@@ -1,0 +1,79 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- (namespace) 인터페이스 경로 -->
+<mapper namespace="com.travel.dao.admin.IDao_Item_admin">
+
+	<select id="selectLists" resultType="com.travel.dto.admin.DTO_Item_admin">
+	
+			SELECT 	EVENT_NO
+						,ITEM_NO
+						,ITEM_NAME
+						,ITEM_DESC
+						,FILENAME
+			FROM 	TMSTITEM
+			WHERE  EVENT_NO = #{param1}
+	
+	</select>
+	<!-- 이벤트 찾기 팝업 -->
+	
+	<select id="event_popup_pageCalculate" resultType="integer">
+	
+			
+			SELECT 	COUNT(*)
+			FROM 	TMSTEVENT A
+			WHERE  LOWER(A.EVENT_NAME) LIKE '%' || LOWER(#{param1}) || '%'
+			
+	</select>
+	
+	<select id="event_selectPopupData" resultType="com.travel.dto.admin.DTO_Item_admin">
+		
+			SELECT  A.EVENT_NO
+			            ,A.EVENT_NAME
+			            ,A.EVENT_FLAG
+			            ,A.EVENT_STARTDATE || ' ~ ' || A.EVENT_ENDDATE AS EVENT_DATE
+			FROM
+			(
+			    SELECT  ROW_NUMBER() OVER (ORDER BY A.EVENT_STARTDATE DESC, EVENT_NO ASC) AS ROW_NUM
+			                ,A.EVENT_NO
+			                ,EVENT_NAME
+			                ,B.CODENAME AS EVENT_FLAG
+			                ,TO_CHAR(A.EVENT_STARTDATE, 'YYYY-MM-DD') AS EVENT_STARTDATE
+			                ,TO_CHAR(A.EVENT_ENDDATE, 'YYYY-MM-DD') AS EVENT_ENDDATE
+			    FROM    TMSTEVENT A LEFT JOIN TMSTCODE B ON     B.GRPCODE = 11
+			                                                                     AND    A.EVENT_FLAG = B.CODE
+			    WHERE  LOWER(A.EVENT_NAME) LIKE '%' || LOWER(#{param1}) || '%'                                                                 
+			    ORDER BY A.EVENT_STARTDATE DESC, EVENT_NO ASC                                                                 
+			) A
+			WHERE A.ROW_NUM BETWEEN #{param2} AND #{param3}
+		
+	</select>
+	
+	<insert id="insertItems" parameterType="map">
+	
+			INSERT INTO TMSTITEM(
+				EVENT_NO, ITEM_NO, ITEM_NAME, FILENAME, ITEM_DESC
+			)
+			VALUES
+			(
+				#{event_no}, #{item_no}, #{list.item_name}, #{list.file_name}, #{list.item_desc}
+			)
+		
+	</insert>
+	
+	<select id="selectitems_img" resultType="string">
+		
+			SELECT 	FILENAME
+			FROM 	TMSTITEM
+			WHERE 	EVENT_NO = #{param1}
+			
+	</select>
+	
+	<delete id="deleteitems">
+			
+			DELETE FROM TMSTITEM WHERE EVENT_NO = #{param1}
+			
+	</delete>
+	
+</mapper>

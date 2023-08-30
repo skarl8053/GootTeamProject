@@ -1,0 +1,15 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- (namespace) 인터페이스 경로 -->
+<mapper namespace="com.travel.dao.admin.IDao_purchase_list_admin">
+
+	<!-- 신재환 / 관리자 -> 숙소등록 -->
+
+	<select  id="purchase_list" resultType="com.travel.dto.admin.DTO_Purchase_admin">
+		SELECT PAYMENT_METHOD,PAYMENT_PRICE,ORDER_DATE
+		FROM THISORDER
+	</select>
+
+</mapper> 

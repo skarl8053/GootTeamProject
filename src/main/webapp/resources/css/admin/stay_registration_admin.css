@@ -1,0 +1,116 @@
+
+/* 
+
+	신재환
+	
+	- 숙소 등록
+	
+ */
+
+ /* 화면 디자인 */
+
+ @font-face { 
+    font-family: 'GmarketSansMedium'; 
+    src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); 
+    font-weight: normal; 
+    font-style: normal; 
+}
+
+* {
+    font-family: 'GmarketSansMedium';
+    font-size : medium;
+    text-align: center;
+    align-items: center;
+}
+
+body {
+    /* width: 1200px; */
+}
+
+.stay_registration_text {
+	font-size : 30px;
+	font-weight : bold;
+}
+
+#detailinfo, #hashtag{
+    border: 1px solid grey;
+    border-radius: 30px;
+    padding: 20px 20px;
+    width: 800px;
+    margin: 0 auto;
+}
+
+.btn {
+    margin-top: 10px;
+    background-color: navy;
+    color: yellow;
+    font-size: 14px;
+    cursor: pointer;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+}
+
+.location, .category {
+    width: 200px;
+}
+
+.title {
+	margin-top : 10px;
+	width : 300px;
+}
+
+.xy {
+	margin-top : 10px;	
+}
+
+#titlefield {
+    margin-top: 20px;
+}
+
+.bed {
+    display: inline-flex;
+    margin: 10px;
+}
+
+.bed input[type="radio"] {
+    margin-left: 5px;
+    margin-right: 5px;
+    color: navy;
+}
+
+#stayinfo,
+#staypolicy,
+#detailroominfo {
+    text-align: center;
+    margin: 20px auto; /* 수평 가운데 정렬 */
+}
+
+#stay_room_facility {
+    margin-bottom: 5px;
+}
+
+#stayinfotext {
+    display:flexbox;
+}
+ 
+/* 파일 */
+/* .file-upload-container {
+    text-align: center;
+}
+
+
+.real-upload {
+    display: none; 
+}
+
+.upload-button {
+   	margin-top : 5px;
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: navy;
+    color: yellow;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+ }  */

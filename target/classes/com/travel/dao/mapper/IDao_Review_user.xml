@@ -1,0 +1,42 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- (namespace) 인터페이스 경로 -->
+<mapper namespace="com.travel.dao.user.IDao_Review_user">
+
+	<!-- 송경미 / 사용자 -> 리뷰 -->
+
+	<insert id="rwrite">
+	<!-- INSERT INTO THISREVIEWTEST VALUES(THISREVIEWTEST_REVIEW_SEQ.NEXTVAL,
+	22,#{param1},#{param2},SYSDATE,#{param3},#{param4},#{param5},0,0,THISREVIEWTEST_REVIEW_SEQ.CURRVAL,0) -->
+	
+	INSERT INTO THISREVIEW VALUES(THISREVIEW_REVIEW_NO_SEQ.NEXTVAL,NULL,#{param1},#{param2},#{param3},#{param4},#{param5},0,#{param6},SYSDATE,THISREVIEW_REVIEW_NO_SEQ.CURRVAL,0,'N')
+	
+	</insert>
+	
+	
+	<select id="rlist" resultType="com.travel.dto.user.DTO_Review_user">
+	SELECT
+	REVIEW_NO,M_NO,S_NO,R_NO,PHOTO_URL,REVIEW_RATE,LIKES,REVIEW_CONTENT,REVIEW_DATE,REVIEW_GROUP,REVIEW_STEP,RESTRICT_FLAG
+	FROM THISREVIEW ORDER BY REVIEW_NO DESC
+	</select>
+
+	<select id="rlistP" resultType="com.travel.dto.user.DTO_Review_user">
+	SELECT REVIEW_NO,M_NO,S_NO,R_NO,PHOTO_URL,REVIEW_RATE,LIKES,REVIEW_CONTENT,REVIEW_DATE,REVIEW_GROUP,REVIEW_STEP,RESTRICT_FLAG
+	 FROM THISREVIEW WHERE PHOTO_URL IS NOT NULL ORDER BY REVIEW_NO DESC 
+	</select>
+
+	<!-- <update id="rReport">
+	UPDATE THISREVIEW SET REPORT_NO=1 WHERE REVIEW_NO=#{param1}	
+	UPDATE THISREVIEW SET REPORT_NO=nvl((select max(REPORT_NO) from THISREVIEW),0) + 1 WHERE REVIEW_NO=#{param1}
+	</update> -->
+	
+	<select id="rateAvg" resultType="int">
+	SELECT ROUND(NVL(AVG(REVIEW_RATE),0)) RATEAVG FROM THISREVIEW
+	</select>
+	
+	<select id="selectReviewTotCount" resultType="int">
+	SELECT COUNT(M_NO)FROM THISREVIEW
+	</select>
+</mapper>

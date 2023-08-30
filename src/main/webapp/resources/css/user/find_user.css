@@ -1,0 +1,157 @@
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+* {
+	padding: 0;
+	margin: 0;
+	font-family: 'GmarketSansMedium', sans-serif;
+	font-size: 14px;
+}
+.box{
+    width: 1200px; 
+    margin: 0 auto; /**중앙 정렬한다.**/
+  }
+  
+  /**사진**/
+  .slide{ /**이만큼의 크기로 보이겠다는 의미**/
+    width:1000px; height:380px;/**사진보다 크면 다음 사진까지 표시되어 img와 slide크기를 맞춘다.**/
+    overflow: hidden;/*이미지는 내장이라 overflow:hidden을 사용해 넘친 사진들을 안보이게 한다.*/
+    border-bottom: 1px solid #333;
+    margin-left: auto;
+    margin-right: auto;
+}
+  .images{
+    display: inline-flex; /*좌우 슬라이드를 위해 flex로 사진을 가로정렬한다.*/
+    height: 500px; /**slide와 images의 높이가 다르면 부자연스럽게 표시돼 slide의 높이에 맞게 높이를 바꾼다.**/
+    transition: transform 0.5s;
+  /**어떤 속성에 대해 애니메이션 효과를 주는 속성이다. 
+  tranform속성에 0.5초의 듀레이션(동작의 시작해서 끝나는 시간)을 준다.**/
+  }
+  .id1{
+    width:1000px; height:500px;/**slide 크기에 맞춘다.**/
+  }
+  .pw1{
+    width:1000px; height:500px;/**slide 크기에 맞춘다.**/
+  }
+  .button_box{
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /**버튼디자인**/
+  .button_box button{
+    margin-top: 20%;
+    margin-bottom: 30px;
+    width: 497px; 
+    height: 60px;
+    background: #cbcaca;
+    border: 0px;
+    border-radius: 6px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  .button_box button:active{/**버튼을 클릭하는 동안 색을 바꾼다.**/
+    color: rgb(1, 19, 67);
+    background:#3e3e3e;
+  }
+  .button_box button:disabled{/**버튼 속성이 disabled되면 색을 바꾼다.**/
+    color: rgb(235, 208, 28);
+    background: rgb(1, 19, 67);
+  }
+  .find_id{
+    margin-left: auto;
+    margin-right: auto;
+  }
+#id_phone, #id_email, #pw_phone, #pw_email{
+  border: 1px solid rgb(1, 19, 67);
+  border-radius: 6px;
+  font-size: 24px;
+  background-color: white;
+  height: 50px;
+  width: 200px;
+}
+#id_phone:hover, #id_email:hover, #pw_phone:hover, #pw_email:hover{/**버튼 속성이 되면 색을 바꾼다.**/
+  color: rgb(235, 208, 28);
+  background: rgb(1, 19, 67);
+  cursor: pointer;
+}
+#id_phone:active, #id_email:active, #pw_phone:active, #pw_email:active{/**버튼을 클릭하는 동안 색을 바꾼다.**/
+  color: rgb(1, 19, 67);
+  background:#3e3e3e;
+}
+label.id_phone, label.id_email, label.pw_phone, label.pw_email{
+  border: 1px solid rgb(1, 19, 67);
+  border-radius: 6px;
+  font-size: 24px;
+  color: rgb(1, 19, 67);
+  background-color: white;
+  display: inline-block;
+  height: 50px;
+  width: 200px;
+  text-align: center;
+  line-height: 55px;
+}
+input#id_phone, div#id_phone_box, input#id_email, div#id_email_box,
+input#pw_phone, div#pw_phone_box, input#pw_email, div#pw_email_box{
+  display: none;
+}
+
+input#id_phone:checked + div#id_phone_box, 
+input#pw_phone:checked + div#pw_phone_box{
+  display: block;
+}
+#id_phone_box_text, #id_email_box_text,
+#pw_phone_box_text, #pw_email_box_text{
+  font-size: 24px;
+  margin-top: 50px;
+  width: 1000px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 230px;
+}
+#id_phone_box_text input, #id_email_box_text input, 
+#pw_phone_box_text input, #pw_email_box_text input{
+  height: 50px;
+  width: 500px;
+  right: 50px;
+  padding-left: 20px;
+  font-size: 24px;
+}
+label:hover{
+  cursor: pointer;
+  background-color: rgb(1, 19, 67);
+  color: rgb(235, 208, 28);
+}
+input#check{
+  width: 100px;
+  text-align: center;
+  padding-left: 0px;
+  height: 55px;
+  color: rgb(235, 208, 28);
+  background-color: rgb(1, 19, 67);
+  border-radius: 6px;
+  border: 0px;
+}
+input#check:hover{
+  cursor: pointer;
+  box-shadow: 3px 3px  gray;
+  transition-duration: 0.3s;
+}
+input#check:active{
+  margin-left: 1px;
+  margin-top: 1px;
+  box-shadow: none;
+}
+#under, #under a{
+  font-size: 20px;
+  text-decoration: none;
+  text-align: center;
+  color: rgb(1, 19, 67);
+}
+#under a:hover{
+  text-decoration: underline;
+}

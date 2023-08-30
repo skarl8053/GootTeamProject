@@ -1,0 +1,278 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- (namespace) 인터페이스 경로 -->
+<mapper namespace="com.travel.dao.admin.IDao_Event_admin">
+
+	<select id="pageCalculate" resultType="Integer">
+		
+		SELECT  	COUNT(*)
+    	FROM    TMSTEVENT A 
+	    WHERE
+	    (
+	        ( #{param1} = 1 )
+	        OR      ( #{param1} = 2 AND A.EVENT_FLAG = 1)
+	        OR      ( #{param1} = 3 AND A.EVENT_FLAG = 2)
+	        OR      ( #{param1} = 4 AND A.EVENT_FLAG = 3)
+	    )
+	    AND LOWER(A.EVENT_NAME) LIKE '%' || LOWER(#{param2}) || '%'
+		
+	</select>
+
+	<select id="selectEvents" resultType="com.travel.dto.admin.DTO_Event_admin">
+	
+		<![CDATA[
+		SELECT  	A.EVENT_NO 
+			        ,A.EVENT_NAME
+			        ,A.EVENT_FLAG_NUM
+			        ,A.EVENT_FLAG_NAME
+			        ,A.EVENT_STARTDATE
+			        ,A.EVENT_ENDDATE
+			        ,(
+			        	CASE WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') > A.EVENT_ENDDATE THEN 'Y'
+			        			ELSE 'N' END					
+					) AS CHECK_WINNER_DATE
+		FROM
+		(
+			SELECT 	A.ROW_NUM
+						,A.EVENT_NAME
+						,A.EVENT_NO
+						,A.EVENT_STARTDATE
+						,A.EVENT_ENDDATE
+						,A.EVENT_FLAG_NUM
+						,B.CODENAME AS EVENT_FLAG_NAME
+			FROM
+			(
+			    	SELECT  	ROW_NUMBER() OVER(ORDER BY EVENT_STARTDATE DESC, EVENT_NO ASC) ROW_NUM
+			            		,A.EVENT_NO 
+					            ,A.EVENT_NAME
+					            ,(
+	                                CASE WHEN TO_CHAR(SYSDATE,'yyyy-MM-dd') < TO_CHAR(A.EVENT_STARTDATE, 'yyyy-MM-dd') THEN 1
+		                                    WHEN TO_CHAR(SYSDATE,'yyyy-MM-dd') > TO_CHAR(A.EVENT_ENDDATE, 'yyyy-MM-dd') THEN 3
+		                                    ELSE 2 END
+	                             ) AS EVENT_FLAG_NUM
+					            ,TO_CHAR(A.EVENT_STARTDATE, 'yyyy-MM-dd') AS EVENT_STARTDATE
+					            ,TO_CHAR(A.EVENT_ENDDATE, 'yyyy-MM-dd') AS EVENT_ENDDATE
+					FROM    TMSTEVENT A
+				    WHERE
+				    (
+				        ( #{param1} = 1 )
+				        OR      ( #{param1} = 2 AND A.EVENT_FLAG = 1)
+				        OR      ( #{param1} = 3 AND A.EVENT_FLAG = 2)
+				        OR      ( #{param1} = 4 AND A.EVENT_FLAG = 3)
+				    )
+				    AND LOWER(A.EVENT_NAME) LIKE '%' || LOWER(#{param2}) || '%'
+				    ORDER BY A.EVENT_STARTDATE DESC, EVENT_NO ASC
+		    )A LEFT JOIN TMSTCODE B 	ON 	B.GRPCODE 				= 11
+													AND 	A.EVENT_FLAG_NUM 	= B.CODE
+		)A
+		WHERE A.ROW_NUM BETWEEN #{param3} AND #{param4}
+		]]>
+	</select>
+	
+	<select id="selectDetailEvent" resultType="com.travel.dto.admin.DTO_Event_admin">
+	
+			SELECT 	EVENT_NO
+						,EVENT_NAME
+						,TO_CHAR(EVENT_STARTDATE, 'yyyy-MM-dd') AS EVENT_STARTDATE
+						,TO_CHAR(EVENT_ENDDATE, 'yyyy-MM-dd') AS EVENT_ENDDATE
+						,FILENAME
+						,EVENT_FLAG
+			FROM 	TMSTEVENT
+			WHERE  EVENT_NO = #{param1}
+			
+	</select>
+	
+	<insert id="insertEvents">
+	
+			INSERT 	INTO TMSTEVENT (EVENT_NO, EVENT_NAME, EVENT_STARTDATE, EVENT_ENDDATE, FILENAME, EVENT_FLAG, EVENT_MEMBER_FLAG)
+			VALUES((SELECT NVL(MAX(EVENT_NO),0) + 1 FROM TMSTEVENT), #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, 'N')
+			
+	</insert>
+	
+	<update id="updateEvents">
+	
+			UPDATE 	TMSTEVENT
+			SET 			EVENT_NAME = #{param2}
+							,EVENT_STARTDATE = #{param3}
+							,EVENT_ENDDATE = #{param4}
+							,FILENAME = #{param5}
+							,EVENT_FLAG = #{param6}
+			WHERE 		EVENT_NO = #{param1}
+			
+	</update>
+	
+	<!-- '1 -->
+	<delete id="deleteEvents">
+			DELETE FROM TMSTEVENT WHERE EVENT_NO IN ( #{vo.check0}, #{vo.check1}, #{vo.check2}, #{vo.check3}, #{vo.check4}, #{vo.check5}, #{vo.check6}, #{vo.check7}, #{vo.check8}, #{vo.check9})
+	</delete>
+	
+	<delete id="deleteItems">
+			DELETE FROM TMSTITEM WHERE EVENT_NO IN ( #{vo.check0}, #{vo.check1}, #{vo.check2}, #{vo.check3}, #{vo.check4}, #{vo.check5}, #{vo.check6}, #{vo.check7}, #{vo.check8}, #{vo.check9})
+	</delete>
+	
+	<select id="selectFile" resultType="string">
+			
+			SELECT 	FILENAME
+			FROM 	TMSTEVENT
+			WHERE 	EVENT_NO = #{param1}
+			
+	</select>
+	
+	<select id="selectFiles" resultType="string">
+			SELECT 	FILENAME
+			FROM 	TMSTEVENT
+			WHERE 	EVENT_NO IN ( #{vo.check0}, #{vo.check1}, #{vo.check2}, #{vo.check3}, #{vo.check4}, #{vo.check5}, #{vo.check6}, #{vo.check7}, #{vo.check8}, #{vo.check9})
+	</select>
+	
+	
+	<select id="selectEventWinner" resultType="com.travel.dto.admin.DTO_Event_admin">
+	
+			SELECT 	A.EVENT_NAME
+						,A.EVENT_MEMBER_FLAG
+						,NVL( B.ITEM_NAME, '미등록') AS FIRST_ITEM
+						,NVL( C.ITEM_NAME, '미등록') AS SECOND_ITEM
+						,NVL( D.ITEM_NAME, '미등록')  AS THIRD_ITEM
+						,NVL(E.M_ID, '미등록')  AS FIRST_MEMBER
+						,NVL(F.M_ID, '미등록')  AS SECOND_MEMBER
+						,NVL(G.M_ID, '미등록')  AS THIRD_MEMBER
+			FROM 	TMSTEVENT A LEFT JOIN TMSTITEM 		B 	ON 	A.EVENT_NO 	= B.EVENT_NO
+																			 		AND 	B.ITEM_NO 		= 1 					<!-- 1등 -->
+									 		LEFT JOIN TMSTITEM 		C 	ON 	A.EVENT_NO 	= C.EVENT_NO
+																		 			AND 	C.ITEM_NO 		= 2 					<!-- 2등 -->
+										 	LEFT JOIN TMSTITEM 		D 	ON 	A.EVENT_NO 	= D.EVENT_NO
+																			 		AND 	D.ITEM_NO 	= 3 					<!-- 3등 -->
+										    LEFT JOIN TMSTMEMBER E ON A.M_NO1  = E.M_NO
+										    LEFT JOIN TMSTMEMBER F ON A.M_NO2  = F.M_NO
+										    LEFT JOIN TMSTMEMBER G ON A.M_NO3 = G.M_NO
+			WHERE  A.EVENT_NO = #{param1}
+	
+	</select>
+	
+	<!-- 멤버찾기 팝업 -->
+	
+	<select id="member_popup_pageCalculate" resultType="integer">
+	
+			SELECT 	COUNT(*)
+			FROM 	TMSTEVENT A INNER JOIN THISATTEND B ON A.EVENT_NO = B.EVENT_NO
+											INNER JOIN TMSTMEMBER C ON B.M_NO = C.M_NO
+			WHERE  A.EVENT_NO = #{param1}
+			<include refid="selectPopupData_where"/>
+			
+	</select>
+	
+	<select id="member_selectPopupData" resultType="com.travel.dto.admin.DTO_Event_admin">
+		
+		SELECT 		A.M_NO
+						,A.M_ID
+						,A.M_NAME
+		FROM
+		(
+			SELECT 	ROW_NUMBER() OVER (ORDER BY C.M_NAME) AS ROW_NUM
+			            ,B.M_NO
+						,C.M_ID
+						,C.M_NAME
+			FROM    TMSTEVENT A 	 INNER JOIN THISATTEND B 		ON A.EVENT_NO = B.EVENT_NO
+											 	 INNER JOIN TMSTMEMBER C 	ON B.M_NO 		= C.M_NO
+			WHERE  A.EVENT_NO = #{param1}
+			<include refid="selectPopupData_where"/>
+		) A
+		WHERE A.ROW_NUM BETWEEN #{param4} AND #{param5}
+		
+	</select>
+	
+	<sql id="selectPopupData_where">
+	
+		<if test="param2==1">
+				<!-- 전체 -->
+				AND     
+				(
+					LOWER(C.M_ID) LIKE '%' || LOWER(#{param3}) || '%'
+					OR       LOWER(C.M_NAME) LIKE '%' || LOWER(#{param3}) || '%'
+				)
+		</if>
+		<if test="param2==2">
+				<!-- 전체 -->
+				AND LOWER(C.M_NAME) LIKE '%' || LOWER(#{param3}) || '%'
+		</if>
+		<if test="param2==3">
+				<!-- 전체 -->
+				AND LOWER(C.M_ID) LIKE '%' || LOWER(#{param3}) || '%'
+		</if>
+	</sql>
+	
+	<update id="updateEventWinner">
+	
+			UPDATE 	TMSTEVENT
+			SET 			EVENT_MEMBER_FLAG = 'Y'
+							,M_NO1 = #{param2}
+							,M_NO2 = #{param3}
+							,M_NO3 = #{param4}
+			WHERE 		EVENT_NO = #{param1}
+			
+	</update>
+
+	<insert id="insertDelivery">
+	
+			INSERT INTO THISDELIVERY
+			(
+			    DELIVERY_NO, EVENT_NO, ITEM_NO ,M_NO, DELIVERY_ADDR, STEP_FLAG, EVENT_DATE, STEP1_DATE, STEP2_DATE, STEP3_DATE
+			)
+			<include refid="insertDelivery_Gubun"/>
+	
+	</insert>
+	
+	<sql id="insertDelivery_Gubun">
+		
+		<if test="param2==1">
+			SELECT  DELIVERY_NO_SEQ.NEXTVAL
+						,A.EVENT_NO
+						,B.ITEM_NO
+						,C.M_NO
+						,C.M_ADDRESS
+						,1
+						,SYSDATE
+						,NULL
+						,NULL
+						,NULL
+			FROM    TMSTEVENT A 	INNER 	JOIN TMSTITEM 		B 	ON A.EVENT_NO 			= B.EVENT_NO
+			                    				LEFT 		JOIN TMSTMEMBER C 	ON A.M_NO1					= C.M_NO
+			WHERE   A.EVENT_NO = #{param1}
+			AND     B.ITEM_NO = #{param2}
+		</if>
+		<if test="param2==2">
+			SELECT  DELIVERY_NO_SEQ.NEXTVAL
+						,A.EVENT_NO
+						,B.ITEM_NO
+						,C.M_NO
+						,C.M_ADDRESS
+						,1
+						,SYSDATE
+						,NULL
+						,NULL
+						,NULL
+			FROM    TMSTEVENT A 	INNER 	JOIN TMSTITEM 		B 	ON A.EVENT_NO 			= B.EVENT_NO
+			                    				LEFT 		JOIN TMSTMEMBER C 	ON A.M_NO2					= C.M_NO
+			WHERE   A.EVENT_NO = #{param1}
+			AND     B.ITEM_NO = #{param2}
+		</if>
+		<if test="param2==3">
+			SELECT  DELIVERY_NO_SEQ.NEXTVAL
+						,A.EVENT_NO
+						,B.ITEM_NO
+						,C.M_NO
+						,C.M_ADDRESS
+						,1
+						,SYSDATE
+						,NULL
+						,NULL
+						,NULL
+			FROM    TMSTEVENT A 	INNER 	JOIN TMSTITEM 		B 	ON A.EVENT_NO 			= B.EVENT_NO
+			                    				LEFT 		JOIN TMSTMEMBER C 	ON A.M_NO3					= C.M_NO
+			WHERE   A.EVENT_NO = #{param1}
+			AND     B.ITEM_NO = #{param2}
+		</if>
+	</sql>
+
+</mapper>

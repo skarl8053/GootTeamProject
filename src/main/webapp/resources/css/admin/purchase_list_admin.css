@@ -1,0 +1,65 @@
+
+/* 
+
+	신재환
+	
+	- 회원 구매 내역
+	
+ */
+
+ /* 화면 디자인 */
+@font-face { 
+    font-family: 'GmarketSansMedium'; 
+    src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); 
+    font-weight: normal; 
+    font-style: normal; 
+    } 
+
+*{
+    text-align: center;
+}
+
+table {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-left:auto; 
+    margin-right:auto;
+    border-collapse : collapse;
+}
+
+table, td, th {
+    border : 1px solid black;
+    padding: 10px;
+};
+
+.situation a {
+    text-decoration: none;
+    list-style: none;
+}
+
+a {
+    text-decoration: none;
+    color: navy;
+    list-style: none;
+    text-align: left;
+}
+
+.page {
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.situation {
+    float: left; /* 왼쪽으로 배치 */
+    margin-left: 386px;
+}
+
+.event_list {
+    text-align: center;
+}
+
+#location {
+    margin-left: 0px;
+}
+ 

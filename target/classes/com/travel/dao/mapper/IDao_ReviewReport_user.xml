@@ -1,0 +1,34 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- (namespace) 인터페이스 경로 -->
+<mapper namespace="com.travel.dao.user.IDao_ReviewReport_user">
+		
+		<select id="reviewReport_createIndex" resultType="integer">
+		
+				SELECT 	NVL(MAX(REPORT_NO),0) + 1 
+				FROM 	THISREPORT
+				
+		</select>
+		
+		<insert id="reviewReport_insert">
+			
+				INSERT INTO THISREPORT
+				VALUES(
+					#{param1}, #{param2}, #{param3}, SYSDATE
+				)
+			
+		</insert>
+		
+		
+		
+		<update id="reviewReport_update">
+				
+				UPDATE 	THISREVIEW
+				SET 			REPORT_NO = #{param2}
+				WHERE 		REVIEW_NO = #{param1}
+				
+		</update>
+		
+</mapper>

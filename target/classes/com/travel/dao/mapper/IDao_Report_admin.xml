@@ -1,0 +1,110 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- (namespace) 인터페이스 경로 -->
+<mapper namespace="com.travel.dao.admin.IDao_Report_admin">
+
+	<!-- 남기문 / 관리자 -> 신고 내역 조회 -->
+
+	<select id="pageCalculate" resultType="Integer">
+			
+		
+		SELECT  COUNT(*)
+		FROM 	THISREPORT A LEFT JOIN THISREVIEW    B ON A.REPORT_NO = B.REPORT_NO
+		 								 LEFT JOIN TMSTMEMBER C ON B.M_NO         = C.M_NO
+		WHERE 
+		( #{param1} = 1 AND LOWER(C.M_ID) LIKE '%' || LOWER(#{param2}) || '%')
+		OR ( #{param1} = 2 AND LOWER(C.M_ID) LIKE '%' || LOWER(#{param2}) || '%' AND NVL(B.RESTRICT_FLAG,'N') = 'Y')
+		OR ( #{param1} = 3 AND LOWER(C.M_ID) LIKE '%' || LOWER(#{param2}) || '%' AND NVL(B.RESTRICT_FLAG,'N') = 'N')
+		
+	</select>
+	
+	<select id="selectReportData" resultType="com.travel.dto.admin.DTO_Report_admin">
+	
+		SELECT 		A.REVIEW_NO
+				        ,A.S_NAME
+				        ,A.REPORT_TYPE
+				        ,A.REVIEW_CONTENT
+				        ,A.M_ID
+				        ,A.M_NO
+				        ,A.RESTRICT_FLAG
+				        ,TO_CHAR(A.REPORT_DATE, 'YYYY-MM-DD HH:MI:SS') AS REPORT_DATE
+		FROM
+		(
+			SELECT  ROW_NUMBER() OVER(ORDER BY A.REPORT_DATE DESC) AS ROW_NUM
+						,B.REVIEW_NO
+				        ,C.S_NAME
+				        ,E.CODENAME AS REPORT_TYPE
+				        ,B.REVIEW_CONTENT
+				        ,D.M_ID
+				        ,D.M_NO
+				        ,B.RESTRICT_FLAG
+				        ,A.REPORT_DATE
+			FROM    THISREPORT A  LEFT JOIN THISREVIEW 		B  ON  A.REPORT_NO   	= B.REPORT_NO
+						                      LEFT JOIN TMSTSTAY   		C  ON  B.S_NO     			= C.S_NO
+						                      LEFT JOIN TMSTMEMBER 	D  ON  B.M_NO        		= D.M_NO
+						                      LEFT JOIN TMSTCODE   		E 	ON  E.GRPCODE     		= 10
+						                                            				    AND A.REPORT_TYPE 	= E.CODE 
+	       WHERE 
+			( #{param1} = 1 AND LOWER(D.M_ID) LIKE '%' || LOWER(#{param2}) || '%')
+			OR ( #{param1} = 2 AND LOWER(D.M_ID) LIKE '%' || LOWER(#{param2}) || '%' AND NVL(B.RESTRICT_FLAG,'N') = 'Y')
+			OR ( #{param1} = 3 AND LOWER(D.M_ID) LIKE '%' || LOWER(#{param2}) || '%' AND NVL(B.RESTRICT_FLAG,'N') = 'N')
+		) A
+		WHERE A.ROW_NUM BETWEEN #{param3} AND #{param4}
+		ORDER BY ROW_NUM ASC
+		
+	</select>
+	
+	<select id="selectDetailReportData" resultType="com.travel.dto.admin.DTO_Report_admin">
+	
+		
+			SELECT  A.REPORT_NO
+				        ,C.S_NAME
+				        ,E.CODENAME AS REPORT_TYPE
+				        ,B.REVIEW_CONTENT
+				        ,D.M_ID
+				        ,(
+				            CASE B.RESTRICT_FLAG WHEN 'Y' THEN '차단 중'
+				        								    WHEN 'N' THEN '차단 되지 않음' END
+				         ) AS RESTRICT_NAME
+				        ,A.REPORT_DATE
+				        ,A.REPORT_CONTENT
+			FROM    THISREPORT A  LEFT JOIN THISREVIEW 		B  ON  A.REPORT_NO   	= B.REPORT_NO
+						                      LEFT JOIN TMSTSTAY   		C  ON  B.S_NO     			= C.S_NO
+						                      LEFT JOIN TMSTMEMBER 	D  ON  B.M_NO        		= D.M_NO
+						                      LEFT JOIN TMSTCODE   		E 	ON  E.GRPCODE     		= 10
+						                                            				    AND A.REPORT_TYPE 	= E.CODE 
+	       WHERE 	A.REPORT_NO = #{param1}
+	
+	</select>
+	
+	<update id="updateBlock">
+		
+		
+		UPDATE THISREVIEW SET RESTRICT_FLAG = #{param2} WHERE M_NO = #{param1}
+		
+	</update>
+	
+	<update id="updateBlock_user">
+		<!-- 사용자 블랙리스트 차단 여부 선택 -->
+		UPDATE TMSTMEMBER SET M_LOCK = #{param2} WHERE M_NO = #{param1}
+		
+	</update>
+
+	<update id="updateBlockAll">
+		
+		UPDATE THISREVIEW SET RESTRICT_FLAG = #{param2} 
+		WHERE M_NO IN (SELECT M_NO FROM TMSTMEMBER WHERE M_ID IN(${param1}))
+	
+	</update>
+	
+	<update id="updateBlockAll_user">
+		
+		UPDATE TMSTMEMBER SET M_LOCK = #{param2} 
+		WHERE M_NO IN (SELECT M_NO FROM TMSTMEMBER WHERE M_ID IN(${param1}))
+	
+	</update>
+
+
+</mapper>

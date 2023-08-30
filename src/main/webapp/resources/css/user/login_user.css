@@ -1,0 +1,89 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	font-family: 'GmarketSansMedium', sans-serif;
+	font-size: 14px;
+}
+
+.login-wrapper {
+	width: 500px;
+	height: 500px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.login {
+	width: 500px;
+	font-size: 40px;
+	color: rgb(1, 19, 67);
+	margin-top: 200px;
+	margin-bottom: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+#login-form {
+	margin: auto;
+}
+
+#login-form>input {
+	height: 60px;
+	width: 500px;
+	padding-left: 20px;
+	box-sizing: border-box;
+	margin-bottom: 16px;
+	border-radius: 6px;
+	font-size: 20px;
+	background-color: #F8F8F8;
+	border: none;
+}
+
+#login-form>input::placeholder {
+	color: #D2D2D2;
+}
+
+#login-form>input[type="submit"] {
+	font-size: 20px;
+	color: rgb(235, 208, 28);
+	background-color: rgb(1, 19, 67);
+	margin-top: 0px;
+}
+
+.forget-wrapper {
+	text-align: right;
+}
+.forget-wrapper a{
+	color: rgb(1, 19, 67);
+	text-decoration: none;
+}
+.forget-wrapper a:hover{
+	color: rgb(235, 208, 28);
+	text-decoration: underline;
+}
+.coupon-event {
+	width: 500px;
+	padding-top: 30px;
+	font-size: 25px;
+	text-align: center;
+	color: rgb(1, 19, 67);
+}
+.btn{
+	cursor: pointer;
+}
+.login-wrapper i{
+	position: relative;
+    left: 440px;
+    top: -51px;
+    color: rgb(1, 19, 67);
+	cursor: pointer;
+}
