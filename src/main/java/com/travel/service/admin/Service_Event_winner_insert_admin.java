@@ -40,8 +40,21 @@ public class Service_Event_winner_insert_admin implements Interface_TravelServic
 		for (int item_no = 1; item_no < 4; item_no++) {
 			
 			dao.insertDelivery(event_no, item_no);
+			
+			int delivery_no = dao.selectDeliveryNo();
+			String alarm_msg = "경품 배송준비가 완료되었습니다. / ( 경품 배송번호 : " + delivery_no + " )";
+			
+			// 알림 이력 등록
+			if(item_no == 1) {
+				dao.insertAlarm(first_mno, alarm_msg);
+			}
+			else if(item_no == 2) {
+				dao.insertAlarm(second_mno, alarm_msg);
+			}
+			else if(item_no == 3) {
+				dao.insertAlarm(third_mno, alarm_msg);
+			}
 		}	
-		
 		model.addAttribute("msg","당첨자 지정이 완료되었습니다.");
 		
 	}

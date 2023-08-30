@@ -8,6 +8,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.travel.service.admin.Interface_TravelService;
 import com.travel.service.admin.Service_Event_delete_admin;
@@ -92,9 +93,9 @@ public class Controller_Event_admin {
 	}
 	
 	@RequestMapping(value="event/insert", method=RequestMethod.POST)
-	public String eventinsert(HttpServletRequest request, Model model) {
+	public String eventinsert(MultipartHttpServletRequest mtfRequest, Model model) {
 		
-		model.addAttribute("request", request);
+		model.addAttribute("request", mtfRequest);
 		
 		service = new Service_Event_insert_admin(sqlSession);
 		service.execute(model);
@@ -104,7 +105,7 @@ public class Controller_Event_admin {
 	}
 	
 	@RequestMapping(value="event/update", method=RequestMethod.POST)
-	public String eventupdate(HttpServletRequest request, Model model) {
+	public String eventupdate(MultipartHttpServletRequest request, Model model) {
 		
 		model.addAttribute("request", request);
 		

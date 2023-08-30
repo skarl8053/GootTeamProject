@@ -190,7 +190,7 @@
                     <tr>
                         <td id="first_col">${li.item_no}</td>
                         <td id="second_col">
-	                        <img src="resources/upload_img/admin/item/${li.filename}" alt="이미지 없음" />
+	                        <img src="resources/upload_img/admin/item/${li.filename}" alt="이미지 없음" width="430px"/>
                         </td><!-- 이미지로 수정할 것 -->
                         <td id="third_col">
                         	제품 이름 : <br>

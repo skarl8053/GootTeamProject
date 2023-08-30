@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.travel.service.admin.Interface_TravelService;
 import com.travel.service.admin.Service_Event_itempopup_admin;
@@ -65,7 +66,7 @@ public class Controller_Item_admin {
 		return "admin/item_form_admin";
 	}
 	@RequestMapping("iteminsert")
-	public String iteminsert(HttpServletRequest request, Model model) {
+	public String iteminsert(MultipartHttpServletRequest request, Model model) {
 		
 		// 이벤트 조회
 		model.addAttribute("request", request);

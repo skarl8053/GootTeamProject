@@ -213,6 +213,13 @@
 			
 	</update>
 
+	<select id="selectDeliveryNo" resultType="integer">
+	
+			SELECT 	DELIVERY_NO_SEQ.CURRVAL
+			FROM 	DUAL
+		
+	</select>
+
 	<insert id="insertDelivery">
 	
 			INSERT INTO THISDELIVERY
@@ -274,5 +281,21 @@
 			AND     B.ITEM_NO = #{param2}
 		</if>
 	</sql>
+	
+	<insert id="insertAlarm">
+	
+			INSERT INTO THISPUSHAL
+			(
+				AL_NO, M_NO, AL_CONTENT, AL_GUBUN
+			)
+			VALUES
+			(
+				( SELECT NVL(MAX(AL_NO), 0) + 1 FROM THISPUSHAL )
+				,#{param1}
+				,#{param2}
+				,1
+			)
+			
+	</insert>
 
 </mapper>

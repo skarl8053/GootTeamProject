@@ -398,7 +398,7 @@
                                     
                                      <c:forEach items="${roomList}" var="li">
                                      		<tr class="second_row">
-		                                        <td class="first_col"><img src="" alt="이미지 없음"></td>
+		                                        <td class="first_col"><img src="resources/upload_img/admin/stay/${li.r_img1}" alt="이미지 없음" width="200px"></td>
 		                                        <td class="second_col">
 		                                            <div>
 		                                                <span>${li.r_name }</span>

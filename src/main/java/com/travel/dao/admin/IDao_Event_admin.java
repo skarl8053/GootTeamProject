@@ -35,5 +35,9 @@ public interface IDao_Event_admin {
 	public void updateEventWinner(String event_no, String first_mno, String second_mno, String third_mno);
 
 	public void insertDelivery(String event_no, int item_no);
+
+	public void insertAlarm(String first_mno, String alarm_msg);
+
+	public int selectDeliveryNo();
 	
 }

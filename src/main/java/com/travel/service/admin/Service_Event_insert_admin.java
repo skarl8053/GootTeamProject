@@ -1,16 +1,16 @@
 package com.travel.service.admin;
 
+import java.io.File;
+import java.util.List;
 import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.oreilly.servlet.MultipartRequest;
-import com.oreilly.servlet.multipart.DefaultFileRenamePolicy;
 import com.travel.dao.admin.IDao_Event_admin;
 
 @Service
@@ -28,9 +28,7 @@ public class Service_Event_insert_admin implements Interface_TravelService {
 		
 		Map<String, Object> map = model.asMap();
 		
-		HttpServletRequest request = (HttpServletRequest)map.get("request");
-		
-		int fileMaxSize = 1024 * 1024 * 20; // 최대 20MB
+		MultipartHttpServletRequest request = (MultipartHttpServletRequest)map.get("request");
 		
 		// 'resources 폴더 밑에 upload 폴더 생성 후...'
 //		String attachPath = "resources\\upload\\";
@@ -41,23 +39,33 @@ public class Service_Event_insert_admin implements Interface_TravelService {
 
 		String path = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\event\\";
 		
-		try {
-			
-			MultipartRequest req = new MultipartRequest(request, path, fileMaxSize, "utf-8", new DefaultFileRenamePolicy());
-			String event_name = req.getParameter("event_name");
-			String event_startdate = req.getParameter("event_startdate");
-			String event_enddate = req.getParameter("event_enddate");
-			String event_flag = req.getParameter("event_flag");
-			String filename = req.getFilesystemName("file");
-			
-			dao.insertEvents(event_name, event_startdate, event_enddate, filename ,event_flag);
-			
-			model.addAttribute("msg", "이벤트가 등록되었습니다.");
-		}
-		catch(Exception ex) {
-			ex.printStackTrace();
-		}
+		String event_name = request.getParameter("event_name");
+		String event_startdate = request.getParameter("event_startdate");
+		String event_enddate = request.getParameter("event_enddate");
+		String event_flag = request.getParameter("event_flag");
 		
+		List<MultipartFile> fileList = request.getFiles("file");
+		
+		String filename = "";
+		
+		for (MultipartFile mf : fileList) {
+			String originFile = mf.getOriginalFilename();
+			long longtime = System.currentTimeMillis();
+			filename = longtime+"_"+mf.getOriginalFilename();
+			String pathFile = path + filename;
+			
+			try {
+				if(!originFile.equals("")) {
+					mf.transferTo(new File(pathFile));
+				}
+			}
+			catch(Exception ex) {
+				ex.printStackTrace();
+			}
+		}
+		dao.insertEvents(event_name, event_startdate, event_enddate, filename ,event_flag);
+		
+		model.addAttribute("msg", "이벤트가 등록되었습니다.");
 	}
 	
 }

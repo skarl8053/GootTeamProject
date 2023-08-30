@@ -1,0 +1,112 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- (namespace) 인터페이스 경로 -->
+<mapper namespace="com.travel.dao.user.IDao_Mypage_user">
+
+		<insert id="refundInsert">
+		
+				INSERT INTO THISREFUND
+				(
+				    REFUND_NO
+				    ,ORDER_NO
+				    ,S_NO
+				    ,REFUND_REASON
+				    ,REFUND_PRICE
+				    ,REFUND_PERCENTAGE
+				    ,STEP_FLAG
+				    ,STEP1_DATE
+				    ,STEP2_DATE
+				)
+				SELECT  (SELECT NVL(MAX(REFUND_NO),0) + 1 FROM THISREFUND)
+				            ,A.ORDER_NO
+				            ,B.S_NO
+				            ,#{param3}
+				            ,A.PAYMENT_PRICE
+				            ,100
+				            ,1
+				            ,SYSDATE
+				            ,NULL
+				FROM    THISORDER A  INNER JOIN THISORDERDTL B ON A.ORDER_NO = B.ORDER_NO
+				                                INNER JOIN TMSTMEMBER   C ON A.M_NO       = C.M_NO
+				WHERE   A.ORDER_NO = #{param2}
+				AND      A.M_NO = #{param1}
+		
+		</insert>
+		
+		<select id="usePoint" resultType="integer">
+			
+			SELECT 	NVL(SUM(NVL(POINT_OUT,0)),0) 
+			FROM 	THISPOINT 
+			WHERE 	M_NO = #{param1}
+			AND 		ORDER_NO = #{param2}
+		
+		</select>
+		
+		<update id="refundPoint">
+		
+				UPDATE  TMSTMEMBER
+				SET        M_POINT = M_POINT + #{param2}
+				WHERE   M_NO = #{param1};
+				
+		</update>
+
+		<update id="refundPointList">
+				
+				INSERT INTO THISPOINT
+				(
+				    POINT_NO
+				    ,M_NO
+				    ,ORDER_NO
+				    ,POINT_TYPE
+				    ,POINT_IN
+				    ,POINT_OUT
+				    ,POINT_USEDATE
+				)
+				VALUES
+				(
+				    (SELECT NVL(MAX(POINT_NO),0) + 1 FROM THISPOINT)
+				    ,#{param1}
+				    ,#{param2}
+				    ,1
+				    ,#{param3}
+				    ,NULL
+				    ,SYSDATE
+				
+				)
+				
+		</update>
+
+		<select id="useCoupon">
+		
+				SELECT  (
+				                CASE WHEN B.COUPON_NO IS NULL THEN 0
+				                        ELSE    B.COUPON_NO END
+				            ) AS COUPON_NO            
+				FROM    THISORDER A LEFT JOIN THISUSECOUPON B 	ON 	A.COUPON_NO 	= B.COUPON_NO
+                                                											AND 	A.M_NO 			= B.M_NO;
+                WHERE 	A.M_ID = #{param1}
+                AND 		A.ORDER_NO = #{param1}
+                
+		</select>
+		
+		<update id="refundCoupon">
+		
+				UPDATE 	THISCOUPON
+				SET 			COUPON_QTY = COUPON_QTY + 1
+				WHERE 		M_NO = #{param1}
+				AND 			COUPON_NO = #{param2}
+		
+		</update>
+		
+		<update id="refundCouponList">
+		
+				UPDATE 	THISUSECOUPON
+				SET 			COUPON_USEFLAG = 'N'
+				WHERE 		M_NO = #{param1}
+				AND 			COUPON_NO = #{param2}
+				
+		</update>
+
+</mapper>
