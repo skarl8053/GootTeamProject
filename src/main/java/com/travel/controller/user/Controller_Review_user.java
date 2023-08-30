@@ -40,6 +40,7 @@ public class Controller_Review_user {
 
 		// need data from booking information.
 
+		//test
 		return "user/review_writeview_user";
 	}
 
