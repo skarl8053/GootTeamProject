@@ -24,7 +24,7 @@ public interface IDao_stay_admin {
 
 		public int selectBoardTotCount();
 
-		public ArrayList<DTO_Stay_admin> list(int rowStart, int rowEnd);
+		public ArrayList<DTO_Stay_admin> list(int rowStart, int rowEnd, int location, int type);
 		
 		public void modify(List<Object> stayData, String s_no);
 

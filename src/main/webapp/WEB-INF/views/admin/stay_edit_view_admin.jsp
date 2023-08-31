@@ -6,7 +6,7 @@
 <head>
     <meta charset="UTF-8">
     <title>숙소 등록</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/stay_registration_admin.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/stay_insert_admin.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- 개별 화면 content 크기를 조절하는 방법 -->
     <style>

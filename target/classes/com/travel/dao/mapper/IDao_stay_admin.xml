@@ -73,7 +73,8 @@
 			SELECT COUNT(*) FROM TMSTSTAY
 		</select>
 		
-		<select id="list" resultType="com.travel.dto.admin.DTO_Stay_admin">
+		<!-- 기존 list 불러오던 sql
+		 <select id="list" resultType="com.travel.dto.admin.DTO_Stay_admin">
 			SELECT *
 			FROM (
 			    SELECT ROWNUM AS NUM, N.*
@@ -84,6 +85,65 @@
 			    ) N
 			)
 			WHERE NUM BETWEEN #{param1} AND #{param2}
+		</select> -->
+		
+		<sql id="search_list">
+		<if test="param4 == 0">
+			<if test="param3 == 0">
+				
+			</if>
+			<if test="param3 != 0">
+				WHERE S_LOCA = #{param3}
+			</if>
+		</if>
+		
+	
+		<if test="param4 == 1">
+			<if test="param3 == 0">
+				WHERE S_TYPE = #{param4}
+			</if>
+			<if test="param3 != 0">
+				WHERE S_LOCA = #{param3}
+				AND S_TYPE = #{param4}
+			</if>
+		</if>
+		
+	
+		<if test="param4 == 2">
+			<if test="param3 == 0">
+				WHERE S_TYPE = #{param4}
+			</if>
+			<if test="param3 != 0">
+				WHERE S_LOCA = #{param3}
+				AND S_TYPE = #{param4}
+			</if>
+		</if>
+		
+	
+		<if test="param4 == 3">
+			<if test="param3 == 0">
+				WHERE S_TYPE = #{param4}
+			</if>
+			<if test="param3 != 0">
+				WHERE S_LOCA = #{param3}
+				AND S_TYPE = #{param4}
+			</if>
+		</if>
+	</sql>
+	
+		<select id="list" resultType="com.travel.dto.admin.DTO_Stay_admin">
+		    SELECT *
+			FROM (
+			    SELECT ROWNUM NUM, N.*
+			    FROM (
+			        SELECT *
+			        FROM TMSTSTAY
+			        ORDER BY S_NO DESC
+			    ) N
+			    <include refid="search_list"/>
+			)
+			WHERE NUM BETWEEN #{param1} AND #{param2}
+					    
 		</select>
 		
 		<update id="modify" parameterType="java.util.List">

@@ -6,13 +6,13 @@
 <head>
     <meta charset="UTF-8">
     <title>숙소 등록</title>
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/stay_registration_admin.css"/>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/stay_insert_admin.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     
     <!-- 개별 화면 content 크기를 조절하는 방법 -->
     <style>
         #content{
-            height: 1300px;
+            height: 1200px;
             width : 1200px;
             margin : 0 auto;
         }
@@ -37,6 +37,8 @@
 		    }
 		
 		    function onClickDeleteUpload() {
+		    	event.preventDefault();
+		    	
 		        // 이미지 미리보기 삭제
 		        const imageIds = ['firstImage', 'secondImage', 'thirdImage'];
 		        for (const imageId of imageIds) {
@@ -51,13 +53,77 @@
 		        fileInput.type = 'text';
 		        fileInput.type = 'file';
 		    }
+		    
+		    // 등록 버튼 누를 때 모든 값 입력됐는지 확인
+		    function onSubmitForm() {
+		    	
+		    	const location = document.querySelector('.location').value;
+		    	const category = document.querySelector('.category').value;
+		    	const title = document.querySelector('.title').value;
+		    	const firstImage = document.querySelector('#firstImage').value;
+		    	const address = document.querySelector('#address').value;
+		    	const addr_x = document.querySelector('#addr_x').value;
+		    	const addr_y = document.querySelector('#addr_y').value;
+		    	const stay_info = document.querySelector('.stay_info').value;
+		    	
+		    	if (location === " ") {
+		            alert("지역을 선택해주세요.");
+		            document.querySelector('.location').focus();
+		            return false; 
+		        }
+
+		        if (category === " ") {
+		            alert("카테고리를 선택해주세요.");
+		            document.querySelector('.category').focus();
+		            return false; 
+		        }
+
+		        if (firstImage === " ") {
+		            alert("이미지를 등록해주세요.");
+		            document.querySelector('#firstImage').focus();
+		            return false; 
+		        }
+		        
+		        if (title === "숙소명을 입력하세요." || title === " " || title === "") {
+		            alert("숙소명을 입력해주세요.");
+		            document.querySelector('.title').focus();
+		            return false; 
+		        }
+
+		        if (address === "") {
+		            alert("주소를 입력해주세요.");
+		            document.querySelector('#address').focus();
+		            return false; 
+		        }
+
+		        if (addr_x === "") {
+		            alert("위도를 입력해주세요.");
+		            document.querySelector('#addr_x').focus();
+		            return false; 
+		        }
+
+		        if (addr_y === "") {
+		            alert("경도를 입력해주세요.");
+		            document.querySelector('#addr_y').focus();
+		            return false; 
+		        }
+
+		        if (stay_info === "") {
+		            alert("숙소 정보 및 정책을 입력해주세요.");
+		            document.querySelector('.stay_info').focus();
+		            return false; 
+		        }
+
+		        alert("숙소가 등록되었습니다.");
+		        return true; 
+		    	
+		    }
     </script>
     
     
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/admin/stay_insert_service" method="post" enctype="multipart/form-data">
-<!-- <form action="stay_registration_service" method="post"> -->
+<form action="${pageContext.request.contextPath}/admin/stay_insert_service" method="post" enctype="multipart/form-data" onsubmit="return onSubmitForm();">
 		<p class="stay_registration_text">숙소 등록</p>
 	    <hr>
 	    <p>숙소 공통 정보</p>
@@ -83,14 +149,15 @@
 		    <input type="text" onfocus="this.value='';" name="stay_title" class="title" value="숙소명을 입력하세요.">
 	    </div>
 	    <p>숙소 공통 사진</p>
-	       	<img src="" alt="이미지 없음" class="image" id="firstImage" style="width:200px; height:200px;" />
-	       	<img src="" alt="이미지 없음" class="image2" id="secondImage" style="width:200px; height:200px;" />
-	       	<img src="" alt="이미지 없음" class="image3" id="thirdImage" style="width:200px; height:200px;"/>
-	        <div class="filebox" id="firstFileBox">
-	        	<label for="firstFile">파일 불러오기</label>
-	        	<input type="file" name="file" class="real-upload" accept="image/*" multiple onchange="imagePreview(this)"> <br />
-	    		<button class="button" id="deleteButton" onclick="onClickDeleteUpload();">파일 삭제</button>
-	    	</div>	
+	       	<div class="image-container">
+			    <img src="" alt="이미지 없음" class="image" id="firstImage" />
+			    <img src="" alt="이미지 없음" class="image2" id="secondImage" />
+			    <img src="" alt="이미지 없음" class="image3" id="thirdImage" /><br />
+			    <div class="filebox" id="firstFileBox">
+			        <input type="file" name="file" class="real-upload" accept="image/*" multiple onchange="imagePreview(this)">
+			        <button class="button" id="deleteButton" onclick="onClickDeleteUpload();">파일 삭제</button>
+			    </div>
+			</div>
 	    	<input type="text" id="address" name="address" placeholder="주소를 입력해주세요." />
 	    	<button id="searchButton">주소 검색</button>
 	        <div class="xy">
@@ -142,7 +209,7 @@
 	                <input type="checkbox" name="stay_facility" value="6"> 흡연구역
 	            </div>
 	        <p>숙소 정보 및 정책</p>
-	        <textarea name="stay_info" onfocus="this.value='';" id="" cols="30" rows="10">숙소 공통 정보 및 정책을 입력해주세요.</textarea>
+	        <textarea name="stay_info" class="stay_info" onfocus="this.value='';" id="" cols="30" rows="10">숙소 공통 정보 및 정책을 입력해주세요.</textarea>
 	        <p>해시태그</p>
 	        <div id="hashtag">
 	            <input type="checkbox" value="1" name="stay_hashtag"> 등산
@@ -156,7 +223,13 @@
 	        </div>
 	        
 	        <input type="submit" class="btn" value="등록하기">
-	        <input type="button" class="btn" value="취소">
+	        <input type="button" class="btn" value="취소" onclick="goToMainPage()">
+	        
+	        <script>
+		        function goToMainPage() {
+		            window.location.href = '/travel/main';
+		        }
+	        </script>
 	</form>
 	
 </body>
