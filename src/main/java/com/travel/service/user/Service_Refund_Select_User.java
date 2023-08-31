@@ -1,5 +1,6 @@
 package com.travel.service.user;
 
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,13 +30,13 @@ public class Service_Refund_Select_User implements Interface_TravelService{
 		String order_no = request.getParameter("order_no"); 
 		
 		// 주문번호, 숙소명
-		DTO_Mypage_user list = dao.orderInfoSelect(m_no, order_no);
+		DTO_Mypage_user o_list = dao.orderInfoSelect(m_no, order_no);
 		
 		// 객실명 조회 (여러개)
-		// DTO_Mypage_user list = dao.orderInfoSelect(m_no, order_no);		
+		List<DTO_Mypage_user> r_list = dao.orderRoomInfoSelect(m_no, order_no);		
 		
 		// 주문 -> 포인트 정보, 주문 -> 쿠폰 정보 가져옴...
-		// DTO_Mypage_user list = dao.orderInfoSelect(m_no, order_no);
+		DTO_Mypage_user d_list = dao.orderDiscountInfoSelect(m_no, order_no);		
 		
 	}
 

@@ -5,14 +5,30 @@
 <!-- (namespace) 인터페이스 경로 -->
 <mapper namespace="com.travel.dao.user.IDao_Mypage_user">
 
-		<select id="orderInfoSelect">
+		<!-- 마이페이지 -->
+
+		<!-- 환불 내역 시작 -->
+		<select id="orderInfoSelect" resultType="com.travel.dto.user.DTO_Mypage_user">
 				
 				SELECT DISTINCT  
 				            A.ORDER_NO, B.S_NO
 				FROM    THISORDER A LEFT JOIN THISORDERDTL B ON A.ORDER_NO = B.ORDER_NO
-				WHERE   A.ORDER_NO = #{param2}
-				AND       A.M_NO = #{param1};
+				WHERE   A.M_NO = #{param1}
+				AND       A.ORDER_NO = #{param2}
 				
+		</select>
+		
+		<select id="orderRoomInfoSelect" resultType="com.travel.dto.user.DTO_Mypage_user">
+		
+				SELECT  ROW_NUMBER() OVER (ORDER BY B.R_NO DESC) AS ROW_NUM
+							,C.R_NAME
+							,C.R_PRICE
+				FROM 	THISORDER A LEFT JOIN THISORDERDTL 	B 	ON 	A.ORDER_NO 	= B.ORDER_NO
+				                             	LEFT JOIN TMSTROOM 		C 	ON 	B.S_NO 			= C.S_NO
+				                                                               				AND 	B.R_NO 			= C.R_NO
+               	WHERE 	A.M_NO 		= #{param1}
+			 	AND 		A.ORDER_NO 	= #{param2}                             				
+		
 		</select>
 		<insert id="refundInsert">
 		
@@ -117,5 +133,7 @@
 				AND 			COUPON_NO = #{param2}
 				
 		</update>
-
+		
+		<!-- 환불 내역 끝 -->
+		
 </mapper>
