@@ -37,32 +37,32 @@ public class Service_Event_insert_admin implements Interface_TravelService {
 //		// '프로젝트경로 + 첨부파일경로'
 //		String path = prjPath + attachPath;
 
-		String path = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\event\\";
+		
 		
 		String event_name = request.getParameter("event_name");
 		String event_startdate = request.getParameter("event_startdate");
 		String event_enddate = request.getParameter("event_enddate");
 		String event_flag = request.getParameter("event_flag");
 		
-		List<MultipartFile> fileList = request.getFiles("file");
+		String path = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\event\\";
 		
-		String filename = "";
+		MultipartFile mf = request.getFiles("file").get(0);
 		
-		for (MultipartFile mf : fileList) {
-			String originFile = mf.getOriginalFilename();
-			long longtime = System.currentTimeMillis();
-			filename = longtime+"_"+mf.getOriginalFilename();
-			String pathFile = path + filename;
-			
-			try {
-				if(!originFile.equals("")) {
-					mf.transferTo(new File(pathFile));
-				}
-			}
-			catch(Exception ex) {
-				ex.printStackTrace();
+		String originFile = mf.getOriginalFilename();
+		long longtime = System.currentTimeMillis();
+		String filename = longtime+"_"+mf.getOriginalFilename();
+		String pathFile = path + filename;
+		
+		try {
+			if(!originFile.equals("")) {
+				mf.transferTo(new File(pathFile));
 			}
 		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+		
 		dao.insertEvents(event_name, event_startdate, event_enddate, filename ,event_flag);
 		
 		model.addAttribute("msg", "이벤트가 등록되었습니다.");

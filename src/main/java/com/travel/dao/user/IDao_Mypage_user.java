@@ -1,5 +1,7 @@
 package com.travel.dao.user;
 
+import com.travel.dto.user.DTO_Mypage_user;
+
 public interface IDao_Mypage_user {
 
 	void refundInsert(String m_no, String order_no, String refund_reason);
@@ -15,5 +17,7 @@ public interface IDao_Mypage_user {
 	void refundCoupon(String m_no, int useCoupon);
 
 	void refundCouponList(String m_no, String order_no, int usePoint);
+
+	DTO_Mypage_user orderInfoSelect(String m_no, String order_no);
 	
 }

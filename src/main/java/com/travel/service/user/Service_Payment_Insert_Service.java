@@ -1,5 +1,9 @@
 package com.travel.service.user;
 
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidAlgorithmParameterException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
@@ -7,6 +11,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.crypto.BadPaddingException;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
@@ -16,6 +23,7 @@ import org.springframework.ui.Model;
 
 import com.travel.dao.user.IDao_Payment_user;
 import com.travel.service.admin.Interface_TravelService;
+import com.travel.usetools.CryptoUtil;
 
 @Service
 @Transactional
@@ -62,6 +70,17 @@ public class Service_Payment_Insert_Service  implements Interface_TravelService 
 		String pay_type = request.getParameter("pay_type");
 		String cardNumber = request.getParameter("cardNumber"); // 암호화 시켜서 저장할 것
 		
+		//
+		String encryptedCardNumber = "";
+		try {
+			// 카드 암호화 키 (임의 배정)
+			encryptedCardNumber = CryptoUtil.encryptAES256(cardNumber, "4ijSJVEVCrT6w");
+		} 
+		catch(Exception ex) {
+			ex.printStackTrace();
+			return;
+		}
+		
 		// 주문번호 생성
 		int create_order_no = dao.selectOrderNo();
 		
@@ -81,7 +100,7 @@ public class Service_Payment_Insert_Service  implements Interface_TravelService 
 		mp.put("discount_price", totalDiscountPrice);
 		mp.put("payment_price", totalResultPrice);
 		mp.put("payment_method", pay_type);
-		mp.put("payment_cardno", cardNumber);
+		mp.put("payment_cardno", encryptedCardNumber);
 		mp.put("payment_flag", "Y");
 		mp.put("deal_flag", "N");
 		mp.put("checkindate", checkindate);

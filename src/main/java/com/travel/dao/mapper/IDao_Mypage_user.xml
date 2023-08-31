@@ -5,6 +5,15 @@
 <!-- (namespace) 인터페이스 경로 -->
 <mapper namespace="com.travel.dao.user.IDao_Mypage_user">
 
+		<select id="orderInfoSelect">
+				
+				SELECT DISTINCT  
+				            A.ORDER_NO, B.S_NO
+				FROM    THISORDER A LEFT JOIN THISORDERDTL B ON A.ORDER_NO = B.ORDER_NO
+				WHERE   A.ORDER_NO = #{param2}
+				AND       A.M_NO = #{param1};
+				
+		</select>
 		<insert id="refundInsert">
 		
 				INSERT INTO THISREFUND
