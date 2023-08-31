@@ -34,6 +34,23 @@ public class Service_Stay_list_admin implements Interface_TravelService {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		SearchVO searchVO = (SearchVO) map.get("searchVO");
 		
+		String locationParameter = request.getParameter("location");
+		String typeParameter = request.getParameter("type");
+
+		int location = 0;
+		int type = 0;
+
+		if (locationParameter != null && !locationParameter.isEmpty()) {
+		    location = Integer.parseInt(locationParameter);
+		}
+
+		if (typeParameter != null && !typeParameter.isEmpty()) {
+		    type = Integer.parseInt(typeParameter);
+		}
+
+		System.out.println("location : "+location);
+		System.out.println("type : "+type);
+		
 		String strPage = request.getParameter("page");
 		if (strPage == null) strPage="1";
 		int page = Integer.parseInt(strPage);
@@ -42,19 +59,19 @@ public class Service_Stay_list_admin implements Interface_TravelService {
 		int total = dao.selectBoardTotCount();
 		searchVO.pageCalculate(total);
 		
-		System.out.println("total cnt : "+total);
-		System.out.println("total row : "+total);
-		System.out.println("clickpage : "+searchVO.getPage());
-		System.out.println("pageStart : "+searchVO.getPageStart());
-		System.out.println("pageEnd : "+searchVO.getPageEnd());
-		System.out.println("pageTot : "+searchVO.getTotPage());
-		System.out.println("rowStart : "+searchVO.getRowStart());
-		System.out.println("rowEnd : "+searchVO.getRowEnd());
+//		System.out.println("total cnt : "+total);
+//		System.out.println("total row : "+total);
+//		System.out.println("clickpage : "+searchVO.getPage());
+//		System.out.println("pageStart : "+searchVO.getPageStart());
+//		System.out.println("pageEnd : "+searchVO.getPageEnd());
+//		System.out.println("pageTot : "+searchVO.getTotPage());
+//		System.out.println("rowStart : "+searchVO.getRowStart());
+//		System.out.println("rowEnd : "+searchVO.getRowEnd());
 		
 		int rowStart = searchVO.getRowStart();
 		int rowEnd = searchVO.getRowEnd();
 		
-		ArrayList<DTO_Stay_admin> dtos = dao.list(rowStart,rowEnd);
+		ArrayList<DTO_Stay_admin> dtos = dao.list(rowStart,rowEnd,location,type);
 		
 		// 리스트 불러오기
 		// ArrayList<DTO_Stay_admin> s_list = dao.stay_list();

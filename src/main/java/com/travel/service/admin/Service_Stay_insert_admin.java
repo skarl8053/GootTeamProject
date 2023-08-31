@@ -61,7 +61,7 @@ public class Service_Stay_insert_admin implements Interface_TravelService {
 			long longtime = System.currentTimeMillis();
 			String changeFile = longtime+"_"+mf.getOriginalFilename();
 			System.out.println("changeFile : "+changeFile);
-			String pathfile = root + "/" + stay_title + changeFile;
+			String pathfile = root + "/" + changeFile;
 			System.out.println("pathfile : "+pathfile);
 			
 			changeFilesList.add(changeFile);
@@ -139,11 +139,12 @@ public class Service_Stay_insert_admin implements Interface_TravelService {
 		StayData.add(location_int);
 		StayData.add(addr_x);
 		StayData.add(addr_y);
-		StayData.add(address);
 		
 		for (int i = 0; i < changeFilesArray.length; i++) {
 			StayData.add(changeFilesArray[i]);
 		}
+		
+		StayData.add(address);
 		
 		for (int i = 0; i < arr_facility.length; i++) {
 			StayData.add(arr_facility[i]);
