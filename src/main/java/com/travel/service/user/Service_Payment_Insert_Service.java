@@ -1,19 +1,10 @@
 package com.travel.service.user;
 
-import java.io.UnsupportedEncodingException;
-import java.security.InvalidAlgorithmParameterException;
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.crypto.BadPaddingException;
-import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.NoSuchPaddingException;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
@@ -139,10 +130,8 @@ public class Service_Payment_Insert_Service  implements Interface_TravelService 
 		// 포인트 적립 이력 추가
 		dao.insertMemberEarnPoint(m_no, create_order_no, totalEarnPoint);
 		
-		String alarm_msg = "숙소 결제가 완료되었습니다." + " / ( 주문번호 : " + create_order_no + " )";
-		
-		// 알림 이력 등록
-		dao.insertAlarm(m_no, alarm_msg);
+		// 알림 이력에 추가
+		dao.insertPushAL(m_no, create_order_no, "숙소 결제가 완료되었습니다.");
 		
 		model.addAttribute("msg", "결제가 완료되었습니다. 예약 정보를 확인해주세요");
 		

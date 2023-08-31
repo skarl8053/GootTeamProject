@@ -78,7 +78,7 @@
                 </tr>
                 <tr>
                     <td class="firstCol">작성자 ID</td>
-                    <td colspan="3" class="secondCol" style="color: red;">${list.m_id}</td>
+                    <td colspan="3" class="secondCol" style="color: red;">${list.m_email}</td>
                 </tr>
                 <tr>
                     <td class="firstCol">숙소명</td>

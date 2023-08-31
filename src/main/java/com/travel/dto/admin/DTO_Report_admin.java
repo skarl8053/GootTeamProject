@@ -18,7 +18,7 @@ public class DTO_Report_admin {
 	private String report_content;
 	private String review_content;
 	private int m_no;
-	private String m_id;
+	private String m_email;
 	private String restrict_name;
 	private String restrict_flag;
     

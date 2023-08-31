@@ -32,27 +32,27 @@ public class Service_Report_blockall_admin implements Interface_TravelService {
 		
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		
-		String m_id = request.getParameter("m_id"); 
+		String m_email = request.getParameter("m_email"); 
 		String is_block = request.getParameter("is_block");
 		
-		String[] m_id_split = m_id.split(",");
+		String[] m_email_split = m_email.split(",");
 		
-		String str_Id = "";
+		String str_email = "";
 		
-		for (int i = 0; i < m_id_split.length; i++) {
+		for (int i = 0; i < m_email_split.length; i++) {
 			
-			String str = m_id_split[i];
-			if(i != m_id_split.length -1) {
-				str_Id +=  "'" + str +  "',";
+			String str = m_email_split[i];
+			if(i != m_email_split.length -1) {
+				str_email +=  "'" + str +  "',";
 			}
 			else {
-				str_Id +=  "'" + str +  "'";
+				str_email +=  "'" + str +  "'";
 			}
 			
 		}
 		
-		dao.updateBlockAll(str_Id, is_block);
-		dao.updateBlockAll_user(str_Id, is_block);
+		dao.updateBlockAll(str_email, is_block);
+		dao.updateBlockAll_user(str_email, is_block);
 		
 		if(is_block.equals("Y")) {
 			model.addAttribute("msg", "일괄 접속 / 댓글 차단되었습니다.");

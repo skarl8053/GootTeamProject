@@ -14,9 +14,9 @@ public interface IDao_Report_admin {
 
 	public void updateBlock_user(int m_no, String is_block);
 
-	public void updateBlockAll(String m_id, String is_block);
+	public void updateBlockAll(String m_email, String is_block);
 
-	public void updateBlockAll_user(String m_id, String is_block);
+	public void updateBlockAll_user(String m_email, String is_block);
 
 	public DTO_Report_admin selectDetailReportData(int report_no);
 

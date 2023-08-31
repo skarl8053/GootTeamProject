@@ -23,5 +23,11 @@ public interface IDao_Mypage_user {
 	DTO_Mypage_user orderInfoSelect(String m_no, String order_no);
 
 	List<DTO_Mypage_user> orderRoomInfoSelect(String m_no, String order_no);
+
+	DTO_Mypage_user orderDiscountInfoSelect(String m_no, String order_no);
+
+	List<DTO_Mypage_user> refundListSelect();
+
+	void insertPushAL(String m_no, String order_no, String msg);
 	
 }

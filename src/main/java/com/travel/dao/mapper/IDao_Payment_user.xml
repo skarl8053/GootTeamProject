@@ -215,18 +215,23 @@
 			
 	</insert>
 	
-	<insert id="insertAlarm">
+	<insert id="insertPushAL">
+	
 			INSERT INTO THISPUSHAL
 			(
-				AL_NO, M_NO, AL_CONTENT, AL_GUBUN
+				AL_NO, M_NO, AL_CONTENT, AL_GUBUN, ORDER_NO, DELIVERY_NO, AL_TIME
 			)
-			VALUES
-			(
-				( SELECT NVL(MAX(AL_NO), 0) + 1 FROM THISPUSHAL )
-				,#{param1}
-				,#{param2}
-				,1
-			)
+			SELECT  		(SELECT NVL(MAX(AL_NO),0) + 1 FROM THISPUSHAL)
+			            	,#{param1}
+			            	,#{param3}
+			            	,1                   	<!-- 2번 결제 -->
+			            	,#{param2}
+			            	,NULL
+			            	,SYSDATE
+			FROM    	THISORDER A
+			WHERE   	A.M_NO 		= #{param1}
+			AND      	A.ORDER_NO 	= #{param2}
+			
 	</insert>
 	
 </mapper>

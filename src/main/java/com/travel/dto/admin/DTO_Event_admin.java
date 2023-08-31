@@ -34,7 +34,7 @@ public class DTO_Event_admin {
 	
 	// 이벤트 당첨자 팝업 (TMSTMEMBER 팝업)
 	private String m_no;
-	private String m_id;
+	private String m_email;
 	private String m_name;
 	
 	

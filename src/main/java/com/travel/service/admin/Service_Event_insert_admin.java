@@ -30,15 +30,6 @@ public class Service_Event_insert_admin implements Interface_TravelService {
 		
 		MultipartHttpServletRequest request = (MultipartHttpServletRequest)map.get("request");
 		
-		// 'resources 폴더 밑에 upload 폴더 생성 후...'
-//		String attachPath = "resources\\upload\\";
-//		String prjPath = request.getSession().getServletContext().getRealPath("/");
-//		
-//		// '프로젝트경로 + 첨부파일경로'
-//		String path = prjPath + attachPath;
-
-		
-		
 		String event_name = request.getParameter("event_name");
 		String event_startdate = request.getParameter("event_startdate");
 		String event_enddate = request.getParameter("event_enddate");

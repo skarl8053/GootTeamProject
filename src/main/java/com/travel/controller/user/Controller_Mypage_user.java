@@ -28,7 +28,7 @@ public class Controller_Mypage_user {
 		service = new Service_Refund_Select_User(sqlSession);
 		service.execute(model);
 
-		return "user/mypage_refundpopup_user";
+		return "/user/mypage_refundpopup_user";
 		
 	}
 	

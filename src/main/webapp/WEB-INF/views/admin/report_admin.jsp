@@ -92,7 +92,7 @@
             	return false;
             }
             
-      		location.replace("report/blockall?m_id=" + uniqueArr + "&is_block=Y");
+      		location.replace("report/blockall?m_email=" + uniqueArr + "&is_block=Y");
 
         }
 
@@ -129,7 +129,7 @@
             	alert('차단할 내용을 체크해주세요');
             	return false;
             }
-      		location.replace("report/blockall?m_id=" + uniqueArr + "&is_block=N");
+      		location.replace("report/blockall?m_email=" + uniqueArr + "&is_block=N");
         }
 
         /* 스위치 토글 */

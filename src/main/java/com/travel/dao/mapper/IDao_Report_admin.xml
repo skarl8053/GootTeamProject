@@ -14,9 +14,9 @@
 		FROM 	THISREPORT A LEFT JOIN THISREVIEW    B ON A.REPORT_NO = B.REPORT_NO
 		 								 LEFT JOIN TMSTMEMBER C ON B.M_NO         = C.M_NO
 		WHERE 
-		( #{param1} = 1 AND LOWER(C.M_ID) LIKE '%' || LOWER(#{param2}) || '%')
-		OR ( #{param1} = 2 AND LOWER(C.M_ID) LIKE '%' || LOWER(#{param2}) || '%' AND NVL(B.RESTRICT_FLAG,'N') = 'Y')
-		OR ( #{param1} = 3 AND LOWER(C.M_ID) LIKE '%' || LOWER(#{param2}) || '%' AND NVL(B.RESTRICT_FLAG,'N') = 'N')
+		( #{param1} = 1 AND LOWER(C.M_EMAIL) LIKE '%' || LOWER(#{param2}) || '%')
+		OR ( #{param1} = 2 AND LOWER(C.M_EMAIL) LIKE '%' || LOWER(#{param2}) || '%' AND NVL(B.RESTRICT_FLAG,'N') = 'Y')
+		OR ( #{param1} = 3 AND LOWER(C.M_EMAIL) LIKE '%' || LOWER(#{param2}) || '%' AND NVL(B.RESTRICT_FLAG,'N') = 'N')
 		
 	</select>
 	
@@ -26,7 +26,7 @@
 				        ,A.S_NAME
 				        ,A.REPORT_TYPE
 				        ,A.REVIEW_CONTENT
-				        ,A.M_ID
+				        ,A.M_EMAIL
 				        ,A.M_NO
 				        ,A.RESTRICT_FLAG
 				        ,TO_CHAR(A.REPORT_DATE, 'YYYY-MM-DD HH:MI:SS') AS REPORT_DATE
@@ -37,7 +37,7 @@
 				        ,C.S_NAME
 				        ,E.CODENAME AS REPORT_TYPE
 				        ,B.REVIEW_CONTENT
-				        ,D.M_ID
+				        ,D.M_EMAIL
 				        ,D.M_NO
 				        ,B.RESTRICT_FLAG
 				        ,A.REPORT_DATE
@@ -47,9 +47,9 @@
 						                      LEFT JOIN TMSTCODE   		E 	ON  E.GRPCODE     		= 10
 						                                            				    AND A.REPORT_TYPE 	= E.CODE 
 	       WHERE 
-			( #{param1} = 1 AND LOWER(D.M_ID) LIKE '%' || LOWER(#{param2}) || '%')
-			OR ( #{param1} = 2 AND LOWER(D.M_ID) LIKE '%' || LOWER(#{param2}) || '%' AND NVL(B.RESTRICT_FLAG,'N') = 'Y')
-			OR ( #{param1} = 3 AND LOWER(D.M_ID) LIKE '%' || LOWER(#{param2}) || '%' AND NVL(B.RESTRICT_FLAG,'N') = 'N')
+			( #{param1} = 1 AND LOWER(D.M_EMAIL) LIKE '%' || LOWER(#{param2}) || '%')
+			OR ( #{param1} = 2 AND LOWER(D.M_EMAIL) LIKE '%' || LOWER(#{param2}) || '%' AND NVL(B.RESTRICT_FLAG,'N') = 'Y')
+			OR ( #{param1} = 3 AND LOWER(D.M_EMAIL) LIKE '%' || LOWER(#{param2}) || '%' AND NVL(B.RESTRICT_FLAG,'N') = 'N')
 		) A
 		WHERE A.ROW_NUM BETWEEN #{param3} AND #{param4}
 		ORDER BY ROW_NUM ASC
@@ -63,7 +63,7 @@
 				        ,C.S_NAME
 				        ,E.CODENAME AS REPORT_TYPE
 				        ,B.REVIEW_CONTENT
-				        ,D.M_ID
+				        ,D.M_EMAIL
 				        ,(
 				            CASE B.RESTRICT_FLAG WHEN 'Y' THEN '차단 중'
 				        								    WHEN 'N' THEN '차단 되지 않음' END
@@ -95,14 +95,14 @@
 	<update id="updateBlockAll">
 		
 		UPDATE THISREVIEW SET RESTRICT_FLAG = #{param2} 
-		WHERE M_NO IN (SELECT M_NO FROM TMSTMEMBER WHERE M_ID IN(${param1}))
+		WHERE M_NO IN (SELECT M_NO FROM TMSTMEMBER WHERE M_EMAIL IN(${param1}))
 	
 	</update>
 	
 	<update id="updateBlockAll_user">
 		
 		UPDATE TMSTMEMBER SET M_LOCK = #{param2} 
-		WHERE M_NO IN (SELECT M_NO FROM TMSTMEMBER WHERE M_ID IN(${param1}))
+		WHERE M_NO IN (SELECT M_NO FROM TMSTMEMBER WHERE M_EMAIL IN(${param1}))
 	
 	</update>
 

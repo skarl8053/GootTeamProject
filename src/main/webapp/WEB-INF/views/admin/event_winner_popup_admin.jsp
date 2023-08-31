@@ -69,7 +69,7 @@
 
     <script>
 
-    	function searchResult(m_no_gubun, m_id_gubun){
+    	function searchResult(m_no_gubun, m_email_gubun){
     		
     		var searchType = document.getElementById("searchType").value;
     		var keyword = document.getElementById("keyword").value;
@@ -77,13 +77,13 @@
     		var event_no = document.getElementById("event_no").value;
     		
     		
-    		location.replace("memberpopup?event_no=" + event_no + "&m_no_gubun=" + m_no_gubun +"&m_id_gubun=" + m_id_gubun + "&searchType=" + searchType + "&keyword=" + keyword);
+    		location.replace("memberpopup?event_no=" + event_no + "&m_no_gubun=" + m_no_gubun +"&m_email_gubun=" + m_email_gubun + "&searchType=" + searchType + "&keyword=" + keyword);
     	}
     
-        function selectItem(m_no_gubun, m_no_value, m_id_gubun, m_id_value){
+        function selectItem(m_no_gubun, m_no_value, m_email_gubun, m_email_value){
         	
         	opener.document.getElementById(m_no_gubun).value = m_no_value;
-			opener.document.getElementById(m_id_gubun).value = m_id_value;
+			opener.document.getElementById(m_email_gubun).value = m_email_value;
 			
 			window.close();
 		 }
@@ -124,7 +124,7 @@
             	</c:if>
             </span>
             <span>
-                <button type="button" onclick="searchResult('${param.m_no_gubun}', '${param.m_id_gubun}')">검색</button>
+                <button type="button" onclick="searchResult('${param.m_no_gubun}', '${param.m_email_gubun}')">검색</button>
             </span>
         </div>
         <br>
@@ -139,9 +139,9 @@
                 <c:forEach items="${list}" var="li">
 	                <tr>
 	                    <td>${li.m_no }</td>
-	                    <td>${li.m_id }</td>
+	                    <td>${li.m_email }</td>
 	                    <td>${li.m_name }</td>
-	                    <td><button type="button" onclick="selectItem('${param.m_no_gubun}','${li.m_no}','${param.m_id_gubun}','${li.m_id}')">선택</button></td>
+	                    <td><button type="button" onclick="selectItem('${param.m_no_gubun}','${li.m_no}','${param.m_email_gubun}','${li.m_email}')">선택</button></td>
 	                </tr>
                 </c:forEach>
             </table> 

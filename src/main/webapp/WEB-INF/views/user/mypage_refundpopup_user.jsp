@@ -11,18 +11,13 @@
 <body>
 
 	<style>
-        html{
-            width: auto;
-            height: 750px;
-        }
-
         div{
             text-align: center;
         }
 
         #form{
             width: 600px;
-            height: 880px;
+            height: 1000px;
             border: 1px solid black;
             margin: 20px auto 0 auto;
             position: relative;
@@ -30,7 +25,7 @@
         hr{
             width: 550px;
         }
-        .table_title{
+        .table_title, #refund_reason_title{
             text-align: left;
             padding: 15px 0 10px 30px;
             font-weight: bold;
@@ -78,6 +73,11 @@
             color: red;
             font-weight: bold;
         }
+        #refund_reason, #refund_reason option{
+            width: 250px;
+            height: 30px;
+            font-size: 20px;
+        }
         footer{
             position: absolute;
             bottom: 5px;
@@ -90,12 +90,7 @@
     </style>
 
     <script>
-        function cancelRefund(){
-
-            // 취소 버튼을 누르면 닫는다.
-            window.close();
-            self.close();
-        }
+        
 
         function setCheckbox(){
 
@@ -110,10 +105,10 @@
                 document.getElementById("continueRefund").checked = false;
             }
 
-            continueRefund(checkbox);
+            continueRefundCK(checkbox);
         }
 
-        function continueRefund(target){
+        function continueRefundCK(target){
             
             // 체크박스 선택 / 취소 여부에 따라 달라짐
 
@@ -141,6 +136,14 @@
                 return false;
             }
         }
+
+        function cancelRefund(){
+
+            // 취소 버튼을 누르면 닫는다.
+            window.close();
+            self.close();
+        }
+
     </script>
 
     <div id="form">
@@ -149,7 +152,11 @@
         </div>
         <hr>
         
-        <form action="a" onsubmit="return refundCheck();">
+        <form action="refund_insert" onsubmit="return refundCheck();">
+
+            <input type="hidden" name="m_no" value="${param.m_no}">
+            <input type="hidden" name="order_no" value="${param.order_no}">
+
             <div>
                 <div class="table_title">
                     <span>주문 정보</span>
@@ -157,32 +164,22 @@
                 <table border="1">
                     <tr>
                         <td class="first_col">주문번호</td>
-                        <td class="second_col" colspan="2">${order_no}</td>
+                        <td class="second_col" colspan="2">${o_list.order_no}</td>
                     </tr>
                     <tr>
                         <td class="first_col">숙소명</td>
-                        <td class="second_col" colspan="2">${s_name}</td>
+                        <td class="second_col" colspan="2">${o_list.s_name}</td>
                     </tr>
                     <tr>
                         <td class="first_col">번호</td>
                         <td class="second_col">객실명</td>
                         <td class="third_col">금액</td>
                     </tr>
-                    <c:forEach items="list" var="li">
+                    <c:forEach items="${r_list}" var="li">
                         <tr>
-                            <td class="first_col"><span></span></td>
-                            <td class="second_col"><span>aa</span></td>
-                            <td class="third_col"><span>aa</span></td>
-                        </tr>
-                        <tr>
-                            <td class="first_col"><span></span></td>
-                            <td class="second_col"><span>aa</span></td>
-                            <td class="third_col"><span>aa</span></td>
-                        </tr>
-                        <tr>
-                            <td class="first_col"><span></span></td>
-                            <td class="second_col"><span>aa</span></td>
-                            <td class="third_col"><span>aa</span></td>
+                            <td class="first_col"><span>${li.row_num}</span></td>
+                            <td class="second_col"><span>${li.r_name}</span></td>
+                            <td class="third_col"><span>${li.r_price }</span></td>
                         </tr>
                     </c:forEach>
                 </table>
@@ -194,7 +191,7 @@
                 <table border="1">
                     <tr>
                         <td class="first_col">포인트</td>
-                        <td class="second_col" colspan="2">3000</td>
+                        <td class="second_col" colspan="2">${d_list.point}</td>
                     </tr>
                 </table>
             </div>
@@ -205,18 +202,29 @@
                 <table border="1">
                     <tr>
                         <td class="first_col">쿠폰 이름</td>
-                        <td class="second_col" colspan="2">3000</td>
+                        <td class="second_col" colspan="2">${d_list.coupon_name}</td>
                     </tr>
                     <tr>
                         <td class="first_col">쿠폰 금액</td>
-                        <td class="second_col" colspan="2">3000</td>
+                        <td class="second_col" colspan="2">${d_list.coupon_no}</td>
                     </tr>
                 </table>
             </div>
             <br>
+            <div class="table_title">
+                <span>환불 사유</span>
+            </div>
+            <div id="refund_reason_title">
+                <select id="refund_reason" name="refund_reason">
+                    <c:forEach items="${reason_list}" var="li">
+                        <option value="${li.refund_reason_no}">${li.refund_reason_name}</option>
+                    </c:forEach>
+                </select>
+            </div>
+            <br>
             <footer>
                 <div>
-                    <input type="checkbox" id="continueRefund" onclick="continueRefund(this)"><span id="checkStr" onclick="setCheckbox()">위와 같은 내용을 확인하였습니다.</span>
+                    <input type="checkbox" id="continueRefund" onchange="continueRefundCK(this)" style="cursor: pointer;"><span id="checkStr" onclick="setCheckbox()">위와 같은 내용을 확인하였습니다.</span>
                 </div>
                 <div>
                     <span>환불을 계속 진행하시겠습니까?</span>

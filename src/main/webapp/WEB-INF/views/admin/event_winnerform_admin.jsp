@@ -57,7 +57,7 @@
 	</c:if> --%>
 
     <script>
-        function selectIdButton(event_no, m_no_gubun, m_id_gubun, isInserted){
+        function selectIdButton(event_no, m_no_gubun, m_email_gubun, isInserted){
 
             if(isInserted == 'Y'){
                 alert("당첨자를 이미 등록하였습니다.")
@@ -65,7 +65,7 @@
             }
             else{
             	
-            	var opensite = "memberpopup?event_no=" + event_no + "&m_no_gubun=" + m_no_gubun + "&m_id_gubun=" + m_id_gubun;
+            	var opensite = "memberpopup?event_no=" + event_no + "&m_no_gubun=" + m_no_gubun + "&m_email_gubun=" + m_email_gubun;
             	
                 window.open(opensite, 'window', 'width=700px, height=830px');
             }
@@ -114,12 +114,7 @@
             
             var check = confirm("당첨자를 등록하면 수정할 수 없으며, 배송정보도 같이 등록됩니다. 등록하시겠습니까?");
             
-            if(check == true){
-            	
-            	location.replace("event_winner/insert?event_no=" + event_no + "&first_mno=" + first_mno + "&second_mno=" + second_mno + "&third_mno=" + third_mno);
-            
-            }
-            else{
+            if(check == false){
             	
             	return false;
             	
@@ -131,7 +126,7 @@
     </script>
 
     <h1>이벤트 당첨자 지정</h1>
-
+	
     <div id="form">
         <form action="event_winner/insert" onsubmit="return insertEventWinner('${param.event_no}')">
 

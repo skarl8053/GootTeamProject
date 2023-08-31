@@ -36,8 +36,8 @@ public interface IDao_Event_admin {
 
 	public void insertDelivery(String event_no, int item_no);
 
-	public void insertAlarm(String first_mno, String alarm_msg);
+	public void insertPushAL(String first_mno, int delivery_no, String alarm_msg);
 
-	public int selectDeliveryNo();
+	public int selectDeliveryNo(String m_no_list, String event_no);
 	
 }

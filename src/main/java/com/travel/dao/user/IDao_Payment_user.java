@@ -40,6 +40,6 @@ public interface IDao_Payment_user {
 
 	void insertMemberUsePointList(String m_no, int create_order_no, int totalUsePoint);
 
-	void insertAlarm(String m_no, String alarm_msg);
+	void insertPushAL(String m_no, int create_order_no, String string);
 
 }

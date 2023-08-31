@@ -56,6 +56,9 @@ public class Service_Refund_Insert_User implements Interface_TravelService{
 			dao.refundCouponList(m_no, order_no, usePoint);
 		}
 		
+		// 알림 이력 추가
+		dao.insertPushAL(m_no, order_no, "환불이 완료되었습니다.");
+		
 		model.addAttribute("msg", "환불이 완료되었습니다.");
 		
 	}
