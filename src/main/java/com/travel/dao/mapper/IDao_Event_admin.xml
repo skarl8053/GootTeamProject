@@ -240,7 +240,7 @@
 						,B.ITEM_NO
 						,C.M_NO
 						,C.M_ADDRESS
-						,2
+						,1
 						,SYSDATE
 						,NULL
 						,NULL
@@ -256,7 +256,7 @@
 						,B.ITEM_NO
 						,C.M_NO
 						,C.M_ADDRESS
-						,2
+						,1
 						,SYSDATE
 						,NULL
 						,NULL
@@ -264,7 +264,7 @@
 			FROM    TMSTEVENT A 	INNER 	JOIN TMSTITEM 		B 	ON A.EVENT_NO 			= B.EVENT_NO
 			                    				LEFT 		JOIN TMSTMEMBER C 	ON A.M_NO2					= C.M_NO
 			WHERE   A.EVENT_NO = #{param1}
-			AND     B.ITEM_NO = #{param2}
+			AND     	 B.ITEM_NO = #{param2}
 		</if>
 		<if test="param2==3">
 			SELECT  DELIVERY_NO_SEQ.NEXTVAL
@@ -272,7 +272,7 @@
 						,B.ITEM_NO
 						,C.M_NO
 						,C.M_ADDRESS
-						,2
+						,1
 						,SYSDATE
 						,NULL
 						,NULL

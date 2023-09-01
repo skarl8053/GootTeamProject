@@ -7,6 +7,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	
+	<!-- 개별 화면 content 크기를 조절하는 방법 -->
+	<style>
+		#content{
+			height: 900px;
+		}
+	</style>
 </head>
 <body>
 
@@ -28,7 +35,7 @@
             width: 150px;
             height: 30px;
         }
-        #keyword{
+        #delivery_no{
             width: 280px;
             height: 29px;
         }
@@ -75,6 +82,18 @@
 			cursor: pointer;
 			margin: 10px 30px 0px 30px;
 		}
+		.statusbutton_stop{
+			background-color: gray;
+            color: black;
+			font-size: 20px;
+            font-weight: bold;
+            border-radius: 3px;
+            width: 200px;
+            height: 50px;
+			cursor: not-allowed;
+			margin: 10px 30px 0px 30px;
+			
+		}
 		.button{
             background-color: blue;
             color: white;
@@ -95,9 +114,16 @@
 
     <script>
 
-		function status1_change(){
-
+    	
+    
+		function status1_change(iscomplete){
+			var delivery_no = document.getElementById("delivery_no").value;
 			// 배송 주문 확인 처리
+
+			if(iscomplete == "Y")
+			{
+				return false;
+			}
 
 			if(confirm("배송 상태를 '배송 주문 확인'으로 변경하시겠습니까?") == false)
 			{
@@ -105,13 +131,18 @@
 			}
 			else{
 				// 처리 진행
-				
+				location.replace("delivery_update?delivery_no=" + delivery_no + "&update=1");
 			}
 
 		}
 
-		function status2_change(){
+		function status2_change(iscomplete){
 			// 배송 준비 처리
+			var delivery_no = document.getElementById("delivery_no").value;
+			if(iscomplete == "Y")
+			{
+				return false;
+			}
 
 			if(confirm("배송 상태를 '배송 준비 완료'로 변경하시겠습니까?") == false)
 			{
@@ -119,26 +150,36 @@
 			}
 			else{
 				// 처리 진행
-				
+				location.replace("delivery_update?delivery_no=" + delivery_no + "&update=2");
 			}
 		}
 
-		function status3_change(){
+		function status3_change(iscomplete){
 			// 배송중 처리
-			
+			var delivery_no = document.getElementById("delivery_no").value;
+			if(iscomplete == "Y")
+			{
+				return false;
+			}
+
 			if(confirm("배송 상태를 '배송중'으로 변경하시겠습니까?") == false)
 			{
 				return false;
 			}
 			else{
 				// 처리 진행
-				
+				location.replace("delivery_update?delivery_no=" + delivery_no + "&update=3");
 			}
 
 		}
 
-		function status4_change(){
+		function status4_change(iscomplete){
 			// 배송 완료 처리
+			var delivery_no = document.getElementById("delivery_no").value;
+			if(iscomplete == "Y")
+			{
+				return false;
+			}
 
 			if(confirm("배송 상태를 '배송완료'로 변경하시겠습니까?") == false)
 			{
@@ -146,7 +187,7 @@
 			}
 			else{
 				// 처리 진행
-				
+				location.replace("delivery_update?delivery_no=" + delivery_no + "&update=4");
 			}
 
 		}
@@ -158,7 +199,7 @@
 			
 		<script>
 			alert("${msg}");
-			location.replace("delivery");
+			location.replace("delivery?delivery_no=${delivery_no}");
 		</script>
 		
 	</c:if>
@@ -173,11 +214,11 @@
 			<div>
 				<br />
 				<span>
-					<c:if test="${empty keyword || keyword eq ''}">
-						<input type="text" id="keyword" name="keyword" placeholder="주문번호를 입력해주세요" autocomplete="off">
+					<c:if test="${empty delivery_no || delivery_no eq ''}">
+						<input type="text" id="delivery_no" name="delivery_no" placeholder="주문번호를 입력해주세요" autocomplete="off">
 					</c:if>
-					<c:if test="${not empty keyword}">
-						<input type="text" id="keyword" name="keyword" value="${keyword}">
+					<c:if test="${not empty delivery_no}">
+						<input type="text" id="delivery_no" name="delivery_no" value="${delivery_no}">
 					</c:if>
 				</span>
 				<span>
@@ -226,23 +267,67 @@
 				</div>
 				<div class="statusfield">
 					<span>
-						<img src="./이미지_sample.jpg" alt="이미지">
+						<c:if test="${list.step1_status eq 'Y'}">
+							<img src="resources/img/delivery/Complete.png" alt="이미지">
+						</c:if>
+						<c:if test="${list.step1_status eq 'N'}">
+							<img src="resources/img/delivery/Check_Order.png" alt="이미지">
+						</c:if>
 					</span>
 					<span>
-						<img src="./이미지_sample.jpg" alt="이미지">
+						<c:if test="${list.step2_status eq 'Y'}">
+							<img src="resources/img/delivery/Complete.png" alt="이미지">
+						</c:if>
+						<c:if test="${list.step2_status eq 'N'}">
+							<img src="resources/img/delivery/Preparing_Delivery.png" alt="이미지">
+						</c:if>
 					</span>
 					<span>
-						<img src="./이미지_sample.jpg" alt="이미지">
+						<c:if test="${list.step3_status eq 'Y'}">
+							<img src="resources/img/delivery/Complete.png" alt="이미지">
+						</c:if>
+						<c:if test="${list.step3_status eq 'N'}">
+							<img src="resources/img/delivery/Delivery.png" alt="이미지">
+						</c:if>
 					</span>
 					<span>
-						<img src="./이미지_sample.jpg" alt="이미지">
+						<c:if test="${list.step4_status eq 'Y'}">
+							<img src="resources/img/delivery/Complete.png" alt="이미지">
+						</c:if>
+						<c:if test="${list.step4_status eq 'N'}">
+							<img src="resources/img/delivery/Delivery_Complete.png" alt="이미지">
+						</c:if>
 					</span>
 				</div>
 				<div class="statusfield">
-					<button class="statusbutton" onclick="return status1_change()">배송 주문 확인 처리</button>
-					<button class="statusbutton" onclick="return status2_change()">배송 준비 완료 처리</button>
-					<button class="statusbutton" onclick="return status3_change()">배송중 처리</button>
-					<button class="statusbutton" onclick="return status4_change()">배송완료 처리</button>
+					<c:if test="${list.step1_status eq 'Y'}">
+						<button type="button" class="statusbutton_stop" onclick="return status1_change('Y')">처리 완료</button>
+					</c:if>
+					<c:if test="${list.step1_status eq 'N'}">
+						<button type="button"  class="statusbutton" onclick="return status1_change('N')">배송 주문 확인 처리</button>
+					</c:if>
+					
+					<c:if test="${list.step2_status eq 'Y'}">
+						<button type="button"  class="statusbutton_stop" onclick="return status2_change('Y')">처리 완료</button>
+					</c:if>
+					<c:if test="${list.step2_status eq 'N'}">
+						<button type="button"  class="statusbutton" onclick="return status2_change('N')">배송 준비 완료 처리</button>
+					</c:if>
+					
+					<c:if test="${list.step3_status eq 'Y'}">
+						<button type="button"  class="statusbutton_stop" onclick="return status3_change('Y')">처리 완료</button>
+					</c:if>
+					<c:if test="${list.step3_status eq 'N'}">
+						<button type="button"  class="statusbutton" onclick="return status3_change('N')">배송중 처리</button>
+					</c:if>
+					
+					<c:if test="${list.step4_status eq 'Y'}">
+						<button type="button"  class="statusbutton_stop" onclick="return status4_change('Y')">처리 완료</button>
+					</c:if>
+					<c:if test="${list.step4_status eq 'N'}">
+						<button type="button"  class="statusbutton" onclick="return status4_change('N')">배송완료 처리</button>
+					</c:if>
+					
 				</div>
 			</div>
 		</form>

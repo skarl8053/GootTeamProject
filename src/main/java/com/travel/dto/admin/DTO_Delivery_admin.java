@@ -14,6 +14,7 @@ public class DTO_Delivery_admin {
 	private int delivery_no;
 	private int event_no;
 	private String event_name;
+	private String score;
 	private int item_no;
 	private String item_name;
 	private int m_no;
