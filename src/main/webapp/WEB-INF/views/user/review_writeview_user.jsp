@@ -33,14 +33,14 @@
 </head>
 <body>
 
-	<form action="user/review_write_user" method="post" enctype="multipart/form-data">
+	<form action="review_write_user" method="post" enctype="multipart/form-data">
 		<div class="container">
 			<div class="a">
 				<div class="repl">후기 남기기</div>
 			</div>
 			<div class="b">
 				<div class="bname">
-					숙소명(예약정보에서 가져와야함)<input type="text" name="s_no" value="134" />
+					숙소명(예약정보에서 가져와야함)<input type="text" name="s_no" value="51" />
 				</div>
 
 				<div class="binfor">

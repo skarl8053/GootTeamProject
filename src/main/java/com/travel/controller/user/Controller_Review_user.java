@@ -7,9 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.travel.service.admin.Interface_TravelService;
-import com.travel.service.user.ReviewReport_Insert_Service;
 import com.travel.service.user.Service_Review_List_User;
 import com.travel.service.user.Service_Review_WriteView_User;
 
@@ -39,22 +39,21 @@ public class Controller_Review_user {
 		System.out.println("review_write_view controller got sign");
 
 		// need data from booking information.
-
-		//test
+		
 		return "user/review_writeview_user";
 	}
 
 	@RequestMapping("review_write_user")
-	public String review_write(HttpServletRequest request, Model model) throws Exception {
+	public String review_write(MultipartHttpServletRequest mtfRequest, Model model) throws Exception {
 		System.out.println("====review_write()====");
 		
-		model.addAttribute("request",request);
+		model.addAttribute("mtfRequest",mtfRequest);
 		
 		service= new Service_Review_WriteView_User(sqlSession);
 		service.execute(model);
 		
 		
 
-		return "redirect:user/review_list_user";
+		return "redirect:review_list_user";
 	}
 }
