@@ -192,6 +192,25 @@
 
 		}
 
+		function searchCheckDelivery(){
+			
+			var delivery_no = document.getElementById("delivery_no").value;
+			if(delivery_no.length < 1)
+			{
+				alert("배송번호를 입력해주세요");
+				return false;
+			}
+			
+		}
+		
+		function inputMoveNumber(target){
+			if(isFinite(target.value) == false) {
+                alert("주문번호는 숫자만 입력할 수 있습니다.");
+                target.value = "";
+                return false;
+            }
+		}
+
     </script>
 
 	<!-- 메세지 -->
@@ -210,15 +229,15 @@
     <h1>배송 관리</h1>
 
 	<div id="form">
-		<form action="delivery">
+		<form action="delivery" onsubmit="return searchCheckDelivery();">
 			<div>
 				<br />
 				<span>
 					<c:if test="${empty delivery_no || delivery_no eq ''}">
-						<input type="text" id="delivery_no" name="delivery_no" placeholder="주문번호를 입력해주세요" autocomplete="off">
+						<input type="text" id="delivery_no" name="delivery_no" onchange="return inputMoveNumber(this);" placeholder="주문번호를 입력해주세요" autocomplete="off">
 					</c:if>
 					<c:if test="${not empty delivery_no}">
-						<input type="text" id="delivery_no" name="delivery_no" value="${delivery_no}">
+						<input type="text" id="delivery_no" name="delivery_no" onchange="return inputMoveNumber(this);" value="${delivery_no}">
 					</c:if>
 				</span>
 				<span>
@@ -247,7 +266,7 @@
 							<td class="first_col">이벤트명</td>
 							<td class="second_col">${list.event_name}</td>
 							<td class="third_col">이벤트 등수</td>
-							<td class="forth_col">${list.event_name}</td>
+							<td class="forth_col">${list.score}</td>
 						</tr>
 						<tr>
 							<td class="first_col">제품명</td>
@@ -255,7 +274,7 @@
 						</tr>
 						<tr>
 							<td class="first_col">배송 상태</td>
-							<td class="second_col" colspan="3">${list.step_flag_str}</td>
+							<td class="second_col" colspan="3" style="color: red; font-weight: bolder;">${list.step_flag_str}</td>
 						</tr>
 					</tbody>
 				</table>

@@ -55,7 +55,7 @@ nav {
     justify-content: space-around;
     margin-left: auto;
     margin-right: auto;
-    z-index: 100; /* �떎瑜� content蹂대떎 留� �븵�뿉 �쐞移섏떆�궡 */
+    z-index: 100; /* 다른 content보다 맨 앞에 위치시킴 */
 }
 
 nav .menubar {

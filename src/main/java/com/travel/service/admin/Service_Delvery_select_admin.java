@@ -39,8 +39,16 @@ public class Service_Delvery_select_admin  implements Interface_TravelService {
 		
 		if(isdelivery_noParamExists == true && list == null)
 		{
-			model.addAttribute("delivery_no", delivery_no);
-			model.addAttribute("msg", "입력하신 배송번호의 배송정보가 존재하지 않습니다.");
+			if(delivery_no.length() < 1)
+			{
+				model.addAttribute("msg", "");
+				return;
+			}
+			else {
+				model.addAttribute("msg", "입력하신 배송번호의 배송정보가 존재하지 않습니다.");
+			}
+			//model.addAttribute("delivery_no", delivery_no);
+			
 		}
 		else {
 			model.addAttribute("delivery_no", delivery_no);

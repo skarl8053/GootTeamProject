@@ -69,6 +69,7 @@ nav .menubar {
 
 nav ul li:hover ul {
     display: block;
+    background-color: white;
 }
 
 nav ul li ul {

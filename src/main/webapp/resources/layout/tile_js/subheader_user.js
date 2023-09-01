@@ -26,7 +26,7 @@ var additionHtml = '<ul id="addition-list-content">';
 $(function(){
     //  header nav의 지역 리스트(<li>)를 나타내는 html 태그
     for(i = 0; i < region_list.length; i++){
-        if(i % 6 == 0)
+        if(i % 2 == 0)
             regionHtml += '<li class="list-new-line"><a href="#">' + region_list[i] + '</a></li>';
         else    //  짝수번째 li 태그에 대해서는 다음줄로 개행되도록...
             regionHtml += '<li><a href="#">'+region_list[i]+'</a></li>';
@@ -36,7 +36,7 @@ $(function(){
 
     //  header nav의 테마 리스트(<li>)를 나타내는 html 태그
     for(i = 0; i < theme_list.length; i++){
-        if(i % 7 == 0)
+        if(i % 2 == 0)
             themeHtml += '<li class="list-new-line"><a href="#">#' + theme_list[i] + '</a></li>';
         else    //  짝수번째 li 태그에 대해서는 다음줄로 개행되도록...
             themeHtml += '<li><a href="#">#'+theme_list[i]+'</a></li>';
@@ -46,7 +46,7 @@ $(function(){
 
     //  header nav의 더보기 메뉴 리스트(<li>)를 나타내는 html 태그
     for(i = 0; i < addition_list.length; i++)
-        if(i % 7 == 0)
+        if(i % 2 == 0)
             additionHtml += '<li class="list-new-line"><a href="#">'+addition_list[i]+'</a></li>';
         else
             additionHtml += '<li><a href="#">'+addition_list[i]+'</a></li>';
