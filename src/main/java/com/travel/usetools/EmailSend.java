@@ -17,16 +17,10 @@ public class EmailSend extends Authenticator{
 	
 	private String toEmail;
 	
-	/**
-	 * Email 기본 설정 ( 알맞게 수정할 것 )
-	 * host Example : http://localhost:9080/sprj30_mail/
-	 * fromEmail : 보내는 이메일
-	 * password : 앱 비밀번호 (구글 비밀번호 아님...)
-	 */
 	
-	private final String host = "http://localhost:9080/sprj30_mail/";
-	private final String fromEmail = "보내는 이메일";
-	private final String password = "앱 비밀번호";
+	private final String host = "http://localhost:8090/travel/";
+	private final String fromEmail = "bpple9392@gmail.com";
+	private final String password = "uhbutuyshjypnuxn";
 	
 	/**
 	 * 이메일 인증메일 전송 메서드
@@ -43,6 +37,7 @@ public class EmailSend extends Authenticator{
 	public String getHost() {
 		return host;
 	}
+	
 	/**
 	 * 보내는 이메일 가져오는 메서드
 	 * @return
@@ -51,7 +46,6 @@ public class EmailSend extends Authenticator{
 		return fromEmail;
 	}
 	
-	
 	/**
 	 * 인증 메세지 보냄..
 	 * @return boolean
@@ -59,14 +53,12 @@ public class EmailSend extends Authenticator{
 	public boolean emailSendAction() {
 		
 		try{
-			
-		
 			String from=fromEmail;
 			
 			String to= toEmail;
 			String code= emailEncrypted(to);
 			String subject="회원가입 인증을 위한 메일입니다.";
-			String content="다음 링크 클릭 이메일 인증을 진행하세요."+"<a href='"+host+"emailCheck?code="+code+"'><b>이메일 인증하기</b></a>";
+			String content="다음 링크 클릭 이메일 인증을 진행하세요."+"<a href='"+host+"member/emailCheck?code="+code+"&m_email="+to+"'><br><b>이메일 인증하기</b></a>";
 			
 			// 진행중 메세지
 			
@@ -88,6 +80,7 @@ public class EmailSend extends Authenticator{
 		
 			Authenticator auth=new Authenticator() {
 				
+				
 				@Override
 				protected PasswordAuthentication getPasswordAuthentication() {
 					return new PasswordAuthentication(fromEmail, password);
@@ -106,11 +99,11 @@ public class EmailSend extends Authenticator{
 			msg.setContent(content, "text/html;charset=UTF-8");
 			Transport.send(msg);
 			
+			System.out.println("리턴 트루");
 			return true;
 			
 		} 
-		catch(AuthenticationFailedException e) {
-			
+		catch(AuthenticationFailedException e) {	
 			System.out.println("전송 실패 : EmailSend 메서드의 fromEmail과 password 정보가 잘못되었습니다.");
 			return false;
 		}
@@ -118,14 +111,15 @@ public class EmailSend extends Authenticator{
 			
 			System.out.println("전송 실패 : " + e.getMessage());
 			return false;
-			
 		}
 	}
+	
 	/**
 	 * emailEncryption : 이메일 암호화
 	 * @param input 이메일 주소
 	 * @return 암호화 String
 	 */
+	
 	public String emailEncrypted(String input){
 		
 		StringBuffer result=new StringBuffer();

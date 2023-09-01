@@ -240,7 +240,7 @@
 						,B.ITEM_NO
 						,C.M_NO
 						,C.M_ADDRESS
-						,1
+						,2
 						,SYSDATE
 						,NULL
 						,NULL
@@ -256,7 +256,7 @@
 						,B.ITEM_NO
 						,C.M_NO
 						,C.M_ADDRESS
-						,1
+						,2
 						,SYSDATE
 						,NULL
 						,NULL
@@ -272,7 +272,7 @@
 						,B.ITEM_NO
 						,C.M_NO
 						,C.M_ADDRESS
-						,1
+						,2
 						,SYSDATE
 						,NULL
 						,NULL

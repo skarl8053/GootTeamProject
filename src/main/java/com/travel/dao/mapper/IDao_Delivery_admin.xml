@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- (namespace) 인터페이스 경로 -->
+<mapper namespace="com.travel.dao.admin.IDao_Delivery_admin">
+
+	<select id="deliveryStatusSelect" resultType="com.travel.dto.admin.DTO_Delivery_admin">
+	
+			SELECT 	A.DELIVERY_NO
+						,A.EVENT_NO
+						,C.EVENT_NAME
+						,A.ITEM_NO
+                        ,D.ITEM_NAME
+						,A.M_NO
+						,A.DELIVERY_ADDR
+						,A.STEP_FLAG
+						,B.CODENAME AS STEP_FLAG_STR
+						,(CASE WHEN A.EVENT_DATE IS NOT NULL THEN 'Y' ELSE 'N' END) AS 	STEP1_STATUS
+						,(CASE WHEN A.STEP1_DATE IS NOT NULL THEN 'Y' ELSE 'N' END) AS 		STEP2_STATUS
+						,(CASE WHEN A.STEP1_DATE IS NOT NULL THEN 'Y' ELSE 'N' END) AS 		STEP3_STATUS
+						,(CASE WHEN A.STEP1_DATE IS NOT NULL THEN 'Y' ELSE 'N' END) AS 		STEP4_STATUS
+						,A.EVENT_DATE 	AS STEP1_DATE
+						,A.STEP1_DATE 	AS STEP2_DATE
+						,A.STEP2_DATE 	AS STEP3_DATE
+						,A.STEP3_DATE 	AS STEP4_DATE
+			FROM 	THISDELIVERY A LEFT JOIN TMSTCODE B 	ON 	B.GRPCODE 	= 13
+																					AND 	A.STEP_FLAG 	= B.CODE
+                                               LEFT JOIN TMSTEVENT C 	ON 	A.EVENT_NO 	= C.EVENT_NO
+                                               LEFT JOIN TMSTITEM   D   ON 	A.EVENT_NO 	= D.EVENT_NO
+                                                                                    AND 	A.ITEM_NO 	= D.ITEM_NO
+			WHERE 	A.DELIVERY_NO = #{param1}
+	
+	</select>
+
+</mapper>

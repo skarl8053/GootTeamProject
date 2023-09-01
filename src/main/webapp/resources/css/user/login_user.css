@@ -32,11 +32,8 @@
 	text-align: center;
 }
 
-#login-form {
-	margin: auto;
-}
 
-#login-form>input {
+#m_email, #m_pw {
 	height: 60px;
 	width: 500px;
 	padding-left: 20px;
@@ -52,11 +49,40 @@
 	color: #D2D2D2;
 }
 
-#login-form>input[type="submit"] {
+.login_btn {
+	height: 60px;
+	width: 500px;
+	padding-left: 10px;
+	box-sizing: border-box;
+	margin-bottom: 16px;
+	border-radius: 6px;
 	font-size: 20px;
+	border: none;
 	color: rgb(235, 208, 28);
 	background-color: rgb(1, 19, 67);
-	margin-top: 0px;
+	cursor:pointer;
+}
+.btn{
+	text-align: center;
+	height: 70px;
+	width: 500px;
+}
+.join{
+	display:block;
+	height: 60px;
+	width: 500px;
+	font-size: 20px;
+	text-decoration: none;
+	text-align: center;
+	color: rgb(235, 208, 28);
+	background-color: rgb(1, 19, 67);
+	box-sizing: border-box;
+	border: none;
+	border-radius: 6px;
+	margin-left:auto;
+	margin-right: auto;
+	padding-left: 10px;
+	line-height: 60px;
 }
 
 .forget-wrapper {
@@ -70,12 +96,24 @@
 	color: rgb(235, 208, 28);
 	text-decoration: underline;
 }
+
+/* ===============건들지 마시오=============== */
+
 .coupon-event {
 	width: 500px;
 	padding-top: 30px;
 	font-size: 25px;
 	text-align: center;
 	color: rgb(1, 19, 67);
+}
+
+@keyframes blink-effect{
+	50%{
+		opacity: 0;
+	}
+}
+#coupon-event{
+	animation: blink-effect 1s step-end infinite;
 }
 .btn{
 	cursor: pointer;
@@ -87,3 +125,4 @@
     color: rgb(1, 19, 67);
 	cursor: pointer;
 }
+

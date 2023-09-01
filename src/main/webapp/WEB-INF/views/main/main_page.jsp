@@ -53,11 +53,11 @@
 <body>
 
 	<!-- 메세지 -->
-	<c:if test="${msg != ''}">
+	<c:if test="${not empty loginmsg}">
 			
 		<script>
-			alert("${msg}");
-			location.replace("/travel/main");
+			alert("${loginmsg}");
+			location.replace("login");
 		</script>
 		
 	</c:if>

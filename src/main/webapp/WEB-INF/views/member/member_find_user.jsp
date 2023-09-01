@@ -7,7 +7,8 @@
 	<title>아이디/비밀번호 찾기</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<link rel="stylesheet" href="../../../resources/css/user/find_user.css" />
+<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/user/find_user.css" />
+
 
 <body>
 	<div class="box">
@@ -68,11 +69,10 @@
 	</div>
 	<div id="under">
 		<br>
-			<a href="#">로그인</a> / <a href="#">회원가입</a> / <a href="#">메인 페이지</a>
+			<a href="login">로그인</a> / <a href="join">회원가입</a> / <a href="${pageContext.request.contextPath }/main">메인 페이지</a>
 	</div>
 
 </body>
-
-<script src="../../../resources/js/user/find_user.js"></script>
+	<script src="${pageContext.request.contextPath }/resources/js/user/find_user.js"></script>
 
 </html>

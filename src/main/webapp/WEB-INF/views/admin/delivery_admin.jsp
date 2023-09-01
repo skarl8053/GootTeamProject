@@ -154,14 +154,14 @@
     </script>
 
 	<!-- 메세지 -->
-	<!-- <c:if test="${msg != ''}">
+	<c:if test="${msg != ''}">
 			
 		<script>
 			alert("${msg}");
-			location.replace("event?page=1");
+			location.replace("delivery");
 		</script>
 		
-	</c:if> -->
+	</c:if>
 
 
 
@@ -169,22 +169,19 @@
     <h1>배송 관리</h1>
 
 	<div id="form">
-		<form action="">
-    
-			<input type="hidden" name="page" value="1"/>
-
+		<form action="delivery">
 			<div>
 				<br />
 				<span>
 					<c:if test="${empty keyword || keyword eq ''}">
 						<input type="text" id="keyword" name="keyword" placeholder="주문번호를 입력해주세요" autocomplete="off">
 					</c:if>
-					<c:if test="${keyword != ''}">
+					<c:if test="${not empty keyword}">
 						<input type="text" id="keyword" name="keyword" value="${keyword}">
 					</c:if>
 				</span>
 				<span>
-					<input type="button" class="button" value="검색" onclick="searchExecute();">
+					<input type="submit" class="button" value="검색" onclick="searchExecute();">
 				</span>
 			</div>
 			<br><br>
@@ -203,21 +200,21 @@
 					<tbody>
 						<tr>
 							<td class="first_col">배송번호</td>
-							<td class="second_col" colspan="3">111</td>
+							<td class="second_col" colspan="3">${list.delivery_no}</td>
 						</tr>
 						<tr>
 							<td class="first_col">이벤트명</td>
-							<td class="second_col">aaa</td>
+							<td class="second_col">${list.event_name}</td>
 							<td class="third_col">이벤트 등수</td>
-							<td class="forth_col">1등</td>
+							<td class="forth_col">${list.event_name}</td>
 						</tr>
 						<tr>
 							<td class="first_col">제품명</td>
-							<td class="second_col" colspan="3">제품명~~~</td>
+							<td class="second_col" colspan="3">${list.item_name}</td>
 						</tr>
 						<tr>
 							<td class="first_col">배송 상태</td>
-							<td class="second_col" colspan="3">배송진행중</td>
+							<td class="second_col" colspan="3">${list.step_flag_str}</td>
 						</tr>
 					</tbody>
 				</table>

@@ -2,7 +2,9 @@
 
 @font-face {
 	font-family: 'GmarketSansMedium';
-	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
 	font-weight: normal;
 	font-style: normal;
 }
@@ -74,11 +76,11 @@ hr {
 	border-radius: 6px;
 	border: 1px solid rgb(1, 19, 67);
 }
-
-.tema {
+.tema{
 	padding-top: 20px;
 	padding-right: 50px;
 }
+
 
 .select-wrapper {
 	width: 1000px;
@@ -116,7 +118,7 @@ hr {
 	box-shadow: 0px 0px 10px #000;
 }
 
-.clicked_btn1, .clicked_btn2  {
+.clicked_btn1, .clicked_btn2 {
 	height: 30px;
 	color: rgb(235, 208, 28);
 	background-color: rgb(1, 19, 67);
@@ -136,21 +138,56 @@ hr {
 }
 
 .join_cancel {
-	width: 610px;
+	text-align: center;
+	width: 1000px;
+	height: 50px;
 	margin-left: auto;
 	margin-right: auto;
 }
 
-.join_btn {
+#join_button{
 	color: rgb(235, 208, 28);
 	background-color: rgb(1, 19, 67);
 	height: 50px;
 	width: 300px;
 	font-size: 24px;
-	padding: auto;
-	margin: auto;
+	margin: 0px;
 	border-radius: 5px;
 	border: 0px;
+	cursor: pointer;
+	display: inline;
+}
+#modify_button{
+	color: rgb(235, 208, 28);
+	background-color: rgb(1, 19, 67);
+	height: 50px;
+	width: 300px;
+	font-size: 24px;
+	margin: 0px;
+	border-radius: 5px;
+	border: 0px;
+	cursor: pointer;
+	display: inline;
+}
+
+#join_button:disabled {
+	color: black;
+	background-color: lightgray;
+}
+
+#cancel_button {
+	color: rgb(235, 208, 28);
+	background-color: rgb(1, 19, 67);
+	height: 50px;
+	width: 300px;
+	font-size: 24px;
+	border-radius: 5px;
+	border: 0px;
+	cursor: pointer;
+	text-decoration: none;
+	display: inline-block;
+	line-height: 50px;
+	margin-left: 10px;
 }
 
 .agree {
@@ -163,19 +200,12 @@ li {
 	list-style: none
 }
 
-#agreeForm {
-	width: 1200px;
-	margin-left: auto;
-	margin-right: auto;
-}
-
-.text {
+#label_font {
 	margin-left: 20px;
 	font-size: 20px;
 }
 
-.chk,
-.chkAll {
+.chk {
 	margin: 18px 0 20px 0;
 	width: 20px;
 	height: 20px;
@@ -187,13 +217,14 @@ li {
 	margin-left: 180px;
 }
 
-#btn-modal1, #btn-modal2{
+#btn-modal1, #btn-modal2 {
 	background-color: white;
 	color: rgb(1, 19, 67);
 	border: 0px;
 	float: right;
 }
-#btn-modal1:hover, #btn-modal2:hover{
+
+#btn-modal1:hover, #btn-modal2:hover {
 	text-decoration: underline;
 	cursor: pointer;
 }
@@ -208,7 +239,6 @@ li {
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-
 	background: rgba(255, 255, 255, 0.25);
 	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 	backdrop-filter: blur(1.5px);
@@ -217,15 +247,13 @@ li {
 	border: 1px solid rgba(255, 255, 255, 0.18);
 }
 
-#modal1 .modal-window, #modal2 .modal-window  {
-
+#modal1 .modal-window, #modal2 .modal-window {
 	background: rgba(1, 19, 67, 0.9);
 	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 	backdrop-filter: blur(13.5px);
 	-webkit-backdrop-filter: blur(13.5px);
 	border-radius: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.18);
-
 	width: 400px;
 	height: 500px;
 	position: relative;
@@ -233,15 +261,14 @@ li {
 	padding: 10px;
 }
 
-#modal1 .title, #modal2 .title  {
+#modal1 .title, #modal2 .title {
 	display: inline;
 	text-shadow: 1px 1px 2px gray;
 	color: white;
 	color: rgb(235, 208, 28);
-
 }
 
-.modal_title{
+.modal_title {
 	font-size: 22px;
 	width: auto;
 	padding-top: 10px;
@@ -271,7 +298,7 @@ li {
 	height: 370px;
 }
 
-.modal_content{
+.modal_content {
 	text-align: center;
 	font-size: 20px;
 	color: rgb(235, 208, 28);
@@ -280,11 +307,12 @@ li {
 	display: block;
 }
 
-.check_container{
+.check_container {
 	width: 100px;
 	margin: 25px auto 0 auto;
 }
-#last_check{
+
+.last_check {
 	background: rgb(1, 19, 67, 0.9);
 	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
 	backdrop-filter: blur(13.5px);
@@ -296,3 +324,12 @@ li {
 	height: 30px;
 	cursor: pointer;
 }
+
+#disabled {
+	background-color: lightgray;
+}
+
+#cancel_btn {
+	margin-left: 10px;
+}
+
