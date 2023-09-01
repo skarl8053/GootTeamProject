@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.travel.service.admin.Interface_TravelService;
 import com.travel.service.admin.Service_Delvery_select_admin;
+import com.travel.service.admin.Service_Delvery_update_admin;
 
 @Controller
 @RequestMapping("admin")
@@ -34,4 +35,15 @@ public class Controller_Deilivery_admin {
 		return "admin/delivery_admin";
 	}
 	
+	@RequestMapping(value="delivery_update")
+	public String delivery_update(HttpServletRequest request, Model model) {
+		
+		// 이벤트 조회
+		model.addAttribute("request", request);
+		
+		service = new Service_Delvery_update_admin(sqlSession);
+		service.execute(model);
+		
+		return "redirect:delivery";
+	}
 }
