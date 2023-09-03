@@ -39,8 +39,7 @@ public class Service_Delvery_select_admin  implements Interface_TravelService {
 		
 		if(isdelivery_noParamExists == true && list == null)
 		{
-			if(delivery_no.length() < 1)
-			{
+			if(delivery_no.length() < 1){
 				model.addAttribute("msg", "");
 				return;
 			}

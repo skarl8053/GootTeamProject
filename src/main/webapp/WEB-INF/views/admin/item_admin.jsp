@@ -84,6 +84,12 @@
             resize: none;
             border-style: none;
         }
+        .item_img {
+        	width: 300px;
+        	max-width: 300px;
+        	height: 300px;
+        	max-height: 300px;
+        }
 		#paging{
 			width: 1200px;
 			text-align: center;
@@ -190,7 +196,7 @@
                     <tr>
                         <td id="first_col">${li.item_no}</td>
                         <td id="second_col">
-	                        <img src="resources/upload_img/admin/item/${li.filename}" alt="이미지 없음" width="430px"/>
+	                        <img class="item_img" src="resources/upload_img/admin/item/${li.filename}" alt="이미지 없음" />
                         </td><!-- 이미지로 수정할 것 -->
                         <td id="third_col">
                         	제품 이름 : <br>

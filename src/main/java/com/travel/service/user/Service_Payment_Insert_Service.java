@@ -65,7 +65,7 @@ public class Service_Payment_Insert_Service  implements Interface_TravelService 
 		String encryptedCardNumber = "";
 		try {
 			// 카드 암호화 키 (임의 배정)
-			encryptedCardNumber = CryptoUtil.encryptAES256(cardNumber, "4ijSJVEVCrT6w");
+			encryptedCardNumber = CryptoUtil.encryptAES256(cardNumber, "4ijSJVEVCrT6w24ds");
 		} 
 		catch(Exception ex) {
 			ex.printStackTrace();

@@ -32,6 +32,10 @@ public class DTO_Event_admin {
 	
 	private String event_member_flag;
 	
+	private int first_delivery_no;
+	private int second_delivery_no;
+	private int third_delivery_no;
+	
 	// 이벤트 당첨자 팝업 (TMSTMEMBER 팝업)
 	private String m_no;
 	private String m_email;

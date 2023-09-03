@@ -14,9 +14,7 @@
 			height: 900px;
 		}
 	</style>
-</head>
-<body>
-
+	
 	<style>
         
 		/* 
@@ -28,9 +26,9 @@
 		
 		 /* 화면 디자인 */
 		
-		#form{
+		/* #form{
 			width: 1200px;
-		}
+		} */
         .searchbox{
             width: 150px;
             height: 30px;
@@ -61,8 +59,9 @@
 			height: auto;
 			text-align: center;
 		}
-		img{
+		.step_img{
 			width: 200px;
+			height: 200px;
 			padding: 40px 30px 0 30px;
 		}
 		.title{
@@ -111,11 +110,12 @@
 		}
 
     </style>
+    
+</head>
+<body>
 
     <script>
 
-    	
-    
 		function status1_change(iscomplete){
 			var delivery_no = document.getElementById("delivery_no").value;
 			// 배송 주문 확인 처리
@@ -192,10 +192,18 @@
 
 		}
 
+		var isNumberCheck = true;
+
 		function searchCheckDelivery(){
 			
-			var delivery_no = document.getElementById("delivery_no").value;
-			if(delivery_no.length < 1)
+			var delivery_no = document.getElementById("delivery_no");
+			
+			if( ! isNumberCheck ){
+				isNumberCheck = true;
+				return false;
+			}
+			
+			if(delivery_no.value.length < 1)
 			{
 				alert("배송번호를 입력해주세요");
 				return false;
@@ -205,8 +213,11 @@
 		
 		function inputMoveNumber(target){
 			if(isFinite(target.value) == false) {
+
                 alert("주문번호는 숫자만 입력할 수 있습니다.");
                 target.value = "";
+				isNumberCheck = false;
+
                 return false;
             }
 		}
@@ -225,7 +236,7 @@
 
 
 
-    <!-- 메인 -->
+   	<!-- 메인 -->
     <h1>배송 관리</h1>
 
 	<div id="form">
@@ -237,11 +248,11 @@
 						<input type="text" id="delivery_no" name="delivery_no" onchange="return inputMoveNumber(this);" placeholder="주문번호를 입력해주세요" autocomplete="off">
 					</c:if>
 					<c:if test="${not empty delivery_no}">
-						<input type="text" id="delivery_no" name="delivery_no" onchange="return inputMoveNumber(this);" value="${delivery_no}">
+						<input type="text" id="delivery_no" name="delivery_no" onchange="return inputMoveNumber(this);" value="${delivery_no}" autocomplete="off">
 					</c:if>
 				</span>
 				<span>
-					<input type="submit" class="button" value="검색" onclick="searchExecute();">
+					<input type="submit" class="button" value="검색">
 				</span>
 			</div>
 			<br><br>
@@ -287,34 +298,34 @@
 				<div class="statusfield">
 					<span>
 						<c:if test="${list.step1_status eq 'Y'}">
-							<img src="resources/img/delivery/Complete.png" alt="이미지">
+							<img class="step_img" src="resources/img/delivery/Complete.png" alt="이미지">
 						</c:if>
 						<c:if test="${list.step1_status eq 'N'}">
-							<img src="resources/img/delivery/Check_Order.png" alt="이미지">
+							<img class="step_img"  src="resources/img/delivery/Check_Order.png" alt="이미지">
 						</c:if>
 					</span>
 					<span>
 						<c:if test="${list.step2_status eq 'Y'}">
-							<img src="resources/img/delivery/Complete.png" alt="이미지">
+							<img class="step_img"  src="resources/img/delivery/Complete.png" alt="이미지">
 						</c:if>
 						<c:if test="${list.step2_status eq 'N'}">
-							<img src="resources/img/delivery/Preparing_Delivery.png" alt="이미지">
+							<img class="step_img"  src="resources/img/delivery/Preparing_Delivery.png" alt="이미지">
 						</c:if>
 					</span>
 					<span>
 						<c:if test="${list.step3_status eq 'Y'}">
-							<img src="resources/img/delivery/Complete.png" alt="이미지">
+							<img class="step_img"  src="resources/img/delivery/Complete.png" alt="이미지">
 						</c:if>
 						<c:if test="${list.step3_status eq 'N'}">
-							<img src="resources/img/delivery/Delivery.png" alt="이미지">
+							<img class="step_img"  src="resources/img/delivery/Delivery.png" alt="이미지">
 						</c:if>
 					</span>
 					<span>
 						<c:if test="${list.step4_status eq 'Y'}">
-							<img src="resources/img/delivery/Complete.png" alt="이미지">
+							<img class="step_img"  src="resources/img/delivery/Complete.png" alt="이미지">
 						</c:if>
 						<c:if test="${list.step4_status eq 'N'}">
-							<img src="resources/img/delivery/Delivery_Complete.png" alt="이미지">
+							<img class="step_img"  src="resources/img/delivery/Delivery_Complete.png" alt="이미지">
 						</c:if>
 					</span>
 				</div>

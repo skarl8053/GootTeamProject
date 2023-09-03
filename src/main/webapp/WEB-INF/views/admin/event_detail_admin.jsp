@@ -28,10 +28,6 @@
             float: left;
             padding: 0 100px 0 0;
         }
-        .key{
-            width: 170px;
-            font-size: 20px;
-        }
 
         #event_name, #datepicker_startdate, #datepicker_enddate{
             height: 30px;
@@ -91,8 +87,6 @@
         }
         /* 첨부파일 컨트롤 끝 */
 
-        
-        
     </style>
 
     <script>
@@ -340,86 +334,81 @@
 			
 			<input type="hidden" id="event_no" name="event_no" value="${param.event_no}" />
 			
-            <ul class="eventlist">
-                <li class="key">이벤트 명</li>
-                <li><input type="text" id="event_name" name="event_name" autocomplete="off" value="${ list.event_name}" onchange="valueChanged()"></li>
-            </ul>
-            <br>
-            <ul class="eventlist">
-                <li class="key">이벤트 진행여부</li>
-                <c:choose>
-                	<c:when test="${list.event_flag eq 1}">
-                		<li>
-                				<span id="event_status" style="color: red;">이벤트 시작 전</span>
-                				<input type="hidden" id="event_flag" name="event_flag" value="1" />
-                		</li>
-                	</c:when>
-                	<c:when test="${list.event_flag eq 2 }">
-                		<li>
-                				<span id="event_status" style="color: green;">이벤트 진행중</span>
-                				<input type="hidden" id="event_flag" name="event_flag" value="2" />
-                		</li>
-                	</c:when>
-                	<c:when test="${list.event_flag eq 3 }">
-                		<li>
-                			<span id="event_status">이벤트 종료</span>
-                			<input type="hidden" id="event_flag" name="event_flag" value="3" />
-                		</li>
-                	</c:when>
-                </c:choose>
-            </ul>
-            <br>
-            <ul class="eventlist">
-                <li class="key">이벤트 기간</li>
-                <li class="value">
-                   
-                        <input type="text" id="datepicker_startdate" name="event_startdate" value="${list.event_startdate }" onchange="valueChanged()" autocomplete="off" readonly >
-                      	<span> ~ </span>
-                        <input type="text" id="datepicker_enddate" name="event_enddate" value="${list.event_enddate }" onchange="valueChanged()" autocomplete="off" readonly>
-                    
-                </li>
-            </ul>
-            <br>
-            <ul class="eventlist">
-                <li class="key">이벤트 사진 첨부</li>
-                <li class="value" id="filebox">
-                        <input id="upload-name" value="${list.filename }" placeholder="첨부파일"  readonly autocomplete="off">
-                        <label for="file" >파일찾기</label> 
-                        <input type="file" id="file" name="file" accept="image/*" onchange="valueChanged()">
-                </li>
-            </ul>
-            <br><br><br><br>
-            <ul class="eventlist">
-                <li class="key">경품</li>
-            </ul>
-            <br>
-            <ul class="eventlist">
-                <li class="key">1등 당첨 경품</li>
-                <li>
-                    <span>
-                        <input type="text" class="item_name" value="미등록" readonly >
-                    </span>
-                </li>
-            </ul>
-            <br>
-            <ul class="eventlist">
-                <li class="key">2등 당첨 경품</li>
-                <li>
-                    <span>
-                        <input type="text" class="item_name" value="미등록" readonly>
-                    </span>
-                </li>
-            </ul>
-            <br>
-            <ul class="eventlist">
-                <li class="key">3등 당첨 경품</li>
-                <li>
-                    <span>
-                        <input type="text" class="item_name" value="미등록" readonly>
-                    </span>
-                </li>
-            </ul>
-            <br><br>
+			<table>
+				<tr>
+					<td width="20%">이벤트명</td>
+					<td>
+						<input type="text" id="event_name" name="event_name" autocomplete="off" value="${ list.event_name}" onchange="valueChanged()">
+					</td>
+				</tr>
+				<tr>
+					<td>이벤트 진행 여부</td>
+					<td>
+						
+							<c:choose>
+								<c:when test="${list.event_flag eq 1}">
+									
+											<span id="event_status" style="color: red;">이벤트 시작 전</span>
+											<input type="hidden" id="event_flag" name="event_flag" value="1" />
+									
+								</c:when>
+								<c:when test="${list.event_flag eq 2 }">
+									
+											<span id="event_status" style="color: green;">이벤트 진행중</span>
+											<input type="hidden" id="event_flag" name="event_flag" value="2" />
+									
+								</c:when>
+								<c:when test="${list.event_flag eq 3 }">
+									
+										<span id="event_status" style="color: blue;">이벤트 종료</span>
+										<input type="hidden" id="event_flag" name="event_flag" value="3" />
+									
+								</c:when>
+							</c:choose>
+						</ul>
+						
+					</td>
+				</tr>
+				<tr>
+					<td>이벤트 기간</td>
+					<td>
+						<ul class="eventlist">
+							<li class="value">
+							   
+									<input type="text" id="datepicker_startdate" name="event_startdate" value="${list.event_startdate }" onchange="valueChanged()" autocomplete="off" readonly >
+									  <span> ~ </span>
+									<input type="text" id="datepicker_enddate" name="event_enddate" value="${list.event_enddate }" onchange="valueChanged()" autocomplete="off" readonly>
+								
+							</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td>이벤트 사진 첨부</td>
+					<td>
+						<ul class="eventlist">
+							<li class="value" id="filebox">
+									<input id="upload-name" value="${list.filename }" placeholder="첨부파일"  readonly autocomplete="off">
+									<label for="file" >파일찾기</label> 
+									<input type="file" id="file" name="file" accept="image/*" onchange="valueChanged()">
+							</li>
+						</ul>
+					</td>
+				</tr>
+				<tr>
+					<td>1등 당첨 경품</td>
+					<td><input type="text" class="item_name" value="미등록" readonly ></td>
+				</tr>
+				<tr>
+					<td>2등 당첨 경품</td>
+					<td><input type="text" class="item_name" value="미등록" readonly></td>
+				</tr>
+				<tr>
+					<td>3등 당첨 경품</td>
+					<td><input type="text" class="item_name" value="미등록" readonly></td>
+				</tr>
+			</table>
+			<br><br>
             <input type="submit" id="updatebutton" value="이벤트 변경">
             <input type="button" id="deletebutton" value="이벤트 삭제" onclick="eventdelete('${param.event_no}');">
             <input type="button" id="backbutton" value="뒤로가기" onclick="location.replace('event')">

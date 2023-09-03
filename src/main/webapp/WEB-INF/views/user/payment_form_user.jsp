@@ -167,7 +167,7 @@
                 var use_point = parseInt(document.getElementById("use_point").value);
                 var currentAllPoint = parseInt(document.getElementById("currentAllPoint").innerHTML);
 
-                if(use_point.length < 1){
+                if(document.getElementById("use_point").value.length < 1){
                     
                     document.getElementById("discountPrice").innerHTML = use_Coupon;
                     document.getElementById("use_point").value = 0;
@@ -200,7 +200,7 @@
                     return false;
                 }
 
-                if(parseInt(totalPrice - use_point) < 0)
+                if(parseInt(totalPrice - use_point - use_Coupon) < 0)
                 {
                     alert('결제 금액 이상의 포인트를 사용할 수 없습니다.');
 
@@ -223,19 +223,20 @@
     		
     		// 포인트 전액 사용
     		
-            var totalPrice = document.getElementById("totalPrice").innerHTML;
-    		var allPoint = document.getElementById("currentAllPoint").innerHTML;
+            var totalPrice = parseInt(document.getElementById("totalPrice").innerHTML);
+    		var allPoint = parseInt(document.getElementById("currentAllPoint").innerHTML);
+    		var use_Coupon = parseInt(document.getElementById("coupon_price").innerHTML);
     		
-            if(totalPrice - allPoint < 0){
+            if( (totalPrice - allPoint - use_Coupon) < 0){
 
                 alert('결제 금액 이상의 포인트를 사용할 수 없습니다.');
+                
+                document.getElementById("discountPrice").innerHTML = use_Coupon;
+                document.getElementById("use_point").value = 0;
 
-                document.getElementById("discountPrice").innerHTML = totalPrice;
-                document.getElementById("use_point").value = totalPrice;
+                document.getElementById("resultPrice").innerHTML = totalPrice - use_Coupon;
 
-                document.getElementById("resultPrice").innerHTML = 0;
-
-                return;
+                return false;
             }
 
     		document.getElementById("use_point").value = allPoint;
@@ -343,7 +344,7 @@
 			
 			<input type="hidden" name="m_no" value="${param.m_no}" />
 			<input type="hidden" name="stay_no" value="${param.stay_no}" />
-			<input type="hidden" name="room_no" value="1_2_3_4" /> <%-- ${param.room_no} --%>
+			<input type="hidden" name="room_no" value="${param.room_no}" /> <%-- ${param.room_no} --%>
 			<input type="hidden" name="checkindate" value="${param.checkindate}" />
 			<input type="hidden" name="checkoutdate" value="${param.checkoutdate}" />
 			<input type="hidden" id="totalAllPrice"name="totalAllPrice" value="" />
@@ -430,8 +431,8 @@
                             <br><hr><br>
                             <div>
                                 <span>포인트</span>
-                                <span><input type="text" id="use_point" name="totalUsePoint" value="0" ></span><span>원</span>
-                                <span><button type="button" onclick="useAllPoint()">전액 사용</button></span>
+                                <span><input type="text" id="use_point" name="totalUsePoint" value="0"  autocomplete="off"></span><span>원</span>
+                                <span><button type="button" onclick="return useAllPoint();">전액 사용</button></span>
                                 &nbsp;&nbsp;<span id="currentAllPoint">${resvList.m_point}</span> 포인트 사용 가능 
                             </div>
                             <div>

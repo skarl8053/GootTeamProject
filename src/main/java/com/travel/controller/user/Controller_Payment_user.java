@@ -17,6 +17,8 @@ import com.travel.service.user.Service_Payment_Service;
 @RequestMapping("user")
 public class Controller_Payment_user {
 
+	// 남기문
+	// 회원 숙소 예약 화면
 	@Autowired
 	private SqlSession sqlSession;
 	private Interface_TravelService service;

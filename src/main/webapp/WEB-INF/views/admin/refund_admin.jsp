@@ -194,14 +194,14 @@
     </script>
 
 	<!-- 메세지 -->
-	<!-- <c:if test="${msg != ''}">
+	<c:if test="${msg != ''}">
 			
 		<script>
 			alert("${msg}");
 			location.replace("refund?order_no=${order_no}");
 		</script>
 		
-	</c:if> -->
+	</c:if>
 
 
 
@@ -216,10 +216,10 @@
 				<br />
 				<span>
 					<c:if test="${empty order_no || order_no eq ''}">
-						<input type="text" id="order_no" name="order_no" placeholder="주문번호를 입력해주세요" autocomplete="off">
+						<input type="text" id="order_no" name="order_no" placeholder="주문번호를 입력해주세요" onchange="return inputMoveNumber(this);" autocomplete="off">
 					</c:if>
 					<c:if test="${not empty order_no}">
-						<input type="text" id="order_no" name="order_no" value="${order_no}">
+						<input type="text" id="order_no" name="order_no" value="${order_no}" onchange="return inputMoveNumber(this);"  autocomplete="off">
 					</c:if>
 				</span>
 				<span>

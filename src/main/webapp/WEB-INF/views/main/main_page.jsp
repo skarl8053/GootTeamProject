@@ -62,6 +62,16 @@
 		
 	</c:if>
 	
+	<!-- 메세지 -->
+	<c:if test="${not empty msg}">
+			
+		<script>
+			alert("${msg}");
+			location.replace("main");
+		</script>
+		
+	</c:if>
+	
 	<!-- 숙소 검색 -->
 	<h2>숙소 검색</h2>
 	<div class="search-box">
