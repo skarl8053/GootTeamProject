@@ -7,6 +7,15 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
+	
+	<!-- 개별 화면 content 크기를 조절하는 방법 -->
+	<style>
+		#content{
+			height: 1600px;
+		}
+	</style>
+	
+	
 	<link rel="stylesheet"
 		href="${pageContext.request.contextPath}/resources/layout/main_css/search.css">
 	<link rel="stylesheet" href="datepicker.css">

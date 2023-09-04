@@ -20,9 +20,6 @@
 		<div id="container">
 				<tiles:insertAttribute name="header"/>
 		</div>
-		<%-- <div id="sidebar-left">
-				<tiles:insertAttribute name="side"/>
-		</div> --%>
 		<div id="content">
 				<tiles:insertAttribute name="content"/>
 		</div>

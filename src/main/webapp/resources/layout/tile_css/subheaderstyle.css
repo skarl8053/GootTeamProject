@@ -22,8 +22,6 @@ body {
     margin: 0;
 }
 
-a { text-decoration: none; }
-
 .container {
     padding: 15px 70px;
     width: auto;
@@ -63,6 +61,7 @@ a { text-decoration: none; }
     padding: 15px 5px;
     color:rgb(235, 208, 28);
     width: auto;
+    text-decoration: none;
 }
 /* 오른쪽 로그인 스타일 */
 
@@ -79,6 +78,7 @@ a { text-decoration: none; }
     height: 40px;
     color: rgb(235, 208, 28);
     transition: 0.3s linear;
+    text-decoration: none;
 }
 
 .menu-bar:hover { background: #011967; }
