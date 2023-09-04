@@ -10,19 +10,13 @@ import lombok.Setter;
 @NoArgsConstructor
 public class DTO_SalesChart_admin {
 	
-	private int january;
-	private int february;
-	private int march;
-	private int april;
-	private int may;
-	private int june;
-	private int july;
-	private int august;
-	private int september;
-	private int october;
-	private int november;
-	private int december;
+	private int order_month;
+	private int order_day;
+	private int sum_payment_price;
 	
+	private int s_no;
+	private String s_name;
+	private String s_type;
 }
 
 

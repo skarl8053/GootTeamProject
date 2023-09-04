@@ -35,7 +35,7 @@
             <div class="container">
                 <ul class="buttonlist">
                     <li class="menu-etc" id="logo_img"><a href="#"><img src="" alt="이미지 없음"></a></li>
-                    <li class="menu-bar"><a href="#">회원 관리 <i class='fa fa-angle-down'></i></a>
+                    <li class="menu-bar"><a href="#">회원 / 매출 관리 <i class='fa fa-angle-down'></i></a>
                         <ul>
                             <li>    
                                 <button class="inner_button" type="button" onclick="siteLocation('');">구매 내역</button>
@@ -49,13 +49,19 @@
                                 <button class="inner_button" type="button" onclick="siteLocation('delivery');">배송 내역</button>
                                 <button class="inner_button" style="visibility: hidden;" type="button" >준비중</button>
                             </li>
+                            <li>    
+                                <button class="inner_button" type="button" onclick="siteLocation('saleschart_year');">연 매출</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('saleschart_month');">월 매출</button>
+                            </li>
                         </ul>
                     </li>
                     <li class="menu-bar"><a href="#">숙소 관리 <i class='fa fa-angle-down'></i></a>
                         <ul>
                             <li>    
-                                <button class="inner_button" type="button" onclick="siteLocation('stay_list');">숙소 관리</button>
-                                <button class="inner_button" type="button" onclick="siteLocation('stay_room');">객실 관리</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list');">숙소 조회</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay');">숙소 등록</button>
+                            	<button class="inner_button" type="button" onclick="siteLocation('stay_room');">객실 등록</button>
+                            	<button class="inner_button" style="visibility: hidden;" type="button" >준비중</button>
                             </li>
                         </ul>
                     </li>

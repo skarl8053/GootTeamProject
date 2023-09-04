@@ -17,12 +17,6 @@
 
 /* *, *:before, *:after { box-sizing: inherit; } */
 
-body {
-    background: white;
-    margin: 0;
-}
-
-a { text-decoration: none; }
 
 .container {
     padding: 15px 70px;
