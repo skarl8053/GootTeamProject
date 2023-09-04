@@ -167,7 +167,7 @@
 			
 		<script>
 			alert("${msg}");
-			location.replace("event?page=1");
+			/* location.replace("event?page=1"); */
 		</script>
 		
 	</c:if>

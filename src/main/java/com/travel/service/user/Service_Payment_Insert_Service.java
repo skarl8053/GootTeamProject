@@ -43,6 +43,11 @@ public class Service_Payment_Insert_Service  implements Interface_TravelService 
 		String checkindate = request.getParameter("checkindate");
 		String checkoutdate = request.getParameter("checkoutdate");
 		
+		// 계산 금액
+		String totalAllPrice = request.getParameter("totalAllPrice");
+		String totalDiscountPrice = request.getParameter("totalDiscountPrice");
+		String totalResultPrice = request.getParameter("totalResultPrice");
+		
 		// 사용 쿠폰번호
 		String coupon_no = request.getParameter("coupon_no");
 		
@@ -52,26 +57,26 @@ public class Service_Payment_Insert_Service  implements Interface_TravelService 
 		// 적립 포인트
 		String totalEarnPoint = request.getParameter("totalEarnPoint");
 		
-		// 계산 금액
-		String totalAllPrice = request.getParameter("totalAllPrice");
-		String totalDiscountPrice = request.getParameter("totalDiscountPrice");
-		String totalResultPrice = request.getParameter("totalResultPrice");
+		
 		
 		// 결제 방식
 		String pay_type = request.getParameter("pay_type");
 		String cardNumber = request.getParameter("cardNumber"); // 암호화 시켜서 저장할 것
 		
-		//
 		String encryptedCardNumber = "";
-		try {
-			// 카드 암호화 키 (임의 배정)
-			encryptedCardNumber = CryptoUtil.encryptAES256(cardNumber, "4ijSJVEVCrT6w24ds");
-		} 
-		catch(Exception ex) {
-			ex.printStackTrace();
-			return;
+		if(pay_type == "1") {
+			
+			// 카드로 결제했을 경우에만 카드번호 투입
+			try {
+				// 카드 암호화 키 (임의 배정)
+				encryptedCardNumber = CryptoUtil.encryptAES256(cardNumber, "4ijSJVEVCrT6w24ds");
+			} 
+			catch(Exception ex) {
+				ex.printStackTrace();
+				return;
+			}
+			
 		}
-		
 		// 주문번호 생성
 		int create_order_no = dao.selectOrderNo();
 		

@@ -1,0 +1,36 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- (namespace) 인터페이스 경로 -->
+<mapper namespace="com.travel.dao.admin.IDao_stay_search_admin">
+	
+	<select id="">
+	
+			SELECT  	COUNT(*)
+			FROM    	TMSTSTAY A LEFT JOIN TMSTCODE B 	ON 	B.GRPCODE 	= 3
+		                                                                AND 	A.S_TYPE 	= B.CODE
+			WHERE 	S_NAME LIKE '%' || #{param1} || '%'
+			
+	</select>
+	
+	<select id="">
+	
+			SELECT 		A.S_NO
+							,A.S_NAME
+							,A.S_TYPE
+			FROM
+			(
+				SELECT  	ROW_NUMBER() OVER(ORDER BY S_NO) AS ROWNUM
+							,A.S_NO
+							,A.S_NAME
+							,B.CODENAME AS S_TYPE
+				FROM    TMSTSTAY A LEFT JOIN TMSTCODE B 	ON 	B.GRPCODE 	= 3
+			                                                                AND 	A.S_TYPE 	= B.CODE
+				WHERE 	S_NAME LIKE '%' || #{param1} || '%'
+			) A
+			WHERE ROWNUM BETWEEN #{param2} AND #{param3}
+			
+	</select>
+	
+</mapper>
