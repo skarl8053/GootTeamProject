@@ -278,73 +278,93 @@ function inputNumberOnly(el) {
 
 
 
-// 테마 및 지역 선택
+// 테마 및 지역 선택 (남기문 전체적으로 수정 완료)
+
+var themeArr = null;
+var locationArr = null;
 
 $(document).ready(
 		function() {
-			var count1 = 0;
-			var count2 = 0;
+			
+			// 테마
 			$('.btn1').each(function(index) {
 				$(this).attr('btn1-index', index);
 			}).click(
 					function() {
 						var index = $(this).attr('btn1-index');
 						$('.btn1[btn1-index=' + index + ']').toggleClass('clicked_btn1');
-						count1++;
-						if (count1 > 3) {
-							alert('테마 및 선호 지역은 각각 최대 3개까지만 선택이 가능합니다.');
-							$('.btn1[bt1-index!=' + index + ']')
-									.toggleClass('clicked_btn1');
-							$('.btn1[bt1-index!=' + (index + 1) + ']')
-									.toggleClass('clicked_btn1');
-							$('.btn1[bt1-index!=' + index + ']')
-									.removeClass('clicked_btn1');
-							count1 = 0;
+						
+						// 남기문 수정 (기존 소스 삭제)
+						if(themeArr == null){
+							themeArr = new Array();
 						}
+
+						// 해당 테마 버튼의 value값 (숫자 가져옴)
+						var selectedButtonValue = $('.btn1[btn1-index=' + index + ']').attr('value');
+						
+						var themeArrIndex = themeArr.findIndex((e) => e == selectedButtonValue);
+
+						if(themeArrIndex == -1){
+							if(themeArr.length < 3){
+								themeArr.push(selectedButtonValue);
+							}
+							else{
+								alert('테마는 각각 최대 3개까지만 선택이 가능합니다.');
+								$('.btn1[btn1-index=' + index + ']').toggleClass('clicked_btn1');
+							}
+						}
+						else{
+								themeArr.splice(themeArrIndex, 1);
+						}
+						
+						console.log("themeArr : " + themeArr);
 					});
+			
 			$('.btn2').each(function(index) {
 				$(this).attr('btn2-index', index);
 			}).click(
 					function() {
 						var index = $(this).attr('btn2-index');
 						$('.btn2[btn2-index=' + index + ']').toggleClass('clicked_btn2');
-						count2++;
-						if (count2 > 3) {
-							alert('테마 및 선호 지역은 각각 최대 3개까지만 선택이 가능합니다.');
-							$('.btn2[bt2-index!=' + index + ']')
-									.toggleClass('clicked_btn2');
-							$('.btn2[bt2-index!=' + (index + 1) + ']')
-									.toggleClass('clicked_btn2');
-							$('.btn2[bt2-index!=' + index + ']')
-									.removeClass('clicked_btn2');
-							count2 = 0;
+						
+						// 남기문 수정 (기존 소스 삭제)
+						if(locationArr == null){
+							locationArr = new Array();
 						}
+						
+						// 해당 지역 버튼의 value값 (숫자 가져옴)
+						var selectedButtonValue = $('.btn2[btn2-index=' + index + ']').attr('value');
+						
+						// 해당 value가 배열에 있는지 확인 / 없으면 -1 반환, 있으면 N번째 수 반환
+						var locationArrIndex = locationArr.findIndex((e) => e == selectedButtonValue);
+						
+						if(locationArrIndex == -1){
+							if(locationArr.length < 3){
+								// 배열에 값이 없고, 배열 내의 개수가 3개 이하인 경우 insert
+								locationArr.push(selectedButtonValue);
+							}
+							else{
+								alert('선호 지역은 각각 최대 3개까지만 선택이 가능합니다.');
+								$('.btn2[btn2-index=' + index + ']').toggleClass('clicked_btn2');
+							}
+						}
+						else{
+							// N번째 인덱스를 이용하여 데이터 삭제
+							locationArr.splice(locationArrIndex, 1);
+						}
+						console.log("locationArr : " + locationArr);
 					});
 		});
 
-
-var all_tema1 = "";
-var all_area1 = "";
-var f = document.joining;
-
-function a(target){
+function listArrayInsert()
+{
+	// 위에서 저장한 내용을 hidden값에 집어넣어줌..
+	document.getElementById("all_tema").value = themeArr;
+	document.getElementById("all_area").value = locationArr;
 	
-		if(all_tema1.length>5){
-			all_tema1=""
-		}else{
-			all_tema1 += target.value+","
-			f.all_tema.value=all_tema1;
-		}
 	
-	console.log(all_tema1)
 }
-function aa(target){
-	if(all_area1.length>5){
-		all_area1=""
-	}else{
-		all_area1 += target.value+","	
-		f.all_area.value=all_area1;
-	}
-	console.log(all_area1)
-}
+
+////////////////////// 테마 / 선호 지역 선택 : 남기문 /////////////////////////
+
 

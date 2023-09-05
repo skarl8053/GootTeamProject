@@ -62,8 +62,8 @@
 		<p class="login">·Î±×ÀÎ</p>
 		<hr/> <br>
 		<form action="logining" onsubmit="return loginCheck()" id="login-form">
-			<input type="email" name="m_email" id="m_email" placeholder="Email">
-			<input type="password" name="m_pw" id="m_pw" placeholder="Password">
+			<input type="email" name="m_email" id="m_email" placeholder="Email" autocomplete="off">
+			<input type="password" name="m_pw" id="m_pw" placeholder="Password" autocomplete="off">
 			<i class="fa-solid fa-eye fa-2xl"></i>
 				<input type="submit" value="Login" class="login_btn">
 		</form>

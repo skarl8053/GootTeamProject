@@ -1,20 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
 	<title>이메일 인증</title>
 </head>
-<script type="text/javascript">
-function closeWin(){
-	alert("회원가입 쿠폰이 증정되었습니다.");
-	self.close();
-}
-</script>
-<body onload="closeWin()">
-<h2>이메일이 인증되었습니다.</h2>
+
+<body onload="closeWin('${msg}')">
+	
+	<script type="text/javascript">
+			function closeWin(msg){
+				alert(msg);
+				self.close();
+			}
+	</script>
 	
 </body>
 </html>

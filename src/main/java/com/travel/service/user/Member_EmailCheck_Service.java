@@ -37,12 +37,14 @@ public class Member_EmailCheck_Service implements Interface_MemberService {
 		boolean isRight=(emailSHA.equals(code))?true:false;
 		if(isRight==true){
 			if (emailcheck.equals("N")) {
-				dao.update_m_emailcheck(m_email);		
-				return "member/member_emailcheck_user";
-			}else {
-				return "member/member_emailcheckfail_user";
+				dao.update_m_emailcheck(m_email);
+				return "complete";
 			}
-		}else {
+			else {
+				return "not_complete";
+			}
+		}
+		else {
 			return "error";		
 		}
 	}

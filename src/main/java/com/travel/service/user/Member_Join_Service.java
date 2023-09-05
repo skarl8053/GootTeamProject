@@ -36,13 +36,8 @@ public class Member_Join_Service implements Interface_TravelService {
 			String m_detailAddress = request.getParameter("m_detailAddress");
 			String m_address = String.format("%s %s", m_roadAddress,m_detailAddress);
 			
-			String m_market = request.getParameter("m_marketing");	
-			String m_marketing="";
-			if(m_market==null) {
-				m_marketing="N"; 
-			}else {
-				m_marketing="Y"; 
-			}
+			String m_marketing = request.getParameter("m_marketing") == null ? "N" : "Y";	
+			
 			
 			String all_area = request.getParameter("all_area");
 			String[] area=all_area.split(",");

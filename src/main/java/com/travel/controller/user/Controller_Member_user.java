@@ -93,6 +93,7 @@ public class Controller_Member_user {
 		service.execute(model);
 
 		System.out.println("메인페이지로 이동");
+		model.addAttribute("msg","회원가입 완료되었으며, 메일 인증이 완료되어야 정상적으로 이용할 수 있습니다.");
 		return "redirect:/main";
 	}
 
@@ -205,14 +206,22 @@ public class Controller_Member_user {
 		check = new Member_EmailCheck_Service(sqlSession);
 		String link = check.execute(model);
 		
-		System.out.println("이메일 인증");
-		service = new Member_FreeCoupon_Service(sqlSession);
-		service.execute(model);
+		if(link.equals("complete")) {
+			
+			System.out.println("이메일 인증");
+			service = new Member_FreeCoupon_Service(sqlSession);
+			service.execute(model);
+			
+			System.out.println("회원가입 쿠폰 증정");
+			
+			model.addAttribute("msg", "이메일 인증 완료 : 회원가입 쿠폰이 증정되었습니다.");
+			
+		}
+		else {
+			model.addAttribute("msg", "이메일 인증이 이미 완료되었습니다.");
+		}
 		
-		System.out.println("회원가입 쿠폰 증정");
-
-		return link;
-
+		return "member/member_emailcheck_user";
 	}
 
 }
