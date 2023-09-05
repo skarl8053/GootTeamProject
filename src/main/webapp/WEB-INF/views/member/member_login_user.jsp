@@ -19,13 +19,8 @@
 		<p class="login">·Î±×ÀÎ</p>
 		<hr/> <br>
 		<form action="logining" id="login-form">
-<<<<<<< HEAD
 			<input type="email" name="m_email" id="m_email" placeholder="Email">
 			<input type="password" name="m_pw" id="m_pw" placeholder="Password">
-=======
-			<input type="email" name="m_email" id="m_email" placeholder="Email" autocomplete="off">
-			<input type="password" name="m_pw" id="m_pw" placeholder="Password" autocomplete="off">
->>>>>>> b5b96998bbca96d31499d5b7b1283fc2589b187e
 			<i class="fa-solid fa-eye fa-2xl"></i>
 				<input type="submit" value="Login" class="login_btn">
 		</form>

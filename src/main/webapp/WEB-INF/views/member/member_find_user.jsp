@@ -26,13 +26,8 @@
 						<div id="id_phone_box">
 						<form action="find_email" method="post">
 							<div id="id_phone_box_text">
-<<<<<<< HEAD
 								이름 <br><input type="text" name="m_name" id="m_name" required> <br><br>
 								핸드폰 번호 <br><input type="text" name="m_tel" id="m_tel" oninput="inputNumberOnly(this)" maxlength="11" required>
-=======
-								이름 <br><input type="text" name="m_name" id="m_name" autocomplete="off" required> <br><br>
-								핸드폰 번호 <br><input type="text" name="m_tel" id="m_tel" autocomplete="off" oninput="inputNumberOnly(this)" maxlength="11" required>
->>>>>>> b5b96998bbca96d31499d5b7b1283fc2589b187e
 								<input type="submit" value="인증" id="check">
 							</div>
 						</form>
@@ -44,15 +39,9 @@
 						<div id="pw_phone_box">
 						<form action="find_pw">
 							<div id="pw_phone_box_text">
-<<<<<<< HEAD
 								이름 <br><input type="text" name="m_name" required> <br><br>
 								핸드폰 번호 <br><input type="text" name="m_tel" oninput="inputNumberOnly(this)" maxlength="11" required><br /><br />
 								이메일 <br><input type="text" name="m_email" required> 
-=======
-								이름 <br><input type="text" name="m_name" autocomplete="off" required> <br><br>
-								핸드폰 번호 <br><input type="text" name="m_tel" autocomplete="off" oninput="inputNumberOnly(this)" maxlength="11" required><br /><br />
-								이메일 <br><input type="text" name="m_email" autocomplete="off" required> 
->>>>>>> b5b96998bbca96d31499d5b7b1283fc2589b187e
 								<input type="submit" value="인증" id="check">
 							</div>
 						</form>
