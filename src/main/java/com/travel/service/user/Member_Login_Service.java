@@ -33,10 +33,26 @@ public class Member_Login_Service implements Interface_MemberService {
 		String key = "1kjkjkjk$%!@#@#@#%ohhkkhkhk9999";
 
 		String m_pw = CryptoUtil.encryptAES256(pw, key);
+<<<<<<< HEAD
 		String m_lock = request.getParameter("m_lock");
+=======
+		String lock = request.getParameter("m_lock");
+>>>>>>> b5b96998bbca96d31499d5b7b1283fc2589b187e
 		
 		DTO_Member_user dto = dao.member_login(m_email, m_pw);
+		String m_name = dto.getM_name();
+		String m_tel = dto.getM_tel();
+		String m_marketing = dto.getM_marketing();
+		int m_theme1 = dto.getM_theme1();
+		int m_theme2 = dto.getM_theme2();
+		int m_theme3 = dto.getM_theme3();
+		int m_area1 = dto.getM_area1();
+		int m_area2 = dto.getM_area2();
+		int m_area3 = dto.getM_area3();
+
+		String m_lock = dto.getM_lock();
 		
+<<<<<<< HEAD
 		String m_name = dto.getM_name();
 		String m_tel = dto.getM_tel();
 		String m_marketing = dto.getM_marketing();
@@ -50,6 +66,9 @@ public class Member_Login_Service implements Interface_MemberService {
 		String m_emailcheck = dto.getM_emailcheck();
 		
 		m_emailcheck = m_emailcheck != null ? m_emailcheck : "";
+=======
+		m_lock = m_lock != null ? m_lock : "";
+>>>>>>> b5b96998bbca96d31499d5b7b1283fc2589b187e
 		
 		if(dto == null)
 		{
@@ -59,11 +78,16 @@ public class Member_Login_Service implements Interface_MemberService {
 		
 		int m_sec = dto.getM_sec();
 		
+<<<<<<< HEAD
 		if(m_emailcheck.equals("N")) {
 			System.out.println("이메일 인증 필요");
 			return "redirect:/main";
 		}else if(m_lock.equals("Y")) {		
 			System.out.println("신고 차단");
+=======
+		if(m_lock.equals("Y")) {
+			System.out.println("차단");
+>>>>>>> b5b96998bbca96d31499d5b7b1283fc2589b187e
 			return "redirect:/main";
 		}else if(m_sec == 1) {		
 			System.out.println("관리자");

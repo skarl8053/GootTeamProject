@@ -59,6 +59,13 @@
 		});
 	</script>
 </head>
+<%
+	if (session.getAttribute("m_email") == null) { // 로그인이 안된 상태
+		System.out.println("널 값???");
+	}else{
+		System.out.println("로그인 된건가?");
+	}
+%>
 <body>
 
 	<!-- 메세지 -->
@@ -76,7 +83,10 @@
 			
 		<script>
 			alert("${msg}");
+<<<<<<< HEAD
+=======
 			location.replace("main");
+>>>>>>> 569a8281372745b28274ff72f6bfcb2807bd8592
 		</script>
 		
 	</c:if>

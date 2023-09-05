@@ -22,7 +22,11 @@
 		<hr />
 		<br>
 		<form action="deleting" id="delete-form">
+<<<<<<< HEAD
 			<input type="password" id="pw" name="pw" placeholder="Password">
+=======
+			<input type="password" id="pw" name="pw" placeholder="Password" autocomplete="off">
+>>>>>>> b5b96998bbca96d31499d5b7b1283fc2589b187e
 			<i class="fa-solid fa-eye fa-2xl"></i>
 	</div>
 	<div id="container">
