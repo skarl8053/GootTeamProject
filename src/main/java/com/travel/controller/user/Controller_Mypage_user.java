@@ -23,6 +23,10 @@ public class Controller_Mypage_user {
 	@RequestMapping("mypage/refund_popup")
 	public String refund_popup(HttpServletRequest request, Model model) {
 		
+		// 남기문
+		// 환불 팝업
+		// M_NO, ORDER_NO 파라미터 필요함..
+		
 		model.addAttribute("request",request);
 		
 		service = new Service_Refund_Select_User(sqlSession);
@@ -35,7 +39,10 @@ public class Controller_Mypage_user {
 	@RequestMapping("mypage/refund_insert")
 	public String refund_insert(HttpServletRequest request, Model model) {
 		
+		// 남기문
 		// 환불 진행
+		
+		// 돌아갈 주소 정할 것
 		
 		model.addAttribute("request",request);
 		

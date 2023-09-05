@@ -44,6 +44,7 @@
 		     border-radius: 3px;
 		     width: 100px;
 		     height: 32px;
+		     cursor: pointer;
 		 }
 		 .button:hover{
 		 	cursor: pointer;

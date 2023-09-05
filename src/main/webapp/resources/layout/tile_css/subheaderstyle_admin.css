@@ -1,3 +1,9 @@
+
+/* 
+	제작 : 남기문 
+    일자 : 2023. 09. 02
+*/
+
 @font-face {
     font-family: 'GmarketSansMedium';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
@@ -5,135 +11,100 @@
     font-style: normal;
 }
 
+/* 메인 스타일 */
+
+/* html { box-sizing: border-box; } */
+
+/* *, *:before, *:after { box-sizing: inherit; } */
+
 body {
-    background-color: white;
+    background: white;
+    margin: 0;
+}
+
+.container {
+    padding: 15px 70px;
+    width: auto;
+    font-family: 'GmarketSansMedium', sans-serif; 
+}
+
+/* 사진 스타일 */
+#logo_img{
+    width: 220px;
+    height: 50px;
+
+    /* 메뉴 (지역, 테마, 더보기) 위치 변경시 이거 변경해주면 됨.. */
+    margin-right: 80px; 
+}
+
+/* 상단바 네비게이션 스타일 */
+
+#navigation { 
+    background: #011967; 
+    height: 85px;
+}
+
+#navigation ul {
+    font-size: 0;
     margin: 0;
     padding: 0;
 }
-header {
-    background-color: #011967;
-    width: 100%;
-    height: 100px;
-}
 
-#login {
-    float: right;
-    margin: 20px 20px 0 0;
-    font-size: 20px;
-    word-spacing: 10px;
-    color: aliceblue;
-}
-
-#login a {
-    color: rgb(235, 208, 28);
-    text-decoration: none;
-    font-weight: bold;
-}
-
-#login a:hover {
-    color:lightblue;
-    text-decoration: none;
-    font-weight: bold;
-}
-
-ul {
-    padding: 0;
-    margin-top: 0px;
-}
-
-li {
-    display: inline;
-}
-
-nav {
-    font-size: 20px;
-    font-family: 'GmarketSansMedium', sans-serif; 
+#navigation ul li {
+    display: inline-block;
     position: relative;
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    margin-left: auto;
-    margin-right: auto;
-    z-index: 100; /* 다른 content보다 맨 앞에 위치시킴 */
 }
 
-nav .menubar {
-    color: rgb(235, 208, 28);
-    text-align: center;
-    text-decoration: none;
-    list-style: none;
-    font-size: 30px;
-    float: left;
-    margin: 0 150px 0 150px;
-}
-
-nav ul li:hover ul {
+.menu-etc a {
     display: block;
-}
-
-nav ul li ul {
-    position: absolute;
-    display: none;
-    margin: 20px 10px;
-}
-nav ul li ul li {
-    display: inline;
-    text-align: center;
-}
-
-nav ul li ul li a {
-    color: #011967;
+    font-size: 20px;
+    padding: 15px 5px;
+    color:rgb(235, 208, 28);
+    width: auto;
     text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    margin-top: 20px;
+}
+/* 오른쪽 로그인 스타일 */
+
+.menu-etc a:hover{
+    color: lightblue;
+}
+
+.menu-bar a{
+    display: block;
+    font-size: 25px;
+    padding: 15px 0px;
+    margin-right: 50px;
+    width: 300px;
     height: 40px;
-    width: 160px;
-    justify-content: center;
-    align-items: center;
-}
-nav ul li ul li a:hover {
-    background-color: #011967;
-    border-radius: 10px;
     color: rgb(235, 208, 28);
+    transition: 0.3s linear;
+    text-decoration: none;
 }
 
-#copy {
-    text-align: center;
+.menu-bar:hover { background: #011967; }
+
+.menu-bar ul {
+    background-color: white;
+    border-bottom: 5px solid #2ba0db;
+    display: none;
+    position: absolute;
+    width: 300px;
 }
 
-footer hr{
-    width: 1200px;
+.inner_button{
+    margin: 10px 15px;
+    width: 120px;
+    height: 40px;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: white;
+    color: #011967;
+    border-style: none;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
-
-/*        추가사항       */
-/* html 태그에 해당 클래스가 추가되면 해당 태그부터는 더 이상 float 속성의 영향을 받지 않음 */
-.clear{
-    clear: both;
-}
-
-/* 지역 목록태그 li, 테마 목록태그 li */
-#region-list-content li, #theme-list-content li{
-    float: left;
-    width: 100px;
-}
-
-#member-list-content, #stay-list-title, #event-list-title{
-    z-index: 100; /* 다른 content보다 맨 앞에 위치시킴 */
-}
-
-#member-list-content{
-    margin-top: 38px;
-    margin-left: 130px;
-}
-
-#stay-list-content{
-    margin-top: 38px;
-    margin-left: 550px;
-}
-
-#event-list-content{
-    margin-top: 38px;
-    margin-left: 975px;
+.inner_button:hover{
+    background-color:#011967;
+    color: rgb(235, 208, 28);
 }

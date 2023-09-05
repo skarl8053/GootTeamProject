@@ -8,12 +8,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-	<div id="wrap">
+	<div id="container">
 		<tiles:insertAttribute name="header" />
-		<hr />
-		<tiles:insertAttribute name="body" />
-		<hr />
-		<tiles:insertAttribute name="footer" />
 	</div>
+	<br /><br /><br />
+	<div id="content">
+		<tiles:insertAttribute name="body" />
+	</div>
+	<hr />
+	<div id="footer">
+		<tiles:insertAttribute name="footer" />	
+	</div>
+	
 </body>
 </html>

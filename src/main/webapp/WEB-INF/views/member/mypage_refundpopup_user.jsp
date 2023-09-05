@@ -41,11 +41,15 @@
             height: 50px;
         }
         .second_col{
-            width: 65%;
+            width: 50%;
             height: 50px;
         }
         .third_col{
-            width: 22%;
+            width: 7%;
+            height: 50px;
+        }
+        .forth_col{
+            width: 30%;
             height: 50px;
         }
         #refundButton{
@@ -164,22 +168,24 @@
                 <table border="1">
                     <tr>
                         <td class="first_col">주문번호</td>
-                        <td class="second_col" colspan="2">${o_list.order_no}</td>
+                        <td class="second_col" colspan="">${o_list.order_no}</td>
+                        <td class="third_col">환불 금액</td>
+                        <td class="forth_col" >${o_list.payment_price}</td>
                     </tr>
                     <tr>
                         <td class="first_col">숙소명</td>
-                        <td class="second_col" colspan="2">${o_list.s_name}</td>
+                        <td class="second_col" colspan="3">${o_list.s_name}</td>
                     </tr>
                     <tr>
                         <td class="first_col">번호</td>
                         <td class="second_col">객실명</td>
-                        <td class="third_col">금액</td>
+                        <td class="third_col" colspan="2">금액</td>
                     </tr>
                     <c:forEach items="${r_list}" var="li">
                         <tr>
                             <td class="first_col"><span>${li.row_num}</span></td>
                             <td class="second_col"><span>${li.r_name}</span></td>
-                            <td class="third_col"><span>${li.r_price }</span></td>
+                            <td class="third_col" colspan="2"><span>${li.r_price }</span></td>
                         </tr>
                     </c:forEach>
                 </table>

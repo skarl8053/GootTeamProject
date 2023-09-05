@@ -28,24 +28,38 @@ public class Service_Delvery_select_admin  implements Interface_TravelService {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		
-		boolean isKeywordParamExists = request.getParameter("keyword") != null ? true : false;
+		boolean isdelivery_noParamExists = request.getParameter("delivery_no") != null ? true : false;
 		
-		String keyword = request.getParameter("keyword") != null ? request.getParameter("keyword") : "";
+		String delivery_no = request.getParameter("delivery_no") != null ? request.getParameter("delivery_no") : "";
 		
-		DTO_Delivery_admin list = dao.deliveryStatusSelect(keyword);
+		DTO_Delivery_admin list = dao.deliveryStatusSelect(delivery_no);
 		
-		// keyword 파라미터(배송번호)를 입력했는데, 리스트가 없는 경우
+		// delivery_no 파라미터(배송번호)를 입력했는데, 리스트가 없는 경우
 		// 해당하는 배송번호가 없다는 것을 의미함.
 		
-		if(isKeywordParamExists == true && list == null)
+		if(isdelivery_noParamExists == true && list == null)
 		{
-			model.addAttribute("keyword", keyword);
-			model.addAttribute("msg", "입력하신 배송번호의 배송정보가 존재하지 않습니다.");
+			if(delivery_no.length() < 1){
+				model.addAttribute("msg", "");
+				return;
+			}
+			else {
+				model.addAttribute("msg", "입력하신 배송번호의 배송정보가 존재하지 않습니다.");
+			}
+			//model.addAttribute("delivery_no", delivery_no);
+			
 		}
 		else {
-			model.addAttribute("keyword", keyword);
+			model.addAttribute("delivery_no", delivery_no);
 			model.addAttribute("list", list);
-			model.addAttribute("msg", "");
+			
+			if(request.getParameter("msg") == null || request.getParameter("msg").equals("")) {
+				model.addAttribute("msg","");
+			}
+			else {
+				model.addAttribute("msg",request.getParameter("msg"));
+			}
+			
 		}
 	}
 }

@@ -14,13 +14,14 @@ public class DTO_Mypage_user {
 	
 	 private int order_no;
 	 private int s_no;
+	 private String payment_price;
 	 private String s_name;
 	 private String row_num;
 	 private String r_name;
 	 private String r_price;
 	 private String coupon_no;
 	 private String coupon_name;
-	 private int point;
+	 private String point;
 	 
 	 private int refund_reason_no;
 	 private String refund_reason_name;

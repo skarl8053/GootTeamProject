@@ -264,7 +264,7 @@
                             </div>
                             <div class="filebox" id="secondFileBox">
                                 <label for="secondFile">파일 불러오기</label>
-                                <input type="file" class="file" id="secondFile" name="secondFile" onchange="imagePreview(this, 'second')"> 
+                                <input type="file" class="file" id="secondFile" name="second_file" onchange="imagePreview(this, 'second')"> 
                             </div>
                             <div>
                                 <button class="button" id="secondDeleteButton" onclick="return onClickDeleteUpload('second');">파일 삭제</button>
@@ -289,7 +289,7 @@
                             </div>
                             <div class="filebox" id="thirdFileBox">
                                 <label for="thirdFile">파일 불러오기</label>
-                                <input type="file" class="file" id="thirdFile" name="thirdFile" onchange="imagePreview(this, 'third')"> 
+                                <input type="file" class="file" id="thirdFile" name="third_file" onchange="imagePreview(this, 'third')"> 
                             </div>
                             <div>
                                 <button class="button" id="thirdDeleteButton" onclick="return onClickDeleteUpload('third');">파일 삭제</button>

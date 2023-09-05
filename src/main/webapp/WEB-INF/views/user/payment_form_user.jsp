@@ -15,7 +15,8 @@
 	</style>
 	
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-
+    <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
+    
 </head>
 <body>
 
@@ -113,7 +114,7 @@
             display: none;
         }
         
-        #submit{
+        .paybutton{
             background-color: blue;
             color: white;
             font-weight: bold;
@@ -122,6 +123,9 @@
             height: 50px;
             font-size: 20px;
             cursor: pointer;
+        }
+        #kakaoPaymentButton{
+            display: none;
         }
     </style>
 
@@ -151,7 +155,7 @@
        		}
         		
         	
-        	document.getElementById("coupon_price").innerHTML = pointPrice;
+        	document.getElementById("coupon_price").innerHTML = 0;
         	document.getElementById("discountPrice").innerHTML = pointPrice;
         	document.getElementById("resultPrice").innerHTML = (totalPrice - couponPrice + pointPrice);
         	
@@ -167,7 +171,7 @@
                 var use_point = parseInt(document.getElementById("use_point").value);
                 var currentAllPoint = parseInt(document.getElementById("currentAllPoint").innerHTML);
 
-                if(use_point.length < 1){
+                if(document.getElementById("use_point").value.length < 1){
                     
                     document.getElementById("discountPrice").innerHTML = use_Coupon;
                     document.getElementById("use_point").value = 0;
@@ -200,7 +204,7 @@
                     return false;
                 }
 
-                if(parseInt(totalPrice - use_point) < 0)
+                if(parseInt(totalPrice - use_point - use_Coupon) < 0)
                 {
                     alert('결제 금액 이상의 포인트를 사용할 수 없습니다.');
 
@@ -212,8 +216,8 @@
                     return;
                 }
 
-
                 payPointExec();
+                
             });
 
         })
@@ -223,19 +227,20 @@
     		
     		// 포인트 전액 사용
     		
-            var totalPrice = document.getElementById("totalPrice").innerHTML;
-    		var allPoint = document.getElementById("currentAllPoint").innerHTML;
+            var totalPrice = parseInt(document.getElementById("totalPrice").innerHTML);
+    		var allPoint = parseInt(document.getElementById("currentAllPoint").innerHTML);
+    		var use_Coupon = parseInt(document.getElementById("coupon_price").innerHTML);
     		
-            if(totalPrice - allPoint < 0){
+            if( (totalPrice - allPoint - use_Coupon) < 0){
 
                 alert('결제 금액 이상의 포인트를 사용할 수 없습니다.');
+                
+                document.getElementById("discountPrice").innerHTML = use_Coupon;
+                document.getElementById("use_point").value = 0;
 
-                document.getElementById("discountPrice").innerHTML = totalPrice;
-                document.getElementById("use_point").value = totalPrice;
+                document.getElementById("resultPrice").innerHTML = totalPrice - use_Coupon;
 
-                document.getElementById("resultPrice").innerHTML = 0;
-
-                return;
+                return false;
             }
 
     		document.getElementById("use_point").value = allPoint;
@@ -299,21 +304,52 @@
             if(target.value.length >= max) {
                 target.nextElementSibling.focus();
             }
-            
-            
+        }
 
+        
+
+        function payMethodChange(methodNum){
+
+            var cardform = document.getElementById("cardform");
+            var cardPaymentButton = document.getElementById("cardPaymentButton");
+            var kakaoPaymentButton = document.getElementById("kakaoPaymentButton");
+
+            if(methodNum == 1){
+
+                // 카드 결제
+                
+                cardform.style.display = "block";
+                cardPaymentButton.style.display = "block";
+                kakaoPaymentButton.style.display = "none";
+
+                document.getElementById("paymethod").value = "1";
+
+            }
+            else if(methodNum == 2){
+                
+                // 카카오페이 결제
+
+                cardform.style.display = "none";
+                cardPaymentButton.style.display = "none";
+                kakaoPaymentButton.style.display = "block";
+
+                document.getElementById("paymethod").value = "2";
+
+            }
         }
 
         function paymentExec(){
+
+            // 일반 카드 결제
 
         	var totalAllPrice = document.getElementById("totalPrice").innerHTML;
         	var totalDiscountPrice = document.getElementById("discountPrice").innerHTML;
         	var totalResultPrice = document.getElementById("resultPrice").innerHTML;
         	
-            var pay_type = document.getElementById("pay_type").value;
+            var paymethod = document.getElementById("paymethod").value;
             var cardnumber = document.getElementById("card_number").value;
 
-            if(pay_type == 1){
+            if(paymethod == 1){
                 
                 if(cardnumber.length < 1)
                 {
@@ -327,31 +363,112 @@
             if(check == false){
                 return false;
             }
-            
-            document.getElementById("totalAllPrice").value = totalAllPrice;
-            document.getElementById("totalDiscountPrice").value = totalDiscountPrice;
-            document.getElementById("totalResultPrice").value = totalResultPrice;
-            
+
+            if(paymethod == 1){
+                cardpayExec();
+            }
+            else if(paymethod == 2){
+                kakaopayExec();
+            }
         }
+
+        function cardpayExec(){
+
+            var m_no = document.getElementById("m_no").value;
+            var stay_no = document.getElementById("stay_no").value;
+            var room_no = document.getElementById("room_no").value;
+            var checkindate = document.getElementById("checkindate").value;
+            var checkoutdate = document.getElementById("checkoutdate").value;
+            var totalAllPrice = document.getElementById("totalPrice").innerHTML;
+            var totalDiscountPrice = document.getElementById("discountPrice").innerHTML;
+            var totalResultPrice = document.getElementById("resultPrice").innerHTML;
+            var totalUsePoint = document.getElementById("use_point").value;
+            var totalEarnPoint = document.getElementById("totalEarnPoint").value;
+            var coupon_no = document.getElementById("coupon_no").value;
+            var card_number = document.getElementById("card_number").value;
+            var paymethod = document.getElementById("paymethod").value;
+
+            location.replace("payment_exec?m_no=" + m_no + "&stay_no=" + stay_no + "&room_no=" + room_no + "&checkindate=" 
+            + checkindate + "&pay_type=1&checkoutdate=" + checkoutdate + "&totalAllPrice=" + totalAllPrice + "&totalDiscountPrice=" + totalDiscountPrice
+            + "&totalResultPrice=" + totalResultPrice + "&totalUsePoint=" + totalUsePoint + "&totalEarnPoint=" + + totalEarnPoint + "&coupon_no=" + coupon_no + "&cardNumber=" + card_number);
+                
+
+        }
+
+        // 카카오 페이 사용 소스
+
+        ///////////////////////////////////////////
+
+        var IMP = window.IMP; 
+        IMP.init("imp07346301"); 
+      
+        var today = new Date();   
+        var hours = today.getHours(); // 시
+        var minutes = today.getMinutes();  // 분
+        var seconds = today.getSeconds();  // 초
+        var milliseconds = today.getMilliseconds();
+        var makeMerchantUid = hours +  minutes + seconds + milliseconds;
+        
+        function kakaopayExec(){
+
+            // 카카오페이 결제
+            
+            var m_no = document.getElementById("m_no").value;
+            var stay_no = document.getElementById("stay_no").value;
+            var room_no = document.getElementById("room_no").value;
+            var checkindate = document.getElementById("checkindate").value;
+            var checkoutdate = document.getElementById("checkoutdate").value;
+            var totalAllPrice = document.getElementById("totalPrice").innerHTML;
+            var totalDiscountPrice = document.getElementById("discountPrice").innerHTML;
+            var totalResultPrice = document.getElementById("resultPrice").innerHTML;
+            var totalUsePoint = document.getElementById("use_point").value;
+            var totalEarnPoint = document.getElementById("totalEarnPoint").value;
+            var coupon_no = document.getElementById("coupon_no").value;
+            var card_number = document.getElementById("card_number").value;
+            var paymethod = document.getElementById("paymethod").value;
+
+            IMP.request_pay({
+                pg : 'kakaopay.TC0ONETIME',
+                pay_method : 'card',
+                merchant_uid: "IMP"+makeMerchantUid, 
+                name : '코드와 아이들 / 숙소 예약',
+                amount : parseInt(totalResultPrice)
+            }, function (rsp) {
+                if (rsp.success) {
+                	
+                    // 카카오 페이 결제 성공할 경우
+                    console.log(rsp);
+					// 결제 정보 등록
+                    location.replace("payment_exec?m_no=" + m_no + "&stay_no=" + stay_no + "&room_no=" + room_no + "&checkindate=" 
+                    + checkindate + "&pay_type=2&checkoutdate=" + checkoutdate + "&totalAllPrice=" + totalAllPrice + "&totalDiscountPrice=" + totalDiscountPrice
+                    + "&totalResultPrice=" + totalResultPrice + "&totalUsePoint=" + totalUsePoint + "&totalEarnPoint=" + + totalEarnPoint + "&coupon_no=" + coupon_no + "&cardNumber=" + card_number);
+                        
+                } else {
+                    console.log(rsp);
+                    alert("카카오페이 결제가 실패하였습니다.");
+                }
+            });
+        }
+
+        /////////////////////////////////////////////////////
 
     </script>
 
 	<h1>결제 진행</h1>
 
     <div id="form">
-        <form action="payment_exec" onsubmit="return paymentExec()">
+        
 			
-			<input type="hidden" name="m_no" value="${param.m_no}" />
-			<input type="hidden" name="stay_no" value="${param.stay_no}" />
-			<input type="hidden" name="room_no" value="1_2_3_4" /> <%-- ${param.room_no} --%>
-			<input type="hidden" name="checkindate" value="${param.checkindate}" />
-			<input type="hidden" name="checkoutdate" value="${param.checkoutdate}" />
-			<input type="hidden" id="totalAllPrice"name="totalAllPrice" value="" />
-			<input type="hidden" id="totalDiscountPrice"name="totalDiscountPrice" value="" />
-			<input type="hidden" id="totalResultPrice"name="totalResultPrice" value="" />
-			<input type="hidden" name="totalEarnPoint" value="${earnpoint}" />
+			<input type="hidden" id="m_no" name="m_no" value="${param.m_no}" />
+			<input type="hidden" id="stay_no" name="stay_no" value="${param.stay_no}" />
+			<input type="hidden" id="room_no" name="room_no" value="${param.room_no}" /> <%-- ${param.room_no} --%>
+			<input type="hidden" id="checkindate" name="checkindate" value="${param.checkindate}" />
+			<input type="hidden" id="checkoutdate" name="checkoutdate" value="${param.checkoutdate}" />
+			<input type="hidden" id="totalEarnPoint" name="totalEarnPoint" value="${earnpoint}" />
 			<input type="hidden" id="coupon_no" name="coupon_no" value="" />
             <input type="hidden" id="card_number" name="cardNumber" value="" />
+            
+            <input type="hidden" id="paymethod" name="paymethod" value="1" />
 
             <div>
                 <ul>
@@ -430,8 +547,8 @@
                             <br><hr><br>
                             <div>
                                 <span>포인트</span>
-                                <span><input type="text" id="use_point" name="totalUsePoint" value="0" ></span><span>원</span>
-                                <span><button type="button" onclick="useAllPoint()">전액 사용</button></span>
+                                <span><input type="text" id="use_point" name="totalUsePoint" value="0"  autocomplete="off"></span><span>원</span>
+                                <span><button type="button" onclick="return useAllPoint();">전액 사용</button></span>
                                 &nbsp;&nbsp;<span id="currentAllPoint">${resvList.m_point}</span> 포인트 사용 가능 
                             </div>
                             <div>
@@ -470,11 +587,12 @@
                             <div>
                                 <span>결제 수단 : </span>
                                 <span>
-                                    <input type="radio" id="pay_type" name="pay_type" value="1" checked> 신용카드 결제
+                                    <input type="radio" name="pay_type" value="1" onchange="payMethodChange(1);" checked> 신용카드 결제
+                                    <input type="radio" name="pay_type" value="2" onchange="payMethodChange(2);"> 카카오페이 결제
                                 </span>
                             </div>
                             <br>
-                            <fieldset>
+                            <fieldset id="cardform">
                                 <span>카드번호 :</span>
                                 <br><br>
                                 <input type="text" id="first_cardnumber" class="cardNumber" onKeyup="return inputMoveNumber(this);" maxlength="4" autocomplete="off"/>&nbsp;-&nbsp;
@@ -486,13 +604,14 @@
                         </div>
                         <div>
                             <div>
-                                <input type="submit" id="submit" value="${sumPrice}원 결제하기">
+                                <input type="button" class="paybutton" id="cardPaymentButton" onclick="return paymentExec()" value="카드로 결제하기">
+                                <input type="button" class="paybutton" id="kakaoPaymentButton" onclick="return paymentExec();" value="카카오 페이로 결제하기">
                             </div>
                         </div>
                     </li>
                 </ul>
             </div>
-        </form>
+       
     </div>
 	
 </body>

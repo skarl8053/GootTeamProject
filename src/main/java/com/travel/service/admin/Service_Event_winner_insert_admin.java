@@ -44,7 +44,7 @@ public class Service_Event_winner_insert_admin implements Interface_TravelServic
 			dao.insertDelivery(event_no, item_no);
 			
 			int delivery_no = dao.selectDeliveryNo(m_no_list[item_no -1], event_no);
-			String alarm_msg = "경품 배송준비가 완료되었습니다.";
+			String alarm_msg = "이벤트에 당첨되어 경품 배송 주문 확인중입니다.";
 			
 			// 알림 이력 등록
 			if(item_no == 1) {

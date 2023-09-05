@@ -7,9 +7,14 @@
 
 	<select id="deliveryStatusSelect" resultType="com.travel.dto.admin.DTO_Delivery_admin">
 	
-			SELECT 	A.DELIVERY_NO
+			SELECT 	             A.DELIVERY_NO
 						,A.EVENT_NO
 						,C.EVENT_NAME
+                        ,(
+                            CASE A.M_NO WHEN C.M_NO1 THEN '1등' 
+                                                WHEN C.M_NO2 THEN '2등'
+                                                WHEN C.M_NO3 THEN '3등' END
+                        ) AS SCORE     
 						,A.ITEM_NO
                         ,D.ITEM_NAME
 						,A.M_NO
@@ -18,8 +23,8 @@
 						,B.CODENAME AS STEP_FLAG_STR
 						,(CASE WHEN A.EVENT_DATE IS NOT NULL THEN 'Y' ELSE 'N' END) AS 	STEP1_STATUS
 						,(CASE WHEN A.STEP1_DATE IS NOT NULL THEN 'Y' ELSE 'N' END) AS 		STEP2_STATUS
-						,(CASE WHEN A.STEP1_DATE IS NOT NULL THEN 'Y' ELSE 'N' END) AS 		STEP3_STATUS
-						,(CASE WHEN A.STEP1_DATE IS NOT NULL THEN 'Y' ELSE 'N' END) AS 		STEP4_STATUS
+						,(CASE WHEN A.STEP2_DATE IS NOT NULL THEN 'Y' ELSE 'N' END) AS 		STEP3_STATUS
+						,(CASE WHEN A.STEP3_DATE IS NOT NULL THEN 'Y' ELSE 'N' END) AS 		STEP4_STATUS
 						,A.EVENT_DATE 	AS STEP1_DATE
 						,A.STEP1_DATE 	AS STEP2_DATE
 						,A.STEP2_DATE 	AS STEP3_DATE
@@ -33,4 +38,46 @@
 	
 	</select>
 
+	<update id="deliveryStatusUpdate">
+	
+			UPDATE 	THISDELIVERY
+			<include refid="delivery_gubun" />
+			WHERE 	 	DELIVERY_NO = #{param1}
+	
+	</update>
+
+	<sql id="delivery_gubun">
+	
+			<if test="param2==1">
+					SET STEP_FLAG = 1, EVENT_DATE = SYSDATE
+			</if>
+			<if test="param2==2">
+					SET STEP_FLAG = 2, STEP1_DATE = SYSDATE
+			</if>
+			<if test="param2==3">
+					SET STEP_FLAG = 3, STEP2_DATE = SYSDATE
+			</if>
+			<if test="param2== 4">
+					SET STEP_FLAG = 4, STEP3_DATE = SYSDATE
+			</if>
+			
+	</sql>
+	
+	<insert id="insertPushAL">
+	
+			INSERT INTO THISPUSHAL
+			(
+				AL_NO, M_NO, AL_CONTENT, AL_GUBUN, ORDER_NO, DELIVERY_NO, AL_TIME
+			)
+			SELECT  		(SELECT NVL(MAX(AL_NO),0) + 1 FROM THISPUSHAL)
+			                ,A.M_NO
+			                ,#{param2}
+			                ,3                   	<!-- 3번 배송 -->
+			                ,NULL
+			                ,#{param1}
+			                ,SYSDATE
+			FROM    	THISDELIVERY A
+			WHERE   	A.DELIVERY_NO   	= #{param1}
+	
+	</insert>
 </mapper>

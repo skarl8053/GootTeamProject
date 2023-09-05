@@ -10,12 +10,14 @@
 		<!-- 환불 내역 시작 -->
 		<select id="orderInfoSelect" resultType="com.travel.dto.user.DTO_Mypage_user">
 				
-				SELECT DISTINCT  
-				            A.ORDER_NO, C.S_NAME
+				SELECT 	DISTINCT  
+				            A.ORDER_NO
+				            ,C.S_NAME
+				            ,A.PAYMENT_PRICE || ' 원' AS PAYMENT_PRICE
 				FROM    THISORDER A LEFT JOIN THISORDERDTL B ON A.ORDER_NO = B.ORDER_NO
 												LEFT JOIN TMSTSTAY C ON B.S_NO = C.S_NO
-				WHERE   A.M_NO = #{param1}
-				AND       A.ORDER_NO = #{param2}
+				WHERE  A.M_NO 		= #{param1}
+				AND     	A.ORDER_NO 	= #{param2}
 				
 		</select>
 		
@@ -23,10 +25,10 @@
 		
 				SELECT  ROW_NUMBER() OVER (ORDER BY B.R_NO DESC) AS ROW_NUM
 							,C.R_NAME
-							,C.R_PRICE
+							,C.R_PRICE || '원' AS R_PRICE
 				FROM 	THISORDER A LEFT JOIN THISORDERDTL 	B 	ON 	A.ORDER_NO 	= B.ORDER_NO
 				                             	LEFT JOIN TMSTROOM 		C 	ON 	B.S_NO 			= C.S_NO
-				                                                               				AND 	B.R_NO 			= C.R_NO
+				                                                                				AND 	B.R_NO 			= C.R_NO
                	WHERE 	A.M_NO 		= #{param1}
 			 	AND 		A.ORDER_NO 	= #{param2}                             				
 		
@@ -34,9 +36,9 @@
 		
 		<select id="orderDiscountInfoSelect" resultType="com.travel.dto.user.DTO_Mypage_user">
 		
-				SELECT  NVL(TO_CHAR(B.COUPON_NO),'-') AS COUPON_NO
+				SELECT  NVL(TO_CHAR(B.COUPON_NO),'0') || ' 원'AS COUPON_NO
 				            ,NVL(B.COUPON_DETAIL,'-') AS COUPON_NAME
-				            ,NVL(SUM(NVL(C.POINT_OUT,0)),0) AS POINT
+				            ,NVL(SUM(NVL(C.POINT_OUT,0)),0) || ' 포인트' AS POINT
 				FROM    THISORDER A LEFT JOIN TMSTCOUPON B 	ON 	A.COUPON_NO 	= B.COUPON_NO 
 				                                LEFT JOIN THISPOINT C 		ON 	A.ORDER_NO 		= C.ORDER_NO
 				                                                                		AND 	A.M_NO 			= C.M_NO
@@ -61,7 +63,6 @@
 				(
 				    REFUND_NO
 				    ,ORDER_NO
-				    ,S_NO
 				    ,REFUND_REASON
 				    ,REFUND_PRICE
 				    ,REFUND_PERCENTAGE
@@ -72,96 +73,21 @@
 				SELECT  DISTINCT
 							(SELECT NVL(MAX(REFUND_NO),0) + 1 FROM THISREFUND)
 				            ,A.ORDER_NO
-				            ,B.S_NO
 				            ,#{param3}
 				            ,A.PAYMENT_PRICE
 				            ,NULL
 				            ,1
 				            ,SYSDATE
-				            ,SYSDATE
-				FROM    THISORDER A  INNER JOIN THISORDERDTL B ON A.ORDER_NO = B.ORDER_NO
-				                                INNER JOIN TMSTMEMBER   C ON A.M_NO       = C.M_NO
-				WHERE   A.ORDER_NO = #{param2}
-				AND      A.M_NO = #{param1}
+				            ,NULL
+				FROM    THISORDER A
+				WHERE  A.M_NO = #{param1} 
+				AND 		A.ORDER_NO = #{param2}
+				     
 		
 		</insert>
 		
-		<select id="usePoint" resultType="integer">
-			
-			SELECT 	NVL(SUM(NVL(POINT_OUT,0)),0) AS POINT
-			FROM 	THISPOINT 
-			WHERE 	M_NO = #{param1}
-			AND 		ORDER_NO = #{param2}
-		
-		</select>
-		
-		<update id="refundPoint">
-		
-				UPDATE  TMSTMEMBER
-				SET        M_POINT = M_POINT + #{param2}
-				WHERE   M_NO = #{param1};
-				
-		</update>
-
-		<update id="refundPointList">
-				
-				INSERT INTO THISPOINT
-				(
-				    POINT_NO
-				    ,M_NO
-				    ,ORDER_NO
-				    ,POINT_TYPE
-				    ,POINT_IN
-				    ,POINT_OUT
-				    ,POINT_USEDATE
-				)
-				VALUES
-				(
-				    (SELECT NVL(MAX(POINT_NO),0) + 1 FROM THISPOINT)
-				    ,#{param1}
-				    ,#{param2}
-				    ,1
-				    ,#{param3}
-				    ,NULL
-				    ,SYSDATE
-				
-				)
-				
-		</update>
-
-		<select id="useCoupon" resultType="integer">
-		
-				SELECT  (
-				                CASE WHEN 	B.COUPON_NO IS NULL THEN 0
-				                        ELSE    	B.COUPON_NO END
-				            ) AS COUPON_NO            
-				FROM    THISORDER A LEFT JOIN THISUSECOUPON B 	ON 	A.COUPON_NO 			= B.COUPON_NO
-                                                											AND 	A.M_NO 			= B.M_NO
-                WHERE 	A.M_NO = #{param1}
-                AND 		A.ORDER_NO = #{param2}
-                
-		</select>
-		
-		<update id="refundCoupon">
-		
-				UPDATE 		THISCOUPON
-				SET 			COUPON_QTY = COUPON_QTY + 1
-				WHERE 		M_NO 			= #{param1}
-				AND 			COUPON_NO 	= #{param2}
-		
-		</update>
-		
-		<update id="refundCouponList">
-		
-				UPDATE 		THISUSECOUPON
-				SET 			COUPON_USEFLAG = 'N'
-				WHERE 		M_NO = #{param1}
-				AND 			COUPON_NO = #{param2}
-				
-		</update>
-		
 		<insert id="insertPushAL">
-		
+	
 				INSERT INTO THISPUSHAL
 				(
 					AL_NO, M_NO, AL_CONTENT, AL_GUBUN, ORDER_NO, DELIVERY_NO, AL_TIME

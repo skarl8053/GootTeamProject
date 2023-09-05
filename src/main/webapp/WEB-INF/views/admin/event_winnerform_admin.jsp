@@ -23,7 +23,7 @@
             padding: 0 100px 0 0;
         }
         .key{
-            width: 170px;
+            width: 100px;
             font-size: 20px;
         }
         .event_info{
@@ -33,6 +33,10 @@
         .event_winner{
             height: 30px;
             width: 400px;
+        }
+        .item_delivery_no{
+        	height: 30px;
+        	width: 100px;
         }
 
         button, #submit{
@@ -174,11 +178,17 @@
                         <input type="text" class="event_winner" id="first_mid" value="${list.first_member}"readonly>
                         <input type="hidden" id="first_mno" name="first_mno" value="" />
                     </li>
-                    <li>
-                        <c:if test="${list.event_member_flag == 'N'}">
-                            <button type="button" class="button" onclick="return selectIdButton('${param.event_no}', 'first_mno', 'first_mid', 'N')">아이디 선택</button>
-                        </c:if>
-                    </li>
+                    <c:if test="${list.event_member_flag == 'N'}">
+	                    <li>
+	                            <button type="button" class="button" onclick="return selectIdButton('${param.event_no}', 'first_mno', 'first_mid', 'N')">아이디 선택</button>
+	                    </li>
+                    </c:if>
+                    <c:if test="${list.event_member_flag == 'Y'}">
+	                    <li class="key">배송번호</li>
+	                    <li>
+	                    	<input type="text" class="item_delivery_no"value="${list.first_delivery_no}" readonly/>
+	                    </li>
+                    </c:if>
                 </ul>
                 <br>
                 <ul class="eventlist">
@@ -187,11 +197,17 @@
                         <input type="text" class="event_winner" id="second_mid" value="${list.second_member}" readonly>
                         <input type="hidden" id="second_mno" name="second_mno" value="" />
                     </li>
-                    <li>
-                        <c:if test="${list.event_member_flag == 'N'}">
-                            <button type="button" class="button" onclick="return selectIdButton('${param.event_no}','second_mno','second_mid', 'N')">아이디 선택</button>
-                        </c:if>
-                    </li>
+                    <c:if test="${list.event_member_flag == 'N'}">
+	                    <li>
+	                        <button type="button" class="button" onclick="return selectIdButton('${param.event_no}','second_mno','second_mid', 'N')">아이디 선택</button>
+	                    </li>
+                    </c:if>
+                    <c:if test="${list.event_member_flag == 'Y'}">
+	                    <li class="key">배송번호</li>
+	                    <li>
+	                    	<input type="text" class="item_delivery_no"value="${list.second_delivery_no}" readonly/>
+	                    </li>
+                    </c:if>
                 </ul>
                 <br>
                 <ul class="eventlist">
@@ -200,11 +216,17 @@
                         <input type="text" class="event_winner" id="third_mid"  value="${list.third_member}" readonly>
                         <input type="hidden" id="third_mno" name="third_mno" value="" />
                     </li>
-                    <li>
-                        <c:if test="${list.event_member_flag == 'N'}">
-                            <button type="button" class="button" onclick="return selectIdButton('${param.event_no}','third_mno','third_mid', 'N')">아이디 선택</button>
-                        </c:if>
-                    </li>
+                    <c:if test="${list.event_member_flag == 'N'}">
+	                    <li>
+	                            <button type="button" class="button" onclick="return selectIdButton('${param.event_no}','third_mno','third_mid', 'N')">아이디 선택</button>
+	                    </li>
+                    </c:if>
+                    <c:if test="${list.event_member_flag == 'Y'}">
+	                    <li class="key">배송번호</li>
+	                    <li>
+	                    	<input type="text" class="item_delivery_no"value="${list.third_delivery_no}" readonly/>
+	                    </li>
+                    </c:if>
                 </ul>
             </div>
             <br><br>

@@ -137,15 +137,24 @@
 						,NVL(E.M_EMAIL, '미등록')  AS FIRST_MEMBER
 						,NVL(F.M_EMAIL, '미등록')  AS SECOND_MEMBER
 						,NVL(G.M_EMAIL, '미등록')  AS THIRD_MEMBER
+						,H.DELIVERY_NO AS FIRST_DELIVERY_NO
+                        ,I.DELIVERY_NO AS SECOND_DELIVERY_NO
+                        ,J.DELIVERY_NO AS THIRD_DELIVERY_NO
 			FROM 	TMSTEVENT A LEFT JOIN TMSTITEM 		B 	ON 	A.EVENT_NO 	= B.EVENT_NO
-																			 		AND 	B.ITEM_NO 		= 1 					<!-- 1등 -->
+																			 		AND 	B.ITEM_NO 	= 1 					<!-- 1등 -->
 									 		LEFT JOIN TMSTITEM 		C 	ON 	A.EVENT_NO 	= C.EVENT_NO
-																		 			AND 	C.ITEM_NO 		= 2 					<!-- 2등 -->
+																		 			AND 	C.ITEM_NO 	= 2 					<!-- 2등 -->
 										 	LEFT JOIN TMSTITEM 		D 	ON 	A.EVENT_NO 	= D.EVENT_NO
 																			 		AND 	D.ITEM_NO 	= 3 					<!-- 3등 -->
-										    LEFT JOIN TMSTMEMBER E ON A.M_NO1  = E.M_NO
-										    LEFT JOIN TMSTMEMBER F ON A.M_NO2  = F.M_NO
-										    LEFT JOIN TMSTMEMBER G ON A.M_NO3 = G.M_NO
+										    LEFT JOIN TMSTMEMBER E 	ON 	A.M_NO1  		= E.M_NO
+										    LEFT JOIN TMSTMEMBER F 	ON 	A.M_NO2  		= F.M_NO
+										    LEFT JOIN TMSTMEMBER G 	ON 	A.M_NO3 		= G.M_NO
+										    LEFT JOIN THISDELIVERY  H 	ON 	A.EVENT_NO 	= H.EVENT_NO
+                                                                     				AND 	A.M_NO1 		= H.M_NO
+                                            LEFT JOIN THISDELIVERY  I 	ON 	A.EVENT_NO 	= I.EVENT_NO
+                                                                     				AND 	A.M_NO2 		= I.M_NO
+                                            LEFT JOIN THISDELIVERY  J 	ON 	A.EVENT_NO 	= J.EVENT_NO
+                                                                     				AND 	A.M_NO3 		= J.M_NO
 			WHERE  A.EVENT_NO = #{param1}
 	
 	</select>
@@ -240,7 +249,7 @@
 						,B.ITEM_NO
 						,C.M_NO
 						,C.M_ADDRESS
-						,2
+						,1
 						,SYSDATE
 						,NULL
 						,NULL
@@ -256,7 +265,7 @@
 						,B.ITEM_NO
 						,C.M_NO
 						,C.M_ADDRESS
-						,2
+						,1
 						,SYSDATE
 						,NULL
 						,NULL
@@ -264,7 +273,7 @@
 			FROM    TMSTEVENT A 	INNER 	JOIN TMSTITEM 		B 	ON A.EVENT_NO 			= B.EVENT_NO
 			                    				LEFT 		JOIN TMSTMEMBER C 	ON A.M_NO2					= C.M_NO
 			WHERE   A.EVENT_NO = #{param1}
-			AND     B.ITEM_NO = #{param2}
+			AND     	 B.ITEM_NO = #{param2}
 		</if>
 		<if test="param2==3">
 			SELECT  DELIVERY_NO_SEQ.NEXTVAL
@@ -272,7 +281,7 @@
 						,B.ITEM_NO
 						,C.M_NO
 						,C.M_ADDRESS
-						,2
+						,1
 						,SYSDATE
 						,NULL
 						,NULL
