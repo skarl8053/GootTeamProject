@@ -28,8 +28,8 @@
         <nav id="navigation">
             <div>
                 <ul class="" style="float: right">
-                    <li class="menu-etc" ><a class="login-menu" href="#">로그인</a></li>
-                    <li class="menu-etc"><a class="login-menu" href="#">회원가입</a></li>
+                    <li class="menu-etc" ><a class="login-menu" href="member/login">로그인</a></li>
+                    <li class="menu-etc"><a class="login-menu" href="member/join">회원가입</a></li>
                 </ul>
             </div>
         </nav>

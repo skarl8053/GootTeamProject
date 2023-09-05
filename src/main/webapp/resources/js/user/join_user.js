@@ -181,6 +181,9 @@ window.addEventListener("keyup", (e) => {
 });
 
 
+
+
+
 // 이메일 중복확인 및 정규식
 
 
@@ -219,6 +222,9 @@ function checking(){
 	return false;
 };
 
+
+
+
 // 비밀번호 정규식
 
 let timeout;
@@ -251,6 +257,8 @@ password.addEventListener("input", () => {
 
 
 
+
+
 //핸드폰 번호 형식 일치 여부
 //비밀번호확인 일치 여부
 
@@ -277,6 +285,13 @@ var p2 = document.getElementById('m_pw2').value;
    }
    
 }
+
+function inputNumberOnly(el) {
+    el.value = el.value.replace(/[^0-9]/g, '');
+  }
+
+
+
 
 // 테마 및 지역 선택
 

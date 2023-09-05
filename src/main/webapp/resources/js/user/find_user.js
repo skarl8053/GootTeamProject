@@ -38,31 +38,8 @@ function init() {  //초기 화면 상태
 }
 init();
 
-// 아이디 찾기
 
-$(document).ready(function(){
-   $("#id_phone").click(function(){
-    $("#id_phone_box").toggle(1000);
-    $("#id_email_box").hide();
-   })
-})
-$(document).ready(function(){
-  $("#id_email").click(function(){
-   $("#id_email_box").toggle(1000);
-   $("#id_phone_box").hide();
-  })
-})
-
-// 비밀번호 찾기
-$(document).ready(function(){
-  $("#pw_phone").click(function(){
-   $("#pw_phone_box").toggle(1000);
-   $("#pw_email_box").hide();
-  })
-})
-$(document).ready(function(){
- $("#pw_email").click(function(){
-  $("#pw_email_box").toggle(1000);
-  $("#pw_phone_box").hide();
- })
-})
+// 핸드폰 번호 숫자만 기입
+function inputNumberOnly(el) {
+    el.value = el.value.replace(/[^0-9]/g, '');
+  }

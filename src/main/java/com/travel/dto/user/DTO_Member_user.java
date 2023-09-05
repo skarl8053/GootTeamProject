@@ -27,6 +27,5 @@ public class DTO_Member_user {
 	private int m_theme2;
 	private int m_theme3;
 	private String m_lock;
-
-	
+	private String m_emailcheck;
 }

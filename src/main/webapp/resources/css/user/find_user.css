@@ -30,10 +30,7 @@
   /**어떤 속성에 대해 애니메이션 효과를 주는 속성이다. 
   tranform속성에 0.5초의 듀레이션(동작의 시작해서 끝나는 시간)을 준다.**/
   }
-  .id1{
-    width:1000px; height:500px;/**slide 크기에 맞춘다.**/
-  }
-  .pw1{
+  .id, .pw{
     width:1000px; height:500px;/**slide 크기에 맞춘다.**/
   }
   .button_box{
@@ -65,46 +62,15 @@
     margin-left: auto;
     margin-right: auto;
   }
-#id_phone, #id_email, #pw_phone, #pw_email{
-  border: 1px solid rgb(1, 19, 67);
-  border-radius: 6px;
-  font-size: 24px;
-  background-color: white;
-  height: 50px;
-  width: 200px;
-}
-#id_phone:hover, #id_email:hover, #pw_phone:hover, #pw_email:hover{/**버튼 속성이 되면 색을 바꾼다.**/
-  color: rgb(235, 208, 28);
-  background: rgb(1, 19, 67);
-  cursor: pointer;
-}
-#id_phone:active, #id_email:active, #pw_phone:active, #pw_email:active{/**버튼을 클릭하는 동안 색을 바꾼다.**/
+
+
+#id_phone:active, #pw_phone:active, #pw_email:active{/**버튼을 클릭하는 동안 색을 바꾼다.**/
   color: rgb(1, 19, 67);
   background:#3e3e3e;
 }
-label.id_phone, label.id_email, label.pw_phone, label.pw_email{
-  border: 1px solid rgb(1, 19, 67);
-  border-radius: 6px;
-  font-size: 24px;
-  color: rgb(1, 19, 67);
-  background-color: white;
-  display: inline-block;
-  height: 50px;
-  width: 200px;
-  text-align: center;
-  line-height: 55px;
-}
-input#id_phone, div#id_phone_box, input#id_email, div#id_email_box,
-input#pw_phone, div#pw_phone_box, input#pw_email, div#pw_email_box{
-  display: none;
-}
 
-input#id_phone:checked + div#id_phone_box, 
-input#pw_phone:checked + div#pw_phone_box{
-  display: block;
-}
-#id_phone_box_text, #id_email_box_text,
-#pw_phone_box_text, #pw_email_box_text{
+
+#id_phone_box_text{
   font-size: 24px;
   margin-top: 50px;
   width: 1000px;
@@ -113,8 +79,17 @@ input#pw_phone:checked + div#pw_phone_box{
   margin-right: auto;
   padding-left: 230px;
 }
-#id_phone_box_text input, #id_email_box_text input, 
-#pw_phone_box_text input, #pw_email_box_text input{
+#pw_phone_box_text{
+  font-size: 24px;
+  margin-top: 10px;
+  width: 1000px;
+  text-align: left;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 230px;
+}
+#id_phone_box_text input,
+#pw_phone_box_text input{
   height: 50px;
   width: 500px;
   right: 50px;

@@ -28,19 +28,20 @@ public class Member_EmailCheck_Service implements Interface_MemberService {
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
-	
 		String m_email = request.getParameter("m_email");
 		String code = request.getParameter("code");
+		DTO_Member_user email = dao.member_check(m_email);
+		String emailcheck = dao.search_emailcheck(m_email);
 	
-		DTO_Member_user email = dao.member_check(m_email);	
-		
-		String emailSHA = new EmailSHA().getSHA256(email.getM_email());
+		String emailSHA = new EmailSHA().getSHA256(email.getM_email()); 
 		boolean isRight=(emailSHA.equals(code))?true:false;
-		
 		if(isRight==true){
-			dao.member_check(m_email);
-			dao.update_m_lock(m_email);
-			return "member/member_emailcheck_user";
+			if (emailcheck.equals("N")) {
+				dao.update_m_emailcheck(m_email);		
+				return "member/member_emailcheck_user";
+			}else {
+				return "member/member_emailcheckfail_user";
+			}
 		}else {
 			return "error";		
 		}

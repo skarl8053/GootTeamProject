@@ -10,8 +10,7 @@
 </head>
 
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 
 
@@ -20,15 +19,15 @@
 	<hr>
 	<br>
 	<form action="joining" name="joining">
-	<input type="hidden" name="all_tema" id="all_tema" value=""/>
-	<input type="hidden" name="all_area" id="all_area" value=""/>
-
+		<input type="hidden" name="all_tema" id="all_tema" value=""/>
+		<input type="hidden" name="all_area" id="all_area" value=""/>
+	
 		<div class="join-wrapper">
 			<table class="member">
 				<tr>
 					<td><label>이메일</label></td>
 					<td><input type="email" class="enter" name="m_email" id="m_email" 
-						 required value="bpple9392@naver.com" />
+						placeholder="이메일을 입력해주세요."  required />
 					</td>
 					<td><input type="button" class="certi" id="check_email" onclick="checking()" value="중복확인"></td>	
 				</tr>
@@ -40,7 +39,7 @@
 				</tr>
 				<tr>
 					<td><label>비밀번호</label></td>
-					<td><input type="password" class="enter" name="m_pw" id="m_pw" value="asdfasdf1!" 
+					<td><input type="password" class="enter" name="m_pw" id="m_pw"
 						placeholder="비밀번호를 입력해주세요." required /> </td>
 				</tr>
 				<tr>
@@ -49,22 +48,22 @@
 				</tr>
 				<tr>
 					<td><label>비밀번호확인</label></td>
-					<td><input type="password" class="enter" name="m_pw2" value="asdfasdf1!"
+					<td><input type="password" class="enter" name="m_pw2" 
 						id="m_pw2" placeholder="비밀번호를 한번 더 입력해주세요." required /></td>
 				</tr>
 				<tr>
 					<td><label>이름</label></td>
-					<td><input type="text" class="enter" name="m_name" value="오바마"
+					<td><input type="text" class="enter" name="m_name" 
 						placeholder="이름을 입력해주세요." required /></td>
 				</tr>
 				<tr>
 					<td><label>휴대폰</label></td>
-					<td><input type="text" class="enter" name="m_tel" id="m_tel" maxlength="11" value="01012341234"
-						placeholder="숫자만 입력해주세요." required /></td>
+					<td><input type="text" oninput="inputNumberOnly(this)" class="enter" name="m_tel" id="m_tel" 
+					maxlength="11"  placeholder="숫자만 입력해주세요." required /></td>
 				</tr>
 				<tr>
 					<td><label>주소</label></td>
-					<td><input type="text" class="enter" id="sample4_roadAddress" value="서울"
+					<td><input type="text" class="enter" id="sample4_roadAddress" 
 						name="m_roadAddress" placeholder="도로명주소"></td>
 					<td><input type="button" class="certi"
 						onclick="sample4_execDaumPostcode()" value="주소찾기"></td>
@@ -77,7 +76,7 @@
 				</tr>
 				<tr>
 					<td><label></label></td>
-					<td><input type="text" class="add_enter" value="부산시"
+					<td><input type="text" class="add_enter" 
 						id="sample4_detailAddress" placeholder="상세주소"
 						name="m_detailAddress"> <input type="text"
 						class="add_enter" id="sample4_extraAddress" placeholder="참고항목"></td>
