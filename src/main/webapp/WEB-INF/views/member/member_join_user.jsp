@@ -10,7 +10,8 @@
 </head>
 
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script
+	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 
 
@@ -19,19 +20,15 @@
 	<hr>
 	<br>
 	<form action="joining" name="joining">
-		<input type="hidden" name="all_tema" id="all_tema" value=""/>
-		<input type="hidden" name="all_area" id="all_area" value=""/>
-	
+	<input type="hidden" name="all_tema" id="all_tema" value=""/>
+	<input type="hidden" name="all_area" id="all_area" value=""/>
+
 		<div class="join-wrapper">
 			<table class="member">
 				<tr>
 					<td><label>이메일</label></td>
 					<td><input type="email" class="enter" name="m_email" id="m_email" 
-<<<<<<< HEAD
 						placeholder="이메일을 입력해주세요."  required />
-=======
-						placeholder="이메일을 입력해주세요."  autocomplete="off" required />
->>>>>>> b5b96998bbca96d31499d5b7b1283fc2589b187e
 					</td>
 					<td><input type="button" class="certi" id="check_email" onclick="checking()" value="중복확인"></td>	
 				</tr>
@@ -57,46 +54,33 @@
 				</tr>
 				<tr>
 					<td><label>이름</label></td>
-<<<<<<< HEAD
 					<td><input type="text" class="enter" name="m_name" 
-=======
-					<td><input type="text" class="enter" name="m_name"  autocomplete="off"
->>>>>>> b5b96998bbca96d31499d5b7b1283fc2589b187e
 						placeholder="이름을 입력해주세요." required /></td>
 				</tr>
 				<tr>
 					<td><label>휴대폰</label></td>
 					<td><input type="text" oninput="inputNumberOnly(this)" class="enter" name="m_tel" id="m_tel" 
-<<<<<<< HEAD
 					maxlength="11"  placeholder="숫자만 입력해주세요." required /></td>
-=======
-					maxlength="11"  placeholder="숫자만 입력해주세요." autocomplete="off" required /></td>
->>>>>>> b5b96998bbca96d31499d5b7b1283fc2589b187e
 				</tr>
 				<tr>
 					<td><label>주소</label></td>
 					<td><input type="text" class="enter" id="sample4_roadAddress" 
-<<<<<<< HEAD
 						name="m_roadAddress" placeholder="도로명주소"></td>
-=======
-						name="m_roadAddress" placeholder="도로명주소" autocomplete="off"></td>
->>>>>>> b5b96998bbca96d31499d5b7b1283fc2589b187e
 					<td><input type="button" class="certi"
 						onclick="sample4_execDaumPostcode()" value="주소찾기"></td>
 				</tr>
 				<tr>
 					<td><label></label></td>
 					<td><input type="text" class="add_enter" id="sample4_postcode"
-						placeholder="우편번호" autocomplete="off"> <input type="text" class="add_enter"
-						id="sample4_jibunAddress" placeholder="지번주소" autocomplete="off"></td>
-						<span id="guide" style="color: #999; display: none"></span>
+						placeholder="우편번호"> <input type="text" class="add_enter"
+						id="sample4_jibunAddress" placeholder="지번주소"></td>
 				</tr>
 				<tr>
 					<td><label></label></td>
 					<td><input type="text" class="add_enter" 
 						id="sample4_detailAddress" placeholder="상세주소"
-						name="m_detailAddress" autocomplete="off"> <input type="text"
-						class="add_enter" id="sample4_extraAddress" placeholder="참고항목" autocomplete="off"></td>
+						name="m_detailAddress"> <input type="text"
+						class="add_enter" id="sample4_extraAddress" placeholder="참고항목"></td>
 				</tr>
 			</table>
 		</div>

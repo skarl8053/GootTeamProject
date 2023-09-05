@@ -45,32 +45,28 @@
 				<tr>
 					<td><label>휴대폰</label></td>
 					<td><input type="text" oninput="inputNumberOnly(this)" class="enter" name="m_tel" maxlength="11" value="${m_tel }"
-<<<<<<< HEAD
 						placeholder="숫자만 입력해주세요." required /></td>
-=======
-						placeholder="숫자만 입력해주세요." autocomplete="off" required /></td>
->>>>>>> b5b96998bbca96d31499d5b7b1283fc2589b187e
 				</tr>
 				<tr>
 					<td><label>주소</label></td>
 					<td><input type="text" class="enter" id="sample4_roadAddress"
-						name="m_roadAddress" placeholder="도로명주소" autocomplete="off"></td>
+						name="m_roadAddress" placeholder="도로명주소"></td>
 					<td><input type="button" class="certi"
 						onclick="sample4_execDaumPostcode()" value="주소찾기"></td>
 				</tr>
 				<tr>
 					<td><label></label></td>
 					<td><input type="text" class="add_enter" id="sample4_postcode"
-						placeholder="우편번호" autocomplete="off"> <input type="text" class="add_enter"
-						id="sample4_jibunAddress" placeholder="지번주소" autocomplete="off"></td>
+						placeholder="우편번호"> <input type="text" class="add_enter"
+						id="sample4_jibunAddress" placeholder="지번주소"></td>
 					<span id="guide" style="color: #999; display: none"></span>
 				</tr>
 				<tr>
 					<td><label></label></td>
 					<td><input type="text" class="add_enter"
 						name="m_detailAddress" id="sample4_detailAddress"
-						placeholder="상세주소" autocomplete="off"> <input type="text" class="add_enter"
-						id="sample4_extraAddress" placeholder="참고항목" autocomplete="off"></td>
+						placeholder="상세주소"> <input type="text" class="add_enter"
+						id="sample4_extraAddress" placeholder="참고항목"></td>
 				</tr>
 			</table>
 		</div>

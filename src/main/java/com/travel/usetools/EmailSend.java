@@ -22,7 +22,7 @@ public class EmailSend extends Authenticator{
 	private String toEmail;
 	
 	
-	private final String host = "http://localhost:8090/travel/";
+	private final String host = "http://localhost:9010/travel/";
 	private final String fromEmail = "bpple9392@gmail.com";
 	private final String password = "uhbutuyshjypnuxn";
 	
@@ -126,11 +126,7 @@ public class EmailSend extends Authenticator{
 			String to= toEmail;
 			String code= emailEncrypted(to);
 			String subject="여기어때 임시 비밀번호입니다.";
-<<<<<<< HEAD
 			String content=m_name+"님의 임시 비밀번호는 '"+t_pw+"' 입니다.";
-=======
-			String content="'"+m_name+"'님의 임시 비밀번호는 '"+t_pw+"' 입니다.<br>로그인 후 임시 비밀번호를 변경해주세요.";
->>>>>>> b5b96998bbca96d31499d5b7b1283fc2589b187e
 			
 			// 진행중 메세지
 			
