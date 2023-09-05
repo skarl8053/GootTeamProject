@@ -71,7 +71,7 @@
 				<a href="join" class="join">회원가입</a>
 		</div>
 		<div class="forget-wrapper">
-			<a href="find">아이디 찾기</a> / <a href="find">비밀번호 찾기</a>
+			<a href="find">이메일 찾기</a> / <a href="find">비밀번호 찾기</a>
 		</div>
 		<div class="coupon-event">
 			<span class="coupon-event">지금 가입하면 </span><span class="coupon-event" id="coupon-event" style="color: red; font-weight: bold;"> 10000원 쿠폰 </span><span class="coupon-event">즉시 지급!</span>

@@ -82,7 +82,7 @@
                         value="${dto.review_rate}" step="1" min="1" max="5" oninput="callrating('${dto.review_no}', this.value);">
                 </span>
             </div>
-            <div class="dl">아이디 : ${dto.m_no }&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="dl">이메일 : ${dto.m_no }&nbsp;&nbsp;&nbsp;&nbsp;
                 / 등록일 : ${dto.review_date }</div>
             <div class="dr">
                 <a href="review_user_like?review_no=${dto.review_no }"><input type="button" value="좋아요"></a>

@@ -62,7 +62,7 @@
 		M_EMAIL=#{param1}
 	</update>
 	
-	<!-- 아이디 찾기 -->
+	<!-- 이메일 찾기 -->
 	<select id="Member_FindEmail" resultType="com.travel.dto.user.DTO_Member_user">
 	SELECT M_EMAIL FROM TMSTMEMBER WHERE M_NAME=#{param1} AND M_TEL=#{param2}
 	</select>

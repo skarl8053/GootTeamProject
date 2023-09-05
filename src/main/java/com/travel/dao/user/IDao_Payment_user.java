@@ -32,14 +32,12 @@ public interface IDao_Payment_user {
 
 	void insertMemberCouponList(String m_no, String coupon_no);
 
-	void insertMemberUsePoint(String m_no, int create_order_no, int totalUsePoint);
-
-	void updateMemberEarnPoint(String m_no, String totalEarnPoint);
-
-	void insertMemberEarnPoint(String m_no, int create_order_no, String totalEarnPoint);
-
-	void insertMemberUsePointList(String m_no, int create_order_no, int totalUsePoint);
-
+	void updateMemberPoint(String m_no, int updatePoint);
+	
+	void insertMemberPointList(String m_no, int create_order_no, int totalEarnPoint, int totalUsePoint);
+	
 	void insertPushAL(String m_no, int create_order_no, String string);
+
+	
 
 }

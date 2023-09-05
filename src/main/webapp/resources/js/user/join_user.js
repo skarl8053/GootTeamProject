@@ -118,13 +118,6 @@ checkAll.addEventListener('click', (e) => {
   toggleSubmitButton();
 });
 
-
-
-
-
-
-
-
 // 약관 보기 모달 창
 
 const modal1 = document.getElementById("modal1");
@@ -180,12 +173,7 @@ window.addEventListener("keyup", (e) => {
   }
 });
 
-
-
-
-
 // 이메일 중복확인 및 정규식
-
 
 function checking(){
 	
@@ -221,9 +209,6 @@ function checking(){
 	});
 	return false;
 };
-
-
-
 
 // 비밀번호 정규식
 

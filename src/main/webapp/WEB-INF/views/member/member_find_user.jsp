@@ -15,7 +15,7 @@
 	<div class="box">
 		<!--div를 두개 감싼이유는 img들을 좌우배치하고 배치된 사진중 한장만 보이게 하기 위해서이다.-->
 		<div class="button_box">
-			<button class="bt_find_id">아이디 찾기</button>
+			<button class="bt_find_id">이메일 찾기</button>
 			<button class="bt_find_pw">비밀번호 찾기</button>
 			
 		</div>

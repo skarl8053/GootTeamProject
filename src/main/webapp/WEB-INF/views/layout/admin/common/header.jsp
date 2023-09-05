@@ -39,7 +39,7 @@
                     <li class="menu-bar"><a href="#">회원 / 매출 관리 <i class='fa fa-angle-down'></i></a>
                         <ul>
                             <li>    
-                                <button class="inner_button" type="button" onclick="siteLocation('');">구매 내역</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('purchase');">구매 내역</button>
                                 <button class="inner_button" type="button" onclick="siteLocation('refund');">환불 내역</button>
                             </li>
                             <li>    

@@ -100,7 +100,7 @@
 	
 			INSERT INTO THISORDER
 			(
-				ORDER_NO, M_NO, COUPON_NO, ORDER_DATE, TOTAL_PRICE, DISCOUNT_PRICE,
+				ORDER_NO, M_NO, S_NO, COUPON_NO, ORDER_DATE, TOTAL_PRICE, DISCOUNT_PRICE,
 				PAYMENT_PRICE, PAYMENT_METHOD, PAYMENT_CARDNO, PAYMENT_FLAG, HOT_DEAL_FLAG, 
 				CHECK_IN_DATE, CHECK_OUT_DATE
 			)
@@ -108,6 +108,7 @@
 			(
 				#{order_no},
 				#{m_no},
+				#{s_no},
 				#{coupon_no},
 				SYSDATE,
 				#{total_price},
@@ -158,45 +159,16 @@
 	
 	</insert>
 	
-	
-	<update id="updateMemberUsePoint">
-	
-			UPDATE 	TMSTMEMBER
-			SET 			M_POINT = NVL(M_POINT,0) - #{param2}
-			WHERE  	M_NO = #{param1}
-			
-	</update>
-	
-	<insert id="insertMemberUsePointList">
-	
-			<!-- 포인트 사용 이력 추가 -->
-			INSERT INTO THISPOINT
-			(
-				POINT_NO, M_NO, ORDER_NO, POINT_TYPE, POINT_IN, POINT_OUT, POINT_USEDATE
-			)
-			VALUES
-			(
-				(SELECT NVL(MAX(POINT_NO),0) + 1 FROM THISPOINT)
-				,#{param1}
-				,#{param2}
-				,1
-				,NULL
-				,#{param3}
-				,SYSDATE
-			)
-			
-	</insert>
-	
-	<update id="updateMemberEarnPoint">
+	<update id="updateMemberPoint">
 	
 			UPDATE 	TMSTMEMBER
-			SET 			M_POINT = NVL(M_POINT,0) + #{param2}
-			WHERE  	M_NO = #{param1}
-			
+			SET 		M_POINT = M_POINT + ( #{param2} )
+			WHERE 	M_NO = #{param1}
+	
 	</update>
 	
-	<insert id="insertMemberEarnPoint">
-	
+	<insert id="insertMemberPointList">
+			
 			<!-- 포인트 사용 이력 추가 -->
 			INSERT INTO THISPOINT
 			(
@@ -209,7 +181,7 @@
 				,#{param2}
 				,1
 				,#{param3}
-				,NULL
+				,#{param4}
 				,SYSDATE
 			)
 			

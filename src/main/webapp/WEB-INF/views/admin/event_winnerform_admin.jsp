@@ -112,7 +112,7 @@
             }
             
             if(first_mno == second_mno || second_mno == third_mno || first_mno == third_mno){
-            	alert("같은 아이디가 중복으로 당첨될 수 없습니다.")
+            	alert("같은 사람이 중복으로 당첨될 수 없습니다.")
             	return false;
             }
             

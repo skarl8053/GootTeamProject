@@ -98,7 +98,7 @@ public class Controller_Member_user {
 
 	@RequestMapping(value = "find")
 	public String find(HttpServletRequest request, Model model) {
-		System.out.println("아이디 및 비밀번호 찾기 화면");
+		System.out.println("이메일 및 비밀번호 찾기 화면");
 		return "member/member_find_user";
 	}
 
