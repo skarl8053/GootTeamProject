@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR"
 	pageEncoding="EUC-KR"%>
+	<%@ taglib prefix="c"  uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,41 +21,55 @@
 		<p class="withdraw">È¸¿øÅ»Åð</p>
 		<hr />
 		<br>
-		<form id="withdraw-form">
-			<input type="password" name="pw" placeholder="Password">
-		<i class="fa-solid fa-eye fa-2xl"></i>
-		</form>
+		<form action="deleting" id="delete-form">
+			<input type="password" id="pw" name="pw" placeholder="Password" autocomplete="off">
+			<i class="fa-solid fa-eye fa-2xl"></i>
 	</div>
 	<div id="container">
-		<button id="btn-modal">È¸¿ø Å»Åð</button>
-		<a href="#" class="cancel_tag">
+		<input id="btn-modal" value="È¸¿øÅ»Åð"> <a href="#"
+			class="cancel_tag">
 			<p class="cancel_text">Ãë¼Ò</p>
 		</a>
 	</div>
 	<div id="modal" class="modal-overlay">
-		<form action="deleting">
-			<div class="modal-window">
-				<div class="title">
-					<div class="close-area">X</div>
-					<p class="modal_title">È¸¿øÅ»Åð</p>
-				</div>
-				<div class="content">
-					<p class="modal_content">
-						Á¤¸» È¸¿øÅ»Åð¸¦ ÇÏ°Ú´Â°¡? <br> ÈÄÈ¸ ¾ÈÇÏ°Ú´Â°¡?
-					</p>
-				</div>
-				<div class="check_container">
-					<input type="submit" id="last_check" value="Å»Åð"></input>
-				</div>
-		</form>
+		<div class="modal-window">
+			<div class="title">
+				<div class="close-area">X</div>
+				<p class="modal_title">È¸¿øÅ»Åð</p>
+			</div>
+			<div class="content">
+				<p class="modal_content">
+					Á¤¸» È¸¿øÅ»Åð¸¦ ÇÏ°Ú´Â°¡? <br> ÈÄÈ¸ ¾ÈÇÏ°Ú´Â°¡?
+				</p>
+			</div>
+			<div class="check_container">
+				<input type="submit" id="last_check" value="Å»Åð"></input>
+			</div>
+			</form>
+		</div>
 	</div>
-	</div>
-
 
 
 </body>
 
+<!-- ¸Þ¼¼Áö -->
+	<c:if test="${not empty msg}">
+			
+		<script>
+			alert("${msg}");
+		</script>
+		
+	</c:if>
+
 <script>
+
+<% String errorMessage = (String) session.getAttribute("errorMessage");
+if (errorMessage != null) { %>
+ document.getElementById("errorMessage").textContent = '<%= errorMessage %>';
+<% session.removeAttribute("errorMessage"); // Remove the error message after displaying %>
+<% } %>
+
+
 	const modal = document.getElementById("modal")
 	const btnModal = document.getElementById("btn-modal")
 	btnModal.addEventListener("click", e => {
@@ -90,6 +105,7 @@
         }
     });
 });
+	
 </script>
 
 

@@ -13,6 +13,10 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
+import org.apache.ibatis.session.SqlSession;
+
+import com.travel.service.user.Member_FindPw_Service;
+
 public class EmailSend extends Authenticator{
 	
 	private String toEmail;
@@ -78,6 +82,70 @@ public class EmailSend extends Authenticator{
 			p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
 			p.put("mail.smtp.socketFactory.fallback", "false");
 		
+			Authenticator auth=new Authenticator() {
+				
+				
+				@Override
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return new PasswordAuthentication(fromEmail, password);
+				}
+				
+			};
+			
+			Session ses=Session.getInstance(p,auth);
+			/* ses.setDebug(true); */
+			MimeMessage msg=new MimeMessage(ses);
+			msg.setSubject(subject);
+			Address fromAddr=new InternetAddress(from);
+			msg.setFrom(fromAddr);
+			Address toAddr=new InternetAddress(to);
+			msg.addRecipient(Message.RecipientType.TO, toAddr);
+			msg.setContent(content, "text/html;charset=UTF-8");
+			Transport.send(msg);
+			
+			System.out.println("리턴 트루");
+			return true;
+			
+		} 
+		catch(AuthenticationFailedException e) {	
+			System.out.println("전송 실패 : EmailSend 메서드의 fromEmail과 password 정보가 잘못되었습니다.");
+			return false;
+		}
+		catch (Exception e){
+			
+			System.out.println("전송 실패 : " + e.getMessage());
+			return false;
+		}
+	}
+	public boolean PwSendAction(String m_name,String t_pw) {
+		
+		
+		try {
+	
+			String from=fromEmail;
+			String to= toEmail;
+			String code= emailEncrypted(to);
+			String subject="여기어때 임시 비밀번호입니다.";
+			String content="'"+m_name+"'님의 임시 비밀번호는 '"+t_pw+"' 입니다.<br>로그인 후 임시 비밀번호를 변경해주세요.";
+			
+			// 진행중 메세지
+			
+			System.out.println("인증 메세지 전송중...");
+			System.out.println("발신 이메일 : " + fromEmail);
+			System.out.println("수신 이메일 : " + toEmail);
+			
+			Properties p=new Properties();
+			p.put("mail.smtp.user", from);
+			p.put("mail.smtp.host", "smtp.googlemail.com");
+			p.put("mail.smtp.port", "465");
+			
+			p.put("mail.smtp.starttls.enable", "true");
+			p.put("mail.smtp.auth", "true");
+			p.put("mail.smtp.debug", "true");
+			p.put("mail.smtp.socketFactory.port", "465");
+			p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+			p.put("mail.smtp.socketFactory.fallback", "false");
+			
 			Authenticator auth=new Authenticator() {
 				
 				

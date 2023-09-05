@@ -325,8 +325,8 @@ li {
 	cursor: pointer;
 }
 
-#disabled {
-	background-color: lightgray;
+#disabled_name, #disabled_email {
+	background-color: light-gray;
 }
 
 #cancel_btn {

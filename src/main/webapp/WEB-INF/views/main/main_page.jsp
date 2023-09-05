@@ -50,6 +50,13 @@
 		});
 	</script>
 </head>
+<%
+	if (session.getAttribute("m_email") == null) { // 로그인이 안된 상태
+		System.out.println("널 값???");
+	}else{
+		System.out.println("로그인 된건가?");
+	}
+%>
 <body>
 
 	<!-- 메세지 -->
@@ -58,6 +65,15 @@
 		<script>
 			alert("${loginmsg}");
 			location.replace("login");
+		</script>
+		
+	</c:if>
+	
+	<!-- 메세지 -->
+	<c:if test="${not empty msg}">
+			
+		<script>
+			alert("${msg}");
 		</script>
 		
 	</c:if>

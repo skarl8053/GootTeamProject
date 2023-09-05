@@ -19,8 +19,8 @@
 		<p class="login">로그인</p>
 		<hr/> <br>
 		<form action="logining" id="login-form">
-			<input type="email" name="m_email" id="m_email" placeholder="Email" value="bpple9392@naver.com">
-			<input type="password" name="m_pw" id="m_pw" placeholder="Password" value="asdfasdf1!">
+			<input type="email" name="m_email" id="m_email" placeholder="Email" autocomplete="off">
+			<input type="password" name="m_pw" id="m_pw" placeholder="Password" autocomplete="off">
 			<i class="fa-solid fa-eye fa-2xl"></i>
 				<input type="submit" value="Login" class="login_btn">
 		</form>
@@ -35,6 +35,14 @@
 		</div>
 	</div>
 </body>
+<!-- 메세지 -->
+	<c:if test="${not empty msg}">
+			
+		<script>
+			alert("${msg}");
+		</script>
+		
+	</c:if>
 <script>
 	$(document).ready(function(){
     $('.login-wrapper i').on('click',function(){
