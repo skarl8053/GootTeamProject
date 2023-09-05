@@ -18,7 +18,7 @@
     width: auto;
     height: 318px;
     font-family: 'GmarketSansMedium', sans-serif; 
-    background: #011967; 
+    background: #011343; 
 }
 
 
@@ -30,7 +30,7 @@
     height: 150px;
 }
 #navigation { 
-    background: #011967; 
+    background: #011343; 
     height: 100px;
 }
 
@@ -50,9 +50,10 @@
 .menu-etc a {
     display: block;
     font-size: 20px;
-    padding: 15px 14px;
+    padding: 15px 20px;
     color:rgb(235, 208, 28);
     text-decoration: none;
+    font-family: 'GmarketSansMedium', sans-serif; 
 }
 /* 오른쪽 로그인 스타일 */
 
@@ -72,7 +73,7 @@
     text-decoration: none;
 }
 
-.menu-bar:hover { background: #011967; }
+.menu-bar:hover { background: #011343; }
 
 .menu-bar ul {
     background-color: white;

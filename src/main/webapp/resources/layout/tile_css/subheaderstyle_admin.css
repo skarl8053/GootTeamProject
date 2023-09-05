@@ -40,7 +40,7 @@ body {
 /* 상단바 네비게이션 스타일 */
 
 #navigation { 
-    background: #011967; 
+    background: #011343;
     height: 85px;
 }
 
@@ -81,7 +81,7 @@ body {
     text-decoration: none;
 }
 
-.menu-bar:hover { background: #011967; }
+.menu-bar:hover { background: #011343;}
 
 .menu-bar ul {
     background-color: white;
@@ -98,13 +98,13 @@ body {
     font-size: 20px;
     font-weight: bold;
     background-color: white;
-    color: #011967;
+    color: #011343;
     border-style: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .inner_button:hover{
-    background-color:#011967;
+    background-color:#011343;
     color: rgb(235, 208, 28);
 }

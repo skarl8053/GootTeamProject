@@ -35,6 +35,21 @@ public class Controller_Member_user {
 
 	@RequestMapping(value = "login")
 	public String login(HttpServletRequest request, Model model) {
+		
+		if(request.getSession().getAttribute("m_no") != null) {
+			
+			model.addAttribute("msg", "이미 로그인이 되어있습니다.");
+			return "main/main_loading";
+					
+		}
+		
+		if(request.getParameter("msg") == null || request.getParameter("msg").equals("")) {
+			model.addAttribute("msg","");
+		}
+		else {
+			model.addAttribute("msg",request.getParameter("msg"));
+		}
+		
 		return "member/member_login_user";
 	}
 
@@ -50,14 +65,12 @@ public class Controller_Member_user {
 	}
 
 	@RequestMapping(value = "logout")
-	public String logout(HttpSession session) {
-		System.out.println("로그아웃 중");
-
-		session.removeAttribute("InUse");
-//		session.invalidate();
-
-		System.out.println("로그아웃 후 홈으로");
-		return "redirect:/main";
+	public String logout(HttpSession session, Model model) {
+		
+		session.invalidate();
+		model.addAttribute("msg", "로그아웃 되었습니다.");
+		
+		return "main/main_loading";
 	}
 
 	@RequestMapping(value = "join")

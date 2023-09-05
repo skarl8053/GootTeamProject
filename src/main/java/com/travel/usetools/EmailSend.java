@@ -22,7 +22,7 @@ public class EmailSend extends Authenticator{
 	private String toEmail;
 	
 	
-	private final String host = "http://localhost:9010/travel/";
+	private final String host = "http://localhost:8090/travel/";
 	private final String fromEmail = "bpple9392@gmail.com";
 	private final String password = "uhbutuyshjypnuxn";
 	

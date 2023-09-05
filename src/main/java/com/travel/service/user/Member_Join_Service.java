@@ -80,8 +80,6 @@ public class Member_Join_Service implements Interface_TravelService {
 			e.printStackTrace();
 		}
 		
-		
-
 	}
 
 }

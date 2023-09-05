@@ -13,6 +13,9 @@
 		#content{
 			height: 1600px;
 		}
+		.title-left{
+			margin: 0 0 0 470px;
+		}
 	</style>
 	
 	
@@ -35,6 +38,21 @@
 		href="${pageContext.request.contextPath}/resources/layout/main_css/slide-css/slick-main.css">
 	<script src="${pageContext.request.contextPath}/resources/layout/main_js/slide-js/slick.js"></script>
 	<script src="${pageContext.request.contextPath}/resources/layout/main_js/slide-js/slick-main.js"></script>
+	
+</head>
+
+<body>
+
+	<!-- 메세지 -->
+	<c:if test="${not empty msg}">
+			
+		<script>
+			alert("${msg}");
+			location.replace("main");
+		</script>
+		
+	</c:if>
+	
 	<script>
 		$.datepicker.setDefaults({
 			dateFormat : 'yy년 mm월 dd일',
@@ -58,38 +76,6 @@
 			$("#datepicker1,#datepicker2").datepicker();
 		});
 	</script>
-</head>
-<%
-	if (session.getAttribute("m_email") == null) { // 로그인이 안된 상태
-		System.out.println("널 값???");
-	}else{
-		System.out.println("로그인 된건가?");
-	}
-%>
-<body>
-
-	<!-- 메세지 -->
-	<c:if test="${not empty loginmsg}">
-			
-		<script>
-			alert("${loginmsg}");
-			location.replace("login");
-		</script>
-		
-	</c:if>
-	
-	<!-- 메세지 -->
-	<c:if test="${not empty msg}">
-			
-		<script>
-			alert("${msg}");
-<<<<<<< HEAD
-=======
-			location.replace("main");
->>>>>>> 569a8281372745b28274ff72f6bfcb2807bd8592
-		</script>
-		
-	</c:if>
 	
 	<!-- 숙소 검색 -->
 	<h2>숙소 검색</h2>
@@ -129,9 +115,9 @@
 	<div class="event-slide">
 		<div class="regular slider"></div>
 	</div>
-	<br />
+	<br /><br /><br /><br />
 	<!-- 핫딜 슬라이드 -->
-	<h2 class="title-left">할인중인 숙소</h2>
+	<h2 class="title-left">${ sessionScope.m_name } 님에게 추천하는 숙소</h2>
 	<div class="hot-deal">
 		<div class="hdeal slider"></div>
 	</div>

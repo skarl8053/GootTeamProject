@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/layout/main_css/header.css" />
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="${pageContext.request.contextPath}/resources/layout/main_js/header.js"></script>
+
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/layout/main_css/header.css" />
+	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+	<script src="${pageContext.request.contextPath}/resources/layout/main_js/header.js"></script>
+	
 </head>
 <body>
 	<!-- 
@@ -22,19 +26,40 @@
             location.replace(move_site);
         }
 	
+		function logout(){
+			
+			var isConfirmed = confirm("로그아웃 하시겠습니까?");
+			
+			if(isConfirmed == false){
+				return false;
+			}
+			else{
+				location.replace("member/logout");
+			}
+		}
+		
 	</script>
 
     <header>
         <nav id="navigation">
             <div>
-                <ul class="" style="float: right">
-                    <li class="menu-etc" ><a class="login-menu" href="member/login">로그인</a></li>
-                    <li class="menu-etc"><a class="login-menu" href="member/join">회원가입</a></li>
-                </ul>
+            	<c:if test="${ empty sessionScope.m_email }">
+            		<ul class="" style="float: right">
+	                    <li class="menu-etc" ><a class="login-menu" href="member/login">로그인</a></li>
+	                    <li class="menu-etc"><a class="login-menu" href="member/join">회원가입</a></li>
+	                </ul>
+            	</c:if>
+            	<c:if test="${ not empty sessionScope.m_email }">
+            		 <ul class="" style="float: right">
+            		 	<li class="menu-etc" ><a href="#">알림</a></li>
+            		 	<li class="menu-etc" ><a href="#">마이페이지</a></li>
+	                    <li class="menu-etc" ><a href="javascript:logout();">로그아웃</a></li>
+	                </ul>
+            	</c:if>
             </div>
         </nav>
-        <div class="container" style="">
-	        <div>
+        <div class="container">
+	        <div style="clear: both">
 	        	<img id="header_img" src="resources/img/main_logo.png" alt="이미지 없음">
 	        </div>
             <div>

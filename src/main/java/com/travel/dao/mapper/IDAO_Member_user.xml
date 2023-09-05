@@ -45,7 +45,7 @@
 	
 	<!-- 로그인 필요 종합 데이터 -->
 	<select id="member_login" resultType="com.travel.dto.user.DTO_Member_user">
-		SELECT * FROM TMSTMEMBER WHERE M_EMAIL=#{param1} AND M_PW=#{param2} AND M_LOCK='N'
+		SELECT * FROM TMSTMEMBER WHERE M_EMAIL=#{param1} AND M_PW=#{param2}
 	</select>
 	
 	<!-- 회원 탈퇴 -->

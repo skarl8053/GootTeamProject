@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,8 +78,13 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="menu-etc" ><a style="padding-left: 20px" href="#">로그인</a></li>
-                    <li class="menu-etc"><a style="padding-left: 20px" href="#">회원가입</a></li>
+                    <c:if test="${empty sessionScope.m_no}">
+                    	<li class="menu-etc"><a style="padding-left: 20px" href="#">로그아웃</a></li>
+                    </c:if>
+                    <c:if test="${not empty sessionScope.m_no}">
+                    	<li class="menu-etc" ><a style="padding-left: 20px" href="#">로그인</a></li>
+                    	<li class="menu-etc"><a style="padding-left: 20px" href="#">회원가입</a></li>
+                    </c:if>
                 </ul>
             </div>
         </nav>

@@ -10,10 +10,9 @@
 </head>
 
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
-
+<script src="${pageContext.request.contextPath }/resources/js/user/join_user.js" charset="UTF-8"></script>
 
 <body>
 	<p class="join">회원가입</p>
@@ -27,9 +26,7 @@
 			<table class="member">
 				<tr>
 					<td><label>이메일</label></td>
-					<td><input type="email" class="enter" name="m_email" id="m_email" 
-						placeholder="이메일을 입력해주세요."  required />
-					</td>
+					<td><input type="email" class="enter" name="m_email" id="m_email" placeholder="이메일을 입력해주세요."  required autocomplete="off"/></td>
 					<td><input type="button" class="certi" id="check_email" onclick="checking()" value="중복확인"></td>	
 				</tr>
 				<tr>
@@ -54,33 +51,36 @@
 				</tr>
 				<tr>
 					<td><label>이름</label></td>
-					<td><input type="text" class="enter" name="m_name" 
-						placeholder="이름을 입력해주세요." required /></td>
+					<td><input type="text" class="enter" name="m_name" placeholder="이름을 입력해주세요." required autocomplete="off"/></td>
 				</tr>
 				<tr>
 					<td><label>휴대폰</label></td>
-					<td><input type="text" oninput="inputNumberOnly(this)" class="enter" name="m_tel" id="m_tel" 
-					maxlength="11"  placeholder="숫자만 입력해주세요." required /></td>
+					<td>
+							<input type="text" oninput="inputNumberOnly(this)" class="enter" name="m_tel" id="m_tel" 
+							maxlength="11"  placeholder="숫자만 입력해주세요." required autocomplete="off" />
+					</td>
 				</tr>
 				<tr>
 					<td><label>주소</label></td>
-					<td><input type="text" class="enter" id="sample4_roadAddress" 
-						name="m_roadAddress" placeholder="도로명주소"></td>
-					<td><input type="button" class="certi"
-						onclick="sample4_execDaumPostcode()" value="주소찾기"></td>
+					<td>
+						<input type="text" class="enter" id="sample4_roadAddress" name="m_roadAddress" placeholder="도로명주소" autocomplete="off">
+					</td>
+					<td>
+						<input type="button" class="certi" onclick="sample4_execDaumPostcode()" value="주소찾기">
+					</td>
 				</tr>
 				<tr>
 					<td><label></label></td>
-					<td><input type="text" class="add_enter" id="sample4_postcode"
-						placeholder="우편번호"> <input type="text" class="add_enter"
-						id="sample4_jibunAddress" placeholder="지번주소"></td>
+					<td>
+						<input type="text" class="add_enter" id="sample4_postcode" placeholder="우편번호" readonly autocomplete="off"> 
+						<input type="text" class="add_enter" id="sample4_jibunAddress" placeholder="지번주소" readonly autocomplete="off">
+					</td>
 				</tr>
 				<tr>
 					<td><label></label></td>
-					<td><input type="text" class="add_enter" 
-						id="sample4_detailAddress" placeholder="상세주소"
-						name="m_detailAddress"> <input type="text"
-						class="add_enter" id="sample4_extraAddress" placeholder="참고항목"></td>
+					<td>
+						<input type="text" class="add_enter"  id="sample4_detailAddress" placeholder="상세주소"name="m_detailAddress"> 
+						<input type="text" class="add_enter" id="sample4_extraAddress" placeholder="참고항목" readonly autocomplete="off"></td>
 				</tr>
 			</table>
 		</div>
@@ -202,7 +202,7 @@
 								<p class="modal_title">개인정보 수집 및 이용에 대한 안내</p>
 							</div>
 							<div class="content">
-								<p class="modal_content">동의?</p>
+								<p class="modal_content">동의? 어 보감</p>
 							</div>
 							<div class="check_container">
 								<button type="button" class="last_check">확인</button>
@@ -240,8 +240,6 @@
 			
 	</form>
 </body>
-<script
-	src="${pageContext.request.contextPath }/resources/js/user/join_user.js"
-	charset="UTF-8"></script>
+
 
 </html>
