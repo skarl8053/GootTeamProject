@@ -38,55 +38,37 @@
 			            #{data}
 			        </foreach>
 			    )
-			   
 			</insert>
-
-	<!-- 숙소 리스트 불러오기 -->
-		<!-- <select  id="stay_list" resultType="com.travel.dto.admin.DTO_Stay_admin">
-			SELECT S_NO,S_NAME FROM TMSTSTAY ORDER BY S_NO DESC
-		</select> -->
 		
 	<!-- 숙소 삭제하기 -->
 		<delete id="stay_delete">
 			DELETE FROM TMSTSTAY WHERE S_NO=#{param1}
+		</delete>
+				
+	<!-- 객실 삭제하기 -->
+		<delete id="stay_room_delete">
+			DELETE FROM TMSTROOM WHERE R_NO=#{param1}
 		</delete>		
 		
-	<!-- 숙소 디테일 뷰 -->
+	<!-- 숙소 상세보기에서 숙소 정보 얻어오기 -->
 		<select id="stay_view" resultType="com.travel.dto.admin.DTO_Stay_admin">
-			SELECT S_NO, S_NAME, S_TYPE, S_INFO, S_LOCA, 
-		        S_FACILITY1, S_FACILITY2, S_FACILITY3, S_FACILITY4, S_FACILITY5, S_FACILITY6,
-		        S_THEME1, S_THEME2, S_THEME3, S_THEME4, S_THEME5, S_THEME6, S_THEME7, S_THEME8
+		   	SELECT *
 		   	FROM TMSTSTAY 
 		   	WHERE S_NO=#{param1}
 		</select>
 		
-	<!-- 숙소 객실 디테일 뷰 -->
-		<!-- <select id="stay_room_view" resultType="com.travel.dto.admin.DTO_Stay_room_admin">
-			select r_name, r_detail, r_person_cnt, r_price, 
-			r_single_bed_flag, r_double_bed_flag, r_queen_bed_flag,
-			r_facility1, r_facility2, r_facility3, r_facility4, r_facility5, r_facility6
-			from tmstroom
-			where s_no
-		</select> -->
+	<!-- 숙소 상세보기에서 객실 정보 얻어오기 -->
+		<select id="stay_room_view" resultType="com.travel.dto.admin.DTO_Stay_room_admin">
+		   	SELECT *
+		   	FROM TMSTROOM 
+		   	WHERE S_NO=#{param1}
+		</select>
 		
 		<select id="selectBoardTotCount" resultType="java.lang.Integer">
 			SELECT COUNT(*) FROM TMSTSTAY
 		</select>
-		
-		<!-- 기존 list 불러오던 sql
-		 <select id="list" resultType="com.travel.dto.admin.DTO_Stay_admin">
-			SELECT *
-			FROM (
-			    SELECT ROWNUM AS NUM, N.*
-			    FROM (
-			        SELECT *
-			        FROM TMSTSTAY
-			        ORDER BY S_NO DESC
-			    ) N
-			)
-			WHERE NUM BETWEEN #{param1} AND #{param2}
-		</select> -->
-		
+
+		<!-- 등록된 숙소 리스트 불러오기 / 페이징 처리 -->
 		<sql id="search_list">
 		<if test="param4 == 0">
 			<if test="param3 == 0">
@@ -96,7 +78,6 @@
 				WHERE S_LOCA = #{param3}
 			</if>
 		</if>
-		
 	
 		<if test="param4 == 1">
 			<if test="param3 == 0">
@@ -107,7 +88,6 @@
 				AND S_TYPE = #{param4}
 			</if>
 		</if>
-		
 	
 		<if test="param4 == 2">
 			<if test="param3 == 0">
@@ -118,7 +98,6 @@
 				AND S_TYPE = #{param4}
 			</if>
 		</if>
-		
 	
 		<if test="param4 == 3">
 			<if test="param3 == 0">
@@ -142,17 +121,96 @@
 			    ) N
 			    <include refid="search_list"/>
 			)
-			WHERE NUM BETWEEN #{param1} AND #{param2}
-					    
+			WHERE NUM BETWEEN #{param1} AND #{param2}		    
 		</select>
 		
-		<update id="modify" parameterType="java.util.List">
-			UPDATE TMSTSTAY
-		   	SET 
-		   	<foreach collection="list" separator="," item="StayData">
-		            #{StayData}
-		    </foreach>
-		   	WHERE S_NO=#{param2}	
+		<update id="Modify" parameterType="java.util.List">
+		    UPDATE TMSTSTAY
+		    SET S_NAME = #{StayData[0]},
+		        S_TYPE = #{StayData[1]},
+		        S_INFO = #{StayData[2]},
+		        S_LOCA = #{StayData[3]}, 
+		        S_ADDR_X = #{StayData[4]},
+		        S_ADDR_Y = #{StayData[5]},
+		        S_IMG1 = #{StayData[6]}, 
+		        S_IMG2 = #{StayData[7]}, 
+		        S_IMG3 = #{StayData[8]}, 
+		        S_ADDR = #{StayData[9]}, 
+		        S_FACILITY1 = #{StayData[10]}, 
+		        S_FACILITY2 = #{StayData[11]}, 
+		        S_FACILITY3 = #{StayData[12]}, 
+		        S_FACILITY4 = #{StayData[13]}, 
+		        S_FACILITY5 = #{StayData[14]}, 
+		        S_FACILITY6 = #{StayData[15]}, 
+		        S_THEME1 = #{StayData[16]}, 
+		        S_THEME2 = #{StayData[17]}, 
+		        S_THEME3 = #{StayData[18]}, 
+		        S_THEME4 = #{StayData[19]}, 
+		        S_THEME5 = #{StayData[20]}, 
+		        S_THEME6 = #{StayData[21]}, 
+		        S_THEME7 = #{StayData[22]}, 
+		        S_THEME8 = #{StayData[23]}  
+		    WHERE S_NO = #{s_no}
 		</update>
+		
+		<update id="ModifiyRoom" parameterType="java.util.List">
+		    UPDATE TMSTROOM
+		    SET R_NAME = #{StayRoomData[0]},
+					R_DETAIL = #{StayRoomData[1]},
+					R_PERSON_CNT = #{StayRoomData[2]}, 
+					R_PRICE = #{StayRoomData[3]},
+					R_IMG1 = #{StayRoomData[4]},
+					R_IMG2 = #{StayRoomData[5]},
+					R_IMG3 = #{StayRoomData[6]},
+					R_SINGLE_BED_FLAG = #{StayRoomData[7]},
+					R_DOUBLE_BED_FLAG = #{StayRoomData[8]},
+					R_QUEEN_BED_FLAG = #{StayRoomData[9]},
+					R_FACILITY1 = #{StayRoomData[10]},
+					R_FACILITY2 = #{StayRoomData[11]},
+					R_FACILITY3 = #{StayRoomData[12]},
+					R_FACILITY4 = #{StayRoomData[13]},
+					R_FACILITY5 = #{StayRoomData[14]},
+					R_FACILITY6 = #{StayRoomData[15]}
+		    WHERE S_NO = #{s_no}
+		</update>
+
+		
+		<!-- <update id="Modify" parameterType="java.util.List">
+		    UPDATE TMSTSTAY
+		    SET S_NAME = #{StayData[0]}
+		    WHERE S_NO = #{s_no}
+		</update> -->
+
+		
+		<select  id="stay_list_confirm_admin" resultType="com.travel.dto.admin.DTO_Stay_admin">
+			SELECT *
+			FROM (
+			    SELECT ROWNUM NUM, N.*
+			    FROM (
+			        SELECT *
+			        FROM TMSTSTAY
+			        ORDER BY S_NO DESC
+			    ) N
+			    <include refid="search_list"/>
+			)
+			WHERE NUM BETWEEN #{param1} AND #{param2}
+		</select>
+		
+		<select id="pageCalculate" resultType="Integer">
+			SELECT COUNT(*) FROM TMSTSTAY
+		</select>
+		
+		<select id="stay_list" resultType="com.travel.dto.admin.DTO_Stay_room_admin">
+			SELECT S_NO,S_NAME,S_IMG1 
+			FROM TMSTSTAY
+			WHERE S_NO=#{param1}
+		</select>
+		
+		<select  id="room_list" resultType="com.travel.dto.admin.DTO_Stay_room_admin">
+			SELECT B.S_NO,B.R_NAME,B.R_IMG1,B.R_NO
+			FROM TMSTSTAY A
+			LEFT JOIN TMSTROOM B ON A.S_NO = B.S_NO
+			WHERE B.S_NO=#{param1}
+		</select>
 		
 	</mapper>

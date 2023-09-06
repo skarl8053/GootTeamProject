@@ -1,6 +1,6 @@
 package com.travel.service.admin;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,74 +13,43 @@ import com.travel.dto.admin.DTO_Stay_admin;
 import com.travel.usetools.SearchVO;
 
 public class Service_Stay_list_admin implements Interface_TravelService {
-	
+
 //	신재환 
 //	숙소 등록 리스트 
 //	관리자
 
 	IDao_stay_admin dao;
-	
-	public Service_Stay_list_admin(SqlSession sqlSession) { 
-		dao = sqlSession.getMapper(IDao_stay_admin.class); 
+
+	public Service_Stay_list_admin(SqlSession sqlSession) {
+		dao = sqlSession.getMapper(IDao_stay_admin.class);
 	}
-	
+
 	@Override
 	public void execute(Model model) {
-		
+
 		System.out.println("stay_list_service 신호");
-		
-		// 페이징 처리
+
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-		SearchVO searchVO = (SearchVO) map.get("searchVO");
-		
-		String locationParameter = request.getParameter("location");
-		String typeParameter = request.getParameter("type");
 
-		int location = 0;
-		int type = 0;
+		// 검색 결과 유지 과정
+		int currentPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
-		if (locationParameter != null && !locationParameter.isEmpty()) {
-		    location = Integer.parseInt(locationParameter);
-		}
+		int location = request.getParameter("location") != null ? Integer.parseInt(request.getParameter("location"))
+				: 0;
+		int type = request.getParameter("type") != null ? Integer.parseInt(request.getParameter("type")) : 0;
 
-		if (typeParameter != null && !typeParameter.isEmpty()) {
-		    type = Integer.parseInt(typeParameter);
-		}
+		SearchVO vo = new SearchVO();
+		vo.setPage(currentPage);
+		vo.pageCalculate(dao.pageCalculate(location, type));
 
-		System.out.println("location : "+location);
-		System.out.println("type : "+type);
-		
-		String strPage = request.getParameter("page");
-		if (strPage == null) strPage="1";
-		int page = Integer.parseInt(strPage);
-		searchVO.setPage(page);
-		
-		int total = dao.selectBoardTotCount();
-		searchVO.pageCalculate(total);
-		
-//		System.out.println("total cnt : "+total);
-//		System.out.println("total row : "+total);
-//		System.out.println("clickpage : "+searchVO.getPage());
-//		System.out.println("pageStart : "+searchVO.getPageStart());
-//		System.out.println("pageEnd : "+searchVO.getPageEnd());
-//		System.out.println("pageTot : "+searchVO.getTotPage());
-//		System.out.println("rowStart : "+searchVO.getRowStart());
-//		System.out.println("rowEnd : "+searchVO.getRowEnd());
-		
-		int rowStart = searchVO.getRowStart();
-		int rowEnd = searchVO.getRowEnd();
-		
-		ArrayList<DTO_Stay_admin> dtos = dao.list(rowStart,rowEnd,location,type);
-		
-		// 리스트 불러오기
-		// ArrayList<DTO_Stay_admin> s_list = dao.stay_list();
-		// model.addAttribute("s_list",s_list);
-		
-		model.addAttribute("list",dtos);
-		model.addAttribute("totRowcnt",total);
-		model.addAttribute("searchVO",searchVO);
-		
+		List<DTO_Stay_admin> list = dao.list(vo.getRowStart(), vo.getRowEnd(), location, type);
+
+		model.addAttribute("vo", vo);
+		model.addAttribute("list", list);
+		model.addAttribute("location", location);
+		model.addAttribute("type", type);
+
 	}
 
 }
