@@ -51,31 +51,49 @@ public class Service_Payment_Service implements Interface_TravelService {
 		DTO_Payment_user stayList = dao.getStayList(stay_no);
 		
 		Map<String, Object> mp = new HashMap<String, Object>();
-		mp.put("stay_no", stay_no);
-		mp.put("room_no", room_no);
-		mp.put("checkin_date", checkin_date);
-		mp.put("checkout_date", checkout_date);
 		
-		List<DTO_Payment_user> roomList = dao.getRoomList(mp);
+		List<DTO_Payment_user> roomList = null;
 		
-		int sumPrice = dao.getSumPrice(mp);
-		
-		long diffDay = 0;
-		
-		try {
+		long diffDay = 1;
+		int sumPrice = 0;
+		if(checkin_date == null || checkout_date == null) {
 			
-			// 예약 총 일자 구함..
-			Date checkin_date_dt = new SimpleDateFormat("yyyy-MM-dd").parse(checkin_date);
-	        Date checkout_date_dt = new SimpleDateFormat("yyyy-MM-dd").parse(checkout_date);
-	        
-	        diffDay = (checkout_date_dt.getTime() - checkin_date_dt.getTime()) / 1000 / (24*60*60);
-	        
-		}
-		catch(Exception ex) {
-			ex.printStackTrace();
+			// 파라미터에 체크인 / 체크아웃 날짜가 없는 경우
+			mp.put("stay_no", stay_no);
+			mp.put("room_no", room_no);
+			
+			roomList = dao.getRoomList_NotExistsDate(mp);
+			sumPrice = dao.getSumPrice_NotExistsDate(mp);
+			
+			// diffDay는 1로 처리
 		}
 		
+		else {
+			// 파라미터에 체크인 / 체크아웃 날짜가 있는 경우
+			
+			mp.put("stay_no", stay_no);
+			mp.put("room_no", room_no);
+			mp.put("checkin_date", checkin_date);
+			mp.put("checkout_date", checkout_date);
+			
+			roomList = dao.getRoomList(mp);
+			sumPrice = dao.getSumPrice(mp);
+			
+			try {
 				
+				// 예약 총 일자 구함..
+				Date checkin_date_dt = new SimpleDateFormat("yyyy-MM-dd").parse(checkin_date);
+		        Date checkout_date_dt = new SimpleDateFormat("yyyy-MM-dd").parse(checkout_date);
+		        
+		        diffDay = (checkout_date_dt.getTime() - checkin_date_dt.getTime()) / 1000 / (24*60*60);
+		        
+			}
+			catch(Exception ex) {
+				ex.printStackTrace();
+			}
+			
+		}
+		
 		model.addAttribute("checkin_date", checkin_date);
 		model.addAttribute("checkout_date", checkout_date);
 		model.addAttribute("diffDay", diffDay);

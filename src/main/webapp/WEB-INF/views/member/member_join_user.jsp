@@ -20,8 +20,8 @@
 	<hr>
 	<br>
 	<form action="joining" onsubmit="return insertBeforeCheck();">
-	<input type="hidden" name="all_tema" id="all_tema" value=""/>
-	<input type="hidden" name="all_area" id="all_area" value=""/>
+		<input type="hidden" name="all_tema" id="all_tema" value=""/>
+		<input type="hidden" name="all_area" id="all_area" value=""/>
 
 		<div class="join-wrapper">
 			<table class="member">
@@ -71,16 +71,11 @@
 				</tr>
 				<tr>
 					<td><label></label></td>
-					<td><input type="text" class="add_enter" id="sample4_postcode"
-						placeholder="우편번호" readonly autocomplete="off"> <input type="text" class="add_enter"
-						id="sample4_jibunAddress" placeholder="지번주소" readonly autocomplete="off"></td>
-				</tr>
-				<tr>
-					<td><label></label></td>
-					<td><input type="text" class="add_enter" 
+					<td>
+						<input type="text" class="enter" 
 						id="sample4_detailAddress" placeholder="상세주소"
-						name="m_detailAddress" autocomplete="off"> <input type="text"
-						class="add_enter" id="sample4_extraAddress" placeholder="참고항목" readonly autocomplete="off"></td>
+						name="m_detailAddress" autocomplete="off">
+					</td>
 				</tr>
 			</table>
 		</div>

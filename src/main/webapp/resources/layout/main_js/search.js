@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         const parent = button.closest(".person");
         const countSpan = parent.querySelector(".count");
         let count = parseInt(countSpan.textContent);
-        if (count > 0) {
+        if (count > 1) {
             count--;
             countSpan.textContent = count;
         }

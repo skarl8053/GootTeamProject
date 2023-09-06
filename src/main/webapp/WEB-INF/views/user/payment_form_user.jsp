@@ -17,6 +17,12 @@
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     <script src="https://cdn.iamport.kr/v1/iamport.js"></script>
     
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    
+    
+    
 </head>
 <body>
 
@@ -49,7 +55,7 @@
             border-collapse: collapse;
         }
         #check_date_table{
-            width: 500px;
+            width: 600px;
             text-align: center;
             margin: 0 auto;
         }
@@ -61,11 +67,16 @@
             color: red;
             font-weight: bold;
         }
-        .check_date_data_row{
+        .check_date_data_row, #datepicker_startdate, #datepicker_enddate{
             height: 80px;
             font-size: 30px;
             font-weight: bold;
             color: blue;
+        }
+        #datepicker_startdate, #datepicker_enddate{
+        	width: 200px;
+        	text-align: center;
+        	border-style: none;
         }
         .first_row{
             height: 30px;
@@ -452,13 +463,111 @@
 
         /////////////////////////////////////////////////////
 
+       $(function(){
+	
+	        var selected_StartDate = null;
+	        var selected_EndDate = null;
+	
+	     	// datePicker 이벤트 시작일
+	
+	        $('#datepicker_startdate').datepicker({
+	            showOn: "both",                             						// 달력을 표시할 타이밍 (both: focus or button)
+	            buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif",     	// 버튼 이미지
+	            buttonImageOnly : true,                     					// 버튼 이미지만 표시할지 여부
+	            buttonText: "날짜선택",                     					// 버튼의 대체 텍스트
+	            dateFormat: "yy-mm-dd",                     					// 날짜의 형식
+	            changeMonth: true,                          					// 월을 이동하기 위한 선택상자 표시여부
+	            minDate: 1,                           						// 선택할수있는 최소날짜, ( 0 : 오늘 이전 날짜 선택 불가)
+	            onClose: function( selectedDate ) {    
+                // 시작일(fromDate) datepicker가 닫힐때
+                // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+	                $("#datepicker_enddate").datepicker( "option", "minDate", selectedDate );
+	
+                	// 맨 처음 조회할 때는 selectedDate가 없는 상태임..
+                
+                	if(selected_StartDate == null){
+                		selected_StartDate = document.getElementById("datepicker_startdate").value;
+                	}
+                	else{
+                		selected_StartDate = selectedDate;
+                	}
+                	
+                	if(selected_EndDate == null){
+                		selected_EndDate = document.getElementById("datepicker_enddate").value;
+                	}
+                	
+	            }                
+	        });
+	
+	     	// datePicker 이벤트 종료일
+	        $('#datepicker_enddate').datepicker({
+	            showOn: "both", 
+	            buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif", 
+	            buttonImageOnly : true,
+	            buttonText: "날짜선택",
+	            dateFormat: "yy-mm-dd",
+	            changeMonth: true,
+	            minDate: 1, 
+	            onClose: function( selectedDate ) {
+	                // 종료일(toDate) datepicker가 닫힐때
+	                // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
+	                $("#datepicker_startdate").datepicker( "option", "maxDate", selectedDate );
+	 
+	                if(selected_StartDate == null){
+                		selected_StartDate = document.getElementById("datepicker_startdate").value;
+                	}
+	                
+	                if(selected_EndDate == null){
+                		selected_EndDate = document.getElementById("datepicker_enddate").value;
+                	}
+	                else{
+	                	selected_EndDate = selectedDate;
+	                }
+	                
+	            }                
+	        });
+	    })
+	         
+	    // datePicker 한글적용을 위해 추가
+	    $.datepicker.setDefaults({
+	        dateFormat: 'yy.mm.dd',
+	        prevText: '이전 달',
+	        nextText: '다음 달',
+	        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+	        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
+	        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
+	        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
+	        showMonthAfterYear: true,
+	        yearSuffix: '년'
+	    });
+        
+        function dateChange(){
+        	
+        	var checkInDate_str = document.getElementById("datepicker_startdate").value;
+        	var checkOutDate_str = document.getElementById("datepicker_enddate").value;
+        	
+        	alert(checkInDate.length)
+        	
+        	/* if(checkInDate.length < 1 || checkOutDate.length < 1){
+        		return false;
+        	}
+        	
+        	const checkInDate = new Date(checkInDate_str);
+        	const checkOutDate = new Date(checkOutDate_str);
+        	
+        	alert(Math.abs(checkInDate.getFullYear() - checkOutDate.getFullYear()));
+        	
+        	document.getElementById("diffday").value = (checkOutDate - checkInDate);
+        	 */
+        }
+        
     </script>
 
 	<h1>결제 진행</h1>
 
     <div id="form">
         
-			
 			<input type="hidden" id="m_no" name="m_no" value="${param.m_no}" />
 			<input type="hidden" id="stay_no" name="stay_no" value="${param.stay_no}" />
 			<input type="hidden" id="room_no" name="room_no" value="${param.room_no}" /> <%-- ${param.room_no} --%>
@@ -489,16 +598,34 @@
                             </div>
                             <div>
                                 <table id="check_date_table">
-                                    <tr>
-                                        <td class="check_date_header_row">체크인 일자</td>
-                                        <td class="check_date_header_row">체크아웃 일자</td>
-                                        <td class="check_date_header_row">총 예약 일자</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="check_date_data_row">${checkin_date }</td>
-                                        <td class="check_date_data_row">${checkout_date }</td>
-                                        <td class="check_date_data_row">${diffDay }</td>
-                                    </tr>
+                                	<c:if test="${not empty param.checkindate && not empty param.checkoutdate}">
+                                		<tr>
+	                                        <td class="check_date_header_row"  width="30%">체크인 일자</td>
+	                                        <td class="check_date_header_row">체크아웃 일자</td>
+	                                        <td class="check_date_header_row">총 예약 일자</td>
+	                                    </tr>
+	                                    <tr>
+	                                        <td class="check_date_data_row">${checkin_date }</td>
+	                                        <td class="check_date_data_row">${checkout_date }</td>
+	                                        <td class="check_date_data_row">${diffDay }</td>
+	                                    </tr>
+                                	</c:if>
+                                    <c:if test="${empty param.checkindate || empty param.checkoutdate}">
+                                		<tr>
+	                                        <td class="check_date_header_row">체크인 일자</td>
+	                                        <td class="check_date_header_row">체크아웃 일자</td>
+	                                        <td class="check_date_header_row">총 예약 일자</td>
+	                                    </tr>
+	                                    <tr>
+	                                        <td class="check_date_data_row">
+	                                        	<input type="text" id="datepicker_startdate" name="event_startdate"  autocomplete="off" readonly placeholder="날짜 선택" onchange="return dateChange();">
+	                                        </td>
+	                                        <td class="check_date_data_row">
+	                                        	<input type="text" id="datepicker_enddate" name="event_startdate" autocomplete="off" readonly placeholder="날짜 선택" onchange="return dateChange();">
+	                                        </td>
+	                                        <td class="check_date_data_row"  id="diffday">${diffDay }</td>
+	                                    </tr>
+                                	</c:if>
                                 </table>
                             </div>
                             <br><br><br>

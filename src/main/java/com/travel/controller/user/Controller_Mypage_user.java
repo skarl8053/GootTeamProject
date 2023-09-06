@@ -13,7 +13,7 @@ import com.travel.service.user.Service_Refund_Insert_User;
 import com.travel.service.user.Service_Refund_Select_User;
 
 @Controller
-@RequestMapping("user")
+@RequestMapping("member")
 public class Controller_Mypage_user {
 	
 	@Autowired
@@ -32,7 +32,7 @@ public class Controller_Mypage_user {
 		service = new Service_Refund_Select_User(sqlSession);
 		service.execute(model);
 
-		return "/user/mypage_refundpopup_user";
+		return "/member/mypage_refundpopup_user";
 		
 	}
 	

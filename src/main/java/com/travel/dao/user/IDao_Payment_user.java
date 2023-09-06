@@ -38,6 +38,10 @@ public interface IDao_Payment_user {
 	
 	void insertPushAL(String m_no, int create_order_no, String string);
 
+	List<DTO_Payment_user> getRoomList_NotExistsDate(Map<String, Object> mp);
+
+	int getSumPrice_NotExistsDate(Map<String, Object> mp);
+
 	
 
 }

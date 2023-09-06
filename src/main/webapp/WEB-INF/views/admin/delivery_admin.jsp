@@ -68,11 +68,11 @@
 			padding-left: 10px;
 			font-size: 30px;
 			font-weight: bold;
-			color: blue
+			color: #011343;
 		}
 		.statusbutton{
-			background-color: blue;
-            color: white;
+			background-color: #011343;
+            color: yellow;
 			font-size: 20px;
             font-weight: bold;
             border-radius: 3px;
@@ -94,8 +94,8 @@
 			
 		}
 		.button{
-            background-color: blue;
-            color: white;
+            background-color: #011343;
+            color: yellow;
             font-weight: bold;
             border-radius: 3px;
             width: 100px;

@@ -28,10 +28,28 @@
 	
 	<select id="getRoomList" parameterType="map" resultType="com.travel.dto.user.DTO_Payment_user">
 	
+			<!-- 체크인 / 체크아웃 날짜가 있을 경우 -->
+			
 			SELECT 	R_IMG1
 						,R_NAME
 						,R_PERSON_CNT
 						,(R_PRICE * (TO_DATE(#{checkout_date}, 'YYYY-MM-DD') - TO_DATE(#{checkin_date}, 'YYYY-MM-DD'))) AS R_PRICE
+			FROM 	TMSTROOM
+			WHERE 	S_NO = #{stay_no}
+			AND 	 	R_NO IN
+			<foreach collection="room_no" item="r_no" index="index" open="(" separator="," close=")">
+			        #{r_no.value}
+		  	</foreach>
+		  	
+	</select>
+	
+	<select id="getRoomList_NotExistsDate" parameterType="map" resultType="com.travel.dto.user.DTO_Payment_user">
+	
+			<!-- 체크인 / 체크아웃 날짜가 없을 경우 -->
+			SELECT 	R_IMG1
+						,R_NAME
+						,R_PERSON_CNT
+						,R_PRICE
 			FROM 	TMSTROOM
 			WHERE 	S_NO = #{stay_no}
 			AND 	 	R_NO IN
@@ -43,6 +61,18 @@
 	<select id="getSumPrice" parameterType="map" resultType="integer">
 	
 			SELECT 	(SUM(R_PRICE) * (TO_DATE(#{checkout_date}, 'YYYY-MM-DD') - TO_DATE(#{checkin_date}, 'YYYY-MM-DD'))) AS SUM_PRICE
+			FROM 	TMSTROOM
+			WHERE 	S_NO = #{stay_no}
+			AND 	 	R_NO IN
+			<foreach collection="room_no" item="r_no" index="index" open="(" separator="," close=")">
+			        #{r_no.value}
+		  	</foreach>
+	
+	</select>
+	
+	<select id="getSumPrice_NotExistsDate" parameterType="map" resultType="integer">
+	
+			SELECT 	SUM(R_PRICE) AS SUM_PRICE
 			FROM 	TMSTROOM
 			WHERE 	S_NO = #{stay_no}
 			AND 	 	R_NO IN
