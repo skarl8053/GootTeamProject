@@ -12,7 +12,7 @@
     <!-- 개별 화면 content 크기를 조절하는 방법 -->
     <style>
         #content{
-            height: 1200px;
+            height: auto;
             width : 1200px;
             margin : 0 auto;
         }
@@ -78,7 +78,7 @@
 		            return false; 
 		        }
 
-		        if (firstImage === " ") {
+		        if (firstImage === "") {
 		            alert("이미지를 등록해주세요.");
 		            document.querySelector('#firstImage').focus();
 		            return false; 
@@ -108,7 +108,7 @@
 		            return false; 
 		        }
 
-		        if (stay_info === "") {
+		        if (stay_info === "" || stay_info === "숙소 공통 정보 및 정책을 입력해주세요." || stay_info.length < 10) {
 		            alert("숙소 정보 및 정책을 입력해주세요.");
 		            document.querySelector('.stay_info').focus();
 		            return false; 

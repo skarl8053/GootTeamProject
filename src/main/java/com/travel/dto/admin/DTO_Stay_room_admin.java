@@ -5,11 +5,12 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter @Setter
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class DTO_Stay_room_admin {
-	
+
 	private int r_no;
 	private int s_no;
 	private String r_name;
@@ -28,5 +29,7 @@ public class DTO_Stay_room_admin {
 	private int r_facility4;
 	private int r_facility5;
 	private int r_facility6;
-	
+
+	private String s_img1;
+	private String s_name;
 }
