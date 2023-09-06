@@ -34,13 +34,13 @@ public class Service_Payment_Service implements Interface_TravelService {
 		String checkout_date = request.getParameter("checkoutdate");
 		
 		String m_no = request.getParameter("m_no");
-		String stay_no = request.getParameter("stay_no");
-		String[] room_no_str = request.getParameter("room_no").split("_");
+		String s_no = request.getParameter("s_no");
+		String[] room_no_str = request.getParameter("r_no").split("_");
 		
-		List<Integer> room_no = new ArrayList<Integer>();
+		List<Integer> r_no = new ArrayList<Integer>();
 		
         for (int i = 0; i < room_no_str.length; i++) {
-        	room_no.add(Integer.parseInt(room_no_str[i]));
+        	r_no.add(Integer.parseInt(room_no_str[i]));
         }
 		
 		
@@ -48,19 +48,19 @@ public class Service_Payment_Service implements Interface_TravelService {
 		DTO_Payment_user resvList = dao.getResvInfo(m_no);
 		
 		// 예약 숙소 / 객실 조회
-		DTO_Payment_user stayList = dao.getStayList(stay_no);
+		DTO_Payment_user stayList = dao.getStayList(s_no);
 		
 		Map<String, Object> mp = new HashMap<String, Object>();
 		
 		List<DTO_Payment_user> roomList = null;
 		
-		long diffDay = 1;
+		long diffDay = 0;
 		int sumPrice = 0;
 		if(checkin_date == null || checkout_date == null) {
 			
 			// 파라미터에 체크인 / 체크아웃 날짜가 없는 경우
-			mp.put("stay_no", stay_no);
-			mp.put("room_no", room_no);
+			mp.put("stay_no", s_no);
+			mp.put("room_no", r_no);
 			
 			roomList = dao.getRoomList_NotExistsDate(mp);
 			sumPrice = dao.getSumPrice_NotExistsDate(mp);
@@ -71,8 +71,8 @@ public class Service_Payment_Service implements Interface_TravelService {
 		else {
 			// 파라미터에 체크인 / 체크아웃 날짜가 있는 경우
 			
-			mp.put("stay_no", stay_no);
-			mp.put("room_no", room_no);
+			mp.put("stay_no", s_no);
+			mp.put("room_no", r_no);
 			mp.put("checkin_date", checkin_date);
 			mp.put("checkout_date", checkout_date);
 			
@@ -85,7 +85,7 @@ public class Service_Payment_Service implements Interface_TravelService {
 				Date checkin_date_dt = new SimpleDateFormat("yyyy-MM-dd").parse(checkin_date);
 		        Date checkout_date_dt = new SimpleDateFormat("yyyy-MM-dd").parse(checkout_date);
 		        
-		        diffDay = (checkout_date_dt.getTime() - checkin_date_dt.getTime()) / 1000 / (24*60*60);
+		        diffDay = ((checkout_date_dt.getTime() - checkin_date_dt.getTime()) / 1000 / (24*60*60)) + 1;
 		        
 			}
 			catch(Exception ex) {

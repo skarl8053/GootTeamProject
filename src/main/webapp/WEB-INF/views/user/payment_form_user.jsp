@@ -24,7 +24,7 @@
     
     
 </head>
-<body>
+<body onload="showInfo();">
 
 	<style>
         body{
@@ -144,6 +144,38 @@
 
         // var use_Coupon_flag = false;
 
+        function showInfo(){
+        	
+        	var checkindate = '<c:out value="${param.checkindate}"/>';
+        	var checkoutdate = '<c:out value="${param.checkoutdate}"/>';
+        	
+        	if(checkindate== "" || checkoutdate == ""){
+        		$("#resv_field").hide();
+        		$("#coupon_field").hide();
+        		$("#price_field").hide();
+       		}
+        	
+        }
+        
+        function resvDate_click(m_no, s_no, r_no){
+        	
+        	// 예약일자 확정 클릭
+        	
+        	var checkindate = document.getElementById("datepicker_startdate").value;
+        	var checkoutdate = document.getElementById("datepicker_enddate").value;
+        	
+        	if(checkindate== "" || checkoutdate == ""){
+        		alert("체크인 / 체크아웃 일자를 설정해주세요")
+        		return false;
+       		}
+        	
+        	if(confirm("예약일자를 확정하시겠습니까?") == false){
+        		return false;
+        	}
+        	
+        	location.replace("payment?m_no=" +m_no + "&s_no=" + s_no + "&r_no=" +r_no + "&checkindate=" + checkindate + "&checkoutdate=" + checkoutdate );
+        }
+        
     	function coupon_popup_open(m_no){
     		
     		var opensite = "couponpopup?m_no=" + m_no;
@@ -386,8 +418,8 @@
         function cardpayExec(){
 
             var m_no = document.getElementById("m_no").value;
-            var stay_no = document.getElementById("stay_no").value;
-            var room_no = document.getElementById("room_no").value;
+            var s_no = document.getElementById("s_no").value;
+            var r_no = document.getElementById("r_no").value;
             var checkindate = document.getElementById("checkindate").value;
             var checkoutdate = document.getElementById("checkoutdate").value;
             var totalAllPrice = document.getElementById("totalPrice").innerHTML;
@@ -399,7 +431,7 @@
             var card_number = document.getElementById("card_number").value;
             var paymethod = document.getElementById("paymethod").value;
 
-            location.replace("payment_exec?m_no=" + m_no + "&stay_no=" + stay_no + "&room_no=" + room_no + "&checkindate=" 
+            location.replace("payment_exec?m_no=" + m_no + "&s_no=" + s_no + "&r_no=" + r_no + "&checkindate=" 
             + checkindate + "&pay_type=1&checkoutdate=" + checkoutdate + "&totalAllPrice=" + totalAllPrice + "&totalDiscountPrice=" + totalDiscountPrice
             + "&totalResultPrice=" + totalResultPrice + "&totalUsePoint=" + totalUsePoint + "&totalEarnPoint=" + + totalEarnPoint + "&coupon_no=" + coupon_no + "&cardNumber=" + card_number);
                 
@@ -425,8 +457,8 @@
             // 카카오페이 결제
             
             var m_no = document.getElementById("m_no").value;
-            var stay_no = document.getElementById("stay_no").value;
-            var room_no = document.getElementById("room_no").value;
+            var s_no = document.getElementById("s_no").value;
+            var r_no = document.getElementById("r_no").value;
             var checkindate = document.getElementById("checkindate").value;
             var checkoutdate = document.getElementById("checkoutdate").value;
             var totalAllPrice = document.getElementById("totalPrice").innerHTML;
@@ -450,7 +482,7 @@
                     // 카카오 페이 결제 성공할 경우
                     console.log(rsp);
 					// 결제 정보 등록
-                    location.replace("payment_exec?m_no=" + m_no + "&stay_no=" + stay_no + "&room_no=" + room_no + "&checkindate=" 
+                    location.replace("payment_exec?m_no=" + m_no + "&s_no=" + s_no + "&r_no=" + r_no + "&checkindate=" 
                     + checkindate + "&pay_type=2&checkoutdate=" + checkoutdate + "&totalAllPrice=" + totalAllPrice + "&totalDiscountPrice=" + totalDiscountPrice
                     + "&totalResultPrice=" + totalResultPrice + "&totalUsePoint=" + totalUsePoint + "&totalEarnPoint=" + + totalEarnPoint + "&coupon_no=" + coupon_no + "&cardNumber=" + card_number);
                         
@@ -547,19 +579,18 @@
         	var checkInDate_str = document.getElementById("datepicker_startdate").value;
         	var checkOutDate_str = document.getElementById("datepicker_enddate").value;
         	
-        	alert(checkInDate.length)
-        	
-        	/* if(checkInDate.length < 1 || checkOutDate.length < 1){
+        	if(checkInDate_str.length < 1 || checkOutDate_str.length < 1){
         		return false;
         	}
         	
-        	const checkInDate = new Date(checkInDate_str);
-        	const checkOutDate = new Date(checkOutDate_str);
+        	const checkInDate = new Date(checkInDate_str).getTime();
+        	const checkOutDate = new Date(checkOutDate_str).getTime();
         	
-        	alert(Math.abs(checkInDate.getFullYear() - checkOutDate.getFullYear()));
+        	// 예약일자 (체크인 ~ 체크아웃 일자)
+    		var resvDate = ((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24)) + 1;
+    		
+        	$("#diffday").html(resvDate);
         	
-        	document.getElementById("diffday").value = (checkOutDate - checkInDate);
-        	 */
         }
         
     </script>
@@ -569,8 +600,8 @@
     <div id="form">
         
 			<input type="hidden" id="m_no" name="m_no" value="${param.m_no}" />
-			<input type="hidden" id="stay_no" name="stay_no" value="${param.stay_no}" />
-			<input type="hidden" id="room_no" name="room_no" value="${param.room_no}" /> <%-- ${param.room_no} --%>
+			<input type="hidden" id="s_no" name="s_no" value="${param.s_no}" />
+			<input type="hidden" id="r_no" name="r_no" value="${param.r_no}" /> <%-- ${param.r_no} --%>
 			<input type="hidden" id="checkindate" name="checkindate" value="${param.checkindate}" />
 			<input type="hidden" id="checkoutdate" name="checkoutdate" value="${param.checkoutdate}" />
 			<input type="hidden" id="totalEarnPoint" name="totalEarnPoint" value="${earnpoint}" />
@@ -625,11 +656,16 @@
 	                                        </td>
 	                                        <td class="check_date_data_row"  id="diffday">${diffDay }</td>
 	                                    </tr>
+	                                    <tr>
+	                                    	<td colspan="3" style="text-align: right; padding: 10px 10px;">
+	                                    		<button onclick="return resvDate_click('${param.m_no}','${param.s_no}','${param.r_no}');">예약일자 확정</button>
+	                                    	</td>
+	                                    </tr>
                                 	</c:if>
                                 </table>
                             </div>
                             <br><br><br>
-                            <div>
+                            <div id="resv_field">
                                 <span class="header">예약 숙소</span>
                                 <hr>
                                 <table id="stay_resv_table">
@@ -651,89 +687,90 @@
 		                                                객실 최대인원수 : <span>${li.r_person_cnt}</span>
 		                                            </div>
 		                                        </td>
-		                                        <td class="third_col"><span>${li.r_price}</span>원</td>
+		                                        <td class="third_col"><span id="r_price">${li.r_price}</span>원</td>
 		                                    </tr>
                                     </c:forEach>
                                     
                                 </table>
                                 <br><br><br>
                             </div>
-                            <div>
-                                <span class="header">쿠폰 / 포인트</span>
-                            </div>
-                            <hr><br>
-                            <div>
-                                 <span>쿠폰 할인</span>
-                                 <button type="button" id="coupon_use" onclick="coupon_popup_open('${param.m_no}');">쿠폰 적용</button>
-                                 <button type="button" id="coupon_cancel" onclick="return coupon_cancel_exec();">쿠폰 삭제</button>
-                            </div>
-                            <div>
-                                <span>&nbsp;&nbsp;&nbsp;└ 즉시 할인</span>
-                                <span style="color:red; font-weight: bold;"><span id="coupon_price">0</span>원 </span>
-                            </div>
-                            <br><hr><br>
-                            <div>
-                                <span>포인트</span>
-                                <span><input type="text" id="use_point" name="totalUsePoint" value="0"  autocomplete="off"></span><span>원</span>
-                                <span><button type="button" onclick="return useAllPoint();">전액 사용</button></span>
-                                &nbsp;&nbsp;<span id="currentAllPoint">${resvList.m_point}</span> 포인트 사용 가능 
-                            </div>
-                            <div>
-                                
-                            </div>
+                            <div id="coupon_field">
+	                            <div>
+	                                <span class="header">쿠폰 / 포인트</span>
+	                            </div>
+	                            <hr><br>
+	                            <div>
+	                                 <span>쿠폰 할인</span>
+	                                 <button type="button" id="coupon_use" onclick="coupon_popup_open('${param.m_no}');">쿠폰 적용</button>
+	                                 <button type="button" id="coupon_cancel" onclick="return coupon_cancel_exec();">쿠폰 삭제</button>
+	                            </div>
+	                            <div>
+	                                <span>&nbsp;&nbsp;&nbsp;└ 즉시 할인</span>
+	                                <span style="color:red; font-weight: bold;"><span id="coupon_price">0</span>원 </span>
+	                            </div>
+	                            <br><hr><br>
+	                            <div>
+	                                <span>포인트</span>
+	                                <span><input type="text" id="use_point" name="totalUsePoint" value="0"  autocomplete="off"></span><span>원</span>
+	                                <span><button type="button" onclick="return useAllPoint();">전액 사용</button></span>
+	                                &nbsp;&nbsp;<span id="currentAllPoint">${resvList.m_point}</span> 포인트 사용 가능 
+	                            </div>
+                          	</div>  
                         </div>
                         
                     </li>
                     <li id="main_second_col">
-                        <div id="point_div">
-                            <p class="header">적립 혜택</p>
-                        </div>
-                        <hr>
-                        <div>
-                            <span>포인트 : </span>
-                            <span id="earnpoint" style="color:red; font-weight: bold;">${earnpoint}</span><span>원</span>
-                        </div>
-                        <br><br><hr>
-                        <div id="pay_div">
-                            <div>
-                                <span class="header">결제 예정금액</span>
-                            </div>
-                            <div>
-                                <span>숙소 금액 : </span>
-                                <span style="color:black; font-weight: bold;"><span id="totalPrice">${sumPrice}</span>원</span> 
-                            </div>
-                            <div>
-                                <span>할인 금액 : </span>
-                                <span style="color:blue; font-weight: bold;"><span id="discountPrice">0</span>원</span>
-                            </div>
-                            <div>
-                                <span>최종 결제 금액 : </span>
-                                <span style="color:red; font-weight: bold;"><span id="resultPrice">${sumPrice}</span>원</span> 
-                            </div>
-                            <hr>
-                            <div>
-                                <span>결제 수단 : </span>
-                                <span>
-                                    <input type="radio" name="pay_type" value="1" onchange="payMethodChange(1);" checked> 신용카드 결제
-                                    <input type="radio" name="pay_type" value="2" onchange="payMethodChange(2);"> 카카오페이 결제
-                                </span>
-                            </div>
-                            <br>
-                            <fieldset id="cardform">
-                                <span>카드번호 :</span>
-                                <br><br>
-                                <input type="text" id="first_cardnumber" class="cardNumber" onKeyup="return inputMoveNumber(this);" maxlength="4" autocomplete="off"/>&nbsp;-&nbsp;
-                                <input type="password" id="second_cardnumber" class="cardNumber" onKeyup="return inputMoveNumber(this);" maxlength="4"  autocomplete="off"/>&nbsp;-&nbsp;
-                                <input type="password" id="third_cardnumber" class="cardNumber" onKeyup="return inputMoveNumber(this);" maxlength="4"  autocomplete="off"/>&nbsp;-&nbsp;
-                                <input type="text" id="forth_cardnumber" class="cardNumber" onKeyup="return inputMoveNumber(this);" maxlength="4"  autocomplete="off"/>
-                            </fieldset>
-                            <br>
-                        </div>
-                        <div>
-                            <div>
-                                <input type="button" class="paybutton" id="cardPaymentButton" onclick="return paymentExec()" value="카드로 결제하기">
-                                <input type="button" class="paybutton" id="kakaoPaymentButton" onclick="return paymentExec();" value="카카오 페이로 결제하기">
-                            </div>
+                    	<div id="price_field">
+	                        <div id="point_div">
+	                            <p class="header">적립 혜택</p>
+	                        </div>
+	                        <hr>
+	                        <div>
+	                            <span>포인트 : </span>
+	                            <span id="earnpoint" style="color:red; font-weight: bold;">${earnpoint}</span><span>원</span>
+	                        </div>
+	                        <br><br><hr>
+	                        <div id="pay_div">
+	                            <div>
+	                                <span class="header">결제 예정금액</span>
+	                            </div>
+	                            <div>
+	                                <span>숙소 금액 : </span>
+	                                <span style="color:black; font-weight: bold;"><span id="totalPrice">${sumPrice}</span>원</span> 
+	                            </div>
+	                            <div>
+	                                <span>할인 금액 : </span>
+	                                <span style="color:blue; font-weight: bold;"><span id="discountPrice">0</span>원</span>
+	                            </div>
+	                            <div>
+	                                <span>최종 결제 금액 : </span>
+	                                <span style="color:red; font-weight: bold;"><span id="resultPrice">${sumPrice}</span>원</span> 
+	                            </div>
+	                            <hr>
+	                            <div>
+	                                <span>결제 수단 : </span>
+	                                <span>
+	                                    <input type="radio" name="pay_type" value="1" onchange="payMethodChange(1);" checked> 신용카드 결제
+	                                    <input type="radio" name="pay_type" value="2" onchange="payMethodChange(2);"> 카카오페이 결제
+	                                </span>
+	                            </div>
+	                            <br>
+	                            <fieldset id="cardform">
+	                                <span>카드번호 :</span>
+	                                <br><br>
+	                                <input type="text" id="first_cardnumber" class="cardNumber" onKeyup="return inputMoveNumber(this);" maxlength="4" autocomplete="off"/>&nbsp;-&nbsp;
+	                                <input type="password" id="second_cardnumber" class="cardNumber" onKeyup="return inputMoveNumber(this);" maxlength="4"  autocomplete="off"/>&nbsp;-&nbsp;
+	                                <input type="password" id="third_cardnumber" class="cardNumber" onKeyup="return inputMoveNumber(this);" maxlength="4"  autocomplete="off"/>&nbsp;-&nbsp;
+	                                <input type="text" id="forth_cardnumber" class="cardNumber" onKeyup="return inputMoveNumber(this);" maxlength="4"  autocomplete="off"/>
+	                            </fieldset>
+	                            <br>
+	                        </div>
+	                        <div>
+	                            <div>
+	                                <input type="button" class="paybutton" id="cardPaymentButton" onclick="return paymentExec()" value="카드로 결제하기">
+	                                <input type="button" class="paybutton" id="kakaoPaymentButton" onclick="return paymentExec();" value="카카오 페이로 결제하기">
+	                            </div>
+	                        </div>
                         </div>
                     </li>
                 </ul>

@@ -33,7 +33,7 @@
 			SELECT 	R_IMG1
 						,R_NAME
 						,R_PERSON_CNT
-						,(R_PRICE * (TO_DATE(#{checkout_date}, 'YYYY-MM-DD') - TO_DATE(#{checkin_date}, 'YYYY-MM-DD'))) AS R_PRICE
+						,(R_PRICE * ( (TO_DATE(#{checkout_date}, 'YYYY-MM-DD') - TO_DATE(#{checkin_date}, 'YYYY-MM-DD')) + 1)) AS R_PRICE
 			FROM 	TMSTROOM
 			WHERE 	S_NO = #{stay_no}
 			AND 	 	R_NO IN
@@ -60,7 +60,7 @@
 	
 	<select id="getSumPrice" parameterType="map" resultType="integer">
 	
-			SELECT 	(SUM(R_PRICE) * (TO_DATE(#{checkout_date}, 'YYYY-MM-DD') - TO_DATE(#{checkin_date}, 'YYYY-MM-DD'))) AS SUM_PRICE
+			SELECT 	(SUM(R_PRICE) *   ((TO_DATE(#{checkout_date}, 'YYYY-MM-DD') - TO_DATE(#{checkin_date}, 'YYYY-MM-DD')) +1)) AS SUM_PRICE
 			FROM 	TMSTROOM
 			WHERE 	S_NO = #{stay_no}
 			AND 	 	R_NO IN
