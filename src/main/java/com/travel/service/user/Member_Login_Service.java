@@ -61,22 +61,25 @@ public class Member_Login_Service implements Interface_MemberService {
 			return "redirect:login";
 		}
 		else {
+			
+			model.addAttribute("InUse",dto);
+			HttpSession session = request.getSession();
+			session.setAttribute("m_no", m_no); // 사용자 번호
+			session.setAttribute("m_sec", m_sec); // 권한
+			session.setAttribute("m_email", m_email); // 사용자 이메일
+			session.setAttribute("m_name", m_name); // 사용자 이름
+			
 			if(m_sec == 1) {		
 				System.out.println("관리자");
 				model.addAttribute("msg","관리자님 환영합니다!!");
-				return "";
+				
+				// 관리자로 로그인할 경우 관리자 페이지의 구매내역 페이지로 이동!!
+				return "redirect:/admin/purchase";
 			}
 			else
 			{
 				System.out.println("로그인 성공");
-				model.addAttribute("InUse",dto);
-				HttpSession session = request.getSession();
-				session.setAttribute("m_no", m_no);
-				session.setAttribute("m_email", m_email);
-				session.setAttribute("m_name", m_name);
-				
 				model.addAttribute("msg", m_name + " 님 환영합니다 !!");
-				
 				return "main/main_loading";
 			}
 		}

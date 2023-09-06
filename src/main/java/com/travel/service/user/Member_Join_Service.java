@@ -38,32 +38,47 @@ public class Member_Join_Service implements Interface_TravelService {
 			
 			String m_marketing = request.getParameter("m_marketing") == null ? "N" : "Y";	
 			
+			// 남기문 수정 (테마 입력하는 부분) ///////////////////////
+			
+			String theme_list = request.getParameter("all_tema");
+			String[] theme=theme_list.split(",");
+			
+			int[] theme_Arr = new int[3];
+			
+			for (int i = 0; i < 3; i++) {
+				if( i > theme.length-1 ) {
+					theme_Arr[i] = 0;
+				}
+				else {
+					theme_Arr[i] = Integer.parseInt(theme[i]);
+				}
+			}
+			
+			int m_theme1 = theme_Arr[0];
+			int m_theme2 = theme_Arr[1];
+			int m_theme3 = theme_Arr[2];
+			
+			// 남기문 수정 ( 선호지역 입력하는 부분 )
 			
 			String all_area = request.getParameter("all_area");
 			String[] area=all_area.split(",");
-			int m_area1 = Integer.parseInt(area[0]);
-			int m_area2 = Integer.parseInt(area[1]);
-			int m_area3 = Integer.parseInt(area[2]);
-			if (area[0]==null) {
-				m_area1=0; m_area2=0; m_area3=0;
-			}else if (area[1]==null) {
-				m_area2=0; m_area3=0;
-			}else if (area[2]==null) {
-				m_area3=0;
+			
+			int[] location_Arr = new int[3];
+			
+			for (int i = 0; i < 3; i++) {
+				if( i > area.length-1 ) {
+					location_Arr[i] = 0;
+				}
+				else {
+					location_Arr[i] = Integer.parseInt(area[i]);
+				}
 			}
 			
-			String all_tema = request.getParameter("all_tema");
-			String[] tema=all_tema.split(",");
-			int m_theme1 = Integer.parseInt(tema[0]);
-			int m_theme2 = Integer.parseInt(tema[1]);
-			int m_theme3 = Integer.parseInt(tema[2]);
-			if (tema[0]==null) {
-				m_theme1=0; m_theme2=0; m_theme3=0;
-			}else if (tema[1]==null) {
-				m_theme2=0; m_theme3=0;
-			}else if (tema[2]==null) {
-				m_theme3=0;
-			}
+			int m_area1 = location_Arr[0];
+			int m_area2 = location_Arr[1];
+			int m_area3 = location_Arr[2];
+			
+			////////////////////////////////////////////////////////////
 			
 			String key = "1kjkjkjk$%!@#@#@#%ohhkkhkhk9999";
 			String encryStr = CryptoUtil.encryptAES256(m_pw, key);

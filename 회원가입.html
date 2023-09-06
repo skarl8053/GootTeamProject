@@ -1,4 +1,16 @@
-// 주소 찾기
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+</head>
+<body>
+
+	<script>
+
+		
+		// 주소 찾기
 
 		//본 예제에서는 도로명 주소 표기 방식에 대한 법령에 따라, 내려오는 데이터를 조합하여 올바른 주소를 구성하는 방법을 설명합니다.
 		function sample4_execDaumPostcode() {
@@ -189,30 +201,23 @@
 						$("#check_text").text("이메일을 입력해주세요.")
 						$("#check_text").css("color","red");
 
-						emailMsg = "이메일을 입력해주세요";
-						
 						isEmailChecked = false;		
 					}else if(data=="0"){		
 						if((reg.test(m_email))==false){
 							$("#check_text").text("이메일 형식에 맞지 않습니다.")
 							$("#check_text").css("color","red");
-							
-							emailMsg = "이메일 형식에 맞지 않습니다.";
-							
+
 							isEmailChecked = false;					
 						}else{
 							$("#check_text").text("사용 가능한 이메일입니다.")
 							$("#check_text").css("color","green");
-							
-							emailMsg = "";
-							
+
 							isEmailChecked = true;				
 						}
 					}else{			
 						$("#check_text").text("중복된 이메일입니다.")
 						$("#check_text").css("color","red");
-						
-						emailMsg = "이미 회원가입이 된 이메일입니다.";
+
 						isEmailChecked = false;
 					}
 				}
@@ -333,13 +338,10 @@
 							});
 				});
 		////////////////////// 테마 / 선호 지역 선택 : 남기문 /////////////////////////
-		
+
 		var isEmailChecked = false;
-		var emailMsg = "";
 		var isPasswordChecked = false;
-		
-		// 회원가입 전에 입력 안한것 / 입력이 잘못된것 찾기 (남기문 추가)
-		
+
 		function insertBeforeCheck() {
 
 			var tel = new RegExp('010(?=.*[0-9]{8})')
@@ -355,30 +357,15 @@
 				alert("이메일을 입력해주세요");
 				return false;
 			}
-			
+
 			if(isEmailChecked == false)
 			{
-				if(emailMsg == ""){
-					alert("이메일 중복확인 버튼을 눌러주세요");
-					return false;
-				}
-				else{
-					alert(emailMsg);
-					return false;
-				}
-			}
-			
-			if(p1.length < 1){
-				alert("비밀번호를 입력해주세요");
+				alert("이메일 입력 후 중복확인 버튼을 클릭해주세요");
 				return false;
 			}
+				
 			if(isPasswordChecked == false){
-				alert("비밀번호를 조건에 맞게 입력해주세요");
-				return false;
-			}
-			
-			if(p2.length < 1){
-				alert("'비밀번호 확인'을 입력해주세요");
+				alert("비밀번호를 입력해주세요");
 				return false;
 			}
 
@@ -407,12 +394,12 @@
 				return false;
 			}	
 			
-			if(themeArr == null || themeArr.length < 1){
+			if(themeArr.length < 0){
 				alert("테마를 최소 1개 이상 선택해주세요");
 				return false;
 			}
 
-			if(locationArr == null || locationArr.length < 1){
+			if(locationArr.length == 0){
 				alert("선호지역을 최소 1개 이상 선택해주세요");
 				return false;
 			}
@@ -420,5 +407,236 @@
 			// 위에서 저장한 내용을 hidden값에 집어넣어줌..
 			document.getElementById("all_tema").value = themeArr;
 			document.getElementById("all_area").value = locationArr;
-			
 		}
+
+		
+
+
+
+
+	</script>
+
+	<p class="join">회원가입</p>
+	<hr>
+	<br>
+	<form action="joining" onsubmit="return insertBeforeCheck();">
+	<input type="hidden" name="all_tema" id="all_tema" value=""/>
+	<input type="hidden" name="all_area" id="all_area" value=""/>
+
+		<div class="join-wrapper">
+			<table class="member">
+				<tr>
+					<td><label>이메일</label></td>
+					<td><input type="email" class="enter" name="m_email" id="m_email" 
+						placeholder="이메일을 입력해주세요."  required autocomplete="off"/>
+					</td>
+					<td><input type="button" class="certi" id="check_email" onclick="checking()" value="중복확인"></td>	
+				</tr>
+				<tr>
+				<td><label style="display:none;"></label></td>
+				<td>
+				<span id="check_text" class="check_text"></span>
+				</td>
+				</tr>
+				<tr>
+					<td><label>비밀번호</label></td>
+					<td><input type="password" class="enter" name="m_pw" id="m_pw"
+						placeholder="비밀번호를 입력해주세요." required /> </td>
+				</tr>
+				<tr>
+					<td><label style="display:none;"></label></td>
+					<td><span id="StrengthDisp"></span></td>
+				</tr>
+				<tr>
+					<td><label>비밀번호확인</label></td>
+					<td><input type="password" class="enter" name="m_pw2" 
+						id="m_pw2" placeholder="비밀번호를 한번 더 입력해주세요." required /></td>
+				</tr>
+				<tr>
+					<td><label>이름</label></td>
+					<td><input type="text" class="enter" name="m_name" 
+						placeholder="이름을 입력해주세요." required autocomplete="off"/></td>
+				</tr>
+				<tr>
+					<td><label>휴대폰</label></td>
+					<td><input type="text" oninput="inputNumberOnly(this)" class="enter" name="m_tel" id="m_tel" 
+					maxlength="11"  placeholder="숫자만 입력해주세요." required autocomplete="off"/></td>
+				</tr>
+				<tr>
+					<td><label>주소</label></td>
+					<td><input type="text" class="enter" id="sample4_roadAddress" 
+						name="m_roadAddress" placeholder="도로명주소" readonly autocomplete="off"></td>
+					<td><input type="button" class="certi"
+						onclick="sample4_execDaumPostcode()" value="주소찾기"></td>
+				</tr>
+				<tr>
+					<td><label></label></td>
+					<td><input type="text" class="add_enter" id="sample4_postcode"
+						placeholder="우편번호" readonly autocomplete="off"> <input type="text" class="add_enter"
+						id="sample4_jibunAddress" placeholder="지번주소" readonly autocomplete="off"></td>
+				</tr>
+				<tr>
+					<td><label></label></td>
+					<td><input type="text" class="add_enter" 
+						id="sample4_detailAddress" placeholder="상세주소"
+						name="m_detailAddress" autocomplete="off"> <input type="text"
+						class="add_enter" id="sample4_extraAddress" placeholder="참고항목" readonly autocomplete="off"></td>
+				</tr>
+			</table>
+		</div>
+		<br> <br>
+		<hr>
+		<br>
+		<div class="select-wrapper">
+			<table class="select">
+				<tr>
+					<td><label class="tema" id="tema">테마</label></td>
+					<td><button type="button" class="btn1" name="tema" value="1">#등산</button>
+						<button type="button" class="btn1" name="tema" value="2" >#바다</button>
+						<button type="button" class="btn1" name="tema" value="3">#도시</button>
+						<button type="button" class="btn1" name="tema" value="4">#계곡</button></td>
+				</tr>
+				<tr>
+					<td><label></label></td>
+					<td><button type="button" class="btn1" name="tema" value="5">#레저</button>
+						<button type="button" class="btn1" name="tema" value="6">#문화</button>
+						<button type="button" class="btn1" name="tema" value="7">#맛집</button>
+						<button type="button" class="btn1" name="tema" value="8">#파티</button></td>
+				</tr>
+				<tr>
+					<td><label class="tema" id="area">선호지역</label></td>
+					<td><button type="button" class="btn2" name="area" value="1">#서울</button>
+						<button type="button" class="btn2" name="area" value="2">#경기</button>
+						<button type="button" class="btn2" name="area" value="3">#인천</button>
+						<button type="button" class="btn2" name="area" value="4">#충청</button></td>
+				</tr>
+				<tr>
+					<td><label></label></td>
+					<td><button type="button" class="btn2" name="area" value="5">#강원</button>
+						<button type="button" class="btn2" name="area" value="6">#경상</button>
+						<button type="button" class="btn2" name="area" value="7">#전라</button>
+						<button type="button" class="btn2" name="area" value="8">#제주</button></td>
+				</tr>
+				<tr>
+					<td><label></label></td>
+				</tr>
+
+
+				<tr>
+					<td colspan="2"><span class="tema_area">※ 테마 및 선호지역은 각각
+							<b>최대 3개</b>까지 선택하실 수 있습니다.
+					</span></td>
+				</tr>
+
+			</table>
+		</div>
+
+		<br>
+		<hr>
+		<br>
+
+		<table class="agree">
+
+			<tr>
+				<td id="agree_label"><label>이용약관동의</label></td>
+				<td>
+					<div class="terms__check__all">
+						<input type="checkbox" name="checkAll" id="checkAll" class="chk"/>
+						<label for="checkAll" class="required" id="label_font">모두
+							동의합니다.</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<ul class="terms__list">
+						<li class="terms__box">
+							<div class="input__check">
+								<input type="checkbox" name="agreement" id="termsOfService"
+									class="chk"  required /> <label for="termsOfService" 
+									class="required" id="label_font">이용약관 동의 <strong>(필수)</strong></label>
+							</div>
+						</li>
+				</td>
+				<td>
+					<button type="button" id="btn-modal1">약관 보기 >></button>
+					<div id="modal1" class="modal-overlay">
+						<div class="modal-window">
+							<div class="title">
+								<div class="close-area">X</div>
+								<p class="modal_title">이용약관 동의</p>
+							</div>
+							<div class="content">
+								<p class="modal_content">
+									동의? <br> 할거지? <br> 안할거야? <br> 왜? <br> 왜
+									안하는거야? <br> 집착해도 될까? <br> 동의할 때까지 물어봐도 될까? <br>
+									안하면 회원가입 못하는데? <br> 회원탈퇴는 안할거지? <br> 뭘 고민하는거야? <br>
+									아직도 동의안해? <br> 아직도? <br> 이제 하지? <br>
+								</p>
+							</div>
+							<div class="check_container">
+								<button type="button" class="last_check">확인</button>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<li class="terms__box">
+						<div class="input__check">
+							<input type="checkbox" name="agreement" id="privacyPolicy" 
+								class="chk" required /> <label for="privacyPolicy"
+								class="required" id="label_font">개인정보 수집 및 이용에 대한 안내 <strong>(필수)</strong></label>
+						</div>
+				</li>
+				</td>
+				<td>
+					<button type="button" id="btn-modal2">약관 보기 >></button>
+					<div id="modal2" class="modal-overlay">
+						<div class="modal-window">
+							<div class="title">
+								<div class="close-area">X</div>
+								<p class="modal_title">개인정보 수집 및 이용에 대한 안내</p>
+							</div>
+							<div class="content">
+								<p class="modal_content">동의?</p>
+							</div>
+							<div class="check_container">
+								<button type="button" class="last_check">확인</button>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td></td>
+				<td>
+					<li class="terms__box">
+						<div class="input__check">
+							<input type="checkbox" name="m_marketing" id="allowPromotions"
+								class="chk"/> <label for="allowPromotions"
+								id="label_font">이벤트 정보 수신 동의 <b>(선택)</b>
+							</label>
+						</div>
+				</li>
+				</td>
+				</ul>
+			</tr>
+
+		</table>
+		<br />
+		<hr />
+		<br />
+		<div class="join_cancel">
+			<button type="submit" class="join_button" id="join_button" disabled>회원가입</button>
+			<a href="${pageContext.request.contextPath }/main" id="cancel_button">취소</a>
+		</div>
+		<br />
+		<br />
+			
+	</form>
+</body>
+</html>

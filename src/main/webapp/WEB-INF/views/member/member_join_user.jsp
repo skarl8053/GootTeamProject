@@ -19,7 +19,7 @@
 	<p class="join">회원가입</p>
 	<hr>
 	<br>
-	<form action="joining" onsubmit="listArrayInsert();">
+	<form action="joining" onsubmit="return insertBeforeCheck();">
 	<input type="hidden" name="all_tema" id="all_tema" value=""/>
 	<input type="hidden" name="all_area" id="all_area" value=""/>
 
@@ -28,7 +28,7 @@
 				<tr>
 					<td><label>이메일</label></td>
 					<td><input type="email" class="enter" name="m_email" id="m_email" 
-						placeholder="이메일을 입력해주세요."  required />
+						placeholder="이메일을 입력해주세요."  autocomplete="off"/>
 					</td>
 					<td><input type="button" class="certi" id="check_email" onclick="checking()" value="중복확인"></td>	
 				</tr>
@@ -41,7 +41,7 @@
 				<tr>
 					<td><label>비밀번호</label></td>
 					<td><input type="password" class="enter" name="m_pw" id="m_pw"
-						placeholder="비밀번호를 입력해주세요." required /> </td>
+						placeholder="비밀번호를 입력해주세요." /> </td>
 				</tr>
 				<tr>
 					<td><label style="display:none;"></label></td>
@@ -50,17 +50,17 @@
 				<tr>
 					<td><label>비밀번호확인</label></td>
 					<td><input type="password" class="enter" name="m_pw2" 
-						id="m_pw2" placeholder="비밀번호를 한번 더 입력해주세요." required /></td>
+						id="m_pw2" placeholder="비밀번호를 한번 더 입력해주세요." /></td>
 				</tr>
 				<tr>
 					<td><label>이름</label></td>
 					<td><input type="text" class="enter" name="m_name" 
-						placeholder="이름을 입력해주세요." required /></td>
+						placeholder="이름을 입력해주세요." autocomplete="off"/></td>
 				</tr>
 				<tr>
 					<td><label>휴대폰</label></td>
 					<td><input type="text" oninput="inputNumberOnly(this)" class="enter" name="m_tel" id="m_tel" 
-					maxlength="11"  placeholder="숫자만 입력해주세요." required /></td>
+					maxlength="11"  placeholder="숫자만 입력해주세요." autocomplete="off"/></td>
 				</tr>
 				<tr>
 					<td><label>주소</label></td>
@@ -79,7 +79,7 @@
 					<td><label></label></td>
 					<td><input type="text" class="add_enter" 
 						id="sample4_detailAddress" placeholder="상세주소"
-						name="m_detailAddress"> <input type="text"
+						name="m_detailAddress" autocomplete="off"> <input type="text"
 						class="add_enter" id="sample4_extraAddress" placeholder="참고항목" readonly autocomplete="off"></td>
 				</tr>
 			</table>
@@ -154,7 +154,7 @@
 						<li class="terms__box">
 							<div class="input__check">
 								<input type="checkbox" name="agreement" id="termsOfService"
-									class="chk"  required /> <label for="termsOfService" 
+									class="chk"  required/> <label for="termsOfService" 
 									class="required" id="label_font">이용약관 동의 <strong>(필수)</strong></label>
 							</div>
 						</li>
@@ -231,8 +231,7 @@
 		<hr />
 		<br />
 		<div class="join_cancel">
-			<button type="submit" class="join_button" id="join_button"
-				onclick="test()" disabled>회원가입</button>
+			<button type="submit" class="join_button" id="join_button" disabled>회원가입</button>
 			<a href="${pageContext.request.contextPath }/main" id="cancel_button">취소</a>
 		</div>
 		<br />

@@ -41,7 +41,7 @@
 	
 </head>
 
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 
 	<!-- 메세지 -->
 	<c:if test="${not empty msg}">
@@ -54,6 +54,13 @@
 	</c:if>
 	
 	<script>
+	
+		window.history.forward();
+		
+		function noBack(){
+			window.history.forward();
+		}
+	
 		$.datepicker.setDefaults({
 			dateFormat : 'yy년 mm월 dd일',
 			prevText : '이전 달',

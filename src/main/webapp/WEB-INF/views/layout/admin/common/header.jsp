@@ -23,12 +23,48 @@
 	
 	-->
 
+	<!-- 로그인 관련 내용 -->
+	<c:if test="${empty sessionScope.m_no}">
+			
+		<script>
+			alert("관리자로 로그인 후 이용할 수 있습니다.");
+			location.replace("/travel/member/login");
+		</script>
+		
+	</c:if>
+	
+	<c:if test="${not empty sessionScope.m_no}">
+			
+			<!-- 관리자 화면을 사용자 권한으로 로그인한 경우 -->
+			<c:if test="${sessionScope.m_sec eq 2}">
+				<script>
+					alert("해당 기능은 관리자로 로그인 후 이용할 수 있습니다.");
+					location.replace("/travel/member/logout");
+				</script>
+			</c:if>
+			
+	</c:if>
+	
+	
+	
     <script>
 	
 		function siteLocation(move_site){
             location.replace(move_site);
         }
 	
+		function logout(){
+			
+			var isConfirmed = confirm("로그아웃 하시겠습니까?");
+			
+			if(isConfirmed == false){
+				return false;
+			}
+			else{
+				location.replace("/travel/member/logout");
+			}
+			
+		}
 	</script>
 	
 	 <header>
@@ -44,11 +80,7 @@
                             </li>
                             <li>    
                                 <button class="inner_button" type="button" onclick="siteLocation('report');">신고 내역</button>
-                                <button class="inner_button" type="button" onclick="siteLocation('point');">포인트 내역</button>
-                            </li>
-                            <li>    
                                 <button class="inner_button" type="button" onclick="siteLocation('delivery');">배송 내역</button>
-                                <button class="inner_button" style="visibility: hidden;" type="button" >준비중</button>
                             </li>
                             <li>    
                                 <button class="inner_button" type="button" onclick="siteLocation('saleschart_year');">연 매출</button>
@@ -78,13 +110,13 @@
                             </li>
                         </ul>
                     </li>
-                    <c:if test="${empty sessionScope.m_no}">
-                    	<li class="menu-etc"><a style="padding-left: 20px" href="#">로그아웃</a></li>
-                    </c:if>
                     <c:if test="${not empty sessionScope.m_no}">
+                    	<li class="menu-etc"><a style="padding-left: 20px" href="javascript:logout();">로그아웃</a></li>
+                    </c:if>
+                    <%-- <c:if test="${empty sessionScope.m_no}">
                     	<li class="menu-etc" ><a style="padding-left: 20px" href="#">로그인</a></li>
                     	<li class="menu-etc"><a style="padding-left: 20px" href="#">회원가입</a></li>
-                    </c:if>
+                    </c:if> --%>
                 </ul>
             </div>
         </nav>

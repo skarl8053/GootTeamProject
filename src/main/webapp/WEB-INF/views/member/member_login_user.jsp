@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/user/login_user.css" />
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 </head>
-<body>
+<body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 	
 	<!-- 메세지 -->
 	<c:if test="${msg != ''}">
@@ -24,6 +24,13 @@
 	</c:if>
 	
 	<script>
+	
+			window.history.forward();
+			
+			function noBack(){
+				window.history.forward();
+			}
+	
 			$(document).ready(function(){
 			    $('.login-wrapper i').on('click',function(){
 			        $('input').toggleClass('active');
@@ -71,7 +78,7 @@
 				<a href="join" class="join">회원가입</a>
 		</div>
 		<div class="forget-wrapper">
-			<a href="find">이메일 찾기</a> / <a href="find">비밀번호 찾기</a>
+			<a href="/travel/main" style="color: red;">메인으로 이동</a> / <a href="find">이메일 찾기</a> / <a href="find">비밀번호 찾기</a>
 		</div>
 		<div class="coupon-event">
 			<span class="coupon-event">지금 가입하면 </span><span class="coupon-event" id="coupon-event" style="color: red; font-weight: bold;"> 10000원 쿠폰 </span><span class="coupon-event">즉시 지급!</span>
