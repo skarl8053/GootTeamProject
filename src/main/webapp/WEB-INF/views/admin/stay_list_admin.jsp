@@ -49,7 +49,7 @@
         }
 	    
 	    function openNewWindow(s_no) {
-	        const option = "width=600,height=720,left=500,top=120";
+	        const option = "width=800,height=800,left=500,top=120";
 	        const popupWindow = window.open("stay_list_room_confirm?s_no=" + s_no, "객실 리스트", option);
 	        
 	        // 팝업 창의 iframe 로드 이벤트에 함수 할당

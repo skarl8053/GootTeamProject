@@ -7,6 +7,7 @@
 	<meta charset="UTF-8">
 	<title>회원 구매 내역</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/purchase_list_admin.css"/>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 	<style>
         #content{
             height: auto;
@@ -38,29 +39,20 @@
             <span>
             	
                 <select id="searchType" name="searchType">
-                	<c:if test="${empty searchType || searchType eq 1}">
-	                    <option value="1" selected>전체</option>
-	                    <option value="2">이름으로 검색</option>
-	                    <option value="3">이메일로 검색</option>
-	                    <option value="4">주문번호로 검색</option>
+                    <c:if test="${searchType eq 1 || searchType eq null}">
+	                    <option value="1" selected>이름으로 검색</option>
+	                    <option value="2">이메일로 검색</option>
+	                    <option value="3">주문번호로 검색</option>
                     </c:if>
                     <c:if test="${searchType eq 2}">
-	                    <option value="1">전체</option>
-	                    <option value="2" selected>이름으로 검색</option>
-	                    <option value="3">이메일로 검색</option>
-	                    <option value="4">주문번호로 검색</option>
+	                    <option value="1">이름으로 검색</option>
+	                    <option value="2" selected>이메일로 검색</option>
+	                    <option value="3">주문번호로 검색</option>
                     </c:if>
                     <c:if test="${searchType eq 3}">
-	                    <option value="1">전체</option>
-	                    <option value="2">이름으로 검색</option>
-	                    <option value="3" selected>이메일로 검색</option>
-	                    <option value="4">주문번호로 검색</option>
-                    </c:if>
-                    <c:if test="${searchType eq 4}">
-	                    <option value="1">전체</option>
-	                    <option value="2">이름으로 검색</option>
-	                    <option value="3">이메일로 검색</option>
-	                    <option value="4" selected>주문번호로 검색</option>
+	                    <option value="1">이름으로 검색</option>
+	                    <option value="2">이메일로 검색</option>
+	                    <option value="3" selected>주문번호로 검색</option>
                     </c:if>
                 </select>
             </span>
@@ -69,9 +61,9 @@
 				        <c:when test="${empty keyword || keyword eq ''}">
 				            <input type="text" id="keyword" name="keyword" placeholder="검색할 내용을 입력해주세요">
 				        </c:when>
-				        <c:otherwise>
+				       <c:otherwise>
 				            <input type="text" id="keyword" name="keyword" autocomplete="off" value="${param.keyword}">
-				        </c:otherwise>
+				       </c:otherwise>
 				    </c:choose>
 				</span>
             <span>
@@ -91,6 +83,7 @@
             <td width="16%">다녀온 날짜</td>
         </tr>
         <c:forEach items="${p_list }" var="p_list">
+       	<input type="hidden" name="page" value="1" />
         	<tr>
 	        	<td>${p_list.order_no }</td>
 	            <td><img src="resources/upload_img/admin/stay/${p_list.s_img1 }" alt="이미지 없음" class="stay_image"/></td>
@@ -105,12 +98,26 @@
         </c:forEach>
     </table>
     
+    <c:if test="${vo.page>1}">
+    	<a href="purchase?page=1&searchType=${searchType }&keyword=${keyword}"><i class="fa-solid fa-angles-left"></i></a>
+    	<a href="purchase?page=${vo.page-1 }&searchType=${searchType }&keyword=${keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
+    </c:if>
+
+	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
+		<c:choose>
+			<c:when test="${i ne page}">
+				<a href="purchase?page=${i}&searchType=${searchType }&keyword=${keyword}">${i}</a>
+			</c:when>
+			<c:otherwise>
+				<span>${i}</span>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+
+	<c:if test="${vo.page < vo.totPage }">
+    	<a href="purchase?page=${vo.page+1 }&searchType=${searchType }&keyword=${keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
+    	<a href="purchase?page=${vo.totPage }&searchType=${searchType }&keyword=${keyword}"><i class="fa-solid fa-angles-right"></i></a>
+    </c:if>
     
-    
-    <input type="button" value="<">
-    <a href="p_list?page=1">1</a>
-    <a href="p_list?page=2">2</a>
-    <a href="p_list?page=3">3</a>
-    <input type="button" value=">">
 </body>
 </html>

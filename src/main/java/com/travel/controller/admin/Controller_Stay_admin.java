@@ -172,10 +172,11 @@ public class Controller_Stay_admin {
 
 	// 숙소 리스트에서 삭제 버튼 클릭시 그 숙소에 있는 객실 삭제하기
 	@RequestMapping(value = "/stay_list_room_confirm")
-	public String stay_list_room_confirm(HttpServletRequest request, Model model) {
+	public String stay_list_room_confirm(HttpServletRequest request, Model model, SearchVO searchVO) {
 
 		System.out.println("stay_list_confirm_Controller 신호");
 		model.addAttribute("request", request);
+		model.addAttribute("searchVO", searchVO);
 
 		service = new Service_Stay_list_room_confirm_admin(sqlSession);
 		service.execute(model);

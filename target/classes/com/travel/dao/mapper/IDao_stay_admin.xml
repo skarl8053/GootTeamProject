@@ -173,14 +173,6 @@
 					R_FACILITY6 = #{StayRoomData[15]}
 		    WHERE S_NO = #{s_no}
 		</update>
-
-		
-		<!-- <update id="Modify" parameterType="java.util.List">
-		    UPDATE TMSTSTAY
-		    SET S_NAME = #{StayData[0]}
-		    WHERE S_NO = #{s_no}
-		</update> -->
-
 		
 		<select  id="stay_list_confirm_admin" resultType="com.travel.dto.admin.DTO_Stay_admin">
 			SELECT *
@@ -207,10 +199,22 @@
 		</select>
 		
 		<select  id="room_list" resultType="com.travel.dto.admin.DTO_Stay_room_admin">
-			SELECT B.S_NO,B.R_NAME,B.R_IMG1,B.R_NO
-			FROM TMSTSTAY A
-			LEFT JOIN TMSTROOM B ON A.S_NO = B.S_NO
-			WHERE B.S_NO=#{param1}
+			SELECT * 
+			FROM (
+			    SELECT ROWNUM AS NUM, B.S_NO, B.R_NAME, B.R_IMG1, B.R_NO
+			    FROM (
+			        SELECT A.S_NO, A.S_NAME, B.R_NAME, B.R_IMG1, B.R_NO
+			        FROM TMSTSTAY A
+			        LEFT JOIN TMSTROOM B ON A.S_NO = B.S_NO
+			        WHERE B.S_NO = #{param3}
+			        ORDER BY A.S_NO DESC
+			    ) B
+			)
+			WHERE NUM BETWEEN #{param1} AND #{param2}
+		</select>
+		
+		<select id="room_list_pageCalculate" resultType="Integer">
+			SELECT COUNT(*) FROM TMSTROOM WHERE S_NO=#{param1}
 		</select>
 		
 	</mapper>

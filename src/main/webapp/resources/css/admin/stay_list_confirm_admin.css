@@ -1,0 +1,49 @@
+/* 
+
+	신재환
+	
+	- 객실 등록 시 숙소명 클릭 팝업 창 CSS
+	
+ */
+
+ /* 화면 디자인 */
+@font-face { 
+    font-family: 'GmarketSansMedium'; 
+    src:url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff'); 
+    font-weight: normal; 
+    font-style: normal; 
+} 
+
+*{
+    text-align: center;
+    font-family: 'GmarketSansMedium';
+    font-weight : medium;
+}
+
+table {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    text-align: center;
+    margin-left: auto; 
+    margin-right: auto;
+    border-collapse : collapse;
+}
+
+table, td, th {
+    border : 1px solid black;
+    padding: 10px;
+}
+
+.btn, #search {
+	width : 50px;
+	height : 40px;
+	background-color: rgb(1, 19, 67);
+	color : rgb(235, 208, 28);
+	font-size : 16px;
+	padding :5px;
+}
+
+.location, .type {
+    width: 200px;
+    font-size: 16px;
+}
