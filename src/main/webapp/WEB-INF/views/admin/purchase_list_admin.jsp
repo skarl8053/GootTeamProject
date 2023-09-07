@@ -137,7 +137,7 @@
     		<span>
     			<c:choose>
 					<c:when test="${empty keyword || keyword eq ''}">
-						<input type="text" id="keyword" name="keyword" placeholder="검색할 내용을 입력해주세요">
+						<input type="text" id="keyword" name="keyword" placeholder="검색할 내용을 입력해주세요" autocomplete="off">
 					</c:when>
 					<c:otherwise>
 						<input type="text" id="keyword" name="keyword" autocomplete="off" value="${param.keyword}">

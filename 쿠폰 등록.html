@@ -7,41 +7,24 @@
 <meta charset="UTF-8">
 	<title>쿠폰등록</title>
 	<style>
-		@font-face {
-				    font-family: 'GmarketSansMedium';
-				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-				    font-weight: normal;
-				    font-style: normal;
-		}
-		
-		*{
-			font-family: 'GmarketSansMedium';
-		}
+
         #form{
             width: 1200px;
         }
         table{
             border-collapse: collapse;
             width: 1200px; 
-            font-size: 20px;
         }
         tr{
             height: 50px;
         }
         #coupon_no, #coupon_detail, #coupon_qty{
             padding: 5px 5px;
-            width: 98%;
+            width: 100%;
             border-style: none;
         }
         .first_col{
             text-align: center;
-        }
-        .pointer{
-        	color: red;
-        	font-weight: bold;
-        }
-        .coupon_flag{
-        	padding: 5px 10px;
         }
         .button{
             background-color: #011343;
@@ -50,6 +33,7 @@
 			width: 100px;
 			height: 32px;
 			cursor: pointer;
+            font-weight: bolder;
         }
 	</style>
 </head>
@@ -58,24 +42,24 @@
 	<!-- serviece 단의 gubun 을 가져와서 뿌림 -->
 	
 	<!-- 쿠폰이 등록되었을 때 -->
-	<c:if test="${param.gubun eq 1}">
+	<!-- <c:if test="${param.gubun eq 1}">
 		<script>
 			alert("${param.msg}");
 			location.replace("couponlist");
 		</script>
-	</c:if>
+	</c:if> -->
 	<!-- 등록하려는 쿠폰이 중복일 때 -->
-	<c:if test="${param.gubun eq 2}">
+	<!-- <c:if test="${param.gubun eq 2}">
 		<script>
 			alert("${param.msg}");
 		</script>
-	</c:if>
+	</c:if> -->
 	<!-- 쿠폰 가격이 입력되지 않았을 때 -->
-	<c:if test="${param.gubun eq 3}">
+	<!-- <c:if test="${param.gubun eq 3}">
 		<script>
 			alert("${param.msg}");
 		</script>
-	</c:if>
+	</c:if> -->
 	
 	
 	
@@ -111,6 +95,7 @@
 			
 			if(target.value == ""){
 				alert("쿠폰 수량을 입력해주세요");
+				
 				return false;
 			}
 			
@@ -137,15 +122,15 @@
 	
 	</script>
 	
-	<h1>쿠폰 정보 등록</h1>
-	<br />
+	<h1>쿠폰 등록</h1>
+
 	<form action="couponinsert" method="post" onsubmit="return insertCheck();">
 		<input type="hidden" name="" />
 		
         <div id="form">
             <table width="500" border="1">
                 <tr>
-                    <td class="first_col">쿠폰 가격 <span class="pointer">*</span></td> 
+                    <td class="first_col">쿠폰 가격</td>
                     <c:if test="${empty param.gubun}">
                         <td><input type="text" id="coupon_no" name="coupon_no" onchange="return coupon_number_change(this)" autocomplete="off"/></td>
                     </c:if>
@@ -154,7 +139,7 @@
                     </c:if>
                 </tr>
                 <tr>
-                    <td class="first_col">쿠폰 내용 <span class="pointer">*</span></td>
+                    <td class="first_col">쿠폰 내용</td>
                     <c:if test="${empty param.gubun}">
                         <td><input type="text" id="coupon_detail" name="coupon_detail" size="50" autocomplete="off"/></td>
                     </c:if>
@@ -173,12 +158,12 @@
                         </c:if>
                         <c:if test="${param.gubun eq 2}">
                             <c:if test="${param.coupon_flag eq 'Y' }">
-                                <input type="radio" class="coupon_flag" name="coupon_flag" value="Y" checked/>Y
-                                <input type="radio" class="coupon_flag"  name="coupon_flag" value="N"/>N
+                                <input type="radio" name="coupon_flag" value="Y" checked/>Y
+                                <input type="radio" name="coupon_flag" value="N"/>N
                             </c:if>
                             <c:if test="${param.coupon_flag eq 'N' }">
-                                <input type="radio" class="coupon_flag"  name="coupon_flag" value="Y"/>Y
-                                <input type="radio" class="coupon_flag"  name="coupon_flag" value="N" checked/>N
+                                <input type="radio" name="coupon_flag" value="Y"/>Y
+                                <input type="radio" name="coupon_flag" value="N" checked/>N
                             </c:if>
                         </c:if>
                     </td>
@@ -195,9 +180,9 @@
                     </td>
                 </tr>
             </table>
-            <br><br />
+            <br>
             <input type="submit" class="button" value="쿠폰등록"></span>
-            <input type="button" class="button" value="뒤로가기" onclick="location.replace('coupon')">  
+            <input type="button" class="button" value="쿠폰목록" onclick="location.replace('coupon')">  
         </div>
 	</form>
 </body>

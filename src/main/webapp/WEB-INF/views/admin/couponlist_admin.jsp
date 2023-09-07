@@ -20,14 +20,16 @@
 	
 	<style>
         
-		/* 
+		@font-face {
+				    font-family: 'GmarketSansMedium';
+				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+				    font-weight: normal;
+				    font-style: normal;
+		}
 		
-			이름 : 남기문
-			작업 : 이벤트 조회
-			
-		 */
-		
-		 /* 화면 디자인 */
+		*{
+			font-family: 'GmarketSansMedium';
+		}
 		
 		 .searchbox{
 		     width: 150px;
@@ -38,9 +40,8 @@
 		     height: 29px;
 		 }
 		 .button{
-		     background-color: blue;
-		     color: white;
-		     font-weight: bold;
+		     background-color:  #011343;
+		     color: #EBD01C;
 		     border-radius: 3px;
 		     width: 100px;
 		     height: 32px;
@@ -87,23 +88,13 @@
 	            else $("#header_checkbox").prop("checked", true); 
 	        });
 	    });	
-    
-        function searchExecute(){
-
-            var keyword = document.getElementById("keyword").value;
-            
-            // 검색 결과 조회
-            location.replace("couponlist?page=1&keyword="+ keyword);
-            
-        }
-        
+    	
         function couponInsertView()
         {
         	// 쿠폰 등록 화면 이동
         	location.replace("couponinsertview");
         	  
         }
-        
         
         function couponDelete()
         {
@@ -162,7 +153,7 @@
     <!-- 메인 -->
     <h1>쿠폰 관리</h1>
 
-    <form action="couponlist">
+    <form action="coupon">
     
     	<input type="hidden" name="page" value="1" />
     	
@@ -177,7 +168,7 @@
             	</c:if>
     		</span>
     		<span>
-    			<input type="submit" class="button" value="검색" onclick="searchExecute();">
+    			<input type="submit" class="button" value="검색">
     		</span>
     	</div>
     	<br><br>

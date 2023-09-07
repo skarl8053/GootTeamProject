@@ -30,14 +30,14 @@ public class Controller_Coupon_admin {
 		model.addAttribute("request", request);
 		travelservice.execute(model);
 		
-		return "couponlist_admin";
+		return "admin/couponlist_admin";
 
 	}
 	
 	@RequestMapping("couponinsertview")
 	public String couponinsert() {
 		
-		return "couponinsertview_admin";
+		return "admin/couponinsertview_admin";
 	}
 	
 	@RequestMapping(method = RequestMethod.POST, value = "couponinsert")
