@@ -19,28 +19,38 @@
 	</style>
 	
 	
-	<%-- <link rel="stylesheet"
-		href="${pageContext.request.contextPath}/resources/layout/main_css/search.css"> --%>
-	<link rel="stylesheet" href="datepicker.css">
-	<script src="${pageContext.request.contextPath}/resources/layout/main_js/search.js"></script>
-	<!-- datepicker -->
-	<script src="datepicker.js"></script>
-	<link rel="stylesheet"
-		href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-	<link rel="stylesheet" href="/resources/demos/style.css">
-	<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/layout/main_css/slide-css/slick.css" />
-	<link rel="stylesheet" type="text/css"
-		href="${pageContext.request.contextPath}/resources/layout/main_css/slide-css/slick-theme.css" />
-	<link rel="stylesheet"
-		href="${pageContext.request.contextPath}/resources/layout/main_css/slide-css/slick-main.css">
-	<script src="${pageContext.request.contextPath}/resources/layout/main_js/slide-js/slick.js"></script>
-	<script src="${pageContext.request.contextPath}/resources/layout/main_js/slide-js/slick-main.js"></script>
+		<%-- <link rel="stylesheet"
+			href="${pageContext.request.contextPath}/resources/layout/main_css/search.css"> --%>
+		<link rel="stylesheet" href="datepicker.css">
+		<script src="${pageContext.request.contextPath}/resources/layout/main_js/search.js"></script>
+		
+		<!-- datepicker -->
+		<script src="datepicker.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+		<link rel="stylesheet" href="/resources/demos/style.css">
+		<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<link rel="stylesheet" type="text/css"
+			href="${pageContext.request.contextPath}/resources/layout/main_css/slide-css/slick.css" />
+		<link rel="stylesheet" type="text/css"
+			href="${pageContext.request.contextPath}/resources/layout/main_css/slide-css/slick-theme.css" />
+		<link rel="stylesheet"
+			href="${pageContext.request.contextPath}/resources/layout/main_css/slide-css/slick-main.css">
+		<script src="${pageContext.request.contextPath}/resources/layout/main_js/slide-js/slick.js"></script>
+		<script src="${pageContext.request.contextPath}/resources/layout/main_js/slide-js/slick-main.js"></script>
 	
 	<style>
-	
+		
+		@font-face {
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
+		}
+		
+		*{
+			font-family: 'GmarketSansMedium';
+		}
 		.title-left{
 			text-align: left;
 		}
@@ -63,50 +73,18 @@
 		    width: 800px; 
 		}
 		
-		button {
+		#datepicker1, #datepicker2{
+			text-align: center;
+			width: 200px;
+		}
+		
+		/* button {
 		    background-color: #007bff;
 		    color: #fff;
 		    border: none;
 		    cursor: pointer;
 		    padding: 10px 20px;
-		}
-		
-		.search_button {
-		    border-radius: 10px;
-		    padding: 10px 50px;
-		    border-radius: 10px;
-		    font-size: 14px;
-		}
-		
-		.search-box #search_field {
-			display: flex;
-		    margin: 5px auto;
-		}
-		
-		.search-box input[type="text"]{
-		    /* width: 200px; */
-		    border-style: none;
-		    text-align: left;
-		    font-size: 18px;
-		}
-		
-		.search-box input[type="text"],
-		.search-box input[type="date"],
-		.search-box select {
-		    margin: 5px;
-		    padding: 10px;
-		    /* display: flex; */
-		}
-		
-		.person {
-		    margin: 5px;
-		}
-		
-		.search-box input[type="date"],
-		.search-box .person {
-		    /* flex-wrap: wrap; */
-		}
-		
+		} */
 		/* 드롭다운 버튼 스타일 */
 		.dropdown-btn {
 		    /* background-color: #fff; */
@@ -114,10 +92,11 @@
 		    background-color: #fff;
 		    border: 1px solid grey;
 		    cursor: pointer;
-		    padding: 10px 30px;
 		    border-radius: 10px;
 		    font-size: 14px;
-		    text-align: left;
+		    width: 120px;
+		    height: 40px;
+		    text-align: center;
 		}
 		
 		/* 드롭다운 콘텐츠 스타일 - 기본적으로 숨김 */
@@ -149,6 +128,47 @@
 		    flex-direction: column;
 		    align-items: flex-start;
 		}
+		
+		.search_button {
+		    border-radius: 10px;
+		    padding: 0 30px;
+		    font-size: 14px;
+		    width: 120px;
+		    height: 40px;
+		    cursor: pointer;
+		    background-color:  #011343;
+		    color: #EBD01C;
+		}
+		
+		.search-box #search_field {
+			display: flex;
+		    margin: 5px auto;
+		}
+		
+		.search-box input[type="text"]{
+		    /* width: 200px; */
+		    border-style: none;
+		    text-align: left;
+		    font-size: 18px;
+		}
+		
+		.search-box input[type="text"],
+		.search-box input[type="date"],
+		.search-box select {
+		    margin: 5px;
+		    padding: 10px;
+		    /* display: flex; */
+		}
+		
+		.person {
+		    margin: 5px;
+		}
+		
+		.search-box input[type="date"],
+		.search-box .person {
+		    /* flex-wrap: wrap; */
+		}
+		
 		
 		.dropdown-content button {
 		    padding: 10px;
@@ -218,6 +238,9 @@
 
 <body onload="noBack();" onpageshow="if(event.persisted) noBack();" onunload="">
 
+	<!-- 남기문 - 숙소 디자인 전체적으로 수정 -->
+	<!-- 신재환 - 이벤트 및 숙소 슬라이드 디자인 / 링크 적용 -->
+
 	<!-- 메세지 -->
 	<c:if test="${not empty msg}">
 			
@@ -230,6 +253,7 @@
 	
 	<script>
 	
+		// 남기문 / 뒤로가기 막기
 		window.history.forward();
 		
 		function noBack(){
@@ -272,24 +296,52 @@
 						});
 			});
 		
-		$.datepicker.setDefaults({
-			dateFormat : 'yy년 mm월 dd일',
-			prevText : '이전 달',
-			nextText : '다음 달',
-			monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월',
-					'10월', '11월', '12월' ],
-			monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월',
-					'9월', '10월', '11월', '12월' ],
-			dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
-			dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
-			dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
-			showMonthAfterYear : true,
-			yearSuffix : '년'
-		});
-	
 		//	웹 페이지가 완전히 로드된 후에 다음 작업을 수행
 		$(function() {
-			$("#datepicker1").datepicker();
+			
+		
+			$('#datepicker1').datepicker({
+	            dateFormat: "yy-mm-dd",                     					// 날짜의 형식
+	            changeMonth: true,                          					// 월을 이동하기 위한 선택상자 표시여부
+	            minDate: 1,                           						// 선택할수있는 최소날짜, ( 0 : 오늘 이전 날짜 선택 불가)
+	            onClose: function( selectedDate ) { 
+	            	
+	                // 시작일(fromDate) datepicker가 닫힐때
+	                // 종료일(toDate)의 선택할수있는 최소 날짜(minDate)를 선택한 시작일로 지정
+	                $("#datepicker2").datepicker( "option", "minDate", selectedDate );
+	                
+	            }
+			});
+			
+	        $('#datepicker2').datepicker({
+	            dateFormat: "yy-mm-dd",
+	            changeMonth: true,
+	            minDate: 1, 
+	            onClose: function( selectedDate ) {
+	            	
+	                // 종료일(toDate) datepicker가 닫힐때
+	                // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
+	                $("#datepicker1").datepicker( "option", "maxDate", selectedDate );
+	                
+	            }                
+	        });
+			
+	        $.datepicker.setDefaults({
+				dateFormat : 'yy-mm-dd',
+				prevText : '이전 달',
+				nextText : '다음 달',
+				monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월',
+						'10월', '11월', '12월' ],
+				monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월',
+						'9월', '10월', '11월', '12월' ],
+				dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
+				dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
+				dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+				showMonthAfterYear : true,
+				yearSuffix : '년'
+			});
+			
+			
 			// 조회기간
 			$("#datepicker1,#datepicker2").datepicker();
 		});
@@ -319,7 +371,10 @@
 				return false;
 			}
 			
-			// 숙소 페이지로 이동
+			// 숙소 페이지로 이동(입력할 것!!)
+			
+			
+			
 			
 		}
 	
@@ -354,11 +409,16 @@
 		</div>
 		<br /><br />
 		<div class="date-guest-search">
-			<input type="text" id="datepicker1" placeholder="체크인"> <input
-				type="text" id="datepicker2" placeholder="체크아웃">
+			<div>
+				<input type="text" id="datepicker1" placeholder="체크인">
+				<span> ~ </span> 
+				<input type="text" id="datepicker2" placeholder="체크아웃">
+			</div>
 			<div class="dropdown">
-				<button class="dropdown-btn">인원 수</button>
-				<button class="search_button" onclick="return searchStay();">검색</button>
+				<div>
+					<span><button class="dropdown-btn">인원 수</button></span>
+					<span><button class="search_button" onclick="return searchStay();">검색</button></span>
+				</div>
 				<div class="dropdown-content">
 					<div class="person">
 						<div class="button-container">
@@ -378,12 +438,32 @@
 	<div class="event-slide">
 		<div class="regular slider"></div>
 	</div>
-	<!-- 핫딜 슬라이드 -->
-	<h2 class="title-left">${ sessionScope.m_name } 님에게 추천하는 숙소</h2>
-	<div class="hot-deal">
-		<div class="hdeal slider"></div>
-	</div>
-	<br />
+	
+	<c:if test="${empty sessionScope.m_no}">
+		
+		<!-- 회원가입 로그인이 완료된 경우 해당 사람의 테마, 선호지역 정보를 가져와 보여준다. -->
+		<!-- 추천 숙소 슬라이드 -->
+		<h2 class="title-left">최근 등록된 숙소</h2>
+		<div class="hot-deal">
+			<div class="hdeal slider"></div>
+		</div>
+		<br />
+		
+	</c:if>
+	
+	<c:if test="${not empty sessionScope.m_no}">
+		
+		<!-- 회원가입 로그인이 완료된 경우 해당 사람의 테마, 선호지역 정보를 가져와 보여준다. -->
+		<!-- 추천 숙소 슬라이드 -->
+		<h2 class="title-left">${ sessionScope.m_name } 님에게 추천하는 숙소</h2>
+		<div class="hot-deal">
+			<div class="hdeal slider"></div>
+		</div>
+		<br />
+		
+	</c:if>
+	
+	
 	
 </body>
 </html>

@@ -25,7 +25,124 @@
 </head>
 <body>
     
-    <h1>신고 내역 조회</h1>
+    <style>
+    	
+		/* 
+		
+			이름 : 남기문
+			작업 : 신고관리 내역 조회
+			
+		 */
+		
+		 /* 화면 디자인 */
+		
+		@font-face {
+				    font-family: 'GmarketSansMedium';
+				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+				    font-weight: normal;
+				    font-style: normal;
+		}
+		
+		*{
+			font-family: 'GmarketSansMedium';
+		}
+		
+		 .searchbox{
+		     width: 150px;
+		     height: 30px;
+		 }
+		 #keyword{
+		     width: 200px;
+		     height: 29px;
+		 }
+		 .button{
+		     background-color: #011343;
+		     color: #EBD01C;
+		     font-weight: bold;
+		     border-radius: 3px;
+		     width: 100px;
+		     height: 32px;
+		 }
+		 .button:hover{
+		 	cursor: pointer;
+		 }
+		 table{
+		     text-align: center;
+		     width: 1200px;
+		 }
+		 table thead tr td{
+		     border-bottom: 1px solid black;
+		 }
+		#paging{
+			width: 1200px;
+			text-align: center;
+			
+		}
+		
+		 /* 스위치 디자인 */
+		
+		 .wrapper {
+			 width: 50px;
+			 height: 50px;
+			 text-align: center;
+			 margin: 50px auto;
+		 }
+		
+		 #switch {
+			 position: absolute;
+			 /* hidden */
+			 appearance: none;
+			 -webkit-appearance: none;
+			 -moz-appearance: none;
+		 }
+		
+		 .switch_label {
+			 position: relative;
+			 cursor: pointer;
+			 display: inline-block;
+			 width: 58px;
+			 height: 28px;
+			 background: #fff;
+			 border: 2px solid #daa;
+			 border-radius: 20px;
+			 transition: 0.2s;
+		 }
+		 .switch_label:hover {
+		 	background: #efefef;
+		 }
+		 .onf_btn {
+			 position: absolute;
+			 top: 4px;
+			 left: 3px;
+			 display: inline-block;
+			 width: 20px;
+			 height: 20px;
+			 border-radius: 20px;
+			 background: #daa;
+			 transition: 0.2s;
+		 }
+		
+		 /* checking style */
+		 #switch:checked+.switch_label {
+			 background: #c44;
+			 border: 2px solid #c44;
+		 }
+		
+		 #switch:checked+.switch_label:hover {
+		 	background: #e55;
+		 }
+		
+		 /* move */
+		 #switch:checked+.switch_label .onf_btn {
+			 left: 34px;
+			 background-color: #fff;
+			 box-shadow: 1px 2px 3px #00000020;
+		 }
+ 
+    	
+    </style>
+    
+    <h1>신고 내역 조회 / 설정 변경</h1>
     
     
     <script>

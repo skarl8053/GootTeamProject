@@ -50,9 +50,9 @@ $(function() {
 				+ imgFiles2[i] + '" /></a>';
 
 	// <div class="hdeal slider"> 태그 내부에 printImgTag2(html 태그) 삽입
-	$("div.hdeal").addClass("slider").html(printImgTag2);
+	$("div.stayinfo").addClass("slider").html(printImgTag2);
 
-	$(".hdeal").slick({
+	$(".stayinfo").slick({
 		dots : true /* 페이지 네비게이션(이미지 하단의 ...) */,
 		infinite : true /* 페이지 반복 설정 */,
 		slidesToShow : 1 /* 보여질 이미지 슬라이드 수 */,

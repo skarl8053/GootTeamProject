@@ -33,11 +33,11 @@
         #form{
             width: 1200px;
         }
-        ul{
+        #form{
             list-style: none;
             padding-left: 0;
         }
-        li{
+        #form li{
             float: left;
             padding-right: 20px;
         }
@@ -112,7 +112,7 @@
             font-size: 20px;
             outline: 3px solid red;
         }
-        button{
+        .button{
             background-color: blue;
             color: white;
             font-weight: bold;
@@ -611,7 +611,7 @@
             <input type="hidden" id="paymethod" name="paymethod" value="1" />
 
             <div>
-                <ul>
+                <ul id="form">
                     <li id="main_first_col">
                         <div id="delivery_info">
                             <div>
@@ -658,7 +658,7 @@
 	                                    </tr>
 	                                    <tr>
 	                                    	<td colspan="3" style="text-align: right; padding: 10px 10px;">
-	                                    		<button onclick="return resvDate_click('${param.m_no}','${param.s_no}','${param.r_no}');">예약일자 확정</button>
+	                                    		<button type="button"  class="button"  onclick="return resvDate_click('${param.m_no}','${param.s_no}','${param.r_no}');">예약일자 확정</button>
 	                                    	</td>
 	                                    </tr>
                                 	</c:if>
@@ -701,8 +701,8 @@
 	                            <hr><br>
 	                            <div>
 	                                 <span>쿠폰 할인</span>
-	                                 <button type="button" id="coupon_use" onclick="coupon_popup_open('${param.m_no}');">쿠폰 적용</button>
-	                                 <button type="button" id="coupon_cancel" onclick="return coupon_cancel_exec();">쿠폰 삭제</button>
+	                                 <button type="button" class="button" id="coupon_use" onclick="coupon_popup_open('${param.m_no}');">쿠폰 적용</button>
+	                                 <button type="button" class="button" id="coupon_cancel" onclick="return coupon_cancel_exec();">쿠폰 삭제</button>
 	                            </div>
 	                            <div>
 	                                <span>&nbsp;&nbsp;&nbsp;└ 즉시 할인</span>
@@ -712,7 +712,7 @@
 	                            <div>
 	                                <span>포인트</span>
 	                                <span><input type="text" id="use_point" name="totalUsePoint" value="0"  autocomplete="off"></span><span>원</span>
-	                                <span><button type="button" onclick="return useAllPoint();">전액 사용</button></span>
+	                                <span><button type="button" class="button" onclick="return useAllPoint();">전액 사용</button></span>
 	                                &nbsp;&nbsp;<span id="currentAllPoint">${resvList.m_point}</span> 포인트 사용 가능 
 	                            </div>
                           	</div>  

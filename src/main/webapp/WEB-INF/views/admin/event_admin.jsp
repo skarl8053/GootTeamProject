@@ -27,8 +27,17 @@
 			
 		 */
 		
-		 /* 화면 디자인 */
+		/* 화면 디자인 */
+		@font-face {
+				    font-family: 'GmarketSansMedium';
+				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+				    font-weight: normal;
+				    font-style: normal;
+		}
 		
+		*{
+			font-family: 'GmarketSansMedium';
+		}
 		 .searchbox{
 		     width: 150px;
 		     height: 30px;
@@ -38,9 +47,8 @@
 		     height: 29px;
 		 }
 		 .button{
-		     background-color: blue;
-		     color: white;
-		     font-weight: bold;
+		     background-color: #011343;
+		     color: #EBD01C;
 		     border-radius: 3px;
 		     width: 100px;
 		     height: 32px;
@@ -66,6 +74,9 @@
 		}
         .winner_button{
            width: 98%; 
+           background-color: #011343;
+		   color: #EBD01C;
+		   cursor: pointer;
         }
 
     </style>

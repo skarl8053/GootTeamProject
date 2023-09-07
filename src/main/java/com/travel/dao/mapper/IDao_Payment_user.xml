@@ -9,7 +9,7 @@
 	
 			SELECT 	M_NO
 						,M_NAME
-						,M_ADDRESS
+						,M_ROADADDRESS || ' ' || M_DETAILADDRESS AS M_ADDRESS
 						,LPAD(M_TEL,3) || '-' || SUBSTR(M_TEL, 4,4) || '-' || SUBSTR(M_TEL, 8, 4) AS M_TEL
 						,NVL(M_POINT,0) AS M_POINT
 			FROM 	TMSTMEMBER

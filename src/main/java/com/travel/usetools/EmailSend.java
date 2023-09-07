@@ -13,10 +13,6 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import org.apache.ibatis.session.SqlSession;
-
-import com.travel.service.user.Member_FindPw_Service;
-
 public class EmailSend extends Authenticator{
 	
 	private String toEmail;

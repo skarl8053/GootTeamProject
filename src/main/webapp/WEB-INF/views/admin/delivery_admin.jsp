@@ -25,10 +25,20 @@
 		 */
 		
 		 /* 화면 디자인 */
+		@font-face {
+				    font-family: 'GmarketSansMedium';
+				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+				    font-weight: normal;
+				    font-style: normal;
+		}
 		
-		/* #form{
+		*{
+			font-family: 'GmarketSansMedium';
+		}
+		
+		#form{
 			width: 1200px;
-		} */
+		}
         .searchbox{
             width: 150px;
             height: 30px;
@@ -72,7 +82,7 @@
 		}
 		.statusbutton{
 			background-color: #011343;
-            color: yellow;
+            color:  #EBD01C;
 			font-size: 20px;
             font-weight: bold;
             border-radius: 3px;
@@ -95,7 +105,7 @@
 		}
 		.button{
             background-color: #011343;
-            color: yellow;
+            color:  #EBD01C;
             font-weight: bold;
             border-radius: 3px;
             width: 100px;
@@ -237,7 +247,7 @@
 
 
    	<!-- 메인 -->
-    <h1>배송 관리</h1>
+    <h1>배송 내역 조회 / 상태 변경</h1>
 
 	<div id="form">
 		<form action="delivery" onsubmit="return searchCheckDelivery();">

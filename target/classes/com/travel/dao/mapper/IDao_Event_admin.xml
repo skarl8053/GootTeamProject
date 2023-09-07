@@ -248,7 +248,7 @@
 						,A.EVENT_NO
 						,B.ITEM_NO
 						,C.M_NO
-						,C.M_ADDRESS
+						,C.M_ROADADDRESS || ' ' || C.M_DETAILADDRESS AS M_ADDRESS
 						,1
 						,SYSDATE
 						,NULL
@@ -264,7 +264,7 @@
 						,A.EVENT_NO
 						,B.ITEM_NO
 						,C.M_NO
-						,C.M_ADDRESS
+						,C.M_ROADADDRESS || ' ' || C.M_DETAILADDRESS AS M_ADDRESS
 						,1
 						,SYSDATE
 						,NULL
@@ -280,7 +280,7 @@
 						,A.EVENT_NO
 						,B.ITEM_NO
 						,C.M_NO
-						,C.M_ADDRESS
+						,C.M_ROADADDRESS || ' ' || C.M_DETAILADDRESS AS M_ADDRESS
 						,1
 						,SYSDATE
 						,NULL

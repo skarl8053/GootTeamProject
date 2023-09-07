@@ -59,11 +59,11 @@ public class Service_Payment_Service implements Interface_TravelService {
 		if(checkin_date == null || checkout_date == null) {
 			
 			// 파라미터에 체크인 / 체크아웃 날짜가 없는 경우
-			mp.put("stay_no", s_no);
-			mp.put("room_no", r_no);
-			
-			roomList = dao.getRoomList_NotExistsDate(mp);
-			sumPrice = dao.getSumPrice_NotExistsDate(mp);
+//			mp.put("stay_no", s_no);
+//			mp.put("room_no", r_no);
+//			
+//			roomList = dao.getRoomList_NotExistsDate(mp);
+//			sumPrice = dao.getSumPrice_NotExistsDate(mp);
 			
 			// diffDay는 1로 처리
 		}
