@@ -73,7 +73,10 @@
 }
 
 .slick-slide img {
-	display: block;
+	/* display: block; */
+	width: 400px;
+	height: 300px;
+
 }
 
 .slick-slide.slick-loading img {
