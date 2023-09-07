@@ -40,9 +40,8 @@
         }
 
         button, #submit{
-            background-color: blue;
-            color: white;
-            font-weight: bold;
+            background-color: #011343;
+            color: #EBD01C;
             border-radius: 3px;
             width: 100px;
             height: 32px;

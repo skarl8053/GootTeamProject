@@ -59,8 +59,8 @@
         }
 
         #updatebutton, #deletebutton, #backbutton{
-            background-color: blue;
-            color: white;
+            background-color: #011343;
+            color: #EBD01C;
             font-weight: bold;
             border-radius: 3px;
             width: 100px;
@@ -83,9 +83,9 @@
             margin: 5px 0;
             display: inline-block;
             padding: 10px 20px;
-            color: #fff;
+            background-color: #011343;
+            color: #EBD01C;
             vertical-align: middle;
-            background-color: #999999;
             cursor: pointer;
             height: 20px;
         }
@@ -421,9 +421,12 @@
 				</tr>
 			</table>
 			<br><br>
-            <input type="submit" id="updatebutton" value="이벤트 변경">
-            <input type="button" id="deletebutton" value="이벤트 삭제" onclick="eventdelete('${param.event_no}');">
-            <input type="button" id="backbutton" value="뒤로가기" onclick="location.replace('event')">
+			<div>
+				<input type="submit" id="updatebutton" value="이벤트 변경">
+	            <input type="button" id="deletebutton" value="이벤트 삭제" onclick="eventdelete('${param.event_no}');">
+	            <input type="button" id="backbutton" value="뒤로가기" onclick="location.replace('event')">
+			</div>
+            
         </form>
     </div>
 	

@@ -228,10 +228,10 @@
     		<span>
     		
     			<c:if test="${empty keyword || keyword eq ''}">
-            		<input type="text" id="keyword" name="keyword" placeholder="검색할 이벤트 이름을 입력해주세요">
+            		<input type="text" id="keyword" name="keyword" placeholder="검색할 이벤트 이름을 입력해주세요" autocomplete="off">
             	</c:if>
                 <c:if test="${keyword != ''}">
-            		<input type="text" id="keyword" name="keyword" value="${keyword}">
+            		<input type="text" id="keyword" name="keyword" value="${keyword}" autocomplete="off">
             	</c:if>
             	
     		</span>

@@ -30,6 +30,7 @@ public class Member_Delete_Service implements Interface_TravelService {
 			Map<String, Object> map = model.asMap();
 			HttpServletRequest request = (HttpServletRequest) map.get("request");
 			HttpSession session = request.getSession();
+			int m_no = (Integer) session.getAttribute("m_no");
 			String s_pw = (String) session.getAttribute("m_pw");
 			System.out.println("세션 비밀번호 : " + s_pw);
 			String pw = request.getParameter("pw");
@@ -42,7 +43,7 @@ public class Member_Delete_Service implements Interface_TravelService {
 			if (s_pw.equals(m_pw)) {
 				System.out.println("회원탈퇴 되었습니다.");
 				session.invalidate();
-				dao.member_delete(m_pw);
+				dao.member_delete(m_no, m_pw);
 				model.addAttribute("deleteSuccess", true);
 			} else {
 				System.out.println("비밀번호가 다릅니다.");

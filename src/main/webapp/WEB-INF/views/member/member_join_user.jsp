@@ -10,8 +10,7 @@
 </head>
 
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 
 
@@ -64,16 +63,16 @@
 				</tr>
 				<tr>
 					<td><label>林家</label></td>
-					<td><input type="text" class="enter" id="sample4_roadAddress" 
+					<td><input type="text" class="enter" id="m_roadAddress" 
 						name="m_roadAddress" placeholder="档肺疙林家" readonly autocomplete="off"></td>
 					<td><input type="button" class="certi"
-						onclick="sample4_execDaumPostcode()" value="林家茫扁"></td>
+						onclick="execDaumPostcode()" value="林家茫扁"></td>
 				</tr>
 				<tr>
 					<td><label></label></td>
 					<td>
 						<input type="text" class="enter" 
-						id="sample4_detailAddress" placeholder="惑技林家"
+						id="m_detailAddress" placeholder="惑技林家"
 						name="m_detailAddress" autocomplete="off">
 					</td>
 				</tr>
@@ -234,8 +233,8 @@
 			
 	</form>
 </body>
-<script
-	src="${pageContext.request.contextPath }/resources/js/user/join_user.js"
-	charset="UTF-8"></script>
+
+<script src="${pageContext.request.contextPath }/resources/js/user/join_user.js"></script>
+
 
 </html>

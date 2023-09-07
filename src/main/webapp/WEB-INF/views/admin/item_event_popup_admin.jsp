@@ -11,9 +11,18 @@
 <body>
 
 	<style>
-        body{
-            resize: none;
-        }
+        /* 화면 디자인 */
+		@font-face {
+				    font-family: 'GmarketSansMedium';
+				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+				    font-weight: normal;
+				    font-style: normal;
+		}
+		
+		*{
+			font-family: 'GmarketSansMedium';
+		}
+		
         #form{
             width: 600px;
             height: 800px;
@@ -55,8 +64,8 @@
             width: 670px;
         }
         button, #submit{
-            background-color: blue;
-            color: white;
+            background-color: #011343;
+            color: #EBD01C;
             font-weight: bold;
             border-radius: 3px;
             width: 100px;

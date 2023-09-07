@@ -214,8 +214,7 @@ public class Controller_Member_user {
 			
 			System.out.println("회원가입 쿠폰 증정");
 			
-			model.addAttribute("msg", "이메일 인증 완료 : 회원가입 쿠폰이 증정되었습니다.");
-			
+			model.addAttribute("msg", "이메일 인증 완료 : 회원가입 쿠폰이 증정되었습니다.");		
 		}
 		else {
 			model.addAttribute("msg", "이메일 인증이 이미 완료되었습니다.");

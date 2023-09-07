@@ -62,8 +62,8 @@
         }
 
         #submit, #backbutton{
-            background-color: blue;
-            color: white;
+            background-color: #011343;
+            color: #EBD01C;
             border-radius: 3px;
             width: 100px;
             height: 32px;
@@ -85,9 +85,9 @@
             margin: 5px 0;
             display: inline-block;
             padding: 10px 20px;
-            color: #fff;
+            background-color: #011343;
+            color:  #EBD01C;
             vertical-align: middle;
-            background-color: #999999;
             cursor: pointer;
             height: 20px;
         }

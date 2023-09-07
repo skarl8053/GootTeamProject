@@ -10,7 +10,7 @@
 		INSERT INTO TMSTMEMBER VALUES(
 		TMSTMEMBER_M_NO_SEQ.NEXTVAL,
 		#{param1},#{param2},#{param3},#{param4},2,0,#{param5},#{param6},#{param7},#{param8},
-		#{param9},#{param10},#{param11},#{param12},'N','N')
+		#{param9},#{param10},#{param11},#{param12},#{param13},'N','N')
 	</insert>
 	
 	<!-- m_no 조회 -->
@@ -50,16 +50,16 @@
 	
 	<!-- 회원 탈퇴 -->
 	<update id="member_delete">
-		UPDATE TMSTMEMBER SET M_LOCK='Y' WHERE M_PW=#{param1}
+		UPDATE TMSTMEMBER SET M_LOCK='Y' WHERE M_NO=#{param1} AND M_PW=#{param2}
 	</update>
 	
 	<!-- 회원정보 수정 -->
 	<update id="member_modify">
 		UPDATE TMSTMEMBER SET
-		M_PW=#{param2},M_TEL=#{param3},M_ADDRESS=#{param4},M_MARKETING=#{param5},M_AREA1=#{param6},M_AREA2=#{param7},M_AREA3=#{param8},
-		M_THEME1=#{param9},M_THEME2=#{param10},M_THEME3=#{param11}
+		M_PW=#{param2},M_TEL=#{param3},M_ROADADDRESS=#{param4}, M_DETAILADDRESS=#{param5},M_MARKETING=#{param6},M_AREA1=#{param7},M_AREA2=#{param8},M_AREA3=#{param9},
+		M_THEME1=#{param10},M_THEME2=#{param11},M_THEME3=#{param12}
 		WHERE
-		M_EMAIL=#{param1}
+		M_NO=#{param1}
 	</update>
 	
 	<!-- 이메일 찾기 -->

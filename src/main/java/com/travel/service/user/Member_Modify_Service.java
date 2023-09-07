@@ -27,9 +27,9 @@ public class Member_Modify_Service implements Interface_TravelService {
 			Map<String, Object> map = model.asMap();
 			HttpServletRequest request = (HttpServletRequest) map.get("request");
 
+			int m_no = Integer.parseInt(request.getParameter("m_no"));
 			String m_pw = request.getParameter("m_pw");
 			int m_tel = Integer.parseInt(request.getParameter("m_tel"));
-			
 			String m_roadAddress = request.getParameter("m_roadAddress");
 			String m_detailAddress = request.getParameter("m_detailAddress");
 			String m_address = String.format("%s-%s", m_roadAddress,m_detailAddress);
@@ -48,7 +48,7 @@ public class Member_Modify_Service implements Interface_TravelService {
 			
 					
 			IDao_Member_user dao = sqlSession.getMapper(IDao_Member_user.class);
-			dao.member_modify(encryStr, m_tel, m_address, m_marketing, m_area1, m_area2, m_area3, m_theme1, m_theme2, m_theme3);
+			dao.member_modify(m_no, encryStr, m_tel, m_roadAddress, m_detailAddress, m_marketing, m_area1, m_area2, m_area3, m_theme1, m_theme2, m_theme3);
 		
 		}
 		catch(Exception ex) {

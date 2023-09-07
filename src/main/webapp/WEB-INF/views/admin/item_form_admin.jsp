@@ -28,7 +28,17 @@
 		
 		 /* 화면 디자인 */
 		
-        
+        /* 화면 디자인 */
+		@font-face {
+				    font-family: 'GmarketSansMedium';
+				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+				    font-weight: normal;
+				    font-style: normal;
+		}
+		
+		*{
+			font-family: 'GmarketSansMedium';
+		}
         ul{
             list-style: none;
             padding-left: 0;
@@ -94,8 +104,8 @@
            width: 98%; 
         }
         .button{
-            background-color: blue;
-            color: white;
+            background-color: #011343;
+            color: #EBD01C;
             font-weight: bold;
             border-radius: 3px;
             width: 100px;
@@ -105,17 +115,17 @@
             cursor: pointer;
         }
         .filebox label {
-        display: inline-block;
-        padding: .5em .75em;
-        color: white;
-        font-size: inherit;
-        line-height: normal;
-        vertical-align: middle;
-        background-color: blue;  /* 버튼 색상 변경 */
-        cursor: pointer;
-        border: 1px solid #ebebeb;
-        border-bottom-color: #e2e2e2;
-        border-radius: .25em;
+	        display: inline-block;
+	        padding: .5em .75em;
+	        font-size: inherit;
+	        line-height: normal;
+	        vertical-align: middle;
+	        background-color: #011343;  /* 버튼 색상 변경 */
+	        color:  #EBD01C;
+	        cursor: pointer;
+	        border: 1px solid #ebebeb;
+	        border-bottom-color: #e2e2e2;
+	        border-radius: .25em;
         }
 
         .filebox input[type="file"] {  /* 파일 필드 숨기기 */
@@ -248,11 +258,11 @@
                         <td id="third_col">
                             <div class="input_name">
                            			제품 이름 : <br>
-                                    <input type="text" id="firstitem_name" name="firstitem_name"><br>
+                                    <input type="text" id="firstitem_name" name="firstitem_name" autocomplete="off"><br>
                             </div>
                             <div class="input_name">
                                     제품 설명 : <br>
-                                    <textarea id="firstitem_desc" name="firstitem_desc" rows="15"></textarea>
+                                    <textarea id="firstitem_desc" name="firstitem_desc" rows="15" autocomplete="off"></textarea>
                             </div>
                         </td>
                     </tr>
@@ -273,11 +283,11 @@
                         <td id="third_col">
                             <div class="input_name">
                                     제품 이름 : <br>
-                                    <input type="text" id="seconditem_name" name="seconditem_name"><br>
+                                    <input type="text" id="seconditem_name" name="seconditem_name" autocomplete="off"><br>
                             </div>
                             <div class="input_name">
                                     제품 설명 : <br>
-                                    <textarea id="seconditem_desc" name="seconditem_desc" rows="15"></textarea>
+                                    <textarea id="seconditem_desc" name="seconditem_desc" rows="15" autocomplete="off"></textarea>
                             </div>
                         </td>
                     </tr>
@@ -298,11 +308,11 @@
                         <td id="third_col">
                             <div class="input_name">
                                     제품 이름 : <br>
-                                    <input type="text" id="thirditem_name" name="thirditem_name"><br>
+                                    <input type="text" id="thirditem_name" name="thirditem_name" autocomplete="off"><br>
                             </div>
                             <div class="input_name">
                                     제품 설명 : <br>
-                                    <textarea id="thirditem_desc" name="thirditem_desc" rows="15"></textarea>
+                                    <textarea id="thirditem_desc" name="thirditem_desc" rows="15" autocomplete="off"></textarea>
                             </div>
                         </td>
                     </tr>

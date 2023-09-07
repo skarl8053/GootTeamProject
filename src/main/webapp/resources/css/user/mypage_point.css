@@ -1,0 +1,133 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	padding: 0;
+	margin: 0;
+	font-family: 'GmarketSansMedium', sans-serif;
+	font-size: 14px;
+}
+
+#con {
+	width: 1200px;
+	display: flex;
+	align-items: column;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+li {
+	list-style: none;
+}
+
+#MyPage_text {
+	margin-top: 0px;
+}
+
+.page_list {
+	margin-top: 20px;
+	width: 200px;
+}
+
+#coupon{
+   font-weight: bolder;
+}
+.menu{
+   text-decoration: none;
+   color: rgb(1, 19, 67);
+   font-size: 24px;
+}
+.menu:hover{
+   font-weight: bolder;
+}
+p#MyPage{
+  font-size: 35px; 
+  text-align: center;
+}
+#Whole{
+   width: 900px;
+   margin-left:100px;
+}
+#title_point{
+   margin-top: 8px;
+   font-size: 35px;
+   font-weight: bold;
+}
+#title_coupon{
+   font-size: 35px;
+   margin-top: 50px;
+   font-weight: bold;
+}
+hr{
+   margin-top: 20px;
+   width: 900px;
+   height: 2px;
+   background-color: rgb(1, 19, 67);
+}
+hr#menu_bar{
+   width: 200px;
+}
+#table{
+   margin-top: 20px;
+   height: 370px;
+}
+#point_table, .coupon_table{
+   width: 900px;
+   height: 300px;
+}
+th{
+   font-size: 20px;
+}
+table, th, td{
+   border-bottom: 1px solid rgb(1, 19, 67);
+   border-left: 1px solid rgb(1, 19, 67);
+   text-align: center;
+   border-collapse: collapse;
+   padding: 15px;
+}
+table:first-child, th:first-child, td:first-child{
+   border-left: none;
+}
+#all_point{
+   display: flex; 
+   align-items: center; 
+   margin-top: 15px;
+}
+#all_coupon{
+   display: flex; 
+   align-items: center; 
+   margin-top: 15px;
+}
+#p_point{
+   font-size: 20px;
+   width: 100px;
+   margin-left: 575px;
+   display: inline-block;
+}
+#p_coupon{
+   font-size: 20px;
+   width: 150px;
+   margin-left: 530px;
+   display: inline-block;
+}
+input{
+   width: 200px;
+   height: 40px;
+   font-size: 20px;
+   text-align: right;
+   padding-right: 20px;
+}
+#use_coupon, #own_coupon{
+   margin-top: 20px;
+}
+.coupon_text p{
+   margin-top: 30px;
+   margin-left: 10px;;
+   font-size: 20px;
+}

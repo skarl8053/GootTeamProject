@@ -57,10 +57,6 @@
 		.button:hover{
 			cursor: pointer;
 		}
-		.s_img1{
-			width: 250px;
-			height: 250px;	
-		}
 		table{
 			text-align: center;
 			width: 1200px;
@@ -150,11 +146,11 @@
     		<table>
 	            <thead>
 					<tr>
-						<td width="5%">주문번호</td>
+						<td width="10%">주문번호</td>
 						<td width="18%">숙소 썸네일</td>
-						<td width="21%">숙소명</td>
-						<td width="7%">결제방식</td>
-						<td width="7%">결제금액</td>
+						<td width="10%">숙소명</td>
+						<td width="10%">결제방식</td>
+						<td width="10%">결제금액</td>
 						<td width="14%">결제날짜</td>
 						<td width="16%">다녀온 날짜</td>
 					</tr>
@@ -163,7 +159,7 @@
 					<c:forEach items="${p_list }" var="p_list">
 						<tr>
 							<td>${p_list.order_no }</td>
-							<td><img src="resources/upload_img/admin/stay/${p_list.s_img1 }" class="s_img1" alt="이미지 없음" class="stay_image"/></td>
+							<td><img src="resources/upload_img/admin/stay/${p_list.s_img1 }" alt="이미지 없음" class="stay_image"/></td>
 							<td>${p_list.s_name }</td>
 							<td>${p_list.payment_method }</td>
 							<td>${p_list.payment_price }</td>

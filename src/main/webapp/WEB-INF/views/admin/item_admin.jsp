@@ -26,20 +26,29 @@
 			작업 : 이벤트 조회
 		*/
 		
-		 /* 화면 디자인 */
 		
+		/* 화면 디자인 */
+		@font-face {
+				    font-family: 'GmarketSansMedium';
+				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+				    font-weight: normal;
+				    font-style: normal;
+		}
+		
+		*{
+			font-family: 'GmarketSansMedium';
+		}
         .searchbox{
             width: 150px;
             height: 30px;
         }
         #event_name{
-            width: 280px;
+            width: 320px;
             height: 29px;
         }
         .button{
-            background-color: blue;
-            color: white;
-            font-weight: bold;
+            background-color: #011343;
+            color: #EBD01C;
             border-radius: 3px;
             width: 100px;
             height: 32px;
@@ -109,7 +118,7 @@
 
             var opensite = "eventpopup?&page=1";
             	
-            window.open(opensite, 'window', 'width=700px, height=830px');
+            window.open(opensite, 'window', 'width=700px, height=860px');
             
         }
         
@@ -178,7 +187,7 @@
     	<div>
     		<br />
     		<span>
-                <input type="text" id="event_name" name="event_name" value="${event_name}" readonly>
+                <input type="text" id="event_name" name="event_name" value="${event_name}" readonly placeholder="이벤트 조회 버튼을 클릭하여 이벤트를 선택해주세요">
     		</span>
     		<span>
     			<input type="submit" class="button" value="검색" >

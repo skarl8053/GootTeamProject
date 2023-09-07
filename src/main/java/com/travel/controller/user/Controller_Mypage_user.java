@@ -46,11 +46,11 @@ public class Controller_Mypage_user {
 		
 		model.addAttribute("request",request);
 		
-		// 환불 실행 진행
 		service = new Service_Refund_Insert_User(sqlSession);
 		service.execute(model);
 
-		// 환불 실행후 환불 폼 닫고 업데이트
+		// 업데이트 후 창 닫기 구현 필요
+		
 		return "";
 	}
 	@RequestMapping("mypage_info")
