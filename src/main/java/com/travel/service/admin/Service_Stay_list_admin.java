@@ -35,8 +35,7 @@ public class Service_Stay_list_admin implements Interface_TravelService {
 		// 검색 결과 유지 과정
 		int currentPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
-		int location = request.getParameter("location") != null ? Integer.parseInt(request.getParameter("location"))
-				: 0;
+		int location = request.getParameter("location") != null ? Integer.parseInt(request.getParameter("location")) : 0;
 		int type = request.getParameter("type") != null ? Integer.parseInt(request.getParameter("type")) : 0;
 
 		SearchVO vo = new SearchVO();

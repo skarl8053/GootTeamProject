@@ -190,6 +190,8 @@
 		
 		<select id="pageCalculate" resultType="Integer">
 			SELECT COUNT(*) FROM TMSTSTAY
+			WHERE S_LOCA = #{param1}
+			AND S_TYPE = #{param2}
 		</select>
 		
 		<select id="stay_list" resultType="com.travel.dto.admin.DTO_Stay_room_admin">
