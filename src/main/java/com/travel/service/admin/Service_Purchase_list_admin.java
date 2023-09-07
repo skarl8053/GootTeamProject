@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 
 import com.travel.dao.admin.IDao_purchase_list_admin;
 import com.travel.dto.admin.DTO_Purchase_admin;
+import com.travel.usetools.SearchVO;
 
 public class Service_Purchase_list_admin implements Interface_TravelService {
 
@@ -46,9 +47,19 @@ public class Service_Purchase_list_admin implements Interface_TravelService {
 		System.out.println("searchType : " + searchType);
 		System.out.println("keyword : " + keyword);
 
-		ArrayList<DTO_Purchase_admin> p_list = dao.purchase_list(searchType, keyword);
+		// 페이징 처리
+		int currentPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 
+		SearchVO vo = new SearchVO();
+		vo.setPage(currentPage);
+		vo.pageCalculate(dao.purchase_pageCalculate(searchType, keyword));
+
+		ArrayList<DTO_Purchase_admin> p_list = dao.purchase_list(searchType, keyword, vo.getRowStart(), vo.getRowEnd());
+
+		model.addAttribute("vo", vo);
 		model.addAttribute("p_list", p_list);
+		model.addAttribute("searchType", searchType);
+		model.addAttribute("keyword", keyword);
 
 		if (request.getParameter("msg") == null || request.getParameter("msg").equals("")) {
 			model.addAttribute("msg", "");

@@ -139,6 +139,82 @@
 	
     <script>
  	// 객실 추가하기 버튼 동작
+	let roomCnt = 1; // 객실 번호 카운터 초기값
+
+    function addRoom() {
+		if (roomCnt<4) {
+			var roomDiv = document.createElement("div");
+			
+			roomDiv.innerHTML = `
+			<p>숙소 객실 정보</p>
+	        <div class="image-container">
+			    <img src="" alt="이미지 없음" class="image" id="firstImage" />
+			    <img src="" alt="이미지 없음" class="image2" id="secondImage" />
+			    <img src="" alt="이미지 없음" class="image3" id="thirdImage" /><br />
+			    <div class="filebox" id="firstFileBox">
+			        <input type="file" name="file" class="real-upload" accept="image/*" multiple onchange="imagePreview(this)">
+			        <button class="button" id="deleteButton" onclick="onClickDeleteUpload();">파일 삭제</button>
+			    </div>
+			</div>
+	        
+	            <p>메인 이미지</p>
+	            <span>숙소 객실번호</span>
+	            <input type="text" onfocus="this.value='';" id="stay_room_name" name="stay_room_name" value="객실번호를 입력하세요.">
+	            <span>인원 수</span>
+	            <select name="stay_room_person" id="stay_room_person">
+	                <option value=" " selected>인원 수</option>
+	                <option value="2">2</option>
+	                <option value="3">3</option>
+	                <option value="4">4</option>
+	                <option value="5">5</option>
+	                <option value="6">6</option>
+	            </select><br>
+	            <span>가격</span>
+	            <input type="text" id="stay_room_price" name="stay_room_price" onfocus="this.value='';" value="가격을 입력하세요.">
+	            <p>객실 상세정보</p>
+	            <textarea name="stay_room_detailinfo" id="stay_room_detailinfo" cols="30" rows="10" onfocus="this.value='';">객실 상세정보를 입력하세요.</textarea><br>
+	            <span>침대</span> <br>
+	            <div class="bed">
+	                <span class="bed_text">싱글 베드 침대</span>
+	                   	<select name="stay_room_single_bed" >
+	                   		<option value="Y">Y</option>
+	                   		<option value="N">N</option>
+	                   	</select>
+	                    <span class="bed_text">더블 베드 침대</span>
+	                    <select name="stay_room_double_bed">
+	                   		<option value="Y">Y</option>
+	                   		<option value="N">N</option>
+	                   	</select>
+	                    <span class="bed_text">퀸 베드 침대</span>
+	                    <select name="stay_room_queen_bed">
+	                   		<option value="Y">Y</option>
+	                   		<option value="N">N</option>
+	                   	</select>
+	            </div> <br>
+	            <span>객실 편의시설</span>
+	            <div id="stay_room_facility">
+	                <input type="checkbox" value="1" name="stay_room_facility"> 노트북 작업공간
+	                <input type="checkbox" value="2" name="stay_room_facility"> 웰컴 드링크
+	                <input type="checkbox" value="3" name="stay_room_facility"> 어매니티 <br>
+	                <input type="checkbox" value="4" name="stay_room_facility"> 넷플릭스
+	                <input type="checkbox" value="5" name="stay_room_facility"> 조식 포함
+	                <input type="checkbox" value="6" name="stay_room_facility"> 무료 와이파이
+	            </div> <br />
+				`;
+				
+				var content = document.getElementById("content");
+				content.appendChild(roomDiv);
+		} else {
+			alert("3개까지 동시에 등록가능합니다.")
+		}     
+		roomCnt++;
+       console.log("cnt : "+roomCnt)
+    }
+	
+	
+    </script>
+    <script>
+ 	/* // 객실 추가하기 버튼 동작
 	let roomCounter = 1; // 객실 번호 카운터 초기값
 
     function addRoom() {
@@ -206,7 +282,7 @@
         const content = document.getElementById("content");
         content.appendChild(roomSection);
 
-    }
+    } */
     </script>
     
 </head>
@@ -278,8 +354,10 @@
 	                <input type="checkbox" value="5" name="stay_room_facility"> 조식 포함
 	                <input type="checkbox" value="6" name="stay_room_facility"> 무료 와이파이
 	            </div> <br />
-	            
-	            <input type="button" value="객실 추가하기" onclick="addRoom()" /> <br />
+	           	
+	        <input type="button" value="객실 추가하기" onclick="addRoom()" /> <br />
+	        
+	        <div id="content"><!-- 추가 될 내용 들어가는 부분 --></div>
 	        
 	        <input type="submit" class="btn" value="등록하기">
 	        <input type="button" class="btn" value="취소" onclick="goToMainPage()">

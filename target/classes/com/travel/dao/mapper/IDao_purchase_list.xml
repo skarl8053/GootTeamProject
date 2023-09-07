@@ -8,21 +8,41 @@
 	<!-- 신재환 / 관리자 -> 숙소등록 -->
 
 	<select  id="purchase_list" resultType="com.travel.dto.admin.DTO_Purchase_admin">
-		SELECT A.ORDER_NO,
-             B.S_IMG1,
-             B.S_NAME,
-             C.CODENAME AS PAYMENT_METHOD,
-             A.PAYMENT_PRICE,
-             TO_CHAR(A.ORDER_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ORDER_DATE,
-             TO_CHAR(A.CHECK_IN_DATE, 'YYYY-MM-DD') AS CHECK_IN_DATE,
-               TO_CHAR(A.CHECK_OUT_DATE, 'YYYY-MM-DD') AS CHECK_OUT_DATE
-      FROM THISORDER A
-      LEFT JOIN TMSTSTAY B ON A.S_NO = B.S_NO
-      LEFT JOIN TMSTCODE C ON C.GRPCODE = 8 AND A.PAYMENT_METHOD = C.CODE
-      LEFT JOIN TMSTMEMBER D ON A.M_NO = D.M_NO
-      WHERE ( #{param1} = 2 AND D.M_NAME LIKE '%' || #{param2} || '%' )
-      OR ( #{param1} = 3 AND D.M_EMAIL LIKE '%' || #{param2} || '%' )
-      OR  ( #{param1} = 4 AND D.M_NO LIKE '%' || #{param2} || '%' )
+	     SELECT *
+	     FROM (
+	     	SELECT ROWNUM NUM, N.*
+	     	FROM (
+	     		 SELECT A.ORDER_NO,
+	             B.S_IMG1,
+	             B.S_NAME,
+	             C.CODENAME AS PAYMENT_METHOD,
+	             A.PAYMENT_PRICE,
+	             TO_CHAR(A.ORDER_DATE, 'YYYY-MM-DD HH24:MI:SS') AS ORDER_DATE,
+	             TO_CHAR(A.CHECK_IN_DATE, 'YYYY-MM-DD') AS CHECK_IN_DATE,
+	             TO_CHAR(A.CHECK_OUT_DATE, 'YYYY-MM-DD') AS CHECK_OUT_DATE
+		      FROM THISORDER A
+		      LEFT JOIN TMSTSTAY B ON A.S_NO = B.S_NO
+		      LEFT JOIN TMSTCODE C ON C.GRPCODE = 8 AND A.PAYMENT_METHOD = C.CODE
+		      LEFT JOIN TMSTMEMBER D ON A.M_NO = D.M_NO
+		      WHERE ( #{param1} = 1 AND D.M_NAME LIKE #{param2} )
+		      OR ( #{param1} = 2 AND D.M_EMAIL LIKE #{param2} )
+		      OR  ( #{param1} = 3 AND A.ORDER_NO LIKE #{param2} )
+		      ORDER BY A.ORDER_NO DESC
+	     	) N
+	     )
+	     WHERE NUM BETWEEN #{param3} AND #{param4}		
+		
+	</select>
+	
+	<select id="purchase_pageCalculate" resultType="Integer">
+		SELECT COUNT(*) AS COUNT
+		FROM THISORDER A
+		LEFT JOIN TMSTSTAY B ON A.S_NO = B.S_NO
+		LEFT JOIN TMSTCODE C ON C.GRPCODE = 8 AND A.PAYMENT_METHOD = C.CODE
+		LEFT JOIN TMSTMEMBER D ON A.M_NO = D.M_NO
+		WHERE ( #{param1} = 1 AND D.M_NAME LIKE #{param2} )
+	      OR ( #{param1} = 2 AND D.M_EMAIL LIKE #{param2} )
+	      OR  ( #{param1} = 3 AND D.M_NO LIKE #{param2} )
 	</select>
 
 </mapper> 
