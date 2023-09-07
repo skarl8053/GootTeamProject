@@ -103,14 +103,14 @@
 	</script>
 
 	<!-- 메세지 -->
-	<%-- <c:if test="${msg != ''}">
+	<!-- <c:if test="${msg != ''}">
 			
 		<script>
 			alert("${msg}");
 			location.replace("event?page=1");
 		</script>
 		
-	</c:if> --%>
+	</c:if> -->
 
     <!-- 메인 -->
     <h1>숙소 조회</h1>
@@ -300,7 +300,7 @@
 								</td>
 								<td><%-- ${list.s_rate } --%></td>
 								<td>
-									<input type="button" value="수정" class="button" onclick="update_click('${list.s_no }');"/>
+									<input type="button" value="수정" class="button" onclick="update_click('${list.s_no }');" />
 									<input type="button" value="삭제" class="button" onclick="openNewWindow(${list.s_no})" />
 								</td>
 							</tr>

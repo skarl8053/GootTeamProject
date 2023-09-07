@@ -14,7 +14,7 @@
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 800px;
+			height: 2900px;
 		}
 	</style>
 	
@@ -22,8 +22,8 @@
         
 		/* 
 		
-			이름 : 남기문
-			작업 : 이벤트 조회
+			이름 : 신재환
+			작업 : 회원 구매 내역 조회
 			
 		 */
 		
@@ -34,7 +34,6 @@
 				    font-weight: normal;
 				    font-style: normal;
 		}
-		
 		*{
 			font-family: 'GmarketSansMedium';
 		}
@@ -57,7 +56,7 @@
 		.button:hover{
 			cursor: pointer;
 		}
-		.s_img1{
+		.s_img1, .img_col{
 			width: 250px;
 			height: 250px;	
 		}
@@ -68,11 +67,9 @@
 		table tbody tr td{
 			height: 40px;
 		}
-
 		table thead tr td{
 			border-bottom: 1px solid black;
 		}
-
 		#paging{
 			width: 1200px;
 			text-align: center;
@@ -101,7 +98,13 @@
 		
 	</c:if>
 
-
+	<script>
+	
+		function searchbox_change(){
+			document.getElementById("keyword").value = "";
+		}
+	
+	</script>
 
     <!-- 메인 -->
     <h1>회원 구매 내역 조회</h1>
@@ -113,7 +116,7 @@
     	<div>
     		<br />
     		<span>
-				<select class="searchbox" id="searchType" name="searchType">
+				<select class="searchbox" id="searchType" name="searchType" onchange="searchbox_change()">
                     <c:if test="${searchType eq 1 || searchType eq null}">
 	                    <option value="1" selected>이름으로 검색</option>
 	                    <option value="2">이메일로 검색</option>
@@ -142,7 +145,7 @@
 				</c:choose>
     		</span>
     		<span>
-    			<input type="button" class="button" value="검색" onclick="searchExecute();">
+    			<input type="submit" class="button" value="검색" onclick="searchExecute();">
     		</span>
     	</div>
     	<br><br>
@@ -163,7 +166,7 @@
 					<c:forEach items="${p_list }" var="p_list">
 						<tr>
 							<td>${p_list.order_no }</td>
-							<td><img src="resources/upload_img/admin/stay/${p_list.s_img1 }" class="s_img1" alt="이미지 없음" class="stay_image"/></td>
+							<td class="img_col"><img src="resources/upload_img/admin/stay/${p_list.s_img1}" class="s_img1" alt="이미지 없음" class="stay_image"/></td>
 							<td>${p_list.s_name }</td>
 							<td>${p_list.payment_method }</td>
 							<td>${p_list.payment_price }</td>

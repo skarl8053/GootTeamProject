@@ -81,7 +81,7 @@
 					<td>${stay_list.s_no }</td>
 					<td>${stay_list.s_name }</td>
 					<td><img src="resources/upload_img/admin/stay/${stay_list.s_img1 }" alt="이미지 없음" width="250px;" height="250px;"/></td>
-					<td><input type="button" value="삭제" class="btn" onclick="stayDelete(${stay_list.r_no})" /></td>
+					<td><input type="button" value="삭제" class="btn" onclick="stayDelete(${stay_list.s_no})" /></td>
 				</tr>
 			</c:forEach>
 		</table><br />

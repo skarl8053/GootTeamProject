@@ -55,8 +55,8 @@
             width: 670px;
         }
         button, #submit{
-            background-color: blue;
-            color: white;
+            background-color: #011343;
+            color: #EBD01C;
             font-weight: bold;
             border-radius: 3px;
             width: 100px;

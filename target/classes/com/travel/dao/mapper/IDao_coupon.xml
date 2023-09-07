@@ -1,0 +1,65 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.travel.dao.admin.IDao_coupon_admin">
+
+  	<select id="couponlist" resultType="com.travel.dto.admin.DTO_coupon_admin">
+  	
+  		
+  		SELECT 	A.COUPON_NO
+  				,A.COUPON_DETAIL
+  				,A.COUPON_QTY
+  				,A.COUPON_FLAG
+  		FROM 	
+  		(
+  			SELECT 	ROW_NUMBER() OVER(ORDER BY COUPON_NO ASC) AS ROW_NUM,
+					COUPON_NO, 
+					COUPON_DETAIL, 
+					COUPON_QTY, 
+					COUPON_FLAG
+			FROM 	TMSTCOUPON
+			WHERE 	COUPON_DETAIL LIKE '%' || #{param1} || '%'
+  		) A
+		WHERE A.ROW_NUM BETWEEN #{param2} AND #{param3}
+		
+	</select>
+	
+	<select id="pageCalculate" resultType="Integer">
+	
+		SELECT 	COUNT(*)
+		FROM 	TMSTCOUPON
+		WHERE 	COUPON_DETAIL LIKE '%' || #{param1} || '%'
+		
+	</select>
+
+  	<insert id="couponinsert">
+  		INSERT INTO TMSTCOUPON (
+  			COUPON_NO, 
+  			COUPON_DETAIL, 
+  			COUPON_FLAG, 
+  			COUPON_QTY
+  			) 
+  		VALUES(
+  			#{param1}, 
+  			#{param2},
+  			#{param3}, 
+  			#{param4}
+  			)
+	</insert>
+	<select id="getCouponCount" resultType="integer">
+		SELECT COUNT(*)
+		FROM TMSTCOUPON
+		WHERE COUPON_NO = #{param1}
+	</select>
+	
+	<delete id="coupondelete" parameterType="map">
+		DELETE FROM TMSTCOUPON WHERE COUPON_NO IN
+		
+		<foreach collection="coupon_no" item="coupon_no" index="index"
+		 open="(" separator="," close=")">
+		 	#{coupon_no.value}
+		 </foreach>
+	</delete>
+	
+</mapper>

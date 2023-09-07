@@ -52,7 +52,7 @@
             	<c:if test="${ not empty sessionScope.m_email }">
             		 <ul class="" style="float: right">
             		 	<li class="menu-etc" ><a href="#">알림</a></li>
-            		 	<li class="menu-etc" ><a href="#">마이페이지</a></li>
+            		 	<li class="menu-etc" ><a href="user/mypage_info?m_no=${sessionScope.m_no}">마이페이지</a></li>
 	                    <li class="menu-etc" ><a href="javascript:logout();">로그아웃</a></li>
 	                </ul>
             	</c:if>
