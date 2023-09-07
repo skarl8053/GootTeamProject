@@ -445,7 +445,7 @@
 		<!-- 추천 숙소 슬라이드 -->
 		<h2 class="title-left">최근 등록된 숙소</h2>
 		<div class="hot-deal">
-			<div class="hdeal slider"></div>
+			<div class="stayinfo slider"></div>
 		</div>
 		<br />
 		
@@ -457,7 +457,7 @@
 		<!-- 추천 숙소 슬라이드 -->
 		<h2 class="title-left">${ sessionScope.m_name } 님에게 추천하는 숙소</h2>
 		<div class="hot-deal">
-			<div class="hdeal slider"></div>
+			<div class="stayinfo slider"></div>
 		</div>
 		<br />
 		

@@ -37,7 +37,7 @@ $(function() {
 		slidesToShow : 1 /* 보여질 이미지 슬라이드 수 */,
 		slidesToScroll : 1 /* 넘겨질 이미지 슬라이드 수 */,
 		autoplay : true /* 이미지 슬라이드 자동 넘김 */,
-		autoplaySpeed : 2300 /* 이미지 슬라이드 자동 넘김시 슬라이드 시간[s] */,
+		autoplaySpeed : 3000 /* 이미지 슬라이드 자동 넘김시 슬라이드 시간[s] */,
 		pauseOnHover : true /* 이미지 슬라이드에 마우스 hover시 슬라이드 멈춤 */,
 		speed : 1000 /* 이미지 슬라이드 속도 */,
 		centerMode : true
@@ -69,9 +69,9 @@ $(function() {
 		slidesToShow : 1 /* 보여질 이미지 슬라이드 수 */,
 		slidesToScroll : 1 /* 넘겨질 이미지 슬라이드 수 */,
 		autoplay : true /* 이미지 슬라이드 자동 넘김 */,
-		autoplaySpeed : 2000 /* 이미지 슬라이드 자동 넘김시 슬라이드 시간[s] */,
+		autoplaySpeed : 3000 /* 이미지 슬라이드 자동 넘김시 슬라이드 시간[s] */,
 		pauseOnHover : true /* 이미지 슬라이드에 마우스 hover시 슬라이드 멈춤 */,
-		speed : 900 /* 이미지 슬라이드 속도 */,
+		speed : 1000 /* 이미지 슬라이드 속도 */,
 		centerMode : true
 	});
 });
