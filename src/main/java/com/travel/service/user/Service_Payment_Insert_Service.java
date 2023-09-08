@@ -36,8 +36,8 @@ public class Service_Payment_Insert_Service  implements Interface_TravelService 
 		String m_no = request.getParameter("m_no");
 		
 		// 예약 숙소 / 객실
-		String stay_no = request.getParameter("stay_no");
-		String[] room_no_str = request.getParameter("room_no").split("_");
+		String stay_no = request.getParameter("s_no");
+		String[] room_no_str = request.getParameter("r_no").split("_");
 		
 		// 체크인 체크아웃
 		String checkindate = request.getParameter("checkindate");

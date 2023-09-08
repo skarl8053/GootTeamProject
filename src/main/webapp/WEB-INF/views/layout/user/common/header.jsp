@@ -119,6 +119,7 @@
                         </ul>
                     </li>
                     <c:if test="${not empty sessionScope.m_no}">
+                    	<li class="menu-etc"><a style="padding-left: 20px" href="mypage_info?m_no=${sessionScope.m_no}">마이페이지</a></li>
                     	<li class="menu-etc"><a style="padding-left: 20px" href="javascript:logout();">로그아웃</a></li>
                     </c:if>
                 </ul>
