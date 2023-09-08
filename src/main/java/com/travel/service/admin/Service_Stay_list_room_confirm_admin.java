@@ -10,6 +10,7 @@ import org.springframework.ui.Model;
 
 import com.travel.dao.admin.IDao_stay_admin;
 import com.travel.dto.admin.DTO_Stay_admin;
+import com.travel.dto.admin.DTO_Stay_room_admin;
 import com.travel.usetools.SearchVO;
 
 public class Service_Stay_list_room_confirm_admin implements Interface_TravelService {
@@ -31,7 +32,7 @@ public class Service_Stay_list_room_confirm_admin implements Interface_TravelSer
 
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
-
+		
 		String s_no_str = request.getParameter("s_no");
 
 		int s_no = Integer.parseInt(s_no_str);
@@ -42,7 +43,7 @@ public class Service_Stay_list_room_confirm_admin implements Interface_TravelSer
 		vo.setPage(currentPage);
 		vo.pageCalculate(dao.room_list_pageCalculate(s_no));
 
-		List<DTO_Stay_admin> stay_list = dao.stay_list(s_no);
+		DTO_Stay_room_admin stay_list = dao.stay_list(s_no);
 		List<DTO_Stay_admin> room_list = dao.room_list(vo.getRowStart(), vo.getRowEnd(), s_no);
 
 		model.addAttribute("s_no", s_no);

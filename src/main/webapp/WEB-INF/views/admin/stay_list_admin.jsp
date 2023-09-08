@@ -14,7 +14,7 @@
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 3000px;
+			height: auto;
 		}
 	</style>
 	
@@ -91,7 +91,7 @@
 	
 	    function openNewWindow(s_no) {
 	        const option = "width=800,height=800,left=500,top=120";
-	        const popupWindow = window.open("stay_list_room_confirm?s_no=" + s_no, "객실 리스트", option);
+	        const popupWindow = window.open("stay_list_room_confirm_popup?s_no=" + s_no, "객실 리스트", option);
 	        
 	        // 팝업 창의 iframe 로드 이벤트에 함수 할당
 	        popupWindow.document.querySelector("#popup-iframe").onload = function() {
@@ -99,6 +99,16 @@
 	            popupWindow.setStayTitle = setStayTitle;
 	        };
 	    }
+	    
+	    function searchExecute(){
+
+            var location = document.getElementById("location").value;
+            var type = document.getElementById("type").value;
+            
+            // 검색 결과 조회
+            location.replace("stay_list?page=1&location=" + location + "&type="+ type);
+            
+        }
 
 	</script>
 
@@ -253,7 +263,7 @@
 				</select>
 			</span>
     		<span>
-    			<input type="submit" class="button" value="검색">
+    			<input type="submit" class="button" value="검색" onclick="searchExecute();">
     		</span>
     	</div>
     	<br><br>
@@ -275,7 +285,8 @@
 						<input type="hidden" id="s_no" value="${list.s_no }" />
 							<tr>
 								<td>${list.s_no }</td>
-								<td class="img_col" ><img class=s_img1 src="resources/upload_img/admin/stay/${list.s_img1 }" alt="이미지 없음" /></td>
+								<td class="img_col" > <a href="stay_view?s_no=${list.s_no }">
+									<img class="s_img1" src="resources/upload_img/admin/stay/${list.s_img1 }" alt="이미지 없음" /></a></td>
 								<td><a href="stay_view?s_no=${list.s_no }">${list.s_name }</a></td>
 								<td>
 									<c:choose>
@@ -319,17 +330,17 @@
 					<a href="stay_list?page=1&location=${location }&type=${type}"><i class="fa-solid fa-angles-left"></i></a>
 					<a href="stay_list?page=${vo.page-1 }&location=${location }&type=${type}"><i class="fa-solid fa-circle-chevron-left"></i></a>
 				</c:if>
-
-				<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
-					<c:choose>
-						<c:when test="${i ne page}">
-							<a href="stay_list?page=${i}&location=${location}&type=${type}">${i}</a>
-						</c:when>
-						<c:otherwise>
-							<span>${i}</span>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
+				
+			<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
+				<c:choose>
+					<c:when test="${ i ne param.page}">
+						<a href="stay_list?page=${i}&location=${location}&type=${type}">${i}</a>
+					</c:when>
+					<c:otherwise>
+						<span>${i}</span>
+					</c:otherwise>
+				</c:choose>
+			</c:forEach>
 
 				<c:if test="${vo.page < vo.totPage }">
 					<a href="stay_list?page=${vo.page+1 }&location=${location }&type=${type}"><i class="fa-solid fa-circle-chevron-right"></i></a>

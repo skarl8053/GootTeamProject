@@ -5,7 +5,7 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>숙소 등록</title>
+    <title>숙소 수정</title>
     <link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/admin/stay_insert_admin.css"/>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <!-- 개별 화면 content 크기를 조절하는 방법 -->
@@ -78,7 +78,7 @@
 <form action="stay_modify" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
 	<c:forEach items="${stay_view }" var="stay_view">
 <input type="hidden" name="s_no" value="${stay_view.s_no }"/>
-		<p>숙소 등록</p>
+		<p>숙소 수정</p>
 	    <hr>
 	    <p>숙소 공통 정보</p>
 	   

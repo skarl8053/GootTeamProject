@@ -35,6 +35,15 @@ public class Service_Stay_delete_admin implements Interface_TravelService {
 		System.out.println("s_no : " + s_no);
 
 		dao.stay_delete(s_no);
-
+		dao.stay_room_All_delete(s_no);
+		
+		if(request.getParameter("msg") == null) {
+			model.addAttribute("msg", "숙소가 삭제되었습니다.");
+		}
+		else {
+			model.addAttribute("msg","");
+		}
+		
+		
 	}
 }

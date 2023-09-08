@@ -116,7 +116,7 @@ public class Controller_Stay_admin {
 	}
 
 	// 숙소 삭제 과정
-	@RequestMapping(method = RequestMethod.POST, value = "/stay_delete")
+	@RequestMapping(value = "/stay_delete")
 	public String stay_delete(HttpServletRequest request, Model model) {
 
 		System.out.println("stay_delete_service_Controller 신호");
@@ -125,7 +125,7 @@ public class Controller_Stay_admin {
 		service = new Service_Stay_delete_admin(sqlSession);
 		service.execute(model);
 
-		return "redirect:/admin/stay_list";
+		return "admin/stay_list_room_confirm_popup_admin";
 	}
 
 	// 객실 삭제 과정
@@ -171,7 +171,7 @@ public class Controller_Stay_admin {
 	}
 
 	// 숙소 리스트에서 삭제 버튼 클릭시 그 숙소에 있는 객실 삭제하기
-	@RequestMapping(value = "/stay_list_room_confirm")
+	@RequestMapping(value = "/stay_list_room_confirm_popup")
 	public String stay_list_room_confirm(HttpServletRequest request, Model model, SearchVO searchVO) {
 
 		System.out.println("stay_list_confirm_Controller 신호");
@@ -181,6 +181,6 @@ public class Controller_Stay_admin {
 		service = new Service_Stay_list_room_confirm_admin(sqlSession);
 		service.execute(model);
 
-		return "/admin/stay_list_room_confirm_admin";
+		return "/admin/stay_list_room_confirm_popup_admin";
 	}
 }

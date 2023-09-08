@@ -93,7 +93,7 @@
                             <li>    
                             	<button class="inner_button" type="button" onclick="siteLocation('stay');">숙소 등록</button>
                             	<button class="inner_button" type="button" onclick="siteLocation('stay_room');">객실 등록</button>
-                                <button class="inner_button" type="button" onclick="siteLocation('stay_list');">숙소 조회</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list?page=1');">숙소 조회</button>
                             	<button class="inner_button" style="visibility: hidden;" type="button" >준비중</button>
                             </li>
                         </ul>

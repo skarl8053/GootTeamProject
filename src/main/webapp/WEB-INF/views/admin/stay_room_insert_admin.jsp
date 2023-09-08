@@ -101,6 +101,12 @@
 		            document.querySelector('#stay_room_detailinfo').focus();
 		            return false; 
 		        }
+		        
+		        if (stay_room_detailinfo.length < 10) {
+		            alert("객실 상세정보를 10글자 이상 입력해주세요.");
+		            document.querySelector('#stay_room_detailinfo').focus();
+		            return false; 
+		        }
 
 		        alert("숙소 객실이 등록되었습니다.");
 		        return true; 
@@ -126,9 +132,16 @@
 	}
 	
 	function openNewWindow() {
-	    const option = "width=600,height=720,left=500,top=120";
+	    const option = "width=600,height=600,left=500,top=120";
 	    const popupWindow = window.open("stay_list_confirm", "숙소 등록 리스트 팝업", option);
 	    
+	    /* const screenWidth = window.screen.width;
+	    const screenHeight = window.screen.height;
+	    const windowWidth = 600; // Set your desired width
+	    const windowHeight = 400; // Set your desired height
+	    const left = (screenWidth - windowWidth) / 2;
+	    const top = (screenHeight - windowHeight) / 2; 
+	    const option = `width=${windowWidth},height=${windowHeight},left=${left},top=${top}`; */
 	    // 팝업 창의 iframe 로드 이벤트에 함수 할당
 	    popupWindow.document.querySelector("#popup-iframe").onload = function() {
 	        // 팝업 창에서 메인 창으로 콜백으로 전달하기 위한 함수 할당
@@ -329,17 +342,17 @@
 	            <textarea name="stay_room_detailinfo" id="stay_room_detailinfo" cols="30" rows="10" onfocus="this.value='';">객실 상세정보를 입력하세요.</textarea><br>
 	            <span>침대</span> <br>
 	            <div class="bed">
-	                <span class="bed_text">싱글 베드 침대</span>
+	                <span class="bed_text">싱글 베드</span>
 	                   	<select name="stay_room_single_bed" >
 	                   		<option value="Y">Y</option>
 	                   		<option value="N">N</option>
 	                   	</select>
-	                    <span class="bed_text">더블 베드 침대</span>
+	                    <span class="bed_text">더블 베드</span>
 	                    <select name="stay_room_double_bed">
 	                   		<option value="Y">Y</option>
 	                   		<option value="N">N</option>
 	                   	</select>
-	                    <span class="bed_text">퀸 베드 침대</span>
+	                    <span class="bed_text">퀸 베드</span>
 	                    <select name="stay_room_queen_bed">
 	                   		<option value="Y">Y</option>
 	                   		<option value="N">N</option>
@@ -355,9 +368,9 @@
 	                <input type="checkbox" value="6" name="stay_room_facility"> 무료 와이파이
 	            </div> <br />
 	           	
-	        <input type="button" value="객실 추가하기" onclick="addRoom()" /> <br />
+	        <input type="button" value="객실 추가하기" onclick="addRoom()" style="display:none;"/> <br />
 	        
-	        <div id="content"><!-- 추가 될 내용 들어가는 부분 --></div>
+	        <!-- <div id="content">추가 될 내용 들어가는 부분</div> -->
 	        
 	        <input type="submit" class="btn" value="등록하기">
 	        <input type="button" class="btn" value="취소" onclick="goToMainPage()">

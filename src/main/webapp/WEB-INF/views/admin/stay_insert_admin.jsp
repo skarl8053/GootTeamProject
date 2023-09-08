@@ -66,54 +66,60 @@
 		    	const addr_y = document.querySelector('#addr_y').value;
 		    	const stay_info = document.querySelector('.stay_info').value;
 		    	
-		    	if (location === " ") {
+		    	if (location == "") {
 		            alert("지역을 선택해주세요.");
 		            document.querySelector('.location').focus();
 		            return false; 
 		        }
 
-		        if (category === " ") {
+		        if (category == "") {
 		            alert("카테고리를 선택해주세요.");
 		            document.querySelector('.category').focus();
 		            return false; 
 		        }
 
-		        if (firstImage === "") {
+		        if (firstImage == "") {
 		            alert("이미지를 등록해주세요.");
 		            document.querySelector('#firstImage').focus();
 		            return false; 
 		        }
 		        
-		        if (title === "숙소명을 입력하세요." || title === " " || title === "") {
+		        if (title == "숙소명을 입력하세요." || title == "") {
 		            alert("숙소명을 입력해주세요.");
 		            document.querySelector('.title').focus();
 		            return false; 
 		        }
 
-		        if (address === "") {
+		        if (address == "") {
 		            alert("주소를 입력해주세요.");
 		            document.querySelector('#address').focus();
 		            return false; 
 		        }
 
-		        if (addr_x === "") {
+		        if (addr_x == "") {
 		            alert("위도를 입력해주세요.");
 		            document.querySelector('#addr_x').focus();
 		            return false; 
 		        }
 
-		        if (addr_y === "") {
+		        if (addr_y == "") {
 		            alert("경도를 입력해주세요.");
 		            document.querySelector('#addr_y').focus();
 		            return false; 
 		        }
 
-		        if (stay_info === "" || stay_info === "숙소 공통 정보 및 정책을 입력해주세요." || stay_info.length < 10) {
+		        if (stay_info == "" ) {
 		            alert("숙소 정보 및 정책을 입력해주세요.");
 		            document.querySelector('.stay_info').focus();
 		            return false; 
 		        }
-
+		        
+		        if (stay_info.length < 10) {
+		        	alert("숙소 정보 및 정책을 10글자 이상 입력해주세요.");
+		            document.querySelector('.stay_info').focus();
+		            return false; 
+		        }
+				
 		        alert("숙소가 등록되었습니다.");
 		        return true; 
 		    	
@@ -146,7 +152,7 @@
 	    </select> <br>
 	    <div id="textfield">
 		    <span id="title">숙소명</span>
-		    <input type="text" onfocus="this.value='';" name="stay_title" class="title" value="숙소명을 입력하세요.">
+		    <input type="text" onfocus="this.value='';" name="stay_title" class="title" placeholder="숙소명을 입력하세요.">
 	    </div>
 	    <p>숙소 공통 사진</p>
 	       	<div class="image-container">
@@ -158,13 +164,13 @@
 			        <button class="button" id="deleteButton" onclick="onClickDeleteUpload();">파일 삭제</button>
 			    </div>
 			</div>
-	    	<input type="text" id="address" name="address" placeholder="주소를 입력해주세요." />
+	    	<input type="text" id="address" name="address" placeholder="주소를 입력해주세요." readonly/>
 	    	<button id="searchButton">주소 검색</button>
 	        <div class="xy">
 		        <span>위도</span>
-		        <input type="text" onfocus="this.value='';" name="addr_x" id="addr_x" value="위도를 입력해주세요.">
+		        <input type="text" onfocus="this.value='';" name="addr_x" id="addr_x" placeholder="위도를 입력해주세요." readonly>
 		        <span>경도</span>
-		        <input type="text" onfocus="this.value='';" name="addr_y" id="addr_y" value="경도를 입력해주세요.">
+		        <input type="text" onfocus="this.value='';" name="addr_y" id="addr_y" placeholder="경도를 입력해주세요." readonly>
 	        </div>
 	        
 	         <!-- 주소 검색 및 위도 경도 구하기 -->
@@ -209,9 +215,9 @@
 	                <input type="checkbox" name="stay_facility" value="6"> 흡연구역
 	            </div>
 	        <p>숙소 정보 및 정책</p>
-	        <textarea name="stay_info" class="stay_info" onfocus="this.value='';" id="" cols="30" rows="10">숙소 공통 정보 및 정책을 입력해주세요.</textarea>
+	        <textarea name="stay_info" class="stay_info" onfocus="this.value='';" id="" cols="30" rows="10" placeholder="숙소 공통 정보 및 정책을 입력해주세요."></textarea>
 	        <p>해시태그</p>
-	        <div id="hashtag">
+	        <div id="hashtag">   
 	            <input type="checkbox" value="1" name="stay_hashtag"> 등산
 	            <input type="checkbox" value="2" name="stay_hashtag"> 바다
 	            <input type="checkbox" value="3" name="stay_hashtag"> 도시
@@ -223,11 +229,11 @@
 	        </div>
 	        
 	        <input type="submit" class="btn" value="등록하기">
-	        <input type="button" class="btn" value="취소" onclick="goToMainPage()">
+	        <input type="button" class="btn" value="취소" onclick="goToMainPage();">
 	        
 	        <script>
 		        function goToMainPage() {
-		            window.location.href = '/travel/main';
+		            location.replace("stay_list");
 		        }
 	        </script>
 	</form>

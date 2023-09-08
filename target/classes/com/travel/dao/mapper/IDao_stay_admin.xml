@@ -42,7 +42,15 @@
 		
 	<!-- 숙소 삭제하기 -->
 		<delete id="stay_delete">
+		
 			DELETE FROM TMSTSTAY WHERE S_NO=#{param1}
+			
+		</delete>
+		
+		<delete id="stay_room_All_delete">
+		
+			DELETE FROM TMSTROOM WHERE S_NO = #{param1}
+		
 		</delete>
 				
 	<!-- 객실 삭제하기 -->
@@ -72,8 +80,7 @@
 		<sql id="search_list">
 		<if test="param4 == 0">
 			<if test="param3 == 0">
-				
-			</if>
+		</if>
 			<if test="param3 != 0">
 				WHERE S_LOCA = #{param3}
 			</if>
@@ -188,10 +195,60 @@
 			WHERE NUM BETWEEN #{param1} AND #{param2}
 		</select>
 		
+		<!-- 등록된 숙소 리스트 불러오기 / 페이징 처리 -->
+		<sql id="search_list_pageing">
+		<if test="param2 == 0">
+			<if test="param1 == 0">
+		</if>
+			<if test="param1 != 0">
+				WHERE S_LOCA = #{param1}
+			</if>
+		</if>
+	
+		<if test="param2 == 1">
+			<if test="param1 == 0">
+				WHERE S_TYPE = #{param2}
+			</if>
+			<if test="param1 != 0">
+				WHERE S_LOCA = #{param1}
+				AND S_TYPE = #{param2}
+			</if>
+		</if>
+	
+		<if test="param2 == 2">
+			<if test="param1 == 0">
+				WHERE S_TYPE = #{param2}
+			</if>
+			<if test="param1 != 0">
+				WHERE S_LOCA = #{param1}
+				AND S_TYPE = #{param2}
+			</if>
+		</if>
+	
+		<if test="param2 == 3">
+			<if test="param1 == 0">
+				WHERE S_TYPE = #{param2}
+			</if>
+			<if test="param1 != 0">
+				WHERE S_LOCA = #{param1}
+				AND S_TYPE = #{param2}
+			</if>
+		</if>
+		
+		<if test="param2 == 4">
+			<if test="param1 == 0">
+				WHERE S_TYPE = #{param2}
+			</if>
+			<if test="param1 != 4">
+				WHERE S_LOCA = #{param1}
+				AND S_TYPE = #{param2}
+			</if>
+		</if>
+	</sql>
+	
 		<select id="pageCalculate" resultType="Integer">
 			SELECT COUNT(*) FROM TMSTSTAY
-			WHERE S_LOCA = #{param1}
-			AND S_TYPE = #{param2}
+			<include refid="search_list_pageing"/>
 		</select>
 		
 		<select id="stay_list" resultType="com.travel.dto.admin.DTO_Stay_room_admin">

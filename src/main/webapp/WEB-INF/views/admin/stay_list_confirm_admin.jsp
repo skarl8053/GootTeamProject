@@ -35,7 +35,7 @@
 	    });
 	</script>
 	<style>
-		body {
+		* {
 			height : auto;
 		}
 	</style>
@@ -218,19 +218,20 @@
     	<a href="stay_list_confirm?page=1&location=${location }&type=${type}"><i class="fa-solid fa-angles-left"></i></a>
     	<a href="stay_list_confirm?page=${vo.page-1 }&location=${location }&type=${type}"><i class="fa-solid fa-circle-chevron-left"></i></a>
     </c:if>
-    
-    <c:forEach begin="${vo.pageStart }" end="${vo.pageEnd }" var="i">
-    	<c:choose>
-    		<c:when test="${i eq vo.page }">
-    				<span>${i }</span>
-    		</c:when>
-    		<c:otherwise>
-    				<a href="stay_list_confirm?page=${i }&location=${location }&type=${type}">${i }</a>
-    		</c:otherwise>
-    	</c:choose>
-    </c:forEach>
-    
-    <c:if test="${vo.page < vo.totPage }">
+
+
+	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
+		<c:choose>
+			<c:when test="${i ne vo.page}">
+				<a href="stay_list_confirm?page=${i}&location=${location}&type=${type}">${i}</a>
+			</c:when>
+			<c:otherwise>
+				<span>${i}</span>
+			</c:otherwise>
+		</c:choose>
+	</c:forEach>
+
+	<c:if test="${vo.page < vo.totPage }">
     	<a href="stay_list_confirm?page=${vo.page+1 }&location=${location }&type=${type}"><i class="fa-solid fa-circle-chevron-right"></i></a>
     	<a href="stay_list_confirm?page=${vo.totPage }&location=${location }&type=${type}"><i class="fa-solid fa-angles-right"></i></a>
     </c:if>

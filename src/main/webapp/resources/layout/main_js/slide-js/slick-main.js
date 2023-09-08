@@ -6,18 +6,18 @@ $(function() {
 	
 	// 이미지 배열
 	var imageUrls = [
-	    'resources/upload_img/admin/stay/숙소11693357921313_KakaoTalk_20230830_095826716.jpg',
-	    'resources/upload_img/admin/stay/숙소11693357921316_KakaoTalk_20230830_095826716_01.jpg',
-	    'resources/upload_img/admin/stay/숙소11693357921318_KakaoTalk_20230830_095826716_02.jpg',
-	    'resources/upload_img/admin/stay/KakaoTalk_20230830_095826716_03.jpg'
+	    'resources/upload_img/admin/event/서울 야경2.jpg',
+	    'resources/upload_img/admin/event/양양 서피비치.jpg',
+	    'resources/upload_img/admin/event/제주도.jpg',
+	    'resources/upload_img/admin/event/부산.jpg'
 	];
 	
 	// 이미지에 대한 링크 배열
 	var linkUrls = [
-	    'http://www.naver.com',
-	    'http://www.nate.com',
-	    'http://www.youtube.com',
-	    'https://sports.news.naver.com/index.nhn'
+	    'http://localhost:8090/travel/main/event_page',
+	    'http://localhost:8090/travel/main/event_page2',
+	    'http://localhost:8090/travel/main/event_page3',
+	    'http://localhost:8090/travel/main/event_page4',
 	];
 	
 	// 이미지 + 링크 배열

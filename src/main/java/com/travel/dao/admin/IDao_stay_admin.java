@@ -46,9 +46,11 @@ public interface IDao_stay_admin {
 	public List<DTO_Stay_admin> room_list(int rowStart, int rowEnd, int s_no);
 
 	// 숙소 리스트 삭제 버튼 클릭 시 등록된 숙소 정보
-	public List<DTO_Stay_admin> stay_list(int s_no);
+	public DTO_Stay_room_admin stay_list(int s_no);
 
 	// 숙소 삭제 버튼 후 객실 리스트 페이징
 	public Integer room_list_pageCalculate(int s_no);
+
+	public void stay_room_All_delete(int s_no);
 
 }
