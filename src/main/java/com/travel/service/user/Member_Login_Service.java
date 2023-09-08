@@ -79,7 +79,7 @@ public class Member_Login_Service implements Interface_MemberService {
 			else
 			{
 				System.out.println("로그인 성공");
-				model.addAttribute("msg", m_name + " 님 환영합니다 !!");
+				model.addAttribute("msg", m_name + "님 환영합니다 !!");
 				return "main/main_loading";
 			}
 		}

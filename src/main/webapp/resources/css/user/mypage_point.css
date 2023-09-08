@@ -11,7 +11,6 @@
 	padding: 0;
 	margin: 0;
 	font-family: 'GmarketSansMedium', sans-serif;
-	font-size: 14px;
 }
 
 #con {
@@ -46,6 +45,7 @@ li {
 .menu:hover{
    font-weight: bolder;
 }
+
 p#MyPage{
   font-size: 35px; 
   text-align: center;

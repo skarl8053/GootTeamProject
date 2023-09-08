@@ -111,34 +111,25 @@
                <table class="coupon_table">
                   <tr>
                      <th class="No" width="15%">No</th>
-                     <th class="Date" width="25%">쿠폰명</th>
-                     <th class="content" width="30%">취득 내역</th>
-                     <th class="point" width="30%">취득 일자</th>
+                     <th class="Date" width="30%">쿠폰명</th>
+                     <th class="content" width="30%">수량</th>
                   </tr>
                   <tr>
                      <td>1</td>
                      <td>10000</td>
-                     <td>회원가입</td>
-                     <td>2020.02.02</td>
+                     <td>100</td>
                   </tr>
                   <tr>
-                     <td>1</td>
-                     <td>10000</td>
-                     <td>회원가입</td>
-                     <td>2020.02.02</td>
+                     <td>2</td>
+                     <td>20000</td>
+                     <td>200</td>
                   </tr>
                   <tr>
-                     <td>1</td>
-                     <td>10000</td>
-                     <td>회원가입</td>
-                     <td>2020.02.02</td>
+                     <td>3</td>
+                     <td>30000</td>
+                     <td>300</td>
                   </tr>
-                  <tr>
-                     <td>1</td>
-                     <td>10000</td>
-                     <td>회원가입</td>
-                     <td>2020.02.02</td>
-                  </tr>
+
                </table>
                <div id="all_coupon">
                   <p id="p_coupon">남은 쿠폰 개수 : </p><input type="text" value="오조오억" disabled>

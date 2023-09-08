@@ -18,7 +18,7 @@
 	<p class="join">회원가입</p>
 	<hr>
 	<br>
-	<form action="joining" onsubmit="return insertBeforeCheck();">
+	<form action="joining" onsubmit="return insertBeforeCheck();" id="form">
 		<input type="hidden" name="all_tema" id="all_tema" value=""/>
 		<input type="hidden" name="all_area" id="all_area" value=""/>
 

@@ -48,6 +48,11 @@
 		SELECT * FROM TMSTMEMBER WHERE M_EMAIL=#{param1} AND M_PW=#{param2}
 	</select>
 	
+	<!-- Session 외 데이터 필요 -->
+	<select id="part_info" resultType="com.travel.dto.user.DTO_Member_user">
+		SELECT * FROM TMSTMEMBER WHERE M_NO=#{param1}
+	</select>
+	
 	<!-- 회원 탈퇴 -->
 	<update id="member_delete">
 		UPDATE TMSTMEMBER SET M_LOCK='Y' WHERE M_NO=#{param1} AND M_PW=#{param2}
@@ -76,7 +81,6 @@
 	<update id="Change_Pw">
 		UPDATE TMSTMEMBER SET M_PW=#{param2} WHERE M_EMAIL=#{param1}
 	</update>
-	
 	
 
 

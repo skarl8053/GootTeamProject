@@ -10,7 +10,6 @@
 	padding: 0;
 	margin: 0;
 	font-family: 'GmarketSansMedium', sans-serif;
-	font-size: 14px;
 }
 #con {
 	width: 1200px;
@@ -93,4 +92,7 @@ td{
    text-align: center;
    width: 250px;
    height: 350px;
+}
+b{
+	font-size: 12px;
 }

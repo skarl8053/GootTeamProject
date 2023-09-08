@@ -10,10 +10,9 @@
 }
 
 * {
-	padding: 0;
-	margin: 0;
+	margin: 0px;
+	padding: 0px;
 	font-family: 'GmarketSansMedium', sans-serif;
-	font-size: 14px;
 }
 
 #con {
@@ -51,6 +50,7 @@ li {
 	font-weight: bolder;
 }
 
+
 p#MyPage {
 	font-size: 35px;
 	text-align: center;
@@ -76,6 +76,10 @@ hr {
 hr#menu_bar {
 	width: 200px;
 }
+#table{
+	margin-top: 20px;
+	height: auto;
+}
 
 #review_table, th, td {
 	border: 1px solid rgb(1, 19, 67);
@@ -90,8 +94,4 @@ hr#menu_bar {
 	margin-top: 50px;
 	width: 900px;
 	text-align: center;
-}
-
-.border_bottom {
-	border-bottom: 1px solid rgb(1, 19, 67);
 }

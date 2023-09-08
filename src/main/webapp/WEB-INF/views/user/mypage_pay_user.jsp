@@ -53,32 +53,36 @@
          <div id="table">
             <table id="pay_table">
                   <tr>
-                     <th width="10%">No</th>
-                     <th width="15%">숙소 정보</th>
-                     <th width="25%">예약 날짜</th>
-                     <th width="20%">예약일</th>
-                     <th width="20%">상태</th>
+                     <th width="5%">No</th>
+                     <th width="25%">숙소 정보</th>
+                     <th width="20%">객실 정보</th>
+                     <th width="18%">예약 날짜</th>
+                     <th width="17%">예약일</th>
+                     <th width="15%">상태</th>
                   </tr>
                   <tr>
                      <td height="200px">번호</td>
                      <td><a href="#">이미지 및 링크</a></td>
+                     <td>객실 이름</td>
                      <td>예약 날짜</td>
                      <td>예약일</td>
                      <td><a href="#">후기 작성</a></td>
                   </tr>
                   <tr>
-                     <td  height="200px">번호</td>
+                     <td height="200px">번호</td>
                      <td><a href="#">이미지 및 링크</a></td>
+                     <td>객실 이름</td>
                      <td>예약 날짜</td>
                      <td>예약일</td>
-                     <td>입금 확인</td>
+                     <td>입금 확인 중</td>
                   </tr>
                   <tr>
-                     <td  height="200px">번호</td>
+                     <td height="200px">번호</td>
                      <td><a href="#">이미지 및 링크</a></td>
+                     <td>객실 이름</td>
                      <td>예약 날짜</td>
                      <td>예약일</td>
-                     <td><a href="#">환불 신청</a></td>
+                     <td><a href="mypage_refund_popup">환불신청</a></td>
                   </tr>
             </table>
          </div>

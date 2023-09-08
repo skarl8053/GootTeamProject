@@ -251,9 +251,11 @@
 							else{
 									themeArr.splice(themeArrIndex, 1);
 							}
-							
 							console.log("themeArr : " + themeArr);
 						});
+				
+
+				
 				
 				$('.btn2').each(function(index) {
 					$(this).attr('btn2-index', index);
@@ -289,6 +291,9 @@
 							}
 							console.log("locationArr : " + locationArr);
 						});
+				
+			
+				
 			});
 	////////////////////// 테마 / 선호 지역 선택 : 남기문 /////////////////////////
 	
@@ -307,8 +312,8 @@
 	
 		var phone_number = $("input[id=m_tel]").val();
 	
-		var address = $("input[id=m_roadAddress]").val();
-		var detail_address = $("input[id=m_detailAddress]").val();
+		var roadaddress = $("input[id=m_roadAddress]").val();
+		var detailaddress = $("input[id=m_detailAddress]").val();
 		
 		if($("input[id=m_email]").val().length < 1){
 			alert("이메일을 입력해주세요");
@@ -356,12 +361,12 @@
 			return false;
 		} 
 	
-		if(address.length < 1){
+		if(roadaddress.length < 1){
 			alert("도로명 주소를 입력해주세요");
 			return false;
 		}
 			
-		if(detail_address.length < 1){
+		if(detailaddress.length < 1){
 			alert("상세 주소를 입력해주세요");
 			return false;
 		}	

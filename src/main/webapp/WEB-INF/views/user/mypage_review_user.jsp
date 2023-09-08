@@ -53,17 +53,17 @@
          <div id="table">
             <table id="review_table">
                <tr>
-                  <td class="border_bottom" rowspan="3" width="10%" height="350px">No</td>
+                  <td class="border_bottom" rowspan="3" width="5%" height="350px">No</td>
                   <td class="border_bottom" rowspan="3" width="30%">후기 img</td>
-                  <td colspan="3" height="70px"><a href="#">후기 제목</a></td>
+                  <td colspan="3" height="70px" style="text-align:left; padding-left:10px;"><a href="#">후기 제목</a></td>
                </tr>
                <tr>
-                  <td class="border_bottom" rowspan="2" width="40%">후기 내용</td>
+                  <td class="border_bottom" rowspan="2" width="40%" style="text-align:left; padding-left:10px;">후기 내용</td>
                   <td colspan="2"></td>
                </tr>
                <tr>        
-                  <td class="border_bottom" width="5%" height="50px">좋아요 이미지</td>
-                  <td class="border_bottom" width="10%">좋아요개수</td>
+                  <td class="border_bottom" width="10%" height="80px">좋아요<br />이미지</td>
+                  <td class="border_bottom" width="8%">좋아요<br />개수</td>
                </tr>
             </table>
          </div>

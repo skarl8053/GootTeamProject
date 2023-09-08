@@ -21,6 +21,7 @@ import com.travel.service.user.Member_FindPw_Service;
 import com.travel.service.user.Member_FreeCoupon_Service;
 import com.travel.service.user.Member_Join_Service;
 import com.travel.service.user.Member_Login_Service;
+import com.travel.service.user.Member_Modifing_Service;
 import com.travel.service.user.Member_Modify_Service;
 import com.travel.service.user.Member_Send_Service;
 
@@ -172,6 +173,11 @@ public class Controller_Member_user {
 
 	@RequestMapping(value = "modify")
 	public String modify(HttpServletRequest request, Model model) {
+		System.out.println("회원정보 페이지로 이동");
+		model.addAttribute("request", request);
+
+		service = new Member_Modify_Service(sqlSession);
+		service.execute(model);
 		return "member/member_modify_user";
 	}
 
@@ -180,10 +186,10 @@ public class Controller_Member_user {
 		System.out.println("회원정보 수정 후 메인페이지로 이동");
 		model.addAttribute("request", request);
 
-		service = new Member_Modify_Service(sqlSession);
+		service = new Member_Modifing_Service(sqlSession);
 		service.execute(model);
 
-		return "member/member_modify_user";
+		return "../user/mypage_info_user";
 	}
 
 	@ResponseBody
