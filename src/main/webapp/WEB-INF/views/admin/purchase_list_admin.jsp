@@ -89,11 +89,11 @@
     
 
 	<!-- 메세지 -->
-	<c:if test="${msg != ''}">
+	<c:if test="${not empty msg}">
 			
 		<script>
 			alert("${msg}");
-			location.replace("event?page=1");
+			location.replace("purchase?searchType=${searchType}");
 		</script>
 		
 	</c:if>
@@ -101,7 +101,20 @@
 	<script>
 	
 		function searchbox_change(){
+			
 			document.getElementById("keyword").value = "";
+			
+		}
+		
+		function searchCheck(){
+			
+			var keyword = document.getElementById("keyword").value;
+			
+			if(keyword.length < 1){
+				alert("검색할 내용을 입력해주세요");
+				return false;
+			}
+			
 		}
 	
 	</script>
@@ -109,7 +122,7 @@
     <!-- 메인 -->
     <h1>회원 구매 내역 조회</h1>
 
-    <form action="purchase">
+    <form action="purchase" onsubmit="return searchCheck()">
     
     	<input type="hidden" name="page" value="1" />
     	
@@ -145,7 +158,7 @@
 				</c:choose>
     		</span>
     		<span>
-    			<input type="submit" class="button" value="검색" onclick="searchExecute();">
+    			<input type="submit" class="button" value="검색">
     		</span>
     	</div>
     	<br><br>
@@ -184,24 +197,24 @@
         	<br />
         	<div id="paging">
         		<c:if test="${vo.page>1}">
-					<a href="purchase?page=1&searchType=${searchType }&keyword=${keyword}"><i class="fa-solid fa-angles-left"></i></a>
-					<a href="purchase?page=${vo.page-1 }&searchType=${searchType }&keyword=${keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
+					<a href="purchase?page=1&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
+					<a href="purchase?page=${vo.page-1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
 				</c:if>
-
-				<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
-					<c:choose>
-						<c:when test="${i ne page}">
-							<a href="purchase?page=${i}&searchType=${searchType }&keyword=${keyword}">${i}</a>
-						</c:when>
-						<c:otherwise>
-							<span>${i}</span>
-						</c:otherwise>
-					</c:choose>
-				</c:forEach>
-
-				<c:if test="${vo.page < vo.totPage }">
-					<a href="purchase?page=${vo.page+1 }&searchType=${searchType }&keyword=${keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
-					<a href="purchase?page=${vo.totPage }&searchType=${searchType }&keyword=${keyword}"><i class="fa-solid fa-angles-right"></i></a>
+	        	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
+	        	
+	        		<c:choose>
+	        			<c:when test="${ i ne param.page }">
+	        				<a href="purchase?page=${i}&searchType=${searchType}&keyword=${keyword}">${i}</a>
+	        			</c:when>
+	        			<c:otherwise>
+	        				<span>${i}</span>
+	        			</c:otherwise>
+	        		</c:choose>
+	        		
+	        	</c:forEach>
+	        	<c:if test="${vo.page < vo.totPage}">
+					<a href="purchase?page=${vo.page+1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
+					<a href="purchase?page=${vo.totPage }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
 				</c:if>
         	</div>
         </div>

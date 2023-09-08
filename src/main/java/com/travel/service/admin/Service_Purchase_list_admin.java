@@ -56,17 +56,37 @@ public class Service_Purchase_list_admin implements Interface_TravelService {
 
 		ArrayList<DTO_Purchase_admin> p_list = dao.purchase_list(searchType, keyword, vo.getRowStart(), vo.getRowEnd());
 
+		if(p_list.size() < 1) {
+			
+			if(keyword.equals("")) {
+				
+				model.addAttribute("msg", "");
+				model.addAttribute("searchType", searchType);
+				model.addAttribute("keyword", keyword);
+				model.addAttribute("vo", vo);
+				
+				if(request.getParameter("msg") == null || request.getParameter("msg").equals("")) {
+					model.addAttribute("msg","");
+				}
+				else {
+					model.addAttribute("msg",request.getParameter("msg"));
+				}
+				
+				return;
+			}
+			else {
+				model.addAttribute("msg", "검색 결과가 없습니다.");
+			}
+			
+		}
+		
 		model.addAttribute("vo", vo);
 		model.addAttribute("p_list", p_list);
 		model.addAttribute("searchType", searchType);
 		model.addAttribute("keyword", keyword);
-
-		if (request.getParameter("msg") == null || request.getParameter("msg").equals("")) {
-			model.addAttribute("msg", "");
-		} else {
-			model.addAttribute("msg", request.getParameter("msg"));
-		}
-
+		
+		
+		
 	}
 
 }

@@ -101,11 +101,11 @@
                     <li class="menu-bar"><a href="#">이벤트 / 쿠폰 관리 <i class='fa fa-angle-down'></i></a>
                         <ul>
                             <li>    
-                                <button class="inner_button" type="button" onclick="siteLocation('event');">이벤트 관리</button>
-                                <button class="inner_button" type="button" onclick="siteLocation('item');">경품 관리</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('event?page=1');">이벤트 관리</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('item?page=1');">경품 관리</button>
                             </li>
                             <li>    
-                                <button class="inner_button" type="button" onclick="siteLocation('coupon');">쿠폰 관리</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('coupon?page=1');">쿠폰 관리</button>
                             	<button class="inner_button" style="visibility: hidden;" type="button" >준비중</button>
                             </li>
                         </ul>

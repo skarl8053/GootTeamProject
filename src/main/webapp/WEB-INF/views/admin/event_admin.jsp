@@ -183,13 +183,13 @@
 		</script>
 		
 	</c:if>
-
-
-
+	
+	
+	
     <!-- 메인 -->
     <h1>이벤트 관리</h1>
 
-    <form action="">
+    <form action="event">
     
     	<input type="hidden" name="page" value="1" />
     	

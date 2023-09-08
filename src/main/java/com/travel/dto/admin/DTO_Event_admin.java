@@ -19,6 +19,7 @@ public class DTO_Event_admin {
 	private String event_startdate;
 	private String event_enddate;
 	private String filename;
+	private String filename2;
 	private String check_winner_date;
 	
 	// 이벤트 당첨자 조회

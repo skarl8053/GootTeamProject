@@ -11,6 +11,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" integrity="sha512-aOG0c6nPNzGk+5zjwyJaoRUgCdOrfSDhmMID2u4+OIslr0GjpLKo7Xm0Ao3xmpM4T8AmIouRkqwj1nrdVsLKEQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+	<!-- 개별 화면 content 크기를 조절하는 방법 -->
+	<style>
+		#content{
+			height: 2000px;
+		}
+	</style>
+
 </head>
 <body>
 
@@ -70,13 +77,13 @@
 
         /***************** 첨부파일 컨트롤 ********************/
 
-        #filebox #upload-name {
+        #filebox #upload-name, #filebox #upload-name2 {
             display: inline-block;
             height: 40px;
             padding: 0 10px;
             vertical-align: middle;
             border: 1px solid #dddddd;
-            width: 78%;
+            width: 300px;
             color: #999999;
         }
         #filebox label {
@@ -98,7 +105,17 @@
             border: 0;
         }
         /* 첨부파일 컨트롤 끝 */
-
+        .img_standard{
+            color: lightblue;
+        }
+        #event_banner_img{
+            width: 600px;
+            height: 300px;
+        }
+        #event_banner_img2{
+            width: 600px;
+            height: 800px;
+        }
     </style>
 
     <script>
@@ -275,7 +292,8 @@
 	        var updated_event_startdate = document.getElementById("datepicker_startdate").value;
 	        var updated_event_enddate = document.getElementById("datepicker_enddate").value;
 	        var updated_event_file = document.getElementById("upload-name").value;
-	
+	        var updated_event_file2 = document.getElementById("upload-name2").value;
+	        
 	        if(updated_event_name.length < 1){
 	            alert("이벤트 명을 입력해주세요");
 	            return false;
@@ -287,9 +305,14 @@
 	            return false;
 	        }
 	
-	        if(updated_event_enddate.length < 1)
+	        if(updated_event_file.length < 1)
 	        {
-	            alert("사진을 등록해주세요");
+	            alert("이벤트 배너 사진을 등록해주세요");
+	            return false;
+	        }
+	        if(updated_event_file2.length < 1)
+	        {
+	            alert("이벤트 상세 사진을 등록해주세요");
 	            return false;
 	        }
     		const truefalse = confirm("이벤트를 삭제하시면 복구 불가능합니다.");
@@ -306,13 +329,20 @@
             var fileName = $("#file").val().split('/').pop().split('\\').pop();
             $("#upload-name").val(fileName);
         });
+
+        $("#file2").on('change',function(){
+            var fileName = $("#file").val().split('/').pop().split('\\').pop();
+            $("#upload-name2").val(fileName);
+        });
 	    
         $(document).ready(function() {
             $("#file").on("change", check_Upload_image_file);
+            $("#file2").on("change", check_Upload_image_file2);
         });
      
         function check_Upload_image_file(e) {
         	
+            // 이벤트 배너 사진 첨부
         	// 파일 첨부시 이미지 파일인지 체크
         	
             var files = e.target.files;
@@ -331,11 +361,47 @@
                 	
                 	var uploadFileName = document.getElementById("file").files[0].name;
                 	document.getElementById("upload-name").value = uploadFileName;
-                	
+                    
+                    var reader = new FileReader();
+                    reader.onload = (e) => {
+                        document.getElementById("event_banner_img").src = e.target.result;
+                    }
+                    reader.readAsDataURL(document.getElementById("file").files[0])
                 }
             });
         }
 
+        function check_Upload_image_file2(e) {
+        	
+            // 이벤트 상세 사진 첨부
+        	// 파일 첨부시 이미지 파일인지 체크
+        	
+            var files = e.target.files;
+            var filesArr = Array.prototype.slice.call(files);
+     
+            var reg = /(.*?)\/(jpg|jpeg|png|bmp)$/;
+     
+            filesArr.forEach(function(f) {
+                if (!f.type.match(reg)) {
+                    alert("확장자는 이미지 확장자만 가능합니다.");
+                    
+                    document.getElementById("upload-name2").value = "";
+                    return;
+                }
+                else{
+                	
+                	var uploadFileName = document.getElementById("file2").files[0].name;
+                	document.getElementById("upload-name2").value = uploadFileName;
+                    
+                    var reader = new FileReader();
+                    reader.onload = (e) => {
+                        document.getElementById("event_banner_img2").src = e.target.result;
+                    }
+                    reader.readAsDataURL(document.getElementById("file2").files[0])
+
+                }
+            });
+        }
     </script>
 
     <h1>이벤트 상세 조회 및 변경</h1>
@@ -353,6 +419,10 @@
 						<input type="text" id="event_name" name="event_name" autocomplete="off" value="${ list.event_name}" onchange="valueChanged()">
 					</td>
 				</tr>
+                <tr>
+                    <td><br><br></td>
+                    <td><br><br></td>
+                </tr>
 				<tr>
 					<td>이벤트 진행 여부</td>
 					<td>
@@ -377,10 +447,13 @@
 									
 								</c:when>
 							</c:choose>
-						</ul>
 						
 					</td>
 				</tr>
+                <tr>
+                    <td><br><br></td>
+                    <td><br><br></td>
+                </tr>
 				<tr>
 					<td>이벤트 기간</td>
 					<td>
@@ -395,8 +468,16 @@
 						</ul>
 					</td>
 				</tr>
+                <tr>
+                    <td><br><br></td>
+                    <td><br><br></td>
+                </tr>
 				<tr>
-					<td>이벤트 사진 첨부</td>
+					<td>
+                        <span>이벤트 배너 사진 첨부</span>
+                        <br>
+                        <span class="img_standard">최소 : 400px * 300px</span>
+                    </td>
 					<td>
 						<ul class="eventlist">
 							<li class="value" id="filebox">
@@ -407,6 +488,37 @@
 						</ul>
 					</td>
 				</tr>
+                <tr>
+                    <td></td>
+                    <td><img id="event_banner_img" src="resources/upload_img/admin/event/${list.filename}" ></td>
+                </tr>
+                <tr>
+                    <td><br><br></td>
+                    <td><br><br></td>
+                </tr>
+                <tr>
+					<td><span>이벤트 상세 사진 첨부</span>
+                        <br>
+                        <span class="img_standard">최소 : 600px * 800px</span>
+                    </td>
+					<td>
+						<ul class="eventlist">
+							<li class="value" id="filebox">
+									<input id="upload-name2" value="${list.filename2}" placeholder="첨부파일"  readonly autocomplete="off">
+									<label for="file2">파일찾기</label> 
+									<input type="file" id="file2" name="file2" accept="image/*" onchange="valueChanged()">
+							</li>
+						</ul>
+					</td>
+				</tr>
+                <tr>
+                    <td></td>
+                    <td><img id="event_banner_img2" src="resources/upload_img/admin/event/detail/${list.filename2}"></td>
+                </tr>
+                <tr>
+                    <td><br><br></td>
+                    <td><br><br></td>
+                </tr>
 				<tr>
 					<td>1등 당첨 경품</td>
 					<td><input type="text" class="item_name" value="미등록" readonly ></td>

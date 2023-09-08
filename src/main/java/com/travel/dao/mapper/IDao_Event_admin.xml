@@ -7,16 +7,18 @@
 
 	<select id="pageCalculate" resultType="Integer">
 		
+		<![CDATA[
 		SELECT  	COUNT(*)
-    	FROM    TMSTEVENT A 
-	    WHERE
+		FROM    TMSTEVENT A 
+		WHERE
 	    (
 	        ( #{param1} = 1 )
-	        OR      ( #{param1} = 2 AND A.EVENT_FLAG = 1)
-	        OR      ( #{param1} = 3 AND A.EVENT_FLAG = 2)
-	        OR      ( #{param1} = 4 AND A.EVENT_FLAG = 3)
+		    OR      ( #{param1} = 2 AND SYSDATE < A.EVENT_STARTDATE)
+		    OR      ( #{param1} = 3 AND SYSDATE BETWEEN A.EVENT_STARTDATE AND A.EVENT_ENDDATE + 1)
+		    OR      ( #{param1} = 4 AND SYSDATE > A.EVENT_ENDDATE + 1)
 	    )
-	    AND LOWER(A.EVENT_NAME) LIKE '%' || LOWER(#{param2}) || '%'
+		AND LOWER(A.EVENT_NAME) LIKE '%' || LOWER(#{param2}) || '%'      
+		]]>
 		
 	</select>
 
@@ -58,9 +60,9 @@
 				    WHERE
 				    (
 				        ( #{param1} = 1 )
-				        OR      ( #{param1} = 2 AND A.EVENT_FLAG = 1)
-				        OR      ( #{param1} = 3 AND A.EVENT_FLAG = 2)
-				        OR      ( #{param1} = 4 AND A.EVENT_FLAG = 3)
+					    OR      ( #{param1} = 2 AND SYSDATE < A.EVENT_STARTDATE)
+					    OR      ( #{param1} = 3 AND SYSDATE BETWEEN A.EVENT_STARTDATE AND A.EVENT_ENDDATE + 1)
+					    OR      ( #{param1} = 4 AND SYSDATE > A.EVENT_ENDDATE + 1)
 				    )
 				    AND LOWER(A.EVENT_NAME) LIKE '%' || LOWER(#{param2}) || '%'
 				    ORDER BY A.EVENT_STARTDATE DESC, EVENT_NO ASC
@@ -78,6 +80,7 @@
 						,TO_CHAR(EVENT_STARTDATE, 'yyyy-MM-dd') AS EVENT_STARTDATE
 						,TO_CHAR(EVENT_ENDDATE, 'yyyy-MM-dd') AS EVENT_ENDDATE
 						,FILENAME
+						,FILENAME2
 						,EVENT_FLAG
 			FROM 	TMSTEVENT
 			WHERE  EVENT_NO = #{param1}
@@ -86,8 +89,8 @@
 	
 	<insert id="insertEvents">
 	
-			INSERT 	INTO TMSTEVENT (EVENT_NO, EVENT_NAME, EVENT_STARTDATE, EVENT_ENDDATE, FILENAME, EVENT_FLAG, EVENT_MEMBER_FLAG)
-			VALUES((SELECT NVL(MAX(EVENT_NO),0) + 1 FROM TMSTEVENT), #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, 'N')
+			INSERT 	INTO TMSTEVENT (EVENT_NO, EVENT_NAME, EVENT_STARTDATE, EVENT_ENDDATE, FILENAME, FILENAME2, EVENT_FLAG, EVENT_MEMBER_FLAG)
+			VALUES((SELECT NVL(MAX(EVENT_NO),0) + 1 FROM TMSTEVENT), #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, 'N')
 			
 	</insert>
 	
@@ -98,7 +101,8 @@
 							,EVENT_STARTDATE = #{param3}
 							,EVENT_ENDDATE = #{param4}
 							,FILENAME = #{param5}
-							,EVENT_FLAG = #{param6}
+							,FILENAME2 = #{param6}
+							,EVENT_FLAG = #{param7}
 			WHERE 		EVENT_NO = #{param1}
 			
 	</update>

@@ -208,14 +208,14 @@
         	<br />
         	<div id="paging">
         		<c:if test="${vo.page>1}">
-					<a href="couponlist?page=1&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
-					<a href="couponlist?page=${vo.page-1 }&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
+					<a href="coupon?page=1&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
+					<a href="coupon?page=${vo.page-1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
 				</c:if>
 	        	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
 	        	
 	        		<c:choose>
 	        			<c:when test="${ i ne param.page }">
-	        				<a href="couponlist?page=${i}&keyword=${keyword}">${i}</a>
+	        				<a href="coupon?page=${i}&searchType=${searchType}&keyword=${keyword}">${i}</a>
 	        			</c:when>
 	        			<c:otherwise>
 	        				<span>${i}</span>
@@ -224,8 +224,8 @@
 	        		
 	        	</c:forEach>
 	        	<c:if test="${vo.page < vo.totPage}">
-					<a href="couponlist?page=${vo.page+1 }&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
-					<a href="couponlist?page=${vo.totPage }&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
+					<a href="coupon?page=${vo.page+1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
+					<a href="coupon?page=${vo.totPage }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
 				</c:if>
         	</div>
         </div>
