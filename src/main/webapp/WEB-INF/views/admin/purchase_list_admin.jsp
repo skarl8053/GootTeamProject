@@ -70,6 +70,17 @@
 		table thead tr td{
 			border-bottom: 1px solid black;
 		}
+		#warning_content{
+        	text-align: center;
+        }
+        #warning_img{
+        	width: 150px;
+        	height: 150px;
+        	margin: 0 auto;
+        }
+        #warning_text{
+        	font-size: 20px;
+        }
 		#paging{
 			width: 1200px;
 			text-align: center;
@@ -93,7 +104,7 @@
 			
 		<script>
 			alert("${msg}");
-			location.replace("purchase?searchType=${searchType}");
+			location.replace("purchase");
 		</script>
 		
 	</c:if>
@@ -195,28 +206,46 @@
     	</div>
     	<div>
         	<br />
-        	<div id="paging">
-        		<c:if test="${vo.page>1}">
-					<a href="purchase?page=1&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
-					<a href="purchase?page=${vo.page-1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
-				</c:if>
-	        	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
-	        	
-	        		<c:choose>
-	        			<c:when test="${ i ne param.page }">
-	        				<a href="purchase?page=${i}&searchType=${searchType}&keyword=${keyword}">${i}</a>
-	        			</c:when>
-	        			<c:otherwise>
-	        				<span>${i}</span>
-	        			</c:otherwise>
-	        		</c:choose>
-	        		
-	        	</c:forEach>
-	        	<c:if test="${vo.page < vo.totPage}">
-					<a href="purchase?page=${vo.page+1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
-					<a href="purchase?page=${vo.totPage }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
-				</c:if>
-        	</div>
+        	<c:if test="${empty param.searchType && empty param.keyword}">
+    	 		<div id="warning_content" >
+    	 			<img id="warning_img" src="resources/img/PL_Search.png" alt="이미지 없음"/>
+    	 			<br />
+	    	 		<span id="warning_text">내용을 검색해주세요</span>
+	    	 		<br /><br /><br />
+    	 		</div>
+    	 	</c:if>
+        	<c:if test="${(not empty param.param1 || not empty param.keyword) && empty p_list}">
+		    	 <div id="warning_content" >
+		    	 		<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+		    	 		<br />
+			    	 	<span id="warning_text">검색된 회원 구매내역이 없습니다.</span>
+			    	 	<br /><br /><br />
+		    	 </div>
+		    </c:if>
+		    <c:if test="${not empty p_list}">
+		    	<div id="paging">
+	        		<c:if test="${vo.page>1}">
+						<a href="purchase?page=1&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
+						<a href="purchase?page=${vo.page-1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
+					</c:if>
+		        	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
+		        	
+		        		<c:choose>
+		        			<c:when test="${ i ne param.page }">
+		        				<a href="purchase?page=${i}&searchType=${searchType}&keyword=${keyword}">${i}</a>
+		        			</c:when>
+		        			<c:otherwise>
+		        				<span>${i}</span>
+		        			</c:otherwise>
+		        		</c:choose>
+		        		
+		        	</c:forEach>
+		        	<c:if test="${vo.page < vo.totPage}">
+						<a href="purchase?page=${vo.page+1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
+						<a href="purchase?page=${vo.totPage }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
+					</c:if>
+	        	</div>
+		    </c:if>
         </div>
     </form>
     

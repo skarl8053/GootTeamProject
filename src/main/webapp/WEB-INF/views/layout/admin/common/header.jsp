@@ -13,7 +13,12 @@
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     
-	
+    <style>
+    	.jbFixed {
+		   position: fixed;
+		   top: 0px;
+		}
+    </style>
 </head>
 <body>
 	
@@ -52,6 +57,19 @@
 		function siteLocation(move_site){
             location.replace(move_site);
         }
+		
+		// 헤더 고정 // 남기문
+		$( document ).ready( function() {
+	        var jbOffset = $( '#container' ).offset();
+	        $( window ).scroll( function() {
+	          if ( $( document ).scrollTop() > jbOffset.top ) {
+	            $( '#container' ).addClass( 'jbFixed' );
+	          }
+	          else {
+	            $( '#container' ).removeClass( 'jbFixed' );
+	          }
+	        });
+	      });
 	
 		function logout(){
 			
@@ -71,7 +89,7 @@
         <nav id="navigation">
             <div class="container">
                 <ul class="buttonlist">
-                    <li class="menu-etc" id="logo_img"><a href="#"><img src="" alt="이미지 없음"></a></li>
+                    <li class="menu-etc" id="logo_img"><a href="javascript:siteLocation('purchase');"><img src="" alt="이미지 없음"></a></li>
                     <li class="menu-bar"><a href="#">회원 / 매출 관리 <i class='fa fa-angle-down'></i></a>
                         <ul>
                             <li>    

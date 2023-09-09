@@ -61,7 +61,7 @@
 	<c:if test="${param.gubun eq 1}">
 		<script>
 			alert("${param.msg}");
-			location.replace("couponlist");
+			location.replace("coupon");
 		</script>
 	</c:if>
 	<!-- 등록하려는 쿠폰이 중복일 때 -->

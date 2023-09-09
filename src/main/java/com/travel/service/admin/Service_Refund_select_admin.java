@@ -35,13 +35,14 @@ public class Service_Refund_select_admin implements Interface_TravelService {
 		
 		if(isRefund_noParamExists == true && list == null)
 		{
-			if(order_no.length() < 1) {
+//			if(order_no.length() < 1) {
+				model.addAttribute("order_no", order_no);
 				model.addAttribute("msg", "");
 				return;
-			}
-			else {
-				model.addAttribute("msg", "입력하신 주문번호의 환불정보가 존재하지 않습니다.");
-			}
+//			}
+//			else {
+//				model.addAttribute("msg", "입력하신 주문번호의 환불정보가 존재하지 않습니다.");
+//			}
 		}
 		else {
 			model.addAttribute("order_no", order_no);

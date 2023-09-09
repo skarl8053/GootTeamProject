@@ -12,7 +12,7 @@
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 1300px;
+			height: 1500px;
 		}
 	</style>
 	
@@ -54,7 +54,7 @@
             height: 32px;
         }
         .button:hover{
-        cursor: pointer;
+       	 	cursor: pointer;
         }
         table{
             width: 1200px;
@@ -66,8 +66,9 @@
         table tbody tr td{
         	height: 40px;
         }
-        table thead tr td{
-            border-bottom: 1px solid black;
+        table thead th{
+        	border-style: none;
+        	border-bottom: 1px solid black;
         }
         #header_checkbox{
         	text-align: center;
@@ -98,6 +99,17 @@
         	max-width: 300px;
         	height: 300px;
         	max-height: 300px;
+        }
+        #warning_content{
+        	text-align: center;
+        }
+        #warning_img{
+        	width: 150px;
+        	height: 150px;
+        	margin: 0 auto;
+        }
+        #warning_text{
+        	font-size: 20px;
         }
 		#paging{
 			width: 1200px;
@@ -138,7 +150,7 @@
         	location.replace("itemform?event_no=" + event_no + "&event_name=" + event_name + "&gubun=insert")
         }
         
-		function deleteItem(event_no){
+		function deleteItem(event_no, event_name){
 			
 			var check = confirm("제품 전체가 삭제됩니다. 계속 진행하시겠습니까?");
 			
@@ -146,7 +158,7 @@
 				return false;
 			}
 			else{
-				location.replace("itemdelete?event_no=" + event_no);
+				location.replace("itemdelete?event_no=" + event_no + "&event_name=" + event_name);
 			}
         }
         
@@ -196,11 +208,11 @@
     	<br><br>
     	<div>
             <table>
-                <tr>
+                <thead>
                     <th width="10%">등수</th>
                     <th width="38%">사진</th>
                     <th width="52%">제품 / 설명</th>
-                </tr>
+                </thead>
                 <c:forEach items="${list}" var="li">
                     <tr>
                         <td id="first_col">${li.item_no}</td>
@@ -217,16 +229,32 @@
                 </c:forEach>
             </table>
         </div>
-        <br /><br />
         <div>
-        	<c:if test="${not empty param.event_no && not empty param.event_name }">
-        		<c:if test="${not empty list}">
-	        		<input type="button" class="button" value="경품 삭제" onclick="return deleteItem('${param.event_no}');">
+	        <br /><br /><br />
+	        	<c:if test="${empty param.event_no && empty param.event_name}">
+	        		<div id="warning_content" >
+		    	 			<img id="warning_img" src="resources/img/PL_Search.png" alt="이미지 없음"/>
+		    	 			<br />
+			    	 		<span id="warning_text">이벤트를 검색해주세요</span>
+			    	 		<br /><br /><br />
+		    	 		</div>
 	        	</c:if>
-	        	<c:if test="${empty list}">
-	        		<input type="button" class="button" value="경품 등록" onclick="insertItem('${param.event_no}','${param.event_name }');">
+	        	<c:if test="${not empty param.event_no && not empty param.event_name && empty list}">
+	        			<div id="warning_content" >
+		    	 			<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+		    	 			<br />
+			    	 		<span id="warning_text">해당 이벤트의 경품 내역이 없습니다.</span>
+			    	 		<br /><br /><br />
+		    	 		</div>
 	        	</c:if>
-        	</c:if>
+	        	<c:if test="${not empty param.event_no && not empty param.event_name }">
+	        		<c:if test="${not empty list}">
+		        		<input type="button" class="button" value="경품 삭제" onclick="return deleteItem('${param.event_no}', '${param.event_name}');">
+		        	</c:if>
+		        	<c:if test="${empty list}">
+		        		<input type="button" class="button" value="경품 등록" onclick="insertItem('${param.event_no}','${param.event_name }');">
+		        	</c:if>
+	        	</c:if>
         </div>
     </form>
 	

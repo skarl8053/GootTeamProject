@@ -101,8 +101,18 @@
             height: 50px;
 			cursor: not-allowed;
 			margin: 10px 30px 0px 30px;
-			
 		}
+        #warning_content{
+        	text-align: center;
+        }
+        #warning_img{
+        	width: 150px;
+        	height: 150px;
+        	margin: 0 auto;
+        }
+        #warning_text{
+        	font-size: 20px;
+        }
 		.button{
             background-color: #011343;
             color:  #EBD01C;
@@ -266,110 +276,129 @@
 				</span>
 			</div>
 			<br><br>
-			<div>
+			<c:if test="${empty param.order_no && empty list}">
+				<div id="warning_content" >
+    	 			<img id="warning_img" src="resources/img/PL_Search.png" alt="이미지 없음"/>
+    	 			<br />
+	    	 		<span id="warning_text">배송 내역을 조회할 주문번호를 입력해주세요</span>
+	    	 		<br /><br /><br />
+    	 		</div>
+			</c:if>
+			<c:if test="${not empty param.order_no && empty list}">
+				<div id="warning_content" >
+    	 			<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+    	 			<br />
+	    	 		<span id="warning_text">해당 주문번호의 주문 정보가 없습니다.</span>
+	    	 		<br /><br /><br />
+    	 		</div>
+			</c:if>
+			<c:if test="${not empty list}">
 				<div>
-					<span class="title">배송 상세내역</span>
+					<div>
+						<span class="title">배송 상세내역</span>
+					</div>
+					<br>
+					<table>
+						<colgroup>
+							<col style="width: 10%">
+							<col style="width: 40%">
+							<col style="width: 10%">
+							<col style="width: 40%">
+						</colgroup>
+						<tbody>
+							<tr>
+								<td class="first_col">배송번호</td>
+								<td class="second_col" colspan="3">${list.delivery_no}</td>
+							</tr>
+							<tr>
+								<td class="first_col">이벤트명</td>
+								<td class="second_col">${list.event_name}</td>
+								<td class="third_col">이벤트 등수</td>
+								<td class="forth_col">${list.score}</td>
+							</tr>
+							<tr>
+								<td class="first_col">제품명</td>
+								<td class="second_col" colspan="3">${list.item_name}</td>
+							</tr>
+							<tr>
+								<td class="first_col">배송 상태</td>
+								<td class="second_col" colspan="3" style="color: red; font-weight: bolder;">${list.step_flag_str}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<br>
-				<table>
-					<colgroup>
-						<col style="width: 10%">
-						<col style="width: 40%">
-						<col style="width: 10%">
-						<col style="width: 40%">
-					</colgroup>
-					<tbody>
-						<tr>
-							<td class="first_col">배송번호</td>
-							<td class="second_col" colspan="3">${list.delivery_no}</td>
-						</tr>
-						<tr>
-							<td class="first_col">이벤트명</td>
-							<td class="second_col">${list.event_name}</td>
-							<td class="third_col">이벤트 등수</td>
-							<td class="forth_col">${list.score}</td>
-						</tr>
-						<tr>
-							<td class="first_col">제품명</td>
-							<td class="second_col" colspan="3">${list.item_name}</td>
-						</tr>
-						<tr>
-							<td class="first_col">배송 상태</td>
-							<td class="second_col" colspan="3" style="color: red; font-weight: bolder;">${list.step_flag_str}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<br><br>
-			<div id="bottomfield">
-				<div>
-					<span class="title">배송 상태 변경</span>
-				</div>
-				<div class="statusfield">
-					<span>
+				<br><br>
+				<div id="bottomfield">
+					<div>
+						<span class="title">배송 상태 변경</span>
+					</div>
+					<div class="statusfield">
+						<span>
+							<c:if test="${list.step1_status eq 'Y'}">
+								<img class="step_img" src="resources/img/delivery/Complete.png" alt="이미지">
+							</c:if>
+							<c:if test="${list.step1_status eq 'N'}">
+								<img class="step_img"  src="resources/img/delivery/Check_Order.png" alt="이미지">
+							</c:if>
+						</span>
+						<span>
+							<c:if test="${list.step2_status eq 'Y'}">
+								<img class="step_img"  src="resources/img/delivery/Complete.png" alt="이미지">
+							</c:if>
+							<c:if test="${list.step2_status eq 'N'}">
+								<img class="step_img"  src="resources/img/delivery/Preparing_Delivery.png" alt="이미지">
+							</c:if>
+						</span>
+						<span>
+							<c:if test="${list.step3_status eq 'Y'}">
+								<img class="step_img"  src="resources/img/delivery/Complete.png" alt="이미지">
+							</c:if>
+							<c:if test="${list.step3_status eq 'N'}">
+								<img class="step_img"  src="resources/img/delivery/Delivery.png" alt="이미지">
+							</c:if>
+						</span>
+						<span>
+							<c:if test="${list.step4_status eq 'Y'}">
+								<img class="step_img"  src="resources/img/delivery/Complete.png" alt="이미지">
+							</c:if>
+							<c:if test="${list.step4_status eq 'N'}">
+								<img class="step_img"  src="resources/img/delivery/Delivery_Complete.png" alt="이미지">
+							</c:if>
+						</span>
+					</div>
+					<div class="statusfield">
 						<c:if test="${list.step1_status eq 'Y'}">
-							<img class="step_img" src="resources/img/delivery/Complete.png" alt="이미지">
+							<button type="button" class="statusbutton_stop" onclick="return status1_change('Y')">처리 완료</button>
 						</c:if>
 						<c:if test="${list.step1_status eq 'N'}">
-							<img class="step_img"  src="resources/img/delivery/Check_Order.png" alt="이미지">
+							<button type="button"  class="statusbutton" onclick="return status1_change('N')">배송 주문 확인 처리</button>
 						</c:if>
-					</span>
-					<span>
+						
 						<c:if test="${list.step2_status eq 'Y'}">
-							<img class="step_img"  src="resources/img/delivery/Complete.png" alt="이미지">
+							<button type="button"  class="statusbutton_stop" onclick="return status2_change('Y')">처리 완료</button>
 						</c:if>
 						<c:if test="${list.step2_status eq 'N'}">
-							<img class="step_img"  src="resources/img/delivery/Preparing_Delivery.png" alt="이미지">
+							<button type="button"  class="statusbutton" onclick="return status2_change('N')">배송 준비 완료 처리</button>
 						</c:if>
-					</span>
-					<span>
+						
 						<c:if test="${list.step3_status eq 'Y'}">
-							<img class="step_img"  src="resources/img/delivery/Complete.png" alt="이미지">
+							<button type="button"  class="statusbutton_stop" onclick="return status3_change('Y')">처리 완료</button>
 						</c:if>
 						<c:if test="${list.step3_status eq 'N'}">
-							<img class="step_img"  src="resources/img/delivery/Delivery.png" alt="이미지">
+							<button type="button"  class="statusbutton" onclick="return status3_change('N')">배송중 처리</button>
 						</c:if>
-					</span>
-					<span>
+						
 						<c:if test="${list.step4_status eq 'Y'}">
-							<img class="step_img"  src="resources/img/delivery/Complete.png" alt="이미지">
+							<button type="button"  class="statusbutton_stop" onclick="return status4_change('Y')">처리 완료</button>
 						</c:if>
 						<c:if test="${list.step4_status eq 'N'}">
-							<img class="step_img"  src="resources/img/delivery/Delivery_Complete.png" alt="이미지">
+							<button type="button"  class="statusbutton" onclick="return status4_change('N')">배송완료 처리</button>
 						</c:if>
-					</span>
+						
+					</div>
 				</div>
-				<div class="statusfield">
-					<c:if test="${list.step1_status eq 'Y'}">
-						<button type="button" class="statusbutton_stop" onclick="return status1_change('Y')">처리 완료</button>
-					</c:if>
-					<c:if test="${list.step1_status eq 'N'}">
-						<button type="button"  class="statusbutton" onclick="return status1_change('N')">배송 주문 확인 처리</button>
-					</c:if>
-					
-					<c:if test="${list.step2_status eq 'Y'}">
-						<button type="button"  class="statusbutton_stop" onclick="return status2_change('Y')">처리 완료</button>
-					</c:if>
-					<c:if test="${list.step2_status eq 'N'}">
-						<button type="button"  class="statusbutton" onclick="return status2_change('N')">배송 준비 완료 처리</button>
-					</c:if>
-					
-					<c:if test="${list.step3_status eq 'Y'}">
-						<button type="button"  class="statusbutton_stop" onclick="return status3_change('Y')">처리 완료</button>
-					</c:if>
-					<c:if test="${list.step3_status eq 'N'}">
-						<button type="button"  class="statusbutton" onclick="return status3_change('N')">배송중 처리</button>
-					</c:if>
-					
-					<c:if test="${list.step4_status eq 'Y'}">
-						<button type="button"  class="statusbutton_stop" onclick="return status4_change('Y')">처리 완료</button>
-					</c:if>
-					<c:if test="${list.step4_status eq 'N'}">
-						<button type="button"  class="statusbutton" onclick="return status4_change('N')">배송완료 처리</button>
-					</c:if>
-					
-				</div>
-			</div>
+			</c:if>
+			
 		</form>
 	</div>
 	

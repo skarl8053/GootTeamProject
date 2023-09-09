@@ -59,6 +59,17 @@
 		 table thead tr td{
 		     border-bottom: 1px solid black;
 		 }
+        #warning_content{
+        	text-align: center;
+        }
+        #warning_img{
+        	width: 150px;
+        	height: 150px;
+        	margin: 0 auto;
+        }
+        #warning_text{
+        	font-size: 20px;
+        }
 		#paging{
 			width: 1200px;
 			text-align: center;
@@ -171,68 +182,88 @@
     			<input type="submit" class="button" value="검색">
     		</span>
     	</div>
-    	<br><br>
-    	<div>
-    		
-    		<table>
-	            <thead>
-                    <tr>
-                    	<td width="3%"><input type="checkbox" id="header_checkbox"></td>
-		                <td width="10%">쿠폰번호 / 금액</td>
-		                <td width="32%">쿠폰명</td>
-		                <td width="15%">무제한 여부</td>
-		                <td width="20%">잔여 수량</td>
-		                
-                    </tr>
-                </thead>
-                <tbody id="searchData">
-                
-                	<c:forEach items="${dto}" var="couponlist">
-		            	<tr>
-			                <!-- 데이터 -->
-			                <td><input type="checkbox" name="chk"></td>
-					 		<td>${couponlist.coupon_no }</td>
-					 		<td>${couponlist.coupon_detail }</td>
-					 		<td>${couponlist.coupon_flag }</td>
-					 		<td>${couponlist.coupon_qty }</td>
-	 	
-			            </tr>
-		            </c:forEach>
-	            
-                </tbody>
-	            
-	        </table>
-    		<br /><br />
-    	</div>
-    	<div>
-        	<br />
-        	<div id="paging">
-        		<c:if test="${vo.page>1}">
-					<a href="coupon?page=1&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
-					<a href="coupon?page=${vo.page-1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
-				</c:if>
-	        	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
-	        	
-	        		<c:choose>
-	        			<c:when test="${ i ne param.page }">
-	        				<a href="coupon?page=${i}&searchType=${searchType}&keyword=${keyword}">${i}</a>
-	        			</c:when>
-	        			<c:otherwise>
-	        				<span>${i}</span>
-	        			</c:otherwise>
-	        		</c:choose>
-	        		
-	        	</c:forEach>
-	        	<c:if test="${vo.page < vo.totPage}">
-					<a href="coupon?page=${vo.page+1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
-					<a href="coupon?page=${vo.totPage }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
-				</c:if>
-        	</div>
-        </div>
+    	<br><br><br />
+    	<c:if test="${empty param.keyword && empty dto}">
+       		<div id="warning_content" >
+    	 			<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+    	 			<br />
+	    	 		<span id="warning_text">등록된 쿠폰정보가 없습니다.</span>
+	    	 		<br /><br /><br />
+    	 		</div>
+       	</c:if>
+       	<c:if test="${not empty param.keyword && empty dto}">
+       		<div id="warning_content" >
+    	 			<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+    	 			<br />
+	    	 		<span id="warning_text">입력하신 쿠폰번호의 쿠폰 정보가 없습니다.</span>
+	    	 		<br /><br /><br />
+    	 		</div>
+       	</c:if>
+    	<c:if test="${not empty dto}">
+    		<div>
+	    		<table>
+		            <thead>
+	                    <tr>
+	                    	<td width="3%"><input type="checkbox" id="header_checkbox"></td>
+			                <td width="10%">쿠폰번호 / 금액</td>
+			                <td width="32%">쿠폰명</td>
+			                <td width="15%">무제한 여부</td>
+			                <td width="20%">잔여 수량</td>
+			                
+	                    </tr>
+	                </thead>
+	                <tbody id="searchData">
+	                
+	                	<c:forEach items="${dto}" var="couponlist">
+			            	<tr>
+				                <!-- 데이터 -->
+				                <td><input type="checkbox" name="chk"></td>
+						 		<td>${couponlist.coupon_no }</td>
+						 		<td>${couponlist.coupon_detail }</td>
+						 		<td>${couponlist.coupon_flag }</td>
+						 		<td>${couponlist.coupon_qty }</td>
+		 	
+				            </tr>
+			            </c:forEach>
+		            
+	                </tbody>
+		            
+		        </table>
+	    		<br /><br />
+	    	</div>
+	    	<div>
+	        	<br />
+	        	<div id="paging">
+	        		<c:if test="${vo.page>1}">
+						<a href="coupon?page=1&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
+						<a href="coupon?page=${vo.page-1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
+					</c:if>
+		        	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
+		        	
+		        		<c:choose>
+		        			<c:when test="${ i ne param.page }">
+		        				<a href="coupon?page=${i}&searchType=${searchType}&keyword=${keyword}">${i}</a>
+		        			</c:when>
+		        			<c:otherwise>
+		        				<span>${i}</span>
+		        			</c:otherwise>
+		        		</c:choose>
+		        		
+		        	</c:forEach>
+		        	<c:if test="${vo.page < vo.totPage}">
+						<a href="coupon?page=${vo.page+1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
+						<a href="coupon?page=${vo.totPage }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
+					</c:if>
+	        	</div>
+	        </div>
+    	</c:if>
+    	
     	<div>
     	 	<br />
     	 	<span><input type="button" class="button" value="쿠폰 등록" onclick="return couponInsertView()"></span>
-            <span><input type="button" class="button" value="쿠폰 삭제" onclick="couponDelete()"></span>
+    	 	<c:if test="${not empty dto}">
+    	 		<span><input type="button" class="button" value="쿠폰 삭제" onclick="couponDelete()"></span>
+    	 	</c:if>
     	</div>
     </form>
     

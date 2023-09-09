@@ -109,3 +109,7 @@ body {
     color: rgb(235, 208, 28);
 }
 
+.jbFixed {
+   position: fixed;
+   top: 0px;
+}

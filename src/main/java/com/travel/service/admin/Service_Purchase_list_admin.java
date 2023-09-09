@@ -58,7 +58,7 @@ public class Service_Purchase_list_admin implements Interface_TravelService {
 
 		if(p_list.size() < 1) {
 			
-			if(keyword.equals("")) {
+//			if(keyword.equals("")) {
 				
 				model.addAttribute("msg", "");
 				model.addAttribute("searchType", searchType);
@@ -73,10 +73,10 @@ public class Service_Purchase_list_admin implements Interface_TravelService {
 				}
 				
 				return;
-			}
-			else {
-				model.addAttribute("msg", "검색 결과가 없습니다.");
-			}
+//			}
+//			else {
+//				model.addAttribute("msg", "검색 결과가 없습니다.");
+//			}
 			
 		}
 		

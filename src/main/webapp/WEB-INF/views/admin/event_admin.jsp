@@ -67,6 +67,17 @@
 		 table thead tr td{
 		     border-bottom: 1px solid black;
 		 }
+		 #warning_content{
+        	text-align: center;
+        }
+        #warning_img{
+        	width: 150px;
+        	height: 150px;
+        	margin: 0 auto;
+        }
+        #warning_text{
+        	font-size: 20px;
+        }
 		#paging{
 			width: 1200px;
 			text-align: center;
@@ -105,16 +116,6 @@
             });
         });
     	
-        function searchExecute(){
-
-            var searchType = document.getElementById("searchType").value;
-            var keyword = document.getElementById("keyword").value;
-            
-            // 검색 결과 조회
-            location.replace("event?page=1&searchType=" + searchType + "&keyword="+ keyword);
-            
-        }
-        
         function eventInsert()
         {
         	// 이벤트 등록
@@ -179,7 +180,7 @@
 			
 		<script>
 			alert("${msg}");
-			location.replace("event?page=1");
+			location.replace("event");
 		</script>
 		
 	</c:if>
@@ -237,7 +238,7 @@
     		</span>
     		<span>
     		
-    			<input type="button" class="button" value="검색" onclick="searchExecute();">
+    			<input type="submit" class="button" value="검색">
     			
     		</span>
     	</div>
@@ -290,28 +291,46 @@
     	</div>
     	<div>
         	<br />
-        	<div id="paging">
-        		<c:if test="${vo.page>1}">
-					<a href="event?page=1&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
-					<a href="event?page=${vo.page-1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
-				</c:if>
-	        	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
-	        	
-	        		<c:choose>
-	        			<c:when test="${ i ne param.page }">
-	        				<a href="event?page=${i}&searchType=${searchType}&keyword=${keyword}">${i}</a>
-	        			</c:when>
-	        			<c:otherwise>
-	        				<span>${i}</span>
-	        			</c:otherwise>
-	        		</c:choose>
-	        		
-	        	</c:forEach>
-	        	<c:if test="${vo.page < vo.totPage}">
-					<a href="event?page=${vo.page+1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
-					<a href="event?page=${vo.totPage }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
-				</c:if>
-        	</div>
+        	<c:if test="${(empty param.searchType || empty param.keyword) && empty list}">
+    	 		<div id="warning_content" >
+    	 			<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+    	 			<br />
+	    	 		<span id="warning_text">등록한 이벤트가 존재하지 않습니다.</span>
+	    	 		<br /><br /><br />
+    	 		</div>
+    	 	</c:if>
+        	<c:if test="${not empty param.searchType && not empty param.keyword && empty list}">
+		    	 <div id="warning_content" >
+		    	 		<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+		    	 		<br />
+			    	 	<span id="warning_text">검색된 이벤트 내역이 없습니다.</span>
+			    	 	<br /><br /><br />
+		    	 </div>
+		    </c:if>
+		    <c:if test="${not empty list}">
+			    <div id="paging">
+	        		<c:if test="${vo.page>1}">
+						<a href="event?page=1&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
+						<a href="event?page=${vo.page-1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
+					</c:if>
+		        	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
+		        	
+		        		<c:choose>
+		        			<c:when test="${ i ne param.page }">
+		        				<a href="event?page=${i}&searchType=${searchType}&keyword=${keyword}">${i}</a>
+		        			</c:when>
+		        			<c:otherwise>
+		        				<span>${i}</span>
+		        			</c:otherwise>
+		        		</c:choose>
+		        		
+		        	</c:forEach>
+		        	<c:if test="${vo.page < vo.totPage}">
+						<a href="event?page=${vo.page+1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
+						<a href="event?page=${vo.totPage }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
+					</c:if>
+	        	</div>
+		    </c:if>
         </div>
     	<div>
     	 	<br />

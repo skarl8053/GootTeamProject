@@ -58,7 +58,7 @@ public class Controller_Coupon_admin {
 		travelservice = new Service_Coupondelete_admin(sqlSession);
 		travelservice.execute(model);
 		
-		return "redirect:couponlist";
+		return "redirect:coupon";
 	}
 	
 }

@@ -78,7 +78,17 @@
 			text-align: center;
 			
 		}
-		
+		#warning_content{
+        	text-align: center;
+        }
+        #warning_img{
+        	width: 150px;
+        	height: 150px;
+        	margin: 0 auto;
+        }
+        #warning_text{
+        	font-size: 20px;
+        }
 		 /* 스위치 디자인 */
 		
 		 .wrapper {
@@ -373,28 +383,46 @@
         </div>
         <div>
         	<br />
-        	<div id="paging">
-        		<c:if test="${vo.page>1}">
-					<a href="report?page=1&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
-					<a href="report?page=${vo.page-1 }&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
-				</c:if>
-	        	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
-	        		
-	        		<c:choose>
-	        			<c:when test="${ i ne param.page }">
-	        				<a href="report?page=${i}&param1=${param1}&keyword=${keyword}">${i}</a>
-	        			</c:when>
-	        			<c:otherwise>
-	        				<span>${i}</span>
-	        			</c:otherwise>
-	        		</c:choose>
-	        		
-	        	</c:forEach>
-	        	<c:if test="${vo.page < vo.totPage}">
-					<a href="report?page=${vo.page+1 }&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
-					<a href="report?page=${vo.totPage }&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
-				</c:if>
-        	</div>
+        	<c:if test="${empty param.param1 && empty param.keyword && empty list}">
+		    	 <div id="warning_content" >
+		    	 		<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+		    	 		<br />
+			    	 	<span id="warning_text">신고된 내역이 없습니다.</span>
+			    	 	<br /><br /><br />
+		    	 </div>
+		    </c:if>
+		    <c:if test="${(not empty param.param1 || not empty param.keyword) && empty list}">
+		    	 <div id="warning_content" >
+		    	 		<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+		    	 		<br />
+			    	 	<span id="warning_text">검색된 신고 내역이 없습니다.</span>
+			    	 	<br /><br /><br />
+		    	 </div>
+		    </c:if>
+		    <c:if test="${not empty list}">
+		    		<div id="paging">
+		        		<c:if test="${vo.page>1}">
+							<a href="report?page=1&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
+							<a href="report?page=${vo.page-1 }&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
+						</c:if>
+			        	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
+			        		
+			        		<c:choose>
+			        			<c:when test="${ i ne param.page }">
+			        				<a href="report?page=${i}&param1=${param1}&keyword=${keyword}">${i}</a>
+			        			</c:when>
+			        			<c:otherwise>
+			        				<span>${i}</span>
+			        			</c:otherwise>
+			        		</c:choose>
+			        		
+			        	</c:forEach>
+			        	<c:if test="${vo.page < vo.totPage}">
+							<a href="report?page=${vo.page+1 }&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
+							<a href="report?page=${vo.totPage }&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
+						</c:if>
+		        	</div>
+		    </c:if>
         </div>
         <div>
         	<br />

@@ -106,7 +106,17 @@
 			margin: 10px 30px 0px 30px;
 			
 		}
-		
+        #warning_content{
+        	text-align: center;
+        }
+        #warning_img{
+        	width: 150px;
+        	height: 150px;
+        	margin: 0 auto;
+        }
+        #warning_text{
+        	font-size: 20px;
+        }		
 		.button{
             background-color: #011343;
             color:  #EBD01C;
@@ -238,93 +248,110 @@
 				</span>
 			</div>
 			<br><br>
-			<div>
+			<c:if test="${empty param.order_no && empty list}">
+				<div id="warning_content" >
+    	 			<img id="warning_img" src="resources/img/PL_Search.png" alt="이미지 없음"/>
+    	 			<br />
+	    	 		<span id="warning_text">환불 내역을 조회할 주문번호를 입력해주세요</span>
+	    	 		<br /><br /><br />
+    	 		</div>
+			</c:if>
+			<c:if test="${not empty param.order_no && empty list}">
+				<div id="warning_content" >
+    	 			<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+    	 			<br />
+	    	 		<span id="warning_text">해당 주문번호의 환불 내역 정보가 없습니다.</span>
+	    	 		<br /><br /><br />
+    	 		</div>
+			</c:if>
+			<c:if test="${not empty list}">
 				<div>
-					<span class="title">환불 상세내역</span>
+					<div>
+						<span class="title">환불 상세내역</span>
+					</div>
+					<br>
+					<table>
+						<colgroup>
+							<col style="width: 10%">
+							<col style="width: 90%">
+						</colgroup>
+						<tbody>
+							<tr>
+								<td class="first_col">환불 번호</td>
+								<td class="second_col">${list.refund_no}</td>
+							</tr>
+							<tr>
+								<td class="first_col">환불 신청자명</td>
+								<td class="second_col">${list.m_name}</td>
+							</tr>
+							<tr>
+								<td class="first_col">환불 사유</td>
+								<td class="second_col">${list.refund_reason}</td>
+							</tr>
+							<tr>
+								<td class="first_col">환불 숙소명</td>
+								<td class="second_col">${list.s_name}</td>
+							</tr>
+							<tr>
+								<td class="first_col">환불 금액</td>
+								<td class="second_col">${list.refund_price}</td>
+							</tr>
+							<tr>
+								<td class="first_col">환불 쿠폰명</td>
+								<td class="second_col">${list.refund_coupon}</td>
+							</tr>
+							<tr>
+								<td class="first_col">환불 포인트</td>
+								<td class="second_col">${list.refund_point}</td>
+							</tr>
+							<tr>
+								<td class="first_col">환불 상태</td>
+								<td class="second_col" style="color: red; font-weight: bolder;">${list.step_flag_str}</td>
+							</tr>
+						</tbody>
+					</table>
 				</div>
-				<br>
-				<table>
-					<colgroup>
-						<col style="width: 10%">
-						<col style="width: 90%">
-					</colgroup>
-					<tbody>
-						<tr>
-							<td class="first_col">환불 번호</td>
-							<td class="second_col">${list.refund_no}</td>
-						</tr>
-						<tr>
-							<td class="first_col">환불 신청자명</td>
-							<td class="second_col">${list.m_name}</td>
-						</tr>
-						<tr>
-							<td class="first_col">환불 사유</td>
-							<td class="second_col">${list.refund_reason}</td>
-						</tr>
-						<tr>
-							<td class="first_col">환불 숙소명</td>
-							<td class="second_col">${list.s_name}</td>
-						</tr>
-						<tr>
-							<td class="first_col">환불 금액</td>
-							<td class="second_col">${list.refund_price}</td>
-						</tr>
-						<tr>
-							<td class="first_col">환불 쿠폰명</td>
-							<td class="second_col">${list.refund_coupon}</td>
-						</tr>
-						<tr>
-							<td class="first_col">환불 포인트</td>
-							<td class="second_col">${list.refund_point}</td>
-						</tr>
-						<tr>
-							<td class="first_col">환불 상태</td>
-							<td class="second_col" style="color: red; font-weight: bolder;">${list.step_flag_str}</td>
-						</tr>
-					</tbody>
-				</table>
-			</div>
-			<br><br>
-			<div id="bottomfield">
-				<div>
-					<span class="title">환불 상태 변경</span>
-				</div>
-				<div class="statusfield">
-					<span>
+				<br><br>
+				<div id="bottomfield">
+					<div>
+						<span class="title">환불 상태 변경</span>
+					</div>
+					<div class="statusfield">
+						<span>
+							<c:if test="${list.step1_status eq 'Y'}">
+								<img class="step_img"  src="resources/img/refund/Complete.png" alt="이미지">
+							</c:if>
+							<c:if test="${list.step1_status eq 'N'}">
+								<img class="step_img"  src="resources/img/refund/list.png" alt="이미지">
+							</c:if>
+						</span>
+						<span>
+							<c:if test="${list.step2_status eq 'Y'}">
+								<img class="step_img"  src="resources/img/refund/Complete.png" alt="이미지">
+							</c:if>
+							<c:if test="${list.step2_status eq 'N'}">
+								<img class="step_img"  src="resources/img/refund/refund.png" alt="이미지">
+							</c:if>
+						</span>
+					</div>
+					<div class="statusfield">
+	
 						<c:if test="${list.step1_status eq 'Y'}">
-							<img class="step_img"  src="resources/img/refund/Complete.png" alt="이미지">
+							<button type="button" class="statusbutton_stop" onclick="return status1_change('Y')">처리 완료</button>
 						</c:if>
 						<c:if test="${list.step1_status eq 'N'}">
-							<img class="step_img"  src="resources/img/refund/list.png" alt="이미지">
+							<button type="button"  class="statusbutton" onclick="return status1_change('N')">환불 주문 확인 처리</button>
 						</c:if>
-					</span>
-					<span>
+						
 						<c:if test="${list.step2_status eq 'Y'}">
-							<img class="step_img"  src="resources/img/refund/Complete.png" alt="이미지">
+							<button type="button"  class="statusbutton_stop" onclick="return status2_change('Y')">처리 완료</button>
 						</c:if>
 						<c:if test="${list.step2_status eq 'N'}">
-							<img class="step_img"  src="resources/img/refund/refund.png" alt="이미지">
+							<button type="button"  class="statusbutton" onclick="return status2_change('N')">환불 완료 처리</button>
 						</c:if>
-					</span>
+					</div>
 				</div>
-				<div class="statusfield">
-
-					<c:if test="${list.step1_status eq 'Y'}">
-						<button type="button" class="statusbutton_stop" onclick="return status1_change('Y')">처리 완료</button>
-					</c:if>
-					<c:if test="${list.step1_status eq 'N'}">
-						<button type="button"  class="statusbutton" onclick="return status1_change('N')">환불 주문 확인 처리</button>
-					</c:if>
-					
-					<c:if test="${list.step2_status eq 'Y'}">
-						<button type="button"  class="statusbutton_stop" onclick="return status2_change('Y')">처리 완료</button>
-					</c:if>
-					<c:if test="${list.step2_status eq 'N'}">
-						<button type="button"  class="statusbutton" onclick="return status2_change('N')">환불 완료 처리</button>
-					</c:if>
-					
-				</div>
-			</div>
+			</c:if>
 		</form>
 	</div>
 	
