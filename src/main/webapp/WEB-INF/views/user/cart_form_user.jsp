@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -12,7 +12,7 @@
 	
 	<style>
 		#content{
-			
+			height: 100%;
 		}
 	</style>
 	
@@ -23,7 +23,7 @@
             font-weight: normal;
             font-style: normal;
         }
-        body{
+        *{
             font-family: 'GmarketSansMedium';
         }
         #form{
@@ -83,14 +83,6 @@
 
 	<script>
 
-		window.addEventListener('DOMContentLoaded', function(){
-		  alert('DOMContentLoaded');
-		});
-		/* $(document).ready(function() {
-			alert("${fn:length(s_list)}")
-		}); */
-	
-	
         function checkOnlyOne(element, s_no) {
         
             const checkboxes = document.getElementsByName("select");
@@ -166,18 +158,18 @@
 	                    <c:forEach items="${s_list}" var="s_list" varStatus="st">
 		                    <tbody>
 		                        <tr>
-		                            <td rowspan="4" style="text-align: center;">
+		                            <td rowspan="${fn:length(r_list)}" style="text-align: center;">
 		                            	<input type="checkbox" class="select" name="select" onclick="checkOnlyOne(this,'${s_list.s_no}')">
 	                            	</td>
 		                            <td class="s_no" style="padding: 0 20px">${s_list.s_no }</td>
-		                            <td style="padding: 0 20px">${s_list.s_type}</td>
-		                            <td colspan="2" style="padding: 0 20px">${s_list.s_name}</td>
+		                            <td style="padding: 0 20px; color: green;">${s_list.s_type}</td>
+		                            <td colspan="2" style="padding: 0 20px; color: blue;">${s_list.s_name}</td>
 		                        </tr>
 		                        <c:forEach items="${r_list[st.index]}" var="r_list">
 		                        	<tr>
 			                            <td class="r_no" style="padding: 0 20px">${r_list.r_no}</td>
-			                            <td colspan="2" style="padding: 0 20px">${r_list.r_name }</td>
-			                            <td style="padding: 0 20px">${r_list.r_price} 원</td>
+			                            <td colspan="2" style="padding: 0 20px; color: purple;">${r_list.r_name }</td>
+			                            <td style="padding: 0 20px; color: red;">${r_list.r_price} 원</td>
 			                        </tr>
 		                        </c:forEach>
 		                    </tbody>
@@ -185,7 +177,7 @@
 	                </table>
 	            </div>
 	            <div>
-		    	 	<br />
+		    	 	<br /><br />
 		    	 	<c:if test="${empty s_list}">
 		    	 		<div id="warning_content" >
 		    	 			<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
@@ -194,7 +186,6 @@
 			    	 		<br /><br /><br />
 		    	 		</div>
 		    	 	</c:if>
-		    	 	
 		    	 	<span><input type="submit" class="button" value="결제 진행"></span>
 		    	 	&nbsp; &nbsp;
 		            <span><input type="button" class="button" value="선택내역 삭제" onclick="return cartDelete();"></span>

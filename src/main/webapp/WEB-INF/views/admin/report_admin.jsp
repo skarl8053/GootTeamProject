@@ -18,7 +18,7 @@
     <!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 800px;
+			height: 100%;
 		}
 	</style>
     
@@ -201,12 +201,13 @@
                 if(cells.checked == true){
                     // 체크된 내용의 순번들을 Array에 집어넣는다.
                     // 6번째 고객 ID를 넣어준다.
-                    arr.add(rows[i].getElementsByTagName("td")[6].getElementsByTagName("span")[0].innerHTML);
+                    arr.add(rows[i].getElementsByTagName("td")[4].getElementsByTagName("span")[0].innerHTML);
                 }
                 else{
                     continue;
                 }
             }
+            
             
             // DB에서 차단 승인 처리
             // 중복값 제거 후 Set을 Array로 변환
@@ -219,7 +220,7 @@
             	return false;
             }
             
-      		location.replace("report/blockall?m_email=" + uniqueArr + "&is_block=Y");
+      		location.replace("report/blockall?m_no=" + uniqueArr + "&is_block=Y");
 
         }
 
@@ -239,7 +240,7 @@
                 if(cells.checked == true){
                     // 체크된 내용의 순번들을 Array에 집어넣는다.
                     // 6번째 고객 ID를 넣어준다.
-                    arr.add(rows[i].getElementsByTagName("td")[6].getElementsByTagName("span")[0].innerHTML);
+                    arr.add(rows[i].getElementsByTagName("td")[4].getElementsByTagName("span")[0].innerHTML);
                 }
                 else{
                     continue;
@@ -256,7 +257,7 @@
             	alert('차단할 내용을 체크해주세요');
             	return false;
             }
-      		location.replace("report/blockall?m_email=" + uniqueArr + "&is_block=N");
+      		location.replace("report/blockall?m_no=" + uniqueArr + "&is_block=N");
         }
 
         /* 스위치 토글 */
@@ -320,7 +321,7 @@
             </span>
             <span>
             	<c:if test="${empty keyword || keyword eq ''}">
-            		<input type="text" id="keyword" name="keyword" placeholder="검색할 ID를 입력해주세요" autocomplete="off">
+            		<input type="text" id="keyword" name="keyword" placeholder="검색할 Email을 입력해주세요" autocomplete="off">
             	</c:if>
                 <c:if test="${keyword != ''}">
             		<input type="text" id="keyword" name="keyword" value="${keyword}" autocomplete="off">
@@ -343,6 +344,7 @@
 	                    <td width="5%">순번</td>
 	                    <td width="20%">신고 일자</td>
 	                    <td width="65%">댓글 내용</td>
+	                    <td style="display: none;">회원번호</td>
 	                    <td width="23%">블랙리스트 차단 여부</td>
                     </tr>
                 </thead>
@@ -355,6 +357,7 @@
 	                        <td><span>${li.review_no }</span></td>
 	                        <td><span>${li.report_date }</span></td>
 	                        <td><span><a href="reportdetail?report_no=${li.review_no}">${li.review_content }</a></span></td>
+	                        <td style="display: none"><span>${li.m_no}</span></td>
 	                        <td> <!--스위치-->
 	                        
 	                        	<c:if test="${li.restrict_flag == 'Y'}">
@@ -383,7 +386,7 @@
         </div>
         <div>
         	<br />
-        	<c:if test="${empty param.param1 && empty param.keyword && empty list}">
+        	<c:if test="${(empty param.param1 || empty param.keyword) && empty list}">
 		    	 <div id="warning_content" >
 		    	 		<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
 		    	 		<br />
@@ -391,7 +394,7 @@
 			    	 	<br /><br /><br />
 		    	 </div>
 		    </c:if>
-		    <c:if test="${(not empty param.param1 || not empty param.keyword) && empty list}">
+		    <c:if test="${(not empty param.param1 && not empty param.keyword) && empty list}">
 		    	 <div id="warning_content" >
 		    	 		<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
 		    	 		<br />

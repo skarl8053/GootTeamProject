@@ -11,7 +11,7 @@
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 1100px;
+			height: 100%;
 		}
 	</style>
 </head>

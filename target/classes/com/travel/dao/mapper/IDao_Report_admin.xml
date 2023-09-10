@@ -92,17 +92,29 @@
 		
 	</update>
 
-	<update id="updateBlockAll">
+	<update id="updateBlockAll" parameterType="map">
 		
-		UPDATE THISREVIEW SET RESTRICT_FLAG = #{param2} 
-		WHERE M_NO IN (SELECT M_NO FROM TMSTMEMBER WHERE M_EMAIL IN(${param1}))
+		<!-- UPDATE THISREVIEW SET RESTRICT_FLAG = #{param2} 
+		WHERE M_NO IN (SELECT M_NO FROM TMSTMEMBER WHERE M_EMAIL IN(${param1})) -->
+		
+		UPDATE THISREVIEW SET RESTRICT_FLAG = #{is_block}
+		WHERE M_NO IN 
+		<foreach collection="m_no" item="m_no" index="index" open="(" separator="," close=")">
+		        #{m_no}
+		</foreach>
 	
 	</update>
 	
 	<update id="updateBlockAll_user">
 		
-		UPDATE TMSTMEMBER SET M_LOCK = #{param2} 
-		WHERE M_NO IN (SELECT M_NO FROM TMSTMEMBER WHERE M_EMAIL IN(${param1}))
+		<!-- UPDATE TMSTMEMBER SET M_LOCK = #{param2} 
+		WHERE M_NO IN (SELECT M_NO FROM TMSTMEMBER WHERE M_EMAIL IN(${param1})) -->
+	
+		UPDATE TMSTMEMBER SET M_LOCK = #{is_block}
+		WHERE M_NO IN
+		<foreach collection="m_no" item="m_no" index="index" open="(" separator="," close=")">
+		        #{m_no}
+		</foreach>
 	
 	</update>
 

@@ -13,12 +13,6 @@
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
     
-    <style>
-    	.jbFixed {
-		   position: fixed;
-		   top: 0px;
-		}
-    </style>
 </head>
 <body>
 	
@@ -58,19 +52,6 @@
             location.replace(move_site);
         }
 		
-		// 헤더 고정 // 남기문
-		$( document ).ready( function() {
-	        var jbOffset = $( '#container' ).offset();
-	        $( window ).scroll( function() {
-	          if ( $( document ).scrollTop() > jbOffset.top ) {
-	            $( '#container' ).addClass( 'jbFixed' );
-	          }
-	          else {
-	            $( '#container' ).removeClass( 'jbFixed' );
-	          }
-	        });
-	      });
-	
 		function logout(){
 			
 			var isConfirmed = confirm("로그아웃 하시겠습니까?");

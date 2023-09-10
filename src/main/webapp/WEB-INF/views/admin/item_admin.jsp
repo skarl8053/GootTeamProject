@@ -12,7 +12,7 @@
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 1500px;
+			height: 100%;
 		}
 	</style>
 	
@@ -70,11 +70,6 @@
         	border-style: none;
         	border-bottom: 1px solid black;
         }
-        #header_checkbox{
-        	text-align: center;
-        	width: 5%;
-        	height: 300px;
-        }
         #first_col{
         	text-align: center;
             width: 10%;
@@ -88,6 +83,9 @@
         #third_col{
             width: 55%;
             height: 300px;
+        }
+        .input_name{
+            padding: 10px 0 10px 20px;
         }
         .item_name, .item_desc{
         	width: 615px;
@@ -220,10 +218,14 @@
 	                        <img class="item_img" src="resources/upload_img/admin/item/${li.filename}" alt="이미지 없음" />
                         </td><!-- 이미지로 수정할 것 -->
                         <td id="third_col">
-                        	제품 이름 : <br>
-                            <input type="text" class="item_name" value="${li.item_name}" readonly><br>
-                        	제품 설명 : <br>
-                        	<textarea rows="15" class="item_desc" readonly>${li.item_desc}</textarea>
+                        	<div class="input_name">
+	                        	제품 이름 : <br>
+	                            <input type="text" class="item_name" value="${li.item_name}" readonly><br>
+                            </div>
+                            <div class="input_name">
+                            	제품 설명 : <br>
+                        		<textarea rows="15" class="item_desc" readonly>${li.item_desc}</textarea>
+                            </div>
                         </td>
                     </tr>
                 </c:forEach>

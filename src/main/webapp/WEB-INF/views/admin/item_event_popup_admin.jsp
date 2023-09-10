@@ -11,6 +11,9 @@
 <body>
 
 	<style>
+		#content{
+			height: 100%;
+		}
         /* 화면 디자인 */
 		@font-face {
 				    font-family: 'GmarketSansMedium';

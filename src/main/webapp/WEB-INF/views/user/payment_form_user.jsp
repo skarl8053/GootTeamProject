@@ -10,7 +10,7 @@
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 1600px;
+			height: 100%;
 		}
 	</style>
 	
@@ -27,9 +27,18 @@
 <body onload="showInfo();">
 
 	<style>
-        body{
-            font-size: 20px;
+		@font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
         }
+        *{
+            font-family: 'GmarketSansMedium';
+        }
+        body{
+        	font-size: 20px;
+        };
         #form{
             width: 1200px;
         }
@@ -96,7 +105,14 @@
         }
         .header{
             font-weight: bolder;
+            font-size: 30px;
+            color: purple;
         }
+        .r_img{
+        	width: 200px;
+        	height: 200px;
+        }
+        
         #delivery_info div{
             padding-bottom: 20px;
         }
@@ -113,9 +129,8 @@
             outline: 3px solid red;
         }
         .button{
-            background-color: blue;
-            color: white;
-            font-weight: bold;
+            background-color:  #011343;
+            color: #EBD01C;
             border-radius: 3px;
             width: 100px;
             height: 32px;
@@ -126,14 +141,14 @@
         }
         
         .paybutton{
-            background-color: blue;
-            color: white;
-            font-weight: bold;
+            background-color:  #011343;
+            color: #EBD01C;
             border-radius: 3px;
             width: 100%;
             height: 50px;
             font-size: 20px;
             cursor: pointer;
+            font-size: 24px;
         }
         #kakaoPaymentButton{
             display: none;
@@ -631,7 +646,7 @@
                                 <table id="check_date_table">
                                 	<c:if test="${not empty param.checkindate && not empty param.checkoutdate}">
                                 		<tr>
-	                                        <td class="check_date_header_row"  width="30%">체크인 일자</td>
+	                                        <td class="check_date_header_row" >체크인 일자</td>
 	                                        <td class="check_date_header_row">체크아웃 일자</td>
 	                                        <td class="check_date_header_row">총 예약 일자</td>
 	                                    </tr>
@@ -678,7 +693,7 @@
                                     
                                      <c:forEach items="${roomList}" var="li">
                                      		<tr class="second_row">
-		                                        <td class="first_col"><img src="resources/upload_img/admin/stay/${li.r_img1}" alt="이미지 없음" width="200px"></td>
+		                                        <td class="first_col"><img class="r_img" src="resources/upload_img/admin/stay/${li.r_img1}" alt="이미지 없음"></td>
 		                                        <td class="second_col">
 		                                            <div>
 		                                                <span>${li.r_name }</span>

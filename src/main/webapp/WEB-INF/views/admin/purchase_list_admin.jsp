@@ -14,7 +14,7 @@
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 2900px;
+			height: 100%;
 		}
 	</style>
 	
@@ -180,10 +180,10 @@
 						<td width="5%">주문번호</td>
 						<td width="18%">숙소 썸네일</td>
 						<td width="21%">숙소명</td>
-						<td width="7%">결제방식</td>
-						<td width="7%">결제금액</td>
+						<td width="8%">결제방식</td>
+						<td width="11%">결제금액</td>
 						<td width="14%">결제날짜</td>
-						<td width="16%">다녀온 날짜</td>
+						<td width="11%">다녀온 날짜</td>
 					</tr>
                 </thead>
                 <tbody id="searchData">

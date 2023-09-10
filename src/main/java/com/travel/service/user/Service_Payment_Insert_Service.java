@@ -64,7 +64,7 @@ public class Service_Payment_Insert_Service  implements Interface_TravelService 
 		String cardNumber = request.getParameter("cardNumber"); // 암호화 시켜서 저장할 것
 		
 		String encryptedCardNumber = "";
-		if(pay_type == "1") {
+		if(pay_type.equals("1")) {
 			
 			// 카드로 결제했을 경우에만 카드번호 투입
 			try {
@@ -124,6 +124,9 @@ public class Service_Payment_Insert_Service  implements Interface_TravelService 
 		// 사용자 포인트 업데이트
 		dao.updateMemberPoint(m_no, updatePoint);
 		dao.insertMemberPointList(m_no, create_order_no, totalEarnPoint, totalUsePoint);
+		
+		// 장바구니 이력 제거
+		dao.deleteCartList(m_no, stay_no);
 		
 		// 알림 이력에 추가
 		dao.insertPushAL(m_no, create_order_no, "숙소 결제가 완료되었습니다.");

@@ -10,7 +10,7 @@
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 1000px;
+			height: 100%;
 		}
 	</style>
 	
@@ -18,7 +18,16 @@
 <body>
 
 	<style>
-
+		@font-face {
+				    font-family: 'GmarketSansMedium';
+				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+				    font-weight: normal;
+				    font-style: normal;
+		}
+		
+		*{
+			font-family: 'GmarketSansMedium';
+		}
         #reportdetail{
             width: 1200px;
         }
@@ -46,6 +55,9 @@
         .forthCol{
             width: 40%;
         }
+        .report_content{
+        	font-size: 40px;
+        }
         textarea{
             width: 99.5%;
             height: 100%;
@@ -54,8 +66,8 @@
         }
         button{
         	
-        	background-color: blue;
-            color: white;
+        	background-color: #011343;
+            color: #EBD01C;
             font-weight: bold;
             border-radius: 3px;
             width: 100px;
@@ -95,7 +107,7 @@
                 </tr>
                 <tr>
                     <td colspan="4">
-                        <textarea rows="15" readonly>${list.review_content}</textarea>
+                        <textarea rows="10"  class="report_content"  readonly>${list.review_content}</textarea>
                     </td>
                 </tr>
                 <tr>
@@ -103,7 +115,7 @@
                 </tr>
                 <tr>
                     <td colspan="4">
-                        <textarea rows="15" readonly>${list.report_content}</textarea>
+                        <textarea rows="10" class="report_content" readonly>${list.report_content}</textarea>
                     </td>
                 </tr>
             </table>

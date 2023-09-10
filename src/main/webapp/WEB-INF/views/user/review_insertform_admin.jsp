@@ -11,13 +11,25 @@
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 1300px;
+			height: 100%;
 		}
-		
+		@font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        *{
+            font-family: 'GmarketSansMedium';
+            resize: none;
+            
+        }
+        #form{
+        	font-size: 20px;
+        }
 		textarea{
 			resize: none;
 		}
-		
 	</style>
 	
 </head>
@@ -57,16 +69,14 @@
 
     <br>
 
-    <div>
+    <div id="form">
         <form action="reportinsert" onsubmit="return reportCheck()" method="post">
 
 			<!-- 앞 화면에서 후기번호 가져옴.. -->
-            <input type="hidden" name="review_no" value="1">
+            <input type="hidden" name="review_no" value="${param.review_no}">
 
             <div>
-                <span>
-                    <p>신고 사유 :</p> 
-                </span>
+                <span>신고 사유 :</span>
                 <span>
                     <select id="report_type" name="report_type">
                         <option value="1">욕설/인신공격</option>

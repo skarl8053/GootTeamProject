@@ -14,7 +14,7 @@
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 800px;
+			height: 100%;
 		}
 	</style>
 	
@@ -123,7 +123,7 @@
         	location.replace("eventinsertform");
         }
         
-        function check_date(event_no, check)
+        function check_date(event_no, event_name, check)
         {
             
         	if(check == 'N')
@@ -132,7 +132,7 @@
        			return false;
        		}
         		
-        	location.replace('event_winner?event_no=' + event_no)
+        	location.replace('event_winner?event_no=' + event_no + "&event_name=" + event_name);
         }
         
         function eventDelete()
@@ -278,7 +278,7 @@
 			                </td>
 			                <td><span>${li.event_startdate} </span>~<span> ${li.event_enddate}</span></td>
 			                <td>
-			                	<button type="button" class="winner_button" onclick="return check_date('${li.event_no}', '${li.check_winner_date}');">당첨자 지정</button>
+			                	<button type="button" class="winner_button" onclick="return check_date('${li.event_no}', '${li.event_name}', '${li.check_winner_date}');">당첨자 지정</button>
 			                	<!-- <input type="hidden" id="check_winner_date" value=""> -->
 			                </td>
 			            </tr>

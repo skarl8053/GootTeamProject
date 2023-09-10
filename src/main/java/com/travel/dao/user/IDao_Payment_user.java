@@ -42,6 +42,8 @@ public interface IDao_Payment_user {
 
 	int getSumPrice_NotExistsDate(Map<String, Object> mp);
 
+	void deleteCartList(String m_no, String stay_no);
+
 	
 
 }

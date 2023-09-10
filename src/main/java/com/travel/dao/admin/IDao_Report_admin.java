@@ -1,6 +1,7 @@
 package com.travel.dao.admin;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import com.travel.dto.admin.DTO_Report_admin;
 
@@ -14,10 +15,12 @@ public interface IDao_Report_admin {
 
 	public void updateBlock_user(int m_no, String is_block);
 
-	public void updateBlockAll(String m_email, String is_block);
+	public void updateBlockAll(Map<String, Object> mp);
 
-	public void updateBlockAll_user(String m_email, String is_block);
+	public void updateBlockAll_user(Map<String, Object> mp);
 
 	public DTO_Report_admin selectDetailReportData(int report_no);
+
+	
 
 }

@@ -8,8 +8,11 @@
 	<title>Insert title here</title>
 </head>
 <body>
-
+	
 	<style>
+		#content{
+			height: 100%;
+		}
         #form{
             width: 1200px;
         }
@@ -74,6 +77,11 @@
             }
         }
 
+        function direct_to_item(event_no, event_name)
+        {
+        	location.replace("item?event_no=" + event_no + "&event_name=" + event_name);
+        }
+        
         function insertEventWinner(event_no){
         	
         	var first_item = document.getElementById("first_item").value;
@@ -84,26 +92,26 @@
             var second_mno = document.getElementById("second_mno").value;
             var third_mno = document.getElementById("third_mno").value;
 			
-            if(first_item == "미등록" && second_item == "미등록" && third_item == "미등록"){
+            if(first_item.length < 1 && second_item.length < 1 && third_item.length < 1){
 
                 alert("해당 이벤트 경품이 없으므로, 당첨자를 저장할 수 없습니다.");
                 return false;
 
             }
 
-            if(first_item != "미등록" && first_mno == "미등록"){
+            if(first_mno.length < 1){
 
                 alert("1등 당첨자를 등록해주세요")
                 return false;
 
             }
-            if(second_item != "미등록" && second_mno == "미등록"){
+            if(second_mno.length < 1){
 
                 alert("2등 당첨자를 등록해주세요")
                 return false;
 
             }
-            if(third_item != "미등록" && third_mno == "미등록"){
+            if(third_mno.length < 1){
                 
                 alert("3등 당첨자를 등록해주세요")
                 return false;
@@ -118,12 +126,9 @@
             var check = confirm("당첨자를 등록하면 수정할 수 없으며, 배송정보도 같이 등록됩니다. 등록하시겠습니까?");
             
             if(check == false){
-            	
             	return false;
-            	
             }
             
-
         }
 
     </script>
@@ -149,7 +154,7 @@
                     <li class="key">1등 경품</li>
                     <li>
                         <!-- name="first_item" -->
-                        <input type="text" class="event_info"  id="first_item" value="${list.first_item}" readonly>  
+                        <input type="text" class="event_info"  id="first_item" value="${list.first_item}" placeholder="1등 경품을 등록해주세요" readonly>  
                     </li>
                 </ul>
                 <br>
@@ -157,7 +162,7 @@
                     <li class="key">2등 경품</li>
                     <li>
                         <!-- name="second_item" -->
-                        <input type="text" class="event_info"  id="second_item"  value="${list.second_item}"  readonly>
+                        <input type="text" class="event_info"  id="second_item"  value="${list.second_item}" placeholder="2등 경품을 등록해주세요"  readonly>
                     </li>
                 </ul>
                 <br>
@@ -165,16 +170,23 @@
                     <li class="key">3등 경품</li>
                     <li>
                         <!-- name="third_item" -->
-                        <input type="text" class="event_info"  id="third_item"  value="${list.third_item}"  readonly>
+                        <input type="text" class="event_info"  id="third_item"  value="${list.third_item}"  placeholder="3등 경품을 등록해주세요" readonly>
                     </li>
                 </ul>
+                <br /><br />
+                <c:if test="${empty list.first_item && empty list.second_item && empty list.third_item}">
+                	<button type="button" class="button" onclick="direct_to_item('${param.event_no}', '${param.event_name }')">경품정보 등록</button>
+                </c:if>
+                 <c:if test="${not empty list.first_item && not empty list.second_item && not empty list.third_item}">
+                	<button type="button" class="button" onclick="direct_to_item('${param.event_no}','${param.event_name }')">경품정보 확인</button>
+                </c:if>
             </div>
             <br><br><br><br>
             <div>
                 <ul class="eventlist">
                     <li class="key">1등 당첨자</li>
                     <li>
-                        <input type="text" class="event_winner" id="first_mid" value="${list.first_member}"readonly>
+                        <input type="text" class="event_winner" id="first_mid" value="${list.first_member}" placeholder="1등 당첨자를 등록해주세요" readonly>
                         <input type="hidden" id="first_mno" name="first_mno" value="" />
                     </li>
                     <c:if test="${list.event_member_flag == 'N'}">
@@ -193,7 +205,7 @@
                 <ul class="eventlist">
                     <li class="key">2등 당첨자</li>
                     <li>
-                        <input type="text" class="event_winner" id="second_mid" value="${list.second_member}" readonly>
+                        <input type="text" class="event_winner" id="second_mid" value="${list.second_member}" placeholder="2등 당첨자를 등록해주세요" readonly>
                         <input type="hidden" id="second_mno" name="second_mno" value="" />
                     </li>
                     <c:if test="${list.event_member_flag == 'N'}">
@@ -212,7 +224,7 @@
                 <ul class="eventlist">
                     <li class="key">3등 당첨자</li>
                     <li>
-                        <input type="text" class="event_winner" id="third_mid"  value="${list.third_member}" readonly>
+                        <input type="text" class="event_winner" id="third_mid"  value="${list.third_member}" placeholder="3등 당첨자를 등록해주세요" readonly>
                         <input type="hidden" id="third_mno" name="third_mno" value="" />
                     </li>
                     <c:if test="${list.event_member_flag == 'N'}">

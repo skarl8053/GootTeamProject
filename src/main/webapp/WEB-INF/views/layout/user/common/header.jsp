@@ -12,13 +12,6 @@
 	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.6.2/css/font-awesome.min.css">
 	<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 		
-	 <style>
-    	.jbFixed {
-		   position: fixed;
-		   top: 0px;
-		}
-    </style>
-		
 </head>
 <body>
 	
@@ -34,19 +27,6 @@
             location.replace(move_site);
         }
 	
-		// 헤더 고정 // 남기문
-		$( document ).ready( function() {
-	        var jbOffset = $( '#container' ).offset();
-	        $( window ).scroll( function() {
-	          if ( $( document ).scrollTop() > jbOffset.top ) {
-	            $( '#container' ).addClass( 'jbFixed' );
-	          }
-	          else {
-	            $( '#container' ).removeClass( 'jbFixed' );
-	          }
-	        });
-	      });
-		
 		function logout(){
 			
 			var isConfirmed = confirm("로그아웃 하시겠습니까?");
@@ -139,6 +119,7 @@
                         </ul>
                     </li>
                     <c:if test="${not empty sessionScope.m_no}">
+                    	<li class="menu-etc"><a style="padding-left: 20px" href="cart?m_no=${sessionScope.m_no}">장바구니</a></li>
                     	<li class="menu-etc"><a style="padding-left: 20px" href="mypage_info?m_no=${sessionScope.m_no}">마이페이지</a></li>
                     	<li class="menu-etc"><a style="padding-left: 20px" href="javascript:logout();">로그아웃</a></li>
                     </c:if>

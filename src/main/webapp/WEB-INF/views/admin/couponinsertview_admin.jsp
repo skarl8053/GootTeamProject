@@ -7,6 +7,12 @@
 <meta charset="UTF-8">
 	<title>쿠폰등록</title>
 	<style>
+	
+		/* 개별 화면 content 크기를 조절하는 방법 */
+		#content{
+			height: 100%;
+		}
+		
 		@font-face {
 				    font-family: 'GmarketSansMedium';
 				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');

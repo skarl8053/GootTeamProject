@@ -12,25 +12,22 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 	
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
-	<style>
-		#content{
-			height: 800px;
-		}
-	</style>
+	
 	
 	<style>
-        
+		/* 개별 화면 content 크기를 조절하는 방법 */
+        #content{
+			height: 100%;
+		}
 		@font-face {
 				    font-family: 'GmarketSansMedium';
 				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
 				    font-weight: normal;
 				    font-style: normal;
 		}
-		
 		*{
 			font-family: 'GmarketSansMedium';
 		}
-		
 		 .searchbox{
 		     width: 150px;
 		     height: 30px;

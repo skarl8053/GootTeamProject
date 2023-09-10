@@ -85,7 +85,7 @@
 	<select id="coupon_popup_pageCalculate" resultType="integer">
 	
 			SELECT  COUNT(*)
-			FROM 	THISCOUPON A LEFT JOIN TMSTCOUPON B ON A.COUPON_NO = B.COUPON_NO
+			FROM 	THISCOUPON A INNER JOIN TMSTCOUPON B ON A.COUPON_NO = B.COUPON_NO
 			WHERE 	A.M_NO = #{param1}
 			AND 		(
 							A.COUPON_NO LIKE '%' ||  #{param2}  || '%'
@@ -107,7 +107,7 @@
 								,A.COUPON_NO
 								,B.COUPON_DETAIL
 								,A.COUPON_QTY
-					FROM 	THISCOUPON A LEFT JOIN TMSTCOUPON B ON A.COUPON_NO = B.COUPON_NO
+					FROM 	THISCOUPON A INNER JOIN TMSTCOUPON B ON A.COUPON_NO = B.COUPON_NO
 					WHERE 	A.M_NO = #{param1}
 					AND 		(
 									A.COUPON_NO LIKE '%' ||  #{param2}  || '%'
@@ -216,6 +216,14 @@
 			)
 			
 	</insert>
+	
+	<delete id="deleteCartList">
+			
+			DELETE FROM THISCART	
+			WHERE 	M_NO = #{param1}
+			AND 		S_NO  = #{param2}
+			
+	</delete>
 	
 	<insert id="insertPushAL">
 	

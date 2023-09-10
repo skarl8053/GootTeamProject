@@ -11,7 +11,7 @@
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 900px;
+			height: 100%;
 		}
 	</style>
 	
@@ -159,11 +159,19 @@
 		function status2_change(iscomplete){
 			// 배송 준비 처리
 			var delivery_no = document.getElementById("delivery_no").value;
+			
+			var step1_status = "<c:out value='${list.step1_status}'/>";
+			
 			if(iscomplete == "Y")
 			{
 				return false;
 			}
 
+			if(step1_status == "N"){
+				alert("배송 주문 확인 완료 처리를 먼저 진행해주세요");
+				return false;
+			}
+			
 			if(confirm("배송 상태를 '배송 준비 완료'로 변경하시겠습니까?") == false)
 			{
 				return false;
@@ -177,11 +185,18 @@
 		function status3_change(iscomplete){
 			// 배송중 처리
 			var delivery_no = document.getElementById("delivery_no").value;
+			var step2_status = "<c:out value='${list.step2_status}'/>";
+			
 			if(iscomplete == "Y")
 			{
 				return false;
 			}
 
+			if(step2_status == "N"){
+				alert("배송 준비 완료 처리를 먼저 진행해주세요");
+				return false;
+			}
+			
 			if(confirm("배송 상태를 '배송중'으로 변경하시겠습니까?") == false)
 			{
 				return false;
@@ -196,11 +211,18 @@
 		function status4_change(iscomplete){
 			// 배송 완료 처리
 			var delivery_no = document.getElementById("delivery_no").value;
+			var step3_status = "<c:out value='${list.step3_status}'/>";
+			
 			if(iscomplete == "Y")
 			{
 				return false;
 			}
-
+			
+			if(step3_status == "N"){
+				alert("배송중 처리를 먼저 진행해주세요");
+				return false;
+			}
+			
 			if(confirm("배송 상태를 '배송완료'로 변경하시겠습니까?") == false)
 			{
 				return false;
@@ -210,7 +232,7 @@
 				location.replace("delivery_update?delivery_no=" + delivery_no + "&update=4");
 			}
 
-		}
+		} 
 
 		var isNumberCheck = true;
 

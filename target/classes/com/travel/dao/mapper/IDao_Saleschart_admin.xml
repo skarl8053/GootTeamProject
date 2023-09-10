@@ -39,12 +39,11 @@
                        ,SUM(NVL(A.PAYMENT_PRICE,0)) AS SUM_PAYMENT_PRICE
             FROM
             (
-	            SELECT  	DISTINCT EXTRACT(MONTH FROM A.ORDER_DATE) AS ORDER_MONTH
+	            SELECT  	EXTRACT(MONTH FROM A.ORDER_DATE) AS ORDER_MONTH
 	            			,A.PAYMENT_PRICE
 	            FROM    THISORDER A LEFT JOIN THISREFUND 		B 	ON A.ORDER_NO = B.ORDER_NO
-	                                			LEFT JOIN THISORDERDTL 	C 	ON A.ORDER_NO = C.ORDER_NO
 	            WHERE  B.REFUND_NO IS NULL
-	            AND 		C.S_NO=#{param1}
+	            AND 		A.S_NO=#{param1}
 	            AND     EXTRACT(YEAR FROM A.ORDER_DATE) = #{param2}
             ) A   
             GROUP BY A.ORDER_MONTH
@@ -58,12 +57,11 @@
                        ,SUM(NVL(A.PAYMENT_PRICE,0)) AS SUM_PAYMENT_PRICE
             FROM
             (
-		            SELECT  	DISTINCT EXTRACT(DAY FROM A.ORDER_DATE) AS ORDER_DAY
+		            SELECT  	EXTRACT(DAY FROM A.ORDER_DATE) AS ORDER_DAY
 		            			,A.PAYMENT_PRICE
 		            FROM    THISORDER A LEFT JOIN THISREFUND 		B 	ON A.ORDER_NO = B.ORDER_NO
-		                                			LEFT JOIN THISORDERDTL 	C 	ON A.ORDER_NO = C.ORDER_NO
 		            WHERE  B.REFUND_NO IS NULL
-	                AND     C.S_NO = #{param1}
+	                AND     A.S_NO = #{param1}
 		            AND     EXTRACT(YEAR FROM A.ORDER_DATE) = #{param2}
 	                AND     EXTRACT(MONTH FROM A.ORDER_DATE) = #{param3}
             ) A   
