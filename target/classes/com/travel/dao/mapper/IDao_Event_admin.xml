@@ -7,16 +7,18 @@
 
 	<select id="pageCalculate" resultType="Integer">
 		
+		<![CDATA[
 		SELECT  	COUNT(*)
-    	FROM    TMSTEVENT A 
-	    WHERE
+		FROM    TMSTEVENT A 
+		WHERE
 	    (
 	        ( #{param1} = 1 )
-	        OR      ( #{param1} = 2 AND A.EVENT_FLAG = 1)
-	        OR      ( #{param1} = 3 AND A.EVENT_FLAG = 2)
-	        OR      ( #{param1} = 4 AND A.EVENT_FLAG = 3)
+		    OR      ( #{param1} = 2 AND SYSDATE < A.EVENT_STARTDATE)
+		    OR      ( #{param1} = 3 AND SYSDATE BETWEEN A.EVENT_STARTDATE AND A.EVENT_ENDDATE + 1)
+		    OR      ( #{param1} = 4 AND SYSDATE > A.EVENT_ENDDATE + 1)
 	    )
-	    AND LOWER(A.EVENT_NAME) LIKE '%' || LOWER(#{param2}) || '%'
+		AND LOWER(A.EVENT_NAME) LIKE '%' || LOWER(#{param2}) || '%'      
+		]]>
 		
 	</select>
 
@@ -58,9 +60,9 @@
 				    WHERE
 				    (
 				        ( #{param1} = 1 )
-				        OR      ( #{param1} = 2 AND A.EVENT_FLAG = 1)
-				        OR      ( #{param1} = 3 AND A.EVENT_FLAG = 2)
-				        OR      ( #{param1} = 4 AND A.EVENT_FLAG = 3)
+					    OR      ( #{param1} = 2 AND SYSDATE < A.EVENT_STARTDATE)
+					    OR      ( #{param1} = 3 AND SYSDATE BETWEEN A.EVENT_STARTDATE AND A.EVENT_ENDDATE + 1)
+					    OR      ( #{param1} = 4 AND SYSDATE > A.EVENT_ENDDATE + 1)
 				    )
 				    AND LOWER(A.EVENT_NAME) LIKE '%' || LOWER(#{param2}) || '%'
 				    ORDER BY A.EVENT_STARTDATE DESC, EVENT_NO ASC
@@ -77,7 +79,10 @@
 						,EVENT_NAME
 						,TO_CHAR(EVENT_STARTDATE, 'yyyy-MM-dd') AS EVENT_STARTDATE
 						,TO_CHAR(EVENT_ENDDATE, 'yyyy-MM-dd') AS EVENT_ENDDATE
+						,EVENT_TARGET
+						,EVENT_CAUTION
 						,FILENAME
+						,FILENAME2
 						,EVENT_FLAG
 			FROM 	TMSTEVENT
 			WHERE  EVENT_NO = #{param1}
@@ -86,19 +91,22 @@
 	
 	<insert id="insertEvents">
 	
-			INSERT 	INTO TMSTEVENT (EVENT_NO, EVENT_NAME, EVENT_STARTDATE, EVENT_ENDDATE, FILENAME, EVENT_FLAG, EVENT_MEMBER_FLAG)
-			VALUES((SELECT NVL(MAX(EVENT_NO),0) + 1 FROM TMSTEVENT), #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, 'N')
+			INSERT 	INTO TMSTEVENT (EVENT_NO, EVENT_NAME, EVENT_STARTDATE, EVENT_ENDDATE, EVENT_TARGET, EVENT_CAUTION, FILENAME, FILENAME2, EVENT_FLAG, EVENT_MEMBER_FLAG)
+			VALUES((SELECT NVL(MAX(EVENT_NO),0) + 1 FROM TMSTEVENT), #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, 'N')
 			
 	</insert>
 	
 	<update id="updateEvents">
 	
-			UPDATE 	TMSTEVENT
+			UPDATE 		TMSTEVENT
 			SET 			EVENT_NAME = #{param2}
 							,EVENT_STARTDATE = #{param3}
 							,EVENT_ENDDATE = #{param4}
-							,FILENAME = #{param5}
-							,EVENT_FLAG = #{param6}
+							,EVENT_TARGET = #{param5}
+							,EVENT_CAUTION = #{param6}
+							,FILENAME = #{param7}
+							,FILENAME2 = #{param8}
+							,EVENT_FLAG = #{param9}
 			WHERE 		EVENT_NO = #{param1}
 			
 	</update>
@@ -131,21 +139,30 @@
 	
 			SELECT 	A.EVENT_NAME
 						,A.EVENT_MEMBER_FLAG
-						,NVL( B.ITEM_NAME, '미등록') AS FIRST_ITEM
-						,NVL( C.ITEM_NAME, '미등록') AS SECOND_ITEM
-						,NVL( D.ITEM_NAME, '미등록')  AS THIRD_ITEM
-						,NVL(E.M_EMAIL, '미등록')  AS FIRST_MEMBER
-						,NVL(F.M_EMAIL, '미등록')  AS SECOND_MEMBER
-						,NVL(G.M_EMAIL, '미등록')  AS THIRD_MEMBER
+						,NVL( B.ITEM_NAME, '') AS FIRST_ITEM
+						,NVL( C.ITEM_NAME, '') AS SECOND_ITEM
+						,NVL( D.ITEM_NAME, '')  AS THIRD_ITEM
+						,NVL(E.M_EMAIL, '')  AS FIRST_MEMBER
+						,NVL(F.M_EMAIL, '')  AS SECOND_MEMBER
+						,NVL(G.M_EMAIL, '')  AS THIRD_MEMBER
+						,H.DELIVERY_NO AS FIRST_DELIVERY_NO
+                        ,I.DELIVERY_NO AS SECOND_DELIVERY_NO
+                        ,J.DELIVERY_NO AS THIRD_DELIVERY_NO
 			FROM 	TMSTEVENT A LEFT JOIN TMSTITEM 		B 	ON 	A.EVENT_NO 	= B.EVENT_NO
-																			 		AND 	B.ITEM_NO 		= 1 					<!-- 1등 -->
+																			 		AND 	B.ITEM_NO 	= 1 					<!-- 1등 -->
 									 		LEFT JOIN TMSTITEM 		C 	ON 	A.EVENT_NO 	= C.EVENT_NO
-																		 			AND 	C.ITEM_NO 		= 2 					<!-- 2등 -->
+																		 			AND 	C.ITEM_NO 	= 2 					<!-- 2등 -->
 										 	LEFT JOIN TMSTITEM 		D 	ON 	A.EVENT_NO 	= D.EVENT_NO
 																			 		AND 	D.ITEM_NO 	= 3 					<!-- 3등 -->
-										    LEFT JOIN TMSTMEMBER E ON A.M_NO1  = E.M_NO
-										    LEFT JOIN TMSTMEMBER F ON A.M_NO2  = F.M_NO
-										    LEFT JOIN TMSTMEMBER G ON A.M_NO3 = G.M_NO
+										    LEFT JOIN TMSTMEMBER E 	ON 	A.M_NO1  		= E.M_NO
+										    LEFT JOIN TMSTMEMBER F 	ON 	A.M_NO2  		= F.M_NO
+										    LEFT JOIN TMSTMEMBER G 	ON 	A.M_NO3 		= G.M_NO
+										    LEFT JOIN THISDELIVERY  H 	ON 	A.EVENT_NO 	= H.EVENT_NO
+                                                                     				AND 	A.M_NO1 		= H.M_NO
+                                            LEFT JOIN THISDELIVERY  I 	ON 	A.EVENT_NO 	= I.EVENT_NO
+                                                                     				AND 	A.M_NO2 		= I.M_NO
+                                            LEFT JOIN THISDELIVERY  J 	ON 	A.EVENT_NO 	= J.EVENT_NO
+                                                                     				AND 	A.M_NO3 		= J.M_NO
 			WHERE  A.EVENT_NO = #{param1}
 	
 	</select>
@@ -239,7 +256,7 @@
 						,A.EVENT_NO
 						,B.ITEM_NO
 						,C.M_NO
-						,C.M_ADDRESS
+						,C.M_ROADADDRESS || ' ' || C.M_DETAILADDRESS AS M_ADDRESS
 						,1
 						,SYSDATE
 						,NULL
@@ -255,7 +272,7 @@
 						,A.EVENT_NO
 						,B.ITEM_NO
 						,C.M_NO
-						,C.M_ADDRESS
+						,C.M_ROADADDRESS || ' ' || C.M_DETAILADDRESS AS M_ADDRESS
 						,1
 						,SYSDATE
 						,NULL
@@ -271,7 +288,7 @@
 						,A.EVENT_NO
 						,B.ITEM_NO
 						,C.M_NO
-						,C.M_ADDRESS
+						,C.M_ROADADDRESS || ' ' || C.M_DETAILADDRESS AS M_ADDRESS
 						,1
 						,SYSDATE
 						,NULL

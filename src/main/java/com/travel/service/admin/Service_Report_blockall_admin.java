@@ -1,5 +1,6 @@
 package com.travel.service.admin;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,30 +30,17 @@ public class Service_Report_blockall_admin implements Interface_TravelService {
 	public void execute(Model model) {
 		
 		Map<String, Object> map = model.asMap();
-		
 		HttpServletRequest request = (HttpServletRequest)map.get("request");
 		
-		String m_email = request.getParameter("m_email"); 
+		String[] m_no = request.getParameter("m_no").split(","); 
 		String is_block = request.getParameter("is_block");
 		
-		String[] m_email_split = m_email.split(",");
+		Map<String, Object> mp = new HashMap<String, Object>();
+		mp.put("m_no", m_no);
+		mp.put("is_block", is_block);
 		
-		String str_email = "";
-		
-		for (int i = 0; i < m_email_split.length; i++) {
-			
-			String str = m_email_split[i];
-			if(i != m_email_split.length -1) {
-				str_email +=  "'" + str +  "',";
-			}
-			else {
-				str_email +=  "'" + str +  "'";
-			}
-			
-		}
-		
-		dao.updateBlockAll(str_email, is_block);
-		dao.updateBlockAll_user(str_email, is_block);
+		dao.updateBlockAll(mp);
+		dao.updateBlockAll_user(mp);
 		
 		if(is_block.equals("Y")) {
 			model.addAttribute("msg", "일괄 접속 / 댓글 차단되었습니다.");

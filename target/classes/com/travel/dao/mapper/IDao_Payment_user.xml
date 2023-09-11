@@ -9,7 +9,7 @@
 	
 			SELECT 	M_NO
 						,M_NAME
-						,M_ADDRESS
+						,M_ROADADDRESS || ' ' || M_DETAILADDRESS AS M_ADDRESS
 						,LPAD(M_TEL,3) || '-' || SUBSTR(M_TEL, 4,4) || '-' || SUBSTR(M_TEL, 8, 4) AS M_TEL
 						,NVL(M_POINT,0) AS M_POINT
 			FROM 	TMSTMEMBER
@@ -28,10 +28,28 @@
 	
 	<select id="getRoomList" parameterType="map" resultType="com.travel.dto.user.DTO_Payment_user">
 	
+			<!-- 체크인 / 체크아웃 날짜가 있을 경우 -->
+			
 			SELECT 	R_IMG1
 						,R_NAME
 						,R_PERSON_CNT
-						,(R_PRICE * (TO_DATE(#{checkout_date}, 'YYYY-MM-DD') - TO_DATE(#{checkin_date}, 'YYYY-MM-DD'))) AS R_PRICE
+						,(R_PRICE * ( (TO_DATE(#{checkout_date}, 'YYYY-MM-DD') - TO_DATE(#{checkin_date}, 'YYYY-MM-DD')) + 1)) AS R_PRICE
+			FROM 	TMSTROOM
+			WHERE 	S_NO = #{stay_no}
+			AND 	 	R_NO IN
+			<foreach collection="room_no" item="r_no" index="index" open="(" separator="," close=")">
+			        #{r_no.value}
+		  	</foreach>
+		  	
+	</select>
+	
+	<select id="getRoomList_NotExistsDate" parameterType="map" resultType="com.travel.dto.user.DTO_Payment_user">
+	
+			<!-- 체크인 / 체크아웃 날짜가 없을 경우 -->
+			SELECT 	R_IMG1
+						,R_NAME
+						,R_PERSON_CNT
+						,R_PRICE
 			FROM 	TMSTROOM
 			WHERE 	S_NO = #{stay_no}
 			AND 	 	R_NO IN
@@ -42,7 +60,19 @@
 	
 	<select id="getSumPrice" parameterType="map" resultType="integer">
 	
-			SELECT 	(SUM(R_PRICE) * (TO_DATE(#{checkout_date}, 'YYYY-MM-DD') - TO_DATE(#{checkin_date}, 'YYYY-MM-DD'))) AS SUM_PRICE
+			SELECT 	(SUM(R_PRICE) *   ((TO_DATE(#{checkout_date}, 'YYYY-MM-DD') - TO_DATE(#{checkin_date}, 'YYYY-MM-DD')) +1)) AS SUM_PRICE
+			FROM 	TMSTROOM
+			WHERE 	S_NO = #{stay_no}
+			AND 	 	R_NO IN
+			<foreach collection="room_no" item="r_no" index="index" open="(" separator="," close=")">
+			        #{r_no.value}
+		  	</foreach>
+	
+	</select>
+	
+	<select id="getSumPrice_NotExistsDate" parameterType="map" resultType="integer">
+	
+			SELECT 	SUM(R_PRICE) AS SUM_PRICE
 			FROM 	TMSTROOM
 			WHERE 	S_NO = #{stay_no}
 			AND 	 	R_NO IN
@@ -55,7 +85,7 @@
 	<select id="coupon_popup_pageCalculate" resultType="integer">
 	
 			SELECT  COUNT(*)
-			FROM 	THISCOUPON A LEFT JOIN TMSTCOUPON B ON A.COUPON_NO = B.COUPON_NO
+			FROM 	THISCOUPON A INNER JOIN TMSTCOUPON B ON A.COUPON_NO = B.COUPON_NO
 			WHERE 	A.M_NO = #{param1}
 			AND 		(
 							A.COUPON_NO LIKE '%' ||  #{param2}  || '%'
@@ -77,7 +107,7 @@
 								,A.COUPON_NO
 								,B.COUPON_DETAIL
 								,A.COUPON_QTY
-					FROM 	THISCOUPON A LEFT JOIN TMSTCOUPON B ON A.COUPON_NO = B.COUPON_NO
+					FROM 	THISCOUPON A INNER JOIN TMSTCOUPON B ON A.COUPON_NO = B.COUPON_NO
 					WHERE 	A.M_NO = #{param1}
 					AND 		(
 									A.COUPON_NO LIKE '%' ||  #{param2}  || '%'
@@ -100,7 +130,7 @@
 	
 			INSERT INTO THISORDER
 			(
-				ORDER_NO, M_NO, COUPON_NO, ORDER_DATE, TOTAL_PRICE, DISCOUNT_PRICE,
+				ORDER_NO, M_NO, S_NO, COUPON_NO, ORDER_DATE, TOTAL_PRICE, DISCOUNT_PRICE,
 				PAYMENT_PRICE, PAYMENT_METHOD, PAYMENT_CARDNO, PAYMENT_FLAG, HOT_DEAL_FLAG, 
 				CHECK_IN_DATE, CHECK_OUT_DATE
 			)
@@ -108,6 +138,7 @@
 			(
 				#{order_no},
 				#{m_no},
+				#{s_no},
 				#{coupon_no},
 				SYSDATE,
 				#{total_price},
@@ -158,45 +189,16 @@
 	
 	</insert>
 	
-	
-	<update id="updateMemberUsePoint">
-	
-			UPDATE 	TMSTMEMBER
-			SET 			M_POINT = NVL(M_POINT,0) - #{param2}
-			WHERE  	M_NO = #{param1}
-			
-	</update>
-	
-	<insert id="insertMemberUsePointList">
-	
-			<!-- 포인트 사용 이력 추가 -->
-			INSERT INTO THISPOINT
-			(
-				POINT_NO, M_NO, ORDER_NO, POINT_TYPE, POINT_IN, POINT_OUT, POINT_USEDATE
-			)
-			VALUES
-			(
-				(SELECT NVL(MAX(POINT_NO),0) + 1 FROM THISPOINT)
-				,#{param1}
-				,#{param2}
-				,1
-				,NULL
-				,#{param3}
-				,SYSDATE
-			)
-			
-	</insert>
-	
-	<update id="updateMemberEarnPoint">
+	<update id="updateMemberPoint">
 	
 			UPDATE 	TMSTMEMBER
-			SET 			M_POINT = NVL(M_POINT,0) + #{param2}
-			WHERE  	M_NO = #{param1}
-			
+			SET 		M_POINT = M_POINT + ( #{param2} )
+			WHERE 	M_NO = #{param1}
+	
 	</update>
 	
-	<insert id="insertMemberEarnPoint">
-	
+	<insert id="insertMemberPointList">
+			
 			<!-- 포인트 사용 이력 추가 -->
 			INSERT INTO THISPOINT
 			(
@@ -209,11 +211,19 @@
 				,#{param2}
 				,1
 				,#{param3}
-				,NULL
+				,#{param4}
 				,SYSDATE
 			)
 			
 	</insert>
+	
+	<delete id="deleteCartList">
+			
+			DELETE FROM THISCART	
+			WHERE 	M_NO = #{param1}
+			AND 		S_NO  = #{param2}
+			
+	</delete>
 	
 	<insert id="insertPushAL">
 	

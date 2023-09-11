@@ -1,0 +1,152 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- (namespace) 인터페이스 경로 -->
+<mapper namespace="com.travel.dao.admin.IDao_Refund_admin">
+
+	<select id="refundStatusSelect" resultType="com.travel.dto.admin.DTO_Refund_admin">
+	
+				SELECT 	DISTINCT 
+							A.REFUND_NO
+							,D.M_NO
+							,I.M_NAME
+						    ,C.CODENAME AS REFUND_REASON
+						    ,A.ORDER_NO
+						    ,F.S_NAME
+						    ,A.REFUND_PRICE || ' 원' AS REFUND_PRICE
+						    ,(
+						    	CASE WHEN 	G.COUPON_DETAIL IS NULL THEN '환불 쿠폰 없음'
+						    		 	ELSE 		(G.COUPON_DETAIL  || '   /   ' || G.COUPON_NO || ' 원 상당 쿠폰' ) END
+						    ) AS REFUND_COUPON
+						    ,H.POINT_OUT || ' 포인트' AS REFUND_POINT
+						    ,B.CODENAME AS STEP_FLAG_STR
+						    ,(CASE WHEN A.STEP1_DATE IS NOT NULL THEN 'Y' ELSE 'N' END) AS 	STEP1_STATUS
+							,(CASE WHEN A.STEP2_DATE IS NOT NULL THEN 'Y' ELSE 'N' END) AS 	STEP2_STATUS
+							,A.STEP1_DATE
+							,A.STEP2_DATE
+			FROM 		THISREFUND A 		LEFT JOIN TMSTCODE 			B 		ON 	B.GRPCODE 			= 14
+			                                        													AND 	A.STEP_FLAG 			= B.CODE
+											            LEFT JOIN TMSTCODE 			C 		ON 	C.GRPCODE 			= 9
+											                                        					AND A.REFUND_REASON 	= C.CODE
+												        LEFT JOIN THISORDER 			D 		ON 	A.ORDER_NO 			= D.ORDER_NO
+												        LEFT JOIN THISORDERDTL 	E 		ON 	D.ORDER_NO 			= E.ORDER_NO
+												        LEFT JOIN TMSTSTAY    		F 		ON 	E.S_NO 					= F.S_NO
+												        LEFT JOIN TMSTCOUPON 		G 		ON 	D.COUPON_NO 		= G.COUPON_NO
+												        LEFT JOIN THISPOINT 			H 		ON 	A.ORDER_NO 			= H.ORDER_NO
+												        LEFT JOIN TMSTMEMBER      I 		ON 	D.M_NO 				= I.M_NO
+			WHERE 	A.ORDER_NO = #{param1}
+			AND 		H.POINT_OUT IS NOT NULL
+			AND 		H.POINT_TYPE = 1   <!-- 삭제하지 말것!! -->
+			
+	</select>
+	
+	<update id="refundUpdate">
+	
+			UPDATE 	THISREFUND
+			SET 			STEP_FLAG = 2
+							,STEP2_DATE = SYSDATE
+			WHERE 		ORDER_NO = #{param1}
+			
+	</update>
+	
+	<select id="usePoint" resultType="integer">
+			
+			SELECT 	NVL(SUM(NVL(POINT_OUT,0)),0) AS POINT
+			FROM 	THISPOINT 
+			WHERE 	M_NO = #{param1}
+			AND 		ORDER_NO = #{param2}
+		
+	</select>
+		
+	<update id="refundPoint">
+		
+			<selectKey keyProperty="refund_point" resultType="java.lang.Integer" order="BEFORE">
+			        SELECT  	-1 * ( NVL(SUM(NVL(POINT_IN,0)),0) - NVL(sum(NVL(POINT_OUT,0)),0) ) AS REFUND_POINT
+				    FROM 	THISPOINT
+				    WHERE 	M_NO = #{param1}
+				    AND 		ORDER_NO = #{param2}
+			</selectKey>
+			
+			UPDATE  TMSTMEMBER
+			SET        M_POINT = M_POINT + (#{refund_point})
+			WHERE   M_NO = #{param1}
+			
+	</update>
+
+	<update id="refundPointList">
+			
+			INSERT INTO THISPOINT
+			(
+			    POINT_NO
+			    ,M_NO
+			    ,ORDER_NO
+			    ,POINT_TYPE
+			    ,POINT_IN
+			    ,POINT_OUT
+			    ,POINT_USEDATE
+			)
+			SELECT  	NVL(MAX(POINT_NO),0) + 1
+				        ,M_NO
+				        ,ORDER_NO
+				        ,2
+				        ,SUM(POINT_OUT)
+				        ,SUM(POINT_IN)
+				        ,SYSDATE
+			FROM    THISPOINT
+			WHERE  M_NO = #{param1}
+			AND     	ORDER_NO = #{param2}
+			GROUP BY M_NO, ORDER_NO
+			
+	</update>
+
+	<select id="useCoupon" resultType="integer">
+	
+			SELECT  (
+			                CASE WHEN 	B.COUPON_NO IS NULL THEN 0
+			                        ELSE    	B.COUPON_NO END
+			            ) AS COUPON_NO            
+			FROM    THISORDER A LEFT JOIN THISUSECOUPON B 	ON 	A.COUPON_NO 			= B.COUPON_NO
+                                               											AND 	A.M_NO 			= B.M_NO
+               WHERE 	A.M_NO = #{param1}
+               AND 		A.ORDER_NO = #{param2}
+               
+	</select>
+	
+	<update id="refundCoupon">
+	
+			UPDATE 	THISCOUPON
+			SET 			COUPON_QTY = COUPON_QTY + 1
+			WHERE 		M_NO 			= #{param1}
+			AND 			COUPON_NO 	= #{param2}
+	
+	</update>
+	
+	<delete id="refundCouponList">
+	
+			DELETE 		FROM 	THISUSECOUPON
+			WHERE 		M_NO = #{param1}
+			AND 			COUPON_NO = #{param2}
+	
+	</delete>
+	
+	<insert id="insertPushAL">
+	
+			INSERT INTO THISPUSHAL
+			(
+				AL_NO, M_NO, AL_CONTENT, AL_GUBUN, ORDER_NO, DELIVERY_NO, AL_TIME
+			)
+			SELECT  		(SELECT NVL(MAX(AL_NO),0) + 1 FROM THISPUSHAL)
+			            	,#{param1}
+			            	,#{param3}
+			            	,2                   	<!-- 2번 환불 -->
+			            	,#{param2}
+			            	,NULL
+			            	,SYSDATE
+			FROM    	THISORDER A
+			WHERE   	A.M_NO 		= #{param1}
+			AND      	A.ORDER_NO 	= #{param2}
+		
+	</insert>
+	
+</mapper>

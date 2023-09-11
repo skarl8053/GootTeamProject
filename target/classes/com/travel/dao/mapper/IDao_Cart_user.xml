@@ -1,0 +1,50 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- (namespace) 인터페이스 경로 -->
+<mapper namespace="com.travel.dao.user.IDao_Cart_user">
+
+	<select id="selectCartStayList" resultType="com.travel.dto.user.DTO_Cart_user">
+	
+			SELECT  DISTINCT 
+						A.S_NO, 
+						B.S_NAME, 
+						C.CODENAME AS S_TYPE
+			FROM    THISCART A 	LEFT JOIN TMSTSTAY 	B 	ON 	A.S_NO 			= B.S_NO
+			                    			LEFT JOIN TMSTCODE 	C 	ON 	C.GRPCODE 	= 3
+			                                        							AND 	B.S_TYPE 		= C.CODE
+			WHERE   A.M_NO = #{param1}
+			ORDER BY A.S_NO ASC
+	
+	</select>
+	
+	<select id="selectCartRoomList" resultType="com.travel.dto.user.DTO_Cart_user">
+	
+			SELECT  B.R_NO, 
+						B.R_NAME, 
+						B.R_PRICE
+			FROM    THISCART A LEFT JOIN TMSTROOM B ON 	A.S_NO 	= B.S_NO
+			                                        						AND 	A.R_NO 	= B.R_NO
+			WHERE 	A.M_NO = #{param1}
+			AND 		A.S_NO 	= #{param2}
+			ORDER BY A.S_NO
+				
+	</select>
+	
+	<select id="selectCartInfo" resultType="string">
+	
+			SELECT  	A.R_NO
+			FROM    THISCART A
+			WHERE 	A.M_NO = #{param1}
+			AND 		A.S_NO = #{param2}
+				
+	</select>
+	
+	<delete id="deleteCartInfo">
+			DELETE 	FROM THISCART
+			WHERE 	M_NO = #{param1}
+			AND 		S_NO = #{param2}
+	</delete>
+	
+</mapper>

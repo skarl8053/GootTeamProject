@@ -16,7 +16,8 @@ public class DTO_Member_user {
 	private String m_pw;
 	private String m_name;
 	private String m_tel;
-	private String m_address;
+	private String m_roadaddress;
+	private String m_detailaddress;
 	private int m_sec; 
 	private int m_point;
  	private String m_marketing;
@@ -27,6 +28,5 @@ public class DTO_Member_user {
 	private int m_theme2;
 	private int m_theme3;
 	private String m_lock;
-
-	
+	private String m_emailcheck;
 }

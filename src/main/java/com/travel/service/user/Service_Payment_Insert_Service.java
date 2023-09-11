@@ -36,42 +36,47 @@ public class Service_Payment_Insert_Service  implements Interface_TravelService 
 		String m_no = request.getParameter("m_no");
 		
 		// 예약 숙소 / 객실
-		String stay_no = request.getParameter("stay_no");
-		String[] room_no_str = request.getParameter("room_no").split("_");
+		String stay_no = request.getParameter("s_no");
+		String[] room_no_str = request.getParameter("r_no").split("_");
 		
 		// 체크인 체크아웃
 		String checkindate = request.getParameter("checkindate");
 		String checkoutdate = request.getParameter("checkoutdate");
-		
-		// 사용 쿠폰번호
-		String coupon_no = request.getParameter("coupon_no");
-		
-		// 사용 포인트
-		int totalUsePoint = Integer.parseInt(request.getParameter("totalUsePoint"));
-		
-		// 적립 포인트
-		String totalEarnPoint = request.getParameter("totalEarnPoint");
 		
 		// 계산 금액
 		String totalAllPrice = request.getParameter("totalAllPrice");
 		String totalDiscountPrice = request.getParameter("totalDiscountPrice");
 		String totalResultPrice = request.getParameter("totalResultPrice");
 		
+		// 사용 쿠폰번호
+		String coupon_no = request.getParameter("coupon_no");
+		
+		// 사용 포인트
+		int totalUsePoint = Integer.parseInt(request.getParameter("totalUsePoint") != null ? request.getParameter("totalUsePoint") : "0");
+		
+		// 적립 포인트
+		int totalEarnPoint = Integer.parseInt(request.getParameter("totalEarnPoint") != null ? request.getParameter("totalEarnPoint") : "0");
+		
+		
+		
 		// 결제 방식
 		String pay_type = request.getParameter("pay_type");
 		String cardNumber = request.getParameter("cardNumber"); // 암호화 시켜서 저장할 것
 		
-		//
 		String encryptedCardNumber = "";
-		try {
-			// 카드 암호화 키 (임의 배정)
-			encryptedCardNumber = CryptoUtil.encryptAES256(cardNumber, "4ijSJVEVCrT6w");
-		} 
-		catch(Exception ex) {
-			ex.printStackTrace();
-			return;
+		if(pay_type.equals("1")) {
+			
+			// 카드로 결제했을 경우에만 카드번호 투입
+			try {
+				// 카드 암호화 키 (임의 배정)
+				encryptedCardNumber = CryptoUtil.encryptAES256(cardNumber, "4ijSJVEVCrT6w24ds");
+			} 
+			catch(Exception ex) {
+				ex.printStackTrace();
+				return;
+			}
+			
 		}
-		
 		// 주문번호 생성
 		int create_order_no = dao.selectOrderNo();
 		
@@ -101,7 +106,7 @@ public class Service_Payment_Insert_Service  implements Interface_TravelService 
 		dao.insertTotalOrder(mp);
 		
 		// 상세 내역 테이블에 넣음..
-		dao.insertDetailOrder(mp);
+		dao.insertDetailOrder(mp);  // ORDERDTL
 		
 		// 쿠폰을 사용한 경우
 		if(! coupon_no.equals("")) {
@@ -114,21 +119,14 @@ public class Service_Payment_Insert_Service  implements Interface_TravelService 
 			
 		}
 		
-		// 포인트를 사용한 경우
-		if(totalUsePoint > 0) {
-			// 사용자 포인트 차감
-			dao.updateMemberUsePoint(m_no, totalUsePoint);
-			
-			// 포인트 사용 이력 추가
-			dao.insertMemberUsePointList(m_no, create_order_no, totalUsePoint);
-		}
+		int updatePoint = totalEarnPoint - totalUsePoint;
 		
+		// 사용자 포인트 업데이트
+		dao.updateMemberPoint(m_no, updatePoint);
+		dao.insertMemberPointList(m_no, create_order_no, totalEarnPoint, totalUsePoint);
 		
-		// 적립 포인트 추가
-		dao.updateMemberEarnPoint(m_no, totalEarnPoint);
-		
-		// 포인트 적립 이력 추가
-		dao.insertMemberEarnPoint(m_no, create_order_no, totalEarnPoint);
+		// 장바구니 이력 제거
+		dao.deleteCartList(m_no, stay_no);
 		
 		// 알림 이력에 추가
 		dao.insertPushAL(m_no, create_order_no, "숙소 결제가 완료되었습니다.");

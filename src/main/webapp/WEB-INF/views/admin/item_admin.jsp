@@ -12,7 +12,7 @@
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 1300px;
+			height: 100%;
 		}
 	</style>
 	
@@ -26,26 +26,35 @@
 			작업 : 이벤트 조회
 		*/
 		
-		 /* 화면 디자인 */
 		
+		/* 화면 디자인 */
+		@font-face {
+				    font-family: 'GmarketSansMedium';
+				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+				    font-weight: normal;
+				    font-style: normal;
+		}
+		
+		*{
+			font-family: 'GmarketSansMedium';
+		}
         .searchbox{
             width: 150px;
             height: 30px;
         }
         #event_name{
-            width: 280px;
+            width: 320px;
             height: 29px;
         }
         .button{
-            background-color: blue;
-            color: white;
-            font-weight: bold;
+            background-color: #011343;
+            color: #EBD01C;
             border-radius: 3px;
             width: 100px;
             height: 32px;
         }
         .button:hover{
-        cursor: pointer;
+       	 	cursor: pointer;
         }
         table{
             width: 1200px;
@@ -57,13 +66,9 @@
         table tbody tr td{
         	height: 40px;
         }
-        table thead tr td{
-            border-bottom: 1px solid black;
-        }
-        #header_checkbox{
-        	text-align: center;
-        	width: 5%;
-        	height: 300px;
+        table thead th{
+        	border-style: none;
+        	border-bottom: 1px solid black;
         }
         #first_col{
         	text-align: center;
@@ -79,10 +84,30 @@
             width: 55%;
             height: 300px;
         }
+        .input_name{
+            padding: 10px 0 10px 20px;
+        }
         .item_name, .item_desc{
         	width: 615px;
             resize: none;
             border-style: none;
+        }
+        .item_img {
+        	width: 300px;
+        	max-width: 300px;
+        	height: 300px;
+        	max-height: 300px;
+        }
+        #warning_content{
+        	text-align: center;
+        }
+        #warning_img{
+        	width: 150px;
+        	height: 150px;
+        	margin: 0 auto;
+        }
+        #warning_text{
+        	font-size: 20px;
         }
 		#paging{
 			width: 1200px;
@@ -103,7 +128,7 @@
 
             var opensite = "eventpopup?&page=1";
             	
-            window.open(opensite, 'window', 'width=700px, height=830px');
+            window.open(opensite, 'window', 'width=700px, height=860px');
             
         }
         
@@ -123,7 +148,7 @@
         	location.replace("itemform?event_no=" + event_no + "&event_name=" + event_name + "&gubun=insert")
         }
         
-		function deleteItem(event_no){
+		function deleteItem(event_no, event_name){
 			
 			var check = confirm("제품 전체가 삭제됩니다. 계속 진행하시겠습니까?");
 			
@@ -131,7 +156,7 @@
 				return false;
 			}
 			else{
-				location.replace("itemdelete?event_no=" + event_no);
+				location.replace("itemdelete?event_no=" + event_no + "&event_name=" + event_name);
 			}
         }
         
@@ -172,7 +197,7 @@
     	<div>
     		<br />
     		<span>
-                <input type="text" id="event_name" name="event_name" value="${event_name}" readonly>
+                <input type="text" id="event_name" name="event_name" value="${event_name}" readonly placeholder="이벤트 조회 버튼을 클릭하여 이벤트를 선택해주세요">
     		</span>
     		<span>
     			<input type="submit" class="button" value="검색" >
@@ -181,37 +206,57 @@
     	<br><br>
     	<div>
             <table>
-                <tr>
+                <thead>
                     <th width="10%">등수</th>
                     <th width="38%">사진</th>
                     <th width="52%">제품 / 설명</th>
-                </tr>
+                </thead>
                 <c:forEach items="${list}" var="li">
                     <tr>
                         <td id="first_col">${li.item_no}</td>
                         <td id="second_col">
-	                        <img src="resources/upload_img/admin/item/${li.filename}" alt="이미지 없음" width="430px"/>
+	                        <img class="item_img" src="resources/upload_img/admin/item/${li.filename}" alt="이미지 없음" />
                         </td><!-- 이미지로 수정할 것 -->
                         <td id="third_col">
-                        	제품 이름 : <br>
-                            <input type="text" class="item_name" value="${li.item_name}" readonly><br>
-                        	제품 설명 : <br>
-                        	<textarea rows="15" class="item_desc" readonly>${li.item_desc}</textarea>
+                        	<div class="input_name">
+	                        	제품 이름 : <br>
+	                            <input type="text" class="item_name" value="${li.item_name}" readonly><br>
+                            </div>
+                            <div class="input_name">
+                            	제품 설명 : <br>
+                        		<textarea rows="15" class="item_desc" readonly>${li.item_desc}</textarea>
+                            </div>
                         </td>
                     </tr>
                 </c:forEach>
             </table>
         </div>
-        <br /><br />
         <div>
-        	<c:if test="${not empty param.event_no && not empty param.event_name }">
-        		<c:if test="${not empty list}">
-	        		<input type="button" class="button" value="경품 삭제" onclick="return deleteItem('${param.event_no}');">
+	        <br /><br /><br />
+	        	<c:if test="${empty param.event_no && empty param.event_name}">
+	        		<div id="warning_content" >
+		    	 			<img id="warning_img" src="resources/img/PL_Search.png" alt="이미지 없음"/>
+		    	 			<br />
+			    	 		<span id="warning_text">이벤트를 검색해주세요</span>
+			    	 		<br /><br /><br />
+		    	 		</div>
 	        	</c:if>
-	        	<c:if test="${empty list}">
-	        		<input type="button" class="button" value="경품 등록" onclick="insertItem('${param.event_no}','${param.event_name }');">
+	        	<c:if test="${not empty param.event_no && not empty param.event_name && empty list}">
+	        			<div id="warning_content" >
+		    	 			<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+		    	 			<br />
+			    	 		<span id="warning_text">해당 이벤트의 경품 내역이 없습니다.</span>
+			    	 		<br /><br /><br />
+		    	 		</div>
 	        	</c:if>
-        	</c:if>
+	        	<c:if test="${not empty param.event_no && not empty param.event_name }">
+	        		<c:if test="${not empty list}">
+		        		<input type="button" class="button" value="경품 삭제" onclick="return deleteItem('${param.event_no}', '${param.event_name}');">
+		        	</c:if>
+		        	<c:if test="${empty list}">
+		        		<input type="button" class="button" value="경품 등록" onclick="insertItem('${param.event_no}','${param.event_name }');">
+		        	</c:if>
+	        	</c:if>
         </div>
     </form>
 	

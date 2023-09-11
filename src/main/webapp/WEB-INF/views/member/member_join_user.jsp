@@ -10,8 +10,7 @@
 </head>
 
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script
-	src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 
 
 
@@ -19,16 +18,16 @@
 	<p class="join">회원가입</p>
 	<hr>
 	<br>
-	<form action="joining" name="joining">
-	<input type="hidden" name="all_tema" id="all_tema" value=""/>
-	<input type="hidden" name="all_area" id="all_area" value=""/>
+	<form action="joining" onsubmit="return insertBeforeCheck();" id="form">
+		<input type="hidden" name="all_tema" id="all_tema" value=""/>
+		<input type="hidden" name="all_area" id="all_area" value=""/>
 
 		<div class="join-wrapper">
 			<table class="member">
 				<tr>
 					<td><label>이메일</label></td>
 					<td><input type="email" class="enter" name="m_email" id="m_email" 
-						 required value="bpple9392@naver.com" />
+						placeholder="이메일을 입력해주세요."  autocomplete="off"/>
 					</td>
 					<td><input type="button" class="certi" id="check_email" onclick="checking()" value="중복확인"></td>	
 				</tr>
@@ -40,8 +39,8 @@
 				</tr>
 				<tr>
 					<td><label>비밀번호</label></td>
-					<td><input type="password" class="enter" name="m_pw" id="m_pw" value="asdfasdf1!" 
-						placeholder="비밀번호를 입력해주세요." required /> </td>
+					<td><input type="password" class="enter" name="m_pw" id="m_pw"
+						placeholder="비밀번호를 입력해주세요." /> </td>
 				</tr>
 				<tr>
 					<td><label style="display:none;"></label></td>
@@ -49,38 +48,33 @@
 				</tr>
 				<tr>
 					<td><label>비밀번호확인</label></td>
-					<td><input type="password" class="enter" name="m_pw2" value="asdfasdf1!"
-						id="m_pw2" placeholder="비밀번호를 한번 더 입력해주세요." required /></td>
+					<td><input type="password" class="enter" name="m_pw2" 
+						id="m_pw2" placeholder="비밀번호를 한번 더 입력해주세요." /></td>
 				</tr>
 				<tr>
 					<td><label>이름</label></td>
-					<td><input type="text" class="enter" name="m_name" value="오바마"
-						placeholder="이름을 입력해주세요." required /></td>
+					<td><input type="text" class="enter" name="m_name" 
+						placeholder="이름을 입력해주세요." autocomplete="off"/></td>
 				</tr>
 				<tr>
 					<td><label>휴대폰</label></td>
-					<td><input type="text" class="enter" name="m_tel" id="m_tel" maxlength="11" value="01012341234"
-						placeholder="숫자만 입력해주세요." required /></td>
+					<td><input type="text" oninput="inputNumberOnly(this)" class="enter" name="m_tel" id="m_tel" 
+					maxlength="11"  placeholder="숫자만 입력해주세요." autocomplete="off"/></td>
 				</tr>
 				<tr>
 					<td><label>주소</label></td>
-					<td><input type="text" class="enter" id="sample4_roadAddress" value="서울"
-						name="m_roadAddress" placeholder="도로명주소"></td>
+					<td><input type="text" class="enter" id="m_roadAddress" 
+						name="m_roadAddress" placeholder="도로명주소" readonly autocomplete="off"></td>
 					<td><input type="button" class="certi"
-						onclick="sample4_execDaumPostcode()" value="주소찾기"></td>
+						onclick="execDaumPostcode()" value="주소찾기"></td>
 				</tr>
 				<tr>
 					<td><label></label></td>
-					<td><input type="text" class="add_enter" id="sample4_postcode"
-						placeholder="우편번호"> <input type="text" class="add_enter"
-						id="sample4_jibunAddress" placeholder="지번주소"></td>
-				</tr>
-				<tr>
-					<td><label></label></td>
-					<td><input type="text" class="add_enter" value="부산시"
-						id="sample4_detailAddress" placeholder="상세주소"
-						name="m_detailAddress"> <input type="text"
-						class="add_enter" id="sample4_extraAddress" placeholder="참고항목"></td>
+					<td>
+						<input type="text" class="enter" 
+						id="m_detailAddress" placeholder="상세주소"
+						name="m_detailAddress" autocomplete="off">
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -91,31 +85,31 @@
 			<table class="select">
 				<tr>
 					<td><label class="tema" id="tema">테마</label></td>
-					<td><button type="button" class="btn1" name="tema" value="1" onclick="a(this)">#등산</button>
-						<button type="button" class="btn1" name="tema" value="2" onclick="a(this)">#바다</button>
-						<button type="button" class="btn1" name="tema" value="3" onclick="a(this)">#도시</button>
-						<button type="button" class="btn1" name="tema" value="4" onclick="a(this)">#계곡</button></td>
+					<td><button type="button" class="btn1" name="tema" value="1">#등산</button>
+						<button type="button" class="btn1" name="tema" value="2" >#바다</button>
+						<button type="button" class="btn1" name="tema" value="3">#도시</button>
+						<button type="button" class="btn1" name="tema" value="4">#계곡</button></td>
 				</tr>
 				<tr>
 					<td><label></label></td>
-					<td><button type="button" class="btn1" name="tema" value="5" onclick="a(this)">#레저</button>
-						<button type="button" class="btn1" name="tema" value="6" onclick="a(this)">#문화</button>
-						<button type="button" class="btn1" name="tema" value="7" onclick="a(this)">#맛집</button>
-						<button type="button" class="btn1" name="tema" value="8" onclick="a(this)">#파티</button></td>
+					<td><button type="button" class="btn1" name="tema" value="5">#레저</button>
+						<button type="button" class="btn1" name="tema" value="6">#문화</button>
+						<button type="button" class="btn1" name="tema" value="7">#맛집</button>
+						<button type="button" class="btn1" name="tema" value="8">#파티</button></td>
 				</tr>
 				<tr>
 					<td><label class="tema" id="area">선호지역</label></td>
-					<td><button type="button" class="btn2" name="area" value="1" onclick="aa(this)">#서울</button>
-						<button type="button" class="btn2" name="area" value="2" onclick="aa(this)">#경기</button>
-						<button type="button" class="btn2" name="area" value="3" onclick="aa(this)">#인천</button>
-						<button type="button" class="btn2" name="area" value="4" onclick="aa(this)">#충청</button></td>
+					<td><button type="button" class="btn2" name="area" value="1">#서울</button>
+						<button type="button" class="btn2" name="area" value="2">#경기</button>
+						<button type="button" class="btn2" name="area" value="3">#인천</button>
+						<button type="button" class="btn2" name="area" value="4">#충청</button></td>
 				</tr>
 				<tr>
 					<td><label></label></td>
-					<td><button type="button" class="btn2" name="area" value="5" onclick="aa(this)">#강원</button>
-						<button type="button" class="btn2" name="area" value="6" onclick="aa(this)">#경상</button>
-						<button type="button" class="btn2" name="area" value="7" onclick="aa(this)">#전라</button>
-						<button type="button" class="btn2" name="area" value="8" onclick="aa(this)">#제주</button></td>
+					<td><button type="button" class="btn2" name="area" value="5">#강원</button>
+						<button type="button" class="btn2" name="area" value="6">#경상</button>
+						<button type="button" class="btn2" name="area" value="7">#전라</button>
+						<button type="button" class="btn2" name="area" value="8">#제주</button></td>
 				</tr>
 				<tr>
 					<td><label></label></td>
@@ -154,7 +148,7 @@
 						<li class="terms__box">
 							<div class="input__check">
 								<input type="checkbox" name="agreement" id="termsOfService"
-									class="chk"  required /> <label for="termsOfService" 
+									class="chk"  required/> <label for="termsOfService" 
 									class="required" id="label_font">이용약관 동의 <strong>(필수)</strong></label>
 							</div>
 						</li>
@@ -231,8 +225,7 @@
 		<hr />
 		<br />
 		<div class="join_cancel">
-			<button type="submit" class="join_button" id="join_button"
-				onclick="test()" disabled>회원가입</button>
+			<button type="submit" class="join_button" id="join_button" disabled>회원가입</button>
 			<a href="${pageContext.request.contextPath }/main" id="cancel_button">취소</a>
 		</div>
 		<br />
@@ -240,8 +233,8 @@
 			
 	</form>
 </body>
-<script
-	src="${pageContext.request.contextPath }/resources/js/user/join_user.js"
-	charset="UTF-8"></script>
+
+<script src="${pageContext.request.contextPath }/resources/js/user/join_user.js"></script>
+
 
 </html>

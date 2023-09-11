@@ -1,0 +1,97 @@
+@charset "UTF-8";
+
+@font-face {
+	font-family: 'GmarketSansMedium';
+	src:
+		url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff')
+		format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+* {
+	margin: 0px;
+	padding: 0px;
+	font-family: 'GmarketSansMedium', sans-serif;
+}
+
+#con {
+	width: 1200px;
+	display: flex;
+	align-items: column;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+li {
+	list-style: none;
+}
+
+#MyPage_text {
+	margin-top: 0px;
+}
+
+.page_list {
+	margin-top: 20px;
+	width: 200px;
+}
+
+#review {
+	font-weight: bolder;
+}
+
+.menu {
+	text-decoration: none;
+	color: rgb(1, 19, 67);
+	font-size: 24px;
+}
+
+.menu:hover {
+	font-weight: bolder;
+}
+
+
+p#MyPage {
+	font-size: 35px;
+	text-align: center;
+}
+
+#Whole {
+	width: 900px;
+	margin-left: 100px;
+}
+
+#title {
+	font-size: 35px;
+	font-weight: bold;
+}
+
+hr {
+	margin-top: 20px;
+	width: 900px;
+	height: 2px;
+	background-color: rgb(1, 19, 67);
+}
+
+hr#menu_bar {
+	width: 200px;
+}
+#table{
+	margin-top: 20px;
+	height: auto;
+}
+
+#review_table, th, td {
+	border: 1px solid rgb(1, 19, 67);
+	border-collapse: collapse;
+}
+
+.border_bottom {
+	border-bottom: 1px solid rgb(1, 19, 67);
+}
+
+#review_table {
+	margin-top: 50px;
+	width: 900px;
+	text-align: center;
+}

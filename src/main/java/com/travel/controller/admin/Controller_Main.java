@@ -21,5 +21,11 @@ public class Controller_Main {
 		
 		return "main/main_page";
 	}
+	@RequestMapping("main_loading")
+	public String main_loading(HttpServletRequest request, Model model) {
+		
+		return "main/main_loading";
+		
+	}
 	
 }

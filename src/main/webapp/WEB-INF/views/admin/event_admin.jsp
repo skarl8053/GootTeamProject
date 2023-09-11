@@ -14,7 +14,7 @@
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 800px;
+			height: 100%;
 		}
 	</style>
 	
@@ -27,8 +27,17 @@
 			
 		 */
 		
-		 /* 화면 디자인 */
+		/* 화면 디자인 */
+		@font-face {
+				    font-family: 'GmarketSansMedium';
+				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+				    font-weight: normal;
+				    font-style: normal;
+		}
 		
+		*{
+			font-family: 'GmarketSansMedium';
+		}
 		 .searchbox{
 		     width: 150px;
 		     height: 30px;
@@ -38,12 +47,12 @@
 		     height: 29px;
 		 }
 		 .button{
-		     background-color: blue;
-		     color: white;
-		     font-weight: bold;
+		     background-color: #011343;
+		     color: #EBD01C;
 		     border-radius: 3px;
 		     width: 100px;
 		     height: 32px;
+		     cursor: pointer;
 		 }
 		 .button:hover{
 		 	cursor: pointer;
@@ -58,6 +67,17 @@
 		 table thead tr td{
 		     border-bottom: 1px solid black;
 		 }
+		 #warning_content{
+        	text-align: center;
+        }
+        #warning_img{
+        	width: 150px;
+        	height: 150px;
+        	margin: 0 auto;
+        }
+        #warning_text{
+        	font-size: 20px;
+        }
 		#paging{
 			width: 1200px;
 			text-align: center;
@@ -65,6 +85,9 @@
 		}
         .winner_button{
            width: 98%; 
+           background-color: #011343;
+		   color: #EBD01C;
+		   cursor: pointer;
         }
 
     </style>
@@ -93,16 +116,6 @@
             });
         });
     	
-        function searchExecute(){
-
-            var searchType = document.getElementById("searchType").value;
-            var keyword = document.getElementById("keyword").value;
-            
-            // 검색 결과 조회
-            location.replace("event?page=1&searchType=" + searchType + "&keyword="+ keyword);
-            
-        }
-        
         function eventInsert()
         {
         	// 이벤트 등록
@@ -110,7 +123,7 @@
         	location.replace("eventinsertform");
         }
         
-        function check_date(event_no, check)
+        function check_date(event_no, event_name, check)
         {
             
         	if(check == 'N')
@@ -119,7 +132,7 @@
        			return false;
        		}
         		
-        	location.replace('event_winner?event_no=' + event_no)
+        	location.replace('event_winner?event_no=' + event_no + "&event_name=" + event_name);
         }
         
         function eventDelete()
@@ -167,17 +180,17 @@
 			
 		<script>
 			alert("${msg}");
-			location.replace("event?page=1");
+			location.replace("event");
 		</script>
 		
 	</c:if>
-
-
-
+	
+	
+	
     <!-- 메인 -->
     <h1>이벤트 관리</h1>
 
-    <form action="">
+    <form action="event">
     
     	<input type="hidden" name="page" value="1" />
     	
@@ -216,16 +229,16 @@
     		<span>
     		
     			<c:if test="${empty keyword || keyword eq ''}">
-            		<input type="text" id="keyword" name="keyword" placeholder="검색할 이벤트 이름을 입력해주세요">
+            		<input type="text" id="keyword" name="keyword" placeholder="검색할 이벤트 이름을 입력해주세요" autocomplete="off">
             	</c:if>
                 <c:if test="${keyword != ''}">
-            		<input type="text" id="keyword" name="keyword" value="${keyword}">
+            		<input type="text" id="keyword" name="keyword" value="${keyword}" autocomplete="off">
             	</c:if>
             	
     		</span>
     		<span>
     		
-    			<input type="button" class="button" value="검색" onclick="searchExecute();">
+    			<input type="submit" class="button" value="검색">
     			
     		</span>
     	</div>
@@ -265,7 +278,7 @@
 			                </td>
 			                <td><span>${li.event_startdate} </span>~<span> ${li.event_enddate}</span></td>
 			                <td>
-			                	<button type="button" class="winner_button" onclick="return check_date('${li.event_no}', '${li.check_winner_date}');">당첨자 지정</button>
+			                	<button type="button" class="winner_button" onclick="return check_date('${li.event_no}', '${li.event_name}', '${li.check_winner_date}');">당첨자 지정</button>
 			                	<!-- <input type="hidden" id="check_winner_date" value=""> -->
 			                </td>
 			            </tr>
@@ -278,28 +291,46 @@
     	</div>
     	<div>
         	<br />
-        	<div id="paging">
-        		<c:if test="${vo.page>1}">
-					<a href="event?page=1&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
-					<a href="event?page=${vo.page-1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
-				</c:if>
-	        	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
-	        	
-	        		<c:choose>
-	        			<c:when test="${ i ne param.page }">
-	        				<a href="event?page=${i}&searchType=${searchType}&keyword=${keyword}">${i}</a>
-	        			</c:when>
-	        			<c:otherwise>
-	        				<span>${i}</span>
-	        			</c:otherwise>
-	        		</c:choose>
-	        		
-	        	</c:forEach>
-	        	<c:if test="${vo.page < vo.totPage}">
-					<a href="event?page=${vo.page+1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
-					<a href="event?page=${vo.totPage }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
-				</c:if>
-        	</div>
+        	<c:if test="${(empty param.searchType || empty param.keyword) && empty list}">
+    	 		<div id="warning_content" >
+    	 			<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+    	 			<br />
+	    	 		<span id="warning_text">등록한 이벤트가 존재하지 않습니다.</span>
+	    	 		<br /><br /><br />
+    	 		</div>
+    	 	</c:if>
+        	<c:if test="${not empty param.searchType && not empty param.keyword && empty list}">
+		    	 <div id="warning_content" >
+		    	 		<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+		    	 		<br />
+			    	 	<span id="warning_text">검색된 이벤트 내역이 없습니다.</span>
+			    	 	<br /><br /><br />
+		    	 </div>
+		    </c:if>
+		    <c:if test="${not empty list}">
+			    <div id="paging">
+	        		<c:if test="${vo.page>1}">
+						<a href="event?page=1&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
+						<a href="event?page=${vo.page-1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
+					</c:if>
+		        	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
+		        	
+		        		<c:choose>
+		        			<c:when test="${ i ne param.page }">
+		        				<a href="event?page=${i}&searchType=${searchType}&keyword=${keyword}">${i}</a>
+		        			</c:when>
+		        			<c:otherwise>
+		        				<span>${i}</span>
+		        			</c:otherwise>
+		        		</c:choose>
+		        		
+		        	</c:forEach>
+		        	<c:if test="${vo.page < vo.totPage}">
+						<a href="event?page=${vo.page+1 }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
+						<a href="event?page=${vo.totPage }&searchType=${param.searchType}&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
+					</c:if>
+	        	</div>
+		    </c:if>
         </div>
     	<div>
     	 	<br />

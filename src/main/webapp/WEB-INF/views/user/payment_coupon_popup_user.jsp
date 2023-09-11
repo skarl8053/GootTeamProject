@@ -11,7 +11,14 @@
 <body>
 
 	<style>
-        body{
+		@font-face {
+            font-family: 'GmarketSansMedium';
+            src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+            font-weight: normal;
+            font-style: normal;
+        }
+        *{
+            font-family: 'GmarketSansMedium';
             resize: none;
         }
         #form{
@@ -74,6 +81,12 @@
     		var totalPrice = parseInt(opener.document.getElementById("totalPrice").innerHTML);
     		var pointPrice = parseInt(opener.document.getElementById("use_point").value); // 포인트 적용된 금액
     		
+    		var resultPrice = (parseInt(totalPrice) - (parseInt(coupon_no) + parseInt(pointPrice)))
+    		
+    		if(resultPrice < 0){
+    			alert("숙소 금액 이상의 할인쿠폰은 사용할 수 없습니다.");
+    			return false;
+    		}
     		
     		// 부모 폼에 쿠폰 적용 시켜준다.
     		opener.document.getElementById("coupon_no").value = coupon_no;
@@ -83,7 +96,7 @@
     		opener.document.getElementById("coupon_price").innerHTML = coupon_no;
     		opener.document.getElementById("discountPrice").innerHTML = (parseInt(coupon_no) + parseInt(pointPrice));
     		// 총 금액 : 전체금액 - (쿠폰금액 + 포인트 금액)
-    		opener.document.getElementById("resultPrice").innerHTML = (parseInt(totalPrice) - (parseInt(coupon_no) + parseInt(pointPrice)));
+    		opener.document.getElementById("resultPrice").innerHTML = resultPrice;
     		
 			window.close();
 		 }
@@ -124,7 +137,7 @@
 			                    <td>${li.coupon_no }</td>
 			                    <td>${li.coupon_detail }</td>
 			                    <td>${li.coupon_qty}</td>
-			                    <td><button type="button" onclick="selectItem('${li.coupon_no}')">선택</button></td>
+			                    <td><button type="button" onclick="return selectItem('${li.coupon_no}')">선택</button></td>
 			                </tr>
 	                	</c:forEach>
 	                

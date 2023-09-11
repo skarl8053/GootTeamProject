@@ -8,4 +8,6 @@ public interface IDao_Delivery_admin {
 
 	void deliveryStatusUpdate(String delivery_no, String update);
 
+	void insertPushAL(String delivery_no, String alarm_msg);
+
 }

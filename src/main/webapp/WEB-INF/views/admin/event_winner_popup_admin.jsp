@@ -11,9 +11,18 @@
 <body>
 
 	<style>
-        body{
-            resize: none;
-        }
+		
+		/* 화면 디자인 */
+		@font-face {
+				    font-family: 'GmarketSansMedium';
+				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+				    font-weight: normal;
+				    font-style: normal;
+		}
+		
+		*{
+			font-family: 'GmarketSansMedium';
+		}
         #form{
             width: 600px;
             height: 800px;
@@ -55,9 +64,8 @@
             width: 670px;
         }
         button{
-            background-color: blue;
-            color: white;
-            font-weight: bold;
+            background-color: #011343;
+            color:  #EBD01C;
             border-radius: 3px;
             width: 100px;
             height: 32px;
@@ -65,7 +73,7 @@
         }
     </style>
     
-    <h1>아이디 검색</h1>
+    <h1>이메일 검색</h1>
 
     <script>
 

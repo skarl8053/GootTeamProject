@@ -48,9 +48,9 @@ public class Service_Stay_insert_admin implements Interface_TravelService {
 		String[] stay_hashtag = request.getParameterValues("stay_hashtag");
 		
 		// 留λ턿 �씠誘몄� �뾽濡쒕뱶 寃쎈줈
-//		String root = "/Users/sjh/Downloads/TeamProject/GootTeamProject/TravelProject/src/main/webapp/resources";
+		String root = "/Users/sjh/Downloads/TeamProject/GootTeamProject0831/GootTeamProject/src/main/webapp/resources/upload_img/admin/stay/";
 		
-		String root = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\stay\\";
+//		String root = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\stay\\";
 		
 		List<String> changeFilesList = new ArrayList<String>();
 		List<MultipartFile> fileList = mtpRequest.getFiles("file");
@@ -58,8 +58,8 @@ public class Service_Stay_insert_admin implements Interface_TravelService {
 		for (MultipartFile mf : fileList) {
 			String originFile = mf.getOriginalFilename();
 			System.out.println("鍮� �삤由ъ쭊 �뙆�씪 �솗�씤 : "+originFile);
-			long longtime = System.currentTimeMillis();
-			String changeFile = longtime+"_"+mf.getOriginalFilename();
+			// long longtime = System.currentTimeMillis();
+			String changeFile = mf.getOriginalFilename();
 			System.out.println("changeFile : "+changeFile);
 			String pathfile = root + "/" + changeFile;
 			System.out.println("pathfile : "+pathfile);

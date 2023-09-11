@@ -18,14 +18,141 @@
     <!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 800px;
+			height: 100%;
 		}
 	</style>
     
 </head>
 <body>
     
-    <h1>신고 내역 조회</h1>
+    <style>
+    	
+		/* 
+		
+			이름 : 남기문
+			작업 : 신고관리 내역 조회
+			
+		 */
+		
+		 /* 화면 디자인 */
+		
+		@font-face {
+				    font-family: 'GmarketSansMedium';
+				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+				    font-weight: normal;
+				    font-style: normal;
+		}
+		
+		*{
+			font-family: 'GmarketSansMedium';
+		}
+		
+		 .searchbox{
+		     width: 150px;
+		     height: 30px;
+		 }
+		 #keyword{
+		     width: 200px;
+		     height: 29px;
+		 }
+		 .button{
+		     background-color: #011343;
+		     color: #EBD01C;
+		     font-weight: bold;
+		     border-radius: 3px;
+		     width: 100px;
+		     height: 32px;
+		 }
+		 .button:hover{
+		 	cursor: pointer;
+		 }
+		 table{
+		     text-align: center;
+		     width: 1200px;
+		 }
+		 table thead tr td{
+		     border-bottom: 1px solid black;
+		 }
+		#paging{
+			width: 1200px;
+			text-align: center;
+			
+		}
+		#warning_content{
+        	text-align: center;
+        }
+        #warning_img{
+        	width: 150px;
+        	height: 150px;
+        	margin: 0 auto;
+        }
+        #warning_text{
+        	font-size: 20px;
+        }
+		 /* 스위치 디자인 */
+		
+		 .wrapper {
+			 width: 50px;
+			 height: 50px;
+			 text-align: center;
+			 margin: 50px auto;
+		 }
+		
+		 #switch {
+			 position: absolute;
+			 /* hidden */
+			 appearance: none;
+			 -webkit-appearance: none;
+			 -moz-appearance: none;
+		 }
+		
+		 .switch_label {
+			 position: relative;
+			 cursor: pointer;
+			 display: inline-block;
+			 width: 58px;
+			 height: 28px;
+			 background: #fff;
+			 border: 2px solid #daa;
+			 border-radius: 20px;
+			 transition: 0.2s;
+		 }
+		 .switch_label:hover {
+		 	background: #efefef;
+		 }
+		 .onf_btn {
+			 position: absolute;
+			 top: 4px;
+			 left: 3px;
+			 display: inline-block;
+			 width: 20px;
+			 height: 20px;
+			 border-radius: 20px;
+			 background: #daa;
+			 transition: 0.2s;
+		 }
+		
+		 /* checking style */
+		 #switch:checked+.switch_label {
+			 background: #c44;
+			 border: 2px solid #c44;
+		 }
+		
+		 #switch:checked+.switch_label:hover {
+		 	background: #e55;
+		 }
+		
+		 /* move */
+		 #switch:checked+.switch_label .onf_btn {
+			 left: 34px;
+			 background-color: #fff;
+			 box-shadow: 1px 2px 3px #00000020;
+		 }
+ 
+    	
+    </style>
+    
+    <h1>신고 내역 조회 / 설정 변경</h1>
     
     
     <script>
@@ -74,12 +201,13 @@
                 if(cells.checked == true){
                     // 체크된 내용의 순번들을 Array에 집어넣는다.
                     // 6번째 고객 ID를 넣어준다.
-                    arr.add(rows[i].getElementsByTagName("td")[6].getElementsByTagName("span")[0].innerHTML);
+                    arr.add(rows[i].getElementsByTagName("td")[4].getElementsByTagName("span")[0].innerHTML);
                 }
                 else{
                     continue;
                 }
             }
+            
             
             // DB에서 차단 승인 처리
             // 중복값 제거 후 Set을 Array로 변환
@@ -92,7 +220,7 @@
             	return false;
             }
             
-      		location.replace("report/blockall?m_email=" + uniqueArr + "&is_block=Y");
+      		location.replace("report/blockall?m_no=" + uniqueArr + "&is_block=Y");
 
         }
 
@@ -112,7 +240,7 @@
                 if(cells.checked == true){
                     // 체크된 내용의 순번들을 Array에 집어넣는다.
                     // 6번째 고객 ID를 넣어준다.
-                    arr.add(rows[i].getElementsByTagName("td")[6].getElementsByTagName("span")[0].innerHTML);
+                    arr.add(rows[i].getElementsByTagName("td")[4].getElementsByTagName("span")[0].innerHTML);
                 }
                 else{
                     continue;
@@ -129,7 +257,7 @@
             	alert('차단할 내용을 체크해주세요');
             	return false;
             }
-      		location.replace("report/blockall?m_email=" + uniqueArr + "&is_block=N");
+      		location.replace("report/blockall?m_no=" + uniqueArr + "&is_block=N");
         }
 
         /* 스위치 토글 */
@@ -193,7 +321,7 @@
             </span>
             <span>
             	<c:if test="${empty keyword || keyword eq ''}">
-            		<input type="text" id="keyword" name="keyword" placeholder="검색할 ID를 입력해주세요" autocomplete="off">
+            		<input type="text" id="keyword" name="keyword" placeholder="검색할 Email을 입력해주세요" autocomplete="off">
             	</c:if>
                 <c:if test="${keyword != ''}">
             		<input type="text" id="keyword" name="keyword" value="${keyword}" autocomplete="off">
@@ -216,6 +344,7 @@
 	                    <td width="5%">순번</td>
 	                    <td width="20%">신고 일자</td>
 	                    <td width="65%">댓글 내용</td>
+	                    <td style="display: none;">회원번호</td>
 	                    <td width="23%">블랙리스트 차단 여부</td>
                     </tr>
                 </thead>
@@ -228,6 +357,7 @@
 	                        <td><span>${li.review_no }</span></td>
 	                        <td><span>${li.report_date }</span></td>
 	                        <td><span><a href="reportdetail?report_no=${li.review_no}">${li.review_content }</a></span></td>
+	                        <td style="display: none"><span>${li.m_no}</span></td>
 	                        <td> <!--스위치-->
 	                        
 	                        	<c:if test="${li.restrict_flag == 'Y'}">
@@ -256,28 +386,46 @@
         </div>
         <div>
         	<br />
-        	<div id="paging">
-        		<c:if test="${vo.page>1}">
-					<a href="report?page=1&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
-					<a href="report?page=${vo.page-1 }&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
-				</c:if>
-	        	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
-	        		
-	        		<c:choose>
-	        			<c:when test="${ i ne param.page }">
-	        				<a href="report?page=${i}&param1=${param1}&keyword=${keyword}">${i}</a>
-	        			</c:when>
-	        			<c:otherwise>
-	        				<span>${i}</span>
-	        			</c:otherwise>
-	        		</c:choose>
-	        		
-	        	</c:forEach>
-	        	<c:if test="${vo.page < vo.totPage}">
-					<a href="report?page=${vo.page+1 }&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
-					<a href="report?page=${vo.totPage }&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
-				</c:if>
-        	</div>
+        	<c:if test="${(empty param.param1 || empty param.keyword) && empty list}">
+		    	 <div id="warning_content" >
+		    	 		<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+		    	 		<br />
+			    	 	<span id="warning_text">신고된 내역이 없습니다.</span>
+			    	 	<br /><br /><br />
+		    	 </div>
+		    </c:if>
+		    <c:if test="${(not empty param.param1 && not empty param.keyword) && empty list}">
+		    	 <div id="warning_content" >
+		    	 		<img id="warning_img" src="resources/img/No_Search.jpeg" alt="이미지 없음"/>
+		    	 		<br />
+			    	 	<span id="warning_text">검색된 신고 내역이 없습니다.</span>
+			    	 	<br /><br /><br />
+		    	 </div>
+		    </c:if>
+		    <c:if test="${not empty list}">
+		    		<div id="paging">
+		        		<c:if test="${vo.page>1}">
+							<a href="report?page=1&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-angles-left"></i></a>
+							<a href="report?page=${vo.page-1 }&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-left"></i></a>
+						</c:if>
+			        	<c:forEach begin="${vo.pageStart}" end="${vo.pageEnd }" var="i">
+			        		
+			        		<c:choose>
+			        			<c:when test="${ i ne param.page }">
+			        				<a href="report?page=${i}&param1=${param1}&keyword=${keyword}">${i}</a>
+			        			</c:when>
+			        			<c:otherwise>
+			        				<span>${i}</span>
+			        			</c:otherwise>
+			        		</c:choose>
+			        		
+			        	</c:forEach>
+			        	<c:if test="${vo.page < vo.totPage}">
+							<a href="report?page=${vo.page+1 }&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-circle-chevron-right"></i></a>
+							<a href="report?page=${vo.totPage }&param1=${param.param1}&keyword=${param.keyword}"><i class="fa-solid fa-angles-right"></i></a>
+						</c:if>
+		        	</div>
+		    </c:if>
         </div>
         <div>
         	<br />

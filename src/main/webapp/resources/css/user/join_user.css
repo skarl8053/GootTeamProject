@@ -70,7 +70,7 @@ hr {
 
 .add_enter {
 	height: 50px;
-	width: 335px;
+	width: 700px;
 	padding-left: 20px;
 	font-size: 20px;
 	border-radius: 6px;
@@ -325,8 +325,8 @@ li {
 	cursor: pointer;
 }
 
-#disabled {
-	background-color: lightgray;
+#disabled_name, #disabled_email {
+	background-color: light-gray;
 }
 
 #cancel_btn {

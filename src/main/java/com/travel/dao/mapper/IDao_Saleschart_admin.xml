@@ -1,0 +1,73 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- (namespace) 인터페이스 경로 -->
+<mapper namespace="com.travel.dao.admin.IDao_SalesChart_admin">
+	
+	<select id="stay_popup_pageCalculate" resultType="integer">
+	
+			SELECT  	COUNT(*)
+			FROM    TMSTSTAY A LEFT JOIN TMSTCODE B ON 	B.GRPCODE 	= 3
+	                                                                		AND 	A.S_TYPE 		= B.CODE
+			WHERE 	S_NAME LIKE '%' || #{param1} || '%'
+			
+	</select>
+	
+	<select id="stay_selectPopupData" resultType="com.travel.dto.admin.DTO_SalesChart_admin">
+	
+			SELECT 		A.S_NO
+							,A.S_NAME
+							,A.S_TYPE
+			FROM
+			(
+				SELECT  	ROW_NUMBER() OVER(ORDER BY A.S_NO) AS ROW_NUM
+							,A.S_NO
+							,A.S_NAME
+							,B.CODENAME AS S_TYPE
+				FROM    TMSTSTAY A LEFT JOIN TMSTCODE B 	ON 	B.GRPCODE 	= 3
+			                                                                		AND 	A.S_TYPE 		= B.CODE
+				WHERE 	A.S_NAME LIKE '%' || #{param1} || '%'
+			) 	A
+			WHERE A.ROW_NUM BETWEEN #{param2} AND #{param3}
+			
+	</select>
+	
+	<select id="salesChartYearSelect" resultType="com.travel.dto.admin.DTO_SalesChart_admin">
+	
+			SELECT  A.ORDER_MONTH
+                       ,SUM(NVL(A.PAYMENT_PRICE,0)) AS SUM_PAYMENT_PRICE
+            FROM
+            (
+	            SELECT  	EXTRACT(MONTH FROM A.ORDER_DATE) AS ORDER_MONTH
+	            			,A.PAYMENT_PRICE
+	            FROM    THISORDER A LEFT JOIN THISREFUND 		B 	ON A.ORDER_NO = B.ORDER_NO
+	            WHERE  B.REFUND_NO IS NULL
+	            AND 		A.S_NO=#{param1}
+	            AND     EXTRACT(YEAR FROM A.ORDER_DATE) = #{param2}
+            ) A   
+            GROUP BY A.ORDER_MONTH
+            ORDER BY A.ORDER_MONTH
+	
+	</select>
+	
+	<select id="salesChartMonthSelect" resultType="com.travel.dto.admin.DTO_SalesChart_admin">
+	
+			SELECT  A.ORDER_DAY
+                       ,SUM(NVL(A.PAYMENT_PRICE,0)) AS SUM_PAYMENT_PRICE
+            FROM
+            (
+		            SELECT  	EXTRACT(DAY FROM A.ORDER_DATE) AS ORDER_DAY
+		            			,A.PAYMENT_PRICE
+		            FROM    THISORDER A LEFT JOIN THISREFUND 		B 	ON A.ORDER_NO = B.ORDER_NO
+		            WHERE  B.REFUND_NO IS NULL
+	                AND     A.S_NO = #{param1}
+		            AND     EXTRACT(YEAR FROM A.ORDER_DATE) = #{param2}
+	                AND     EXTRACT(MONTH FROM A.ORDER_DATE) = #{param3}
+            ) A   
+            GROUP BY A.ORDER_DAY
+            ORDER BY A.ORDER_DAY
+	
+	</select>
+	
+</mapper>

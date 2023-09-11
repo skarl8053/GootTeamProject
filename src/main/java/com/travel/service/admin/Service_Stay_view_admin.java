@@ -1,6 +1,7 @@
 package com.travel.service.admin;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -38,9 +39,11 @@ public class Service_Stay_view_admin implements Interface_TravelService {
 		String s_no = request.getParameter("s_no");
 		
 		ArrayList<DTO_Stay_admin> stay_view = dao.stay_view(s_no);
-		// ArrayList<DTO_Stay_room_admin> stay_room_view = dao.stay_room_view(s_no);
+		ArrayList<DTO_Stay_room_admin> stay_room_view = dao.stay_room_view(s_no);
+		
 		
 		model.addAttribute("stay_view",stay_view);
+		model.addAttribute("stay_room_view",stay_room_view);
 		
 	}
 	

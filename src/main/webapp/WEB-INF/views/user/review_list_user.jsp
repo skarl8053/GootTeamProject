@@ -94,7 +94,7 @@
                         value="${dto.review_rate}" step="1" min="1" max="5" oninput="callrating('${dto.review_no}', this.value);">
                 </span>
             </div>
-            <div class="dl">아이디 : ${dto.m_no }&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="dl">이메일 : ${dto.m_no }&nbsp;&nbsp;&nbsp;&nbsp;
                 / 등록일 : ${dto.review_date }</div>
             <div class="dr">
             

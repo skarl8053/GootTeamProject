@@ -32,7 +32,6 @@ public class Member_Send_Service implements Interface_TravelService {
 			
 			DTO_Member_user dto = dao.member_check(m_email);
 			String email_data = dto.getM_email();
-
 			EmailSend email_send = new EmailSend(email_data);
 			System.out.println("확인 이메일 전송 시작");
 			email_send.emailSendAction();

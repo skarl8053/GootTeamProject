@@ -18,6 +18,7 @@ import com.travel.dao.admin.IDao_Event_admin;
 public class Service_Event_insert_admin implements Interface_TravelService {
 
 	IDao_Event_admin dao;
+	MultipartHttpServletRequest request = null;
 	
 	public Service_Event_insert_admin(SqlSession sqlSession) { 
 		dao = sqlSession.getMapper(IDao_Event_admin.class); 
@@ -28,20 +29,36 @@ public class Service_Event_insert_admin implements Interface_TravelService {
 		
 		Map<String, Object> map = model.asMap();
 		
-		MultipartHttpServletRequest request = (MultipartHttpServletRequest)map.get("request");
+		request = (MultipartHttpServletRequest)map.get("request");
 		
 		String event_name = request.getParameter("event_name");
 		String event_startdate = request.getParameter("event_startdate");
 		String event_enddate = request.getParameter("event_enddate");
 		String event_flag = request.getParameter("event_flag");
 		
-		String path = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\event\\";
+		String event_target = request.getParameter("event_target");
+		String event_caution = request.getParameter("event_caution");
 		
-		MultipartFile mf = request.getFiles("file").get(0);
+		String path = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\event\\";
+		String detailpath = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\event\\detail\\";
+		
+		String filename = returnFileName("file", path);
+		String filename2 = returnFileName("file2", detailpath);
+		
+		dao.insertEvents(event_name, event_startdate, event_enddate, event_target, event_caution, filename, filename2, event_flag);
+		
+		model.addAttribute("msg", "이벤트가 등록되었습니다.");
+	}
+	
+	private String returnFileName(String tagname, String path) {
+		
+		String filename = "";
+		
+		MultipartFile mf = request.getFiles(tagname).get(0);
 		
 		String originFile = mf.getOriginalFilename();
 		long longtime = System.currentTimeMillis();
-		String filename = longtime+"_"+mf.getOriginalFilename();
+		filename = longtime+"_"+mf.getOriginalFilename();
 		String pathFile = path + filename;
 		
 		try {
@@ -53,10 +70,8 @@ public class Service_Event_insert_admin implements Interface_TravelService {
 			ex.printStackTrace();
 		}
 		
+		return filename;
 		
-		dao.insertEvents(event_name, event_startdate, event_enddate, filename ,event_flag);
-		
-		model.addAttribute("msg", "이벤트가 등록되었습니다.");
 	}
 	
 }

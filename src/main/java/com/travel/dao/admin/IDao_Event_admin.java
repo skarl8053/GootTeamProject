@@ -13,7 +13,7 @@ public interface IDao_Event_admin {
 
 	public void deleteEvents(Map<String, Object> event_no);
 
-	public void insertEvents(String event_name, String event_startdate, String event_enddate, String filename, String event_flag);
+	public void insertEvents(String event_name, String event_startdate, String event_enddate, String event_target, String event_caution, String filename, String filename2, String event_flag);
 
 	public List<String> selectFiles(Map<String, Object> mp);
 
@@ -21,8 +21,7 @@ public interface IDao_Event_admin {
 
 	public String selectFile(int event_no);
 
-	public void updateEvents(int event_no, String event_name, String event_startdate, String event_enddate, String filename,
-			String event_flag);
+	public void updateEvents(int event_no, String event_name, String event_startdate, String event_enddate, String event_target, String event_caution, String filename, String filename2, String event_flag);
 
 	public List<DTO_Event_admin> member_selectPopupData(int event_no, String searchType, String keyword, Integer rowStart, Integer rowEnd);
 

@@ -1,10 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>¾ÆÀÌµð/ºñ¹Ð¹øÈ£ Ã£±â</title>
+	<title>ì•„ì´ë””/ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</title>
 </head>
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <link rel="stylesheet" href="${pageContext.request.contextPath }/resources/css/user/find_user.css" />
@@ -12,55 +13,38 @@
 
 <body>
 	<div class="box">
-		<!--div¸¦ µÎ°³ °¨½ÑÀÌÀ¯´Â imgµéÀ» ÁÂ¿ì¹èÄ¡ÇÏ°í ¹èÄ¡µÈ »çÁøÁß ÇÑÀå¸¸ º¸ÀÌ°Ô ÇÏ±â À§ÇØ¼­ÀÌ´Ù.-->
+		<!--divë¥¼ ë‘ê°œ ê°ì‹¼ì´ìœ ëŠ” imgë“¤ì„ ì¢Œìš°ë°°ì¹˜í•˜ê³  ë°°ì¹˜ëœ ì‚¬ì§„ì¤‘ í•œìž¥ë§Œ ë³´ì´ê²Œ í•˜ê¸° ìœ„í•´ì„œì´ë‹¤.-->
 		<div class="button_box">
-			<button class="bt_find_id">¾ÆÀÌµð Ã£±â</button>
-			<button class="bt_find_pw">ºñ¹Ð¹øÈ£ Ã£±â</button>
+			<button class="bt_find_id">ì´ë©”ì¼ ì°¾ê¸°</button>
+			<button class="bt_find_pw">ë¹„ë°€ë²ˆí˜¸ ì°¾ê¸°</button>
 			
 		</div>
-		<div class="slide"> <!--¹èÄ¡µÈ imgµéÀ» ÇÏ³ªÀÇ img¸¸ º¸ÀÌ°Ô °¡¸®±â À§ÇÑ ÅÂ±×-->
-			<div class="images"> <!--imgµéÀ» ÁÂ¿ì¹èÄ¡ÇÒ ÅÂ±×-->
-				<div class="id1">
+		<div class="slide"> <!--ë°°ì¹˜ëœ imgë“¤ì„ í•˜ë‚˜ì˜ imgë§Œ ë³´ì´ê²Œ ê°€ë¦¬ê¸° ìœ„í•œ íƒœê·¸-->
+			<div class="images"> <!--imgë“¤ì„ ì¢Œìš°ë°°ì¹˜í•  íƒœê·¸-->
+				<div class="id">
 					<div class="find_id">
-						<label class="id_phone" for="id_phone">ÇÚµåÆù ÀÎÁõ</label>
-						<label class="id_email" for="id_email">ÀÌ¸ÞÀÏ ÀÎÁõ</label>
-						<input id="id_phone" type="checkbox">
-						<input id="id_email" type="checkbox">
 						<div id="id_phone_box">
+						<form action="find_email" method="post">
 							<div id="id_phone_box_text">
-								ÀÌ¸§ <br><input type="text"> <br><br>
-								ÇÚµåÆù ¹øÈ£ <br><input type="text">
-								<input type="submit" value="ÀÎÁõ" id="check">
+								ì´ë¦„ <br><input type="text" name="m_name" id="m_name" required> <br><br>
+								í•¸ë“œí° ë²ˆí˜¸ <br><input type="text" name="m_tel" id="m_tel" oninput="inputNumberOnly(this)" maxlength="11" required>
+								<input type="submit" value="ì¸ì¦" id="check">
 							</div>
-						</div>
-						<div id="id_email_box">
-							<div id="id_email_box_text">
-								ÀÌ¸§ <br><input type="text"> <br><br>
-								ÀÌ¸ÞÀÏ <br><input type="text">
-								<input type="submit" value="ÀÎÁõ" id="check">
-							</div>
+						</form>
 						</div>
 					</div>
 				</div>
-				<div class="pw1">
+				<div class="pw">
 					<div class="find_pw">
-						<label class="pw_phone" for="pw_phone">ÇÚµåÆù ÀÎÁõ</label>
-						<label class="pw_email" for="pw_email">ÀÌ¸ÞÀÏ ÀÎÁõ</label>
-						<input id="pw_phone" type="checkbox">
-						<input id="pw_email" type="checkbox">
 						<div id="pw_phone_box">
+						<form action="find_pw">
 							<div id="pw_phone_box_text">
-								ÀÌ¸ÞÀÏ <br><input type="text"> <br><br>
-								ÇÚµåÆù ¹øÈ£ <br><input type="text">
-								<input type="submit" value="ÀÎÁõ" id="check">
+								ì´ë¦„ <br><input type="text" name="m_name" required> <br><br>
+								í•¸ë“œí° ë²ˆí˜¸ <br><input type="text" name="m_tel" oninput="inputNumberOnly(this)" maxlength="11" required><br /><br />
+								ì´ë©”ì¼ <br><input type="text" name="m_email" required> 
+								<input type="submit" value="ì¸ì¦" id="check">
 							</div>
-						</div>
-						<div id="pw_email_box">
-							<div id="pw_email_box_text">
-								ÀÌ¸§ <br><input type="text"> <br><br>
-								ÀÌ¸ÞÀÏ <br><input type="text">
-								<input type="submit" value="ÀÎÁõ" id="check">
-							</div>
+						</form>
 						</div>
 					</div>
 				</div>
@@ -69,10 +53,18 @@
 	</div>
 	<div id="under">
 		<br>
-			<a href="login">·Î±×ÀÎ</a> / <a href="join">È¸¿ø°¡ÀÔ</a> / <a href="${pageContext.request.contextPath }/main">¸ÞÀÎ ÆäÀÌÁö</a>
+			<a href="login">ë¡œê·¸ì¸</a> / <a href="join">íšŒì›ê°€ìž…</a> / <a href="${pageContext.request.contextPath }/main">ë©”ì¸ íŽ˜ì´ì§€</a>
 	</div>
 
 </body>
+<!-- ë©”ì„¸ì§€ -->
+	<c:if test="${not empty msg}">
+			
+		<script>
+			alert("${msg}");
+		</script>
+		
+	</c:if>
 	<script src="${pageContext.request.contextPath }/resources/js/user/find_user.js"></script>
 
 </html>
