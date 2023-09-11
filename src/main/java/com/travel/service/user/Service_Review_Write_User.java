@@ -11,10 +11,10 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.travel.dao.user.IDao_Review_user;
 import com.travel.service.admin.Interface_TravelService;
 
-public class Service_Review_WriteView_User implements Interface_TravelService {
+public class Service_Review_Write_User implements Interface_TravelService {
 private SqlSession sqlSession;
 	
-	public Service_Review_WriteView_User(SqlSession sqlSession) {
+	public Service_Review_Write_User(SqlSession sqlSession) {
 		this.sqlSession = sqlSession;
 	}
 
@@ -72,6 +72,9 @@ private SqlSession sqlSession;
 		
 		/* 평점 stay table로 입력 */
 		dao.updateAvgRate(s_no);
+		
+		
+		model.addAttribute("s_no",s_no);
 		
 	}
 	

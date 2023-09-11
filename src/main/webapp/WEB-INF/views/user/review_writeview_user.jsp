@@ -12,7 +12,7 @@
 <title>Document</title>
 <script>
 	function reratinglist(target) {
-		alert("target : " + target.value);
+		/* alert("target : " + target.value); */
 		var htmltxt = "";
 		//var pointvalue=document.getElementById("rating").value;
 		$('input[name=review_rate]').attr('value', target.value);
@@ -40,11 +40,11 @@
 			</div>
 			<div class="b">
 				<div class="bname">
-					숙소명(예약정보에서 가져와야함)<input type="text" name="s_no" value="51" />
+					숙소 : ${srName[0].s_name }
 				</div>
 
 				<div class="binfor">
-					객실정보(예약정보에서 가져와야함)<input type="text" name="r_no" value="589" />
+					객실 : ${srName[0].r_name }
 				</div>
 
 				<span class="star"> ★★★★★ <span>★★★★★</span> <input
@@ -63,14 +63,16 @@
 
 				</div>
 				<div class="db">
-					<textarea name="review_content" id="review_text" cols="150" rows="3">Cooooool</textarea>
+					<textarea name="review_content" id="review_text" cols="143" rows="3"></textarea>
 				</div>
 			</div>
-
-			<input type="hidden" name="m_no" value="55" /> 
+			
+			<input type="hidden" name="m_no" value=${m_no } /> 
+			<input type="hidden" name="r_no" value=${r_no } /> 
+			<input type="hidden" name="s_no" value=${s_no } /> 
 			<input type="submit" value="submit" />
 	</form>
-	<a href="review_list_user">목록</a>
+	<a href="mypage_pay">취소</a>
 	</div>
 </body>
 </html>

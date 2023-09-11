@@ -10,8 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.travel.service.admin.Interface_TravelService;
+import com.travel.service.user.Service_Review_Like_User;
 import com.travel.service.user.Service_Review_List_User;
-import com.travel.service.user.Service_Review_WriteView_User;
+import com.travel.service.user.Service_Review_Write_User;
+import com.travel.service.user.Service_Review_Writeview_User;
 
 @Controller
 @RequestMapping("user")
@@ -35,10 +37,13 @@ public class Controller_Review_user {
 	}
 
 	@RequestMapping("review_writeview_user")
-	public String review_write_view() {
+	public String review_write_view(HttpServletRequest request, Model model) {
 		System.out.println("review_write_view controller got sign");
 
-		// need data from booking information.
+		model.addAttribute("request",request);
+		
+		service = new Service_Review_Writeview_User(sqlSession);
+		service.execute(model);
 		
 		return "user/review_writeview_user";
 	}
@@ -49,11 +54,24 @@ public class Controller_Review_user {
 		
 		model.addAttribute("mtfRequest",mtfRequest);
 		
-		service= new Service_Review_WriteView_User(sqlSession);
+		service= new Service_Review_Write_User(sqlSession);
 		service.execute(model);
 		
 		
 
+		return "redirect:review_list_user";
+	}
+	
+	@RequestMapping("review_user_like")
+	public String review_user_like(HttpServletRequest request, Model model) {
+		System.out.println("====review_user_like()====");
+		
+		model.addAttribute("request",request);
+		
+		service= new Service_Review_Like_User(sqlSession);
+		service.execute(model);
+		
+		
 		return "redirect:review_list_user";
 	}
 }

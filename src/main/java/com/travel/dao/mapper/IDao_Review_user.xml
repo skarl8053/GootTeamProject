@@ -6,12 +6,12 @@
 <mapper namespace="com.travel.dao.user.IDao_Review_user">
 
 	<!-- 송경미 / 사용자 -> 리뷰 -->
-
+	<select id="rwriteview" resultType="com.travel.dto.user.DTO_StayDetail_user"> 
+		SELECT R_NAME, S_NAME FROM TMSTROOM A INNER JOIN TMSTSTAY B ON A.S_NO=B.S_NO 
+		WHERE A.S_NO=#{param1} AND R_NO=#{param2} </select>
+	
 
 	<insert id="rwrite">
-
-		<!-- INSERT INTO THISREVIEWTEST VALUES(THISREVIEWTEST_REVIEW_SEQ.NEXTVAL,22,#{param1},#{param2},SYSDATE,#{param3},#{param4},#{param5},0,0,THISREVIEWTEST_REVIEW_SEQ.CURRVAL,0) -->
-
 		INSERT INTO THISREVIEW
 		VALUES(THISREVIEW_REVIEW_NO_SEQ.NEXTVAL,NULL,#{param1},#{param2},#{param3},#{param4},#{param5},0,#{param6},SYSDATE,THISREVIEW_REVIEW_NO_SEQ.CURRVAL,0,'N')
 	</insert>
@@ -21,29 +21,61 @@
 		FROM THISREVIEW WHERE S_NO=#{param1}) WHERE S_NO=#{param1}
 	</update>
 
-	<select id="rlist"
-		resultType="com.travel.dto.user.DTO_Review_user">
-		SELECT
-		REVIEW_NO,M_NO,S_NO,R_NO,PHOTO_URL,REVIEW_RATE,LIKES,REVIEW_CONTENT,REVIEW_DATE,REVIEW_GROUP,REVIEW_STEP,RESTRICT_FLAG
-		FROM THISREVIEW ORDER BY REVIEW_NO DESC
+	
+	<select id="rlist" resultType="com.travel.dto.user.DTO_Review_user">
+	SELECT
+	REVIEW_NO,M_NO,S_NO,R_NO,PHOTO_URL,REVIEW_RATE,LIKES,REVIEW_CONTENT,REVIEW_DATE,REVIEW_GROUP,REVIEW_STEP,RESTRICT_FLAG
+	FROM THISREVIEW WHERE S_NO=#{param1} ORDER BY REVIEW_NO DESC
 	</select>
 
-	<select id="rlistP"
-		resultType="com.travel.dto.user.DTO_Review_user">
-		SELECT
-		REVIEW_NO,M_NO,S_NO,R_NO,PHOTO_URL,REVIEW_RATE,LIKES,REVIEW_CONTENT,REVIEW_DATE,REVIEW_GROUP,REVIEW_STEP,RESTRICT_FLAG
-		FROM THISREVIEW WHERE PHOTO_URL IS NOT NULL ORDER BY REVIEW_NO DESC
+	<select id="rlistP" resultType="com.travel.dto.user.DTO_Review_user">
+	SELECT REVIEW_NO,M_NO,S_NO,R_NO,PHOTO_URL,REVIEW_RATE,LIKES,REVIEW_CONTENT,REVIEW_DATE,REVIEW_GROUP,REVIEW_STEP,RESTRICT_FLAG
+	 FROM THISREVIEW WHERE PHOTO_URL IS NOT NULL AND S_NO=#{param1} ORDER BY REVIEW_NO DESC 
+	</select>
+	
+	<select id="rlistL" resultType="com.travel.dto.user.DTO_Review_user">
+	SELECT REVIEW_NO,M_NO,S_NO,R_NO,PHOTO_URL,REVIEW_RATE,LIKES,REVIEW_CONTENT,REVIEW_DATE,REVIEW_GROUP,REVIEW_STEP,RESTRICT_FLAG
+	FROM THISREVIEW WHERE S_NO=#{param1} ORDER BY NVL(LIKES,0)  DESC
 	</select>
 
-	<!-- <update id="rReport">UPDATE THISREVIEW SET REPORT_NO=1 WHERE REVIEW_NO=#{param1}UPDATE 
-		THISREVIEW SET REPORT_NO=nvl((select max(REPORT_NO) from THISREVIEW),0) + 
-		1 WHERE REVIEW_NO=#{param1}</update> -->
+	<select id="rlistLP" resultType="com.travel.dto.user.DTO_Review_user">
+	SELECT REVIEW_NO,M_NO,S_NO,R_NO,PHOTO_URL,REVIEW_RATE,LIKES,REVIEW_CONTENT,REVIEW_DATE,REVIEW_GROUP,REVIEW_STEP,RESTRICT_FLAG
+	 FROM THISREVIEW WHERE PHOTO_URL IS NOT NULL AND S_NO=#{param1} ORDER BY NVL(LIKES,0)  DESC
+	</select>
 
-
+	
 	<select id="rateAvg" resultType="int">
-		SELECT
-		ROUND(NVL(AVG(REVIEW_RATE),0)) RATEAVG FROM THISREVIEW </select>
-
+	SELECT ROUND(NVL(AVG(REVIEW_RATE),0)) RATEAVG FROM THISREVIEW WHERE S_NO=#{param1}
+	</select>
+	
 	<select id="selectReviewTotCount" resultType="int">
-	    SELECT COUNT(M_NO)FROM THISREVIEW </select>
+	SELECT COUNT(M_NO)FROM THISREVIEW WHERE S_NO=#{param1}
+	</select>
+	
+	
+	<select id="rlikeCheck" resultType="String">
+	
+	SELECT M_NO FROM THISLIKE WHERE REVIEW_ID=#{param1}
+	
+	</select>
+	
+	
+	<insert id="rlikePlusL">
+	INSERT INTO THISLIKE VALUES(#{param1},#{param2})
+	</insert>
+	
+	<update id="rlikePlusR">
+	UPDATE THISREVIEW SET LIKES=LIKES+1 WHERE REVIEW_NO=#{param1}	
+	
+	</update>
+	
+	<delete id="rlikeMinusL">
+	DELETE FROM THISLIKE WHERE M_NO=#{param1}
+	</delete>
+	
+	<update id="rlikeMinusR">
+	UPDATE THISREVIEW SET LIKES=LIKES-1 WHERE REVIEW_NO=#{param1}	
+	</update>
+	
+	
 </mapper>

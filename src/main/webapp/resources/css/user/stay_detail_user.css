@@ -1,0 +1,453 @@
+/* 
+	이름 : 송경미
+	작업 : 숙소 상세 페이지
+*/
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+#content{
+		  height: auto;
+		}
+
+
+.total{
+	width:1200px;
+    /* margin: 2%; */
+    font-family: 'GmarketSansMedium';
+
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    
+  }
+
+.top1{
+ 
+    height: 200px;
+    text-align: center;
+    
+    
+}
+
+.accommodationName{
+	padding-left: 20px;
+    font-weight: 700;
+    font-size: 40px;
+    color: rgb(1,19,67);
+}
+.bo1{
+	margin-top:15px;
+    height: 500px;
+    display: flex;
+}
+
+
+.bo1_1{
+
+    background-image: red;
+    width: 700px;
+    float: left;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+bo2{
+
+    float: right;
+
+
+}
+.bo1_2{
+    height: 248px;
+    width: 500px;
+    padding-bottom: 4px;
+   
+  
+    
+}
+
+.bo1_3{
+    height: 248px;
+    width: 500px;
+   
+    
+}
+
+/* 객실, 숙소정보, 후기 링크 시작 */
+
+details{
+	border-bottom:2px solid gray;
+	padding: 5px;
+}
+
+details summary::marker{font-size:0;}
+
+.bo3{
+
+    height: 200px;
+    padding-bottom: 22px;
+}
+
+.links{
+
+    width: 96%;
+    height: 50px;
+    display: flex;
+    text-align: center;
+    padding: 2%;
+    border-bottom: 2px solid black;
+    
+}
+
+.aa{
+    width: 80px;
+    padding: 20px;
+    
+}
+
+a{
+    text-decoration-line: none;
+
+}
+
+/* 방대표사진 */
+.room1{
+    height: 200px;
+    width: 500px;
+    resize: both;
+    float: left;
+
+}
+
+.room1TopR{
+    height: 200px;
+    width: 680px;
+    float: right;
+}
+
+.accommodationBl{
+	text-align: right;
+	padding-right: 20px;
+}
+
+/* 버튼 */
+
+.button-24 {
+  background: rgb(1,19,67);
+  border: 1px solid rgb(1,19,67);
+  border-radius: 6px;
+  box-shadow: rgba(0, 0, 0, 0.1) 1px 2px 4px;
+  box-sizing: border-box;
+  color: rgb(235,208,28);;
+  cursor: pointer;
+  display: inline-block;
+  font-family: nunito,roboto,proxima-nova,"proxima nova",sans-serif;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 16px;
+  min-height: 40px;
+  outline: 0;
+  padding: 12px 14px;
+  text-align: center;
+  text-rendering: geometricprecision;
+  text-transform: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+}
+
+.button-24:hover,
+.button-24:active {
+  background-color: initial;
+  background-position: 0 0;
+  color: rgb(1,19,67);
+}
+
+.button-24:active {
+  opacity: .5;
+}
+
+
+/* 숨겨질 사진 글 준비 */
+.fo{
+
+    height: 240px;
+    width: 96%;
+    padding: 2%;
+    border-top: 2px solid black;
+    background-color: ghostwhite;
+}
+
+.room2{
+    height: 300px;
+    width: 500px;
+
+    resize: both;
+    float: left;
+}
+
+
+
+.fo11{
+
+    height: 400px;
+    width: 100%;
+    padding-top: 45px;
+    border-top: 2px solid black;
+    border-bottom: 2px solid black;
+    box-sizing:border-box;
+}
+
+
+/* icons */
+.icons {
+    margin-top: 20px;
+}
+
+.icons img {
+    width: 40px;
+    margin-right: 10px;
+}
+
+/* Slideshow container */
+.slideshow-container {
+	max-width: 600px;
+	max-height: 280px;
+	position: relative;
+	margin: auto;
+}
+
+.slideshow-container12 {
+	max-width: 600px;
+	max-height: 280px;
+	position: relative;
+	margin: auto;
+}
+.slideshow-container23 {
+	max-width: 600px;
+	max-height: 280px;
+	position: relative;
+	margin: auto;
+}
+
+.slideshow-container .mySlides img {
+	height: 280px;
+}
+
+.slideshow-container12 .mySlides12 img {
+	height: 280px;
+}
+
+.slideshow-container23 .mySlides23 img {
+	height: 280px;
+}
+
+/* Hide the images by default */
+.mySlides {
+	display: none;
+}
+
+.mySlides12 {
+	display: none;
+}
+.mySlides23 {
+	display: none;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	width: auto;
+	margin-top: -22px;
+	padding: 16px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	transition: 0.6s ease;
+	border-radius: 0 3px 3px 0;
+	user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+	right: 0;
+	border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+/* Next & previous buttons */
+.prev1, .next1 {
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	width: auto;
+	margin-top: -22px;
+	padding: 16px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	transition: 0.6s ease;
+	border-radius: 0 3px 3px 0;
+	user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next1 {
+	right: 0;
+	border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev1:hover, .next1:hover {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+/* Next & previous buttons */
+.prev2, .next2 {
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	width: auto;
+	margin-top: -22px;
+	padding: 16px;
+	color: white;
+	font-weight: bold;
+	font-size: 18px;
+	transition: 0.6s ease;
+	border-radius: 0 3px 3px 0;
+	user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next2 {
+	right: 0;
+	border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev2:hover, .next2:hover {
+	background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Caption text */
+.text {
+	color: #f2f2f2;
+	font-size: 15px;
+	padding: 8px 12px;
+	position: absolute;
+	bottom: 8px;
+	width: 100%;
+	text-align: center;
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+	color: #f2f2f2;
+	font-size: 12px;
+	padding: 8px 12px;
+	position: absolute;
+	top: 0;
+}
+
+/* The dots/bullets/indicators */
+.dot {
+	cursor: pointer;
+	height: 15px;
+	width: 15px;
+	margin: 0 2px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.6s ease;
+}
+
+.dot1 {
+	cursor: pointer;
+	height: 15px;
+	width: 15px;
+	margin: 0 2px;
+	background-color: #bbb;
+	border-radius: 50%;
+	display: inline-block;
+	transition: background-color 0.6s ease;
+}
+
+.active, .dot:hover {
+	background-color: #717171;
+}
+
+.active1, .dot1:hover {
+	background-color: #717171;
+}
+
+/* Fading animation */
+.fade {
+	-webkit-animation-name: fade;
+	-webkit-animation-duration: 1.5s;
+	animation-name: fade;
+	animation-duration: 1.5s;
+}
+
+@
+-webkit-keyframes fade {
+	from {opacity: .4
+}
+
+to {
+	opacity: 1
+}
+
+}
+@
+keyframes fade {
+	from {opacity: .4
+}
+
+to {
+	opacity: 1
+}
+
+}
+/* Fading animation */
+.fade1 {
+	-webkit-animation-name: fade;
+	-webkit-animation-duration: 1.5s;
+	animation-name: fade;
+	animation-duration: 1.5s;
+}
+
+@
+-webkit-keyframes fade1 {
+	from {opacity: .4
+}
+
+to {
+	opacity: 1
+}
+
+}
+@
+keyframes fade1 {
+	from {opacity: .4
+}
+
+to {
+	opacity: 1
+}
+}
+
+
+
