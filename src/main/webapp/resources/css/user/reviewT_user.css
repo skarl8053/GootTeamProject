@@ -4,13 +4,50 @@
 */
 
 /* 화면 디자인 */
-@import
-	url('https://fonts.googleapis.com/css?family=Montserrat:300,400,700');
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+#content{
+		  height: auto;
+		}
 
 .container {
-	font-family: 'Montserrat', sans-serif;
 	width: 1200px;
    
+}
+.tc{
+	padding:10px;
+	text-align: center;
+	height: 250px;
+	width: 1200px;
+}
+
+.tcimg {
+  position: relative;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%; /*둥그런 원으로 만들기 위함*/
+  overflow: hidden;
+}
+.tcimg img{
+	position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.tctext{
+	border-top: 2px solid;
+	width: 900px;
+	margin-left: 90px;
+	
+	
 }
 
 .a {
@@ -38,7 +75,7 @@
 /* star */
 .star {
 	position: relative;
-	font-size: 60px;
+	font-size: 28px;
 	color: #f0f0f0;
 }
 
@@ -60,6 +97,14 @@
 	pointer-events: none;
 }
 
+.fa-solid {
+	-webkit-font-smoothing: antialiased;
+  	display: var(--fa-display);
+    font-style: normal;
+    font-variant: normal;
+    line-height: 1;
+    text-rendering: auto;
+}
 #st1 {
 	font-size: 40px;
 }
@@ -99,8 +144,6 @@
 	height: 100px;
 	padding: 2%;
     padding-bottom: 55px; /* Add some spacing between content and image */
-    /* ... (existing styles) */
-
     flex: 1; /* Allow the content container to grow */
    
 
@@ -129,7 +172,8 @@
     padding-left: 2%;
 }
 img {
-	max-width: 200px;
-	height: 100px;
+	border-radius: 5%;
+	max-width: 100%;
+	height: 100%;
     resize: horizontal;
 }
