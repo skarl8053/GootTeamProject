@@ -1,0 +1,135 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.travel.dao.user.IDao_pushal_user">
+
+	<select id="pushalpayment" resultType="com.travel.dto.user.DTO_pushal_user">
+			
+			
+			<![CDATA[  
+			SELECT 		A.ROW_NUM
+							,A.AL_CONTENT
+							,A.ORDER_NO
+							,A.AL_TIME
+			FROM(
+					SELECT   ROW_NUMBER() OVER(ORDER BY P.AL_TIME DESC) AS ROW_NUM,
+								P.AL_CONTENT ||   ' ( 객실 ' || COUNT(C.R_NO) || '건 )' AS AL_CONTENT,
+						       	P.ORDER_NO,
+						       	P.AL_TIME
+					FROM 	THISPUSHAL P   	LEFT JOIN  	THISORDER 		B 	ON 		P.ORDER_NO = B.ORDER_NO
+		                                            	LEFT JOIN 	THISORDERDTL C 	ON 		B.ORDER_NO = C.ORDER_NO
+		                                                                                  		AND 		B.S_NO 		 = C.S_NO
+					WHERE 	P.M_NO = #{param1}
+					AND 		
+					(
+						#{param2} = 0
+						OR 
+						(P.AL_GUBUN = #{param2})
+					)
+		            GROUP BY P.ORDER_NO, P.AL_TIME, P.AL_CONTENT
+					ORDER BY P.AL_TIME DESC
+			) A
+			WHERE ROW_NUM BETWEEN #{param3} AND #{param4}
+			]]>
+			
+	</select>
+	
+	<select id="pageCalculate_pushal" resultType="integer">
+	
+			SELECT 	COUNT(*)
+			FROM 	THISPUSHAL
+			WHERE 	M_NO = #{param1}
+			AND 		
+			(
+					#{param2} = 0
+					OR 
+					(AL_GUBUN = #{param2})
+			)
+			<!-- 조건절 넣을 것 -->
+	
+	</select>
+	
+	<!-- <select id="pushalrefund" resultType="com.travel.dto.user.DTO_pushal_user">
+			SELECT P.AL_NO,
+				   P.AL_CONTENT,
+				   P.ORDER_NO
+				FROM THISPUSHAL P  
+			WHERE P.M_NO = #{param1}
+			AND AL_GUBUN =2
+			ORDER BY P.AL_NO DESC
+	</select>
+	<select id="pushaldelivery" resultType="com.travel.dto.user.DTO_pushal_user">
+		SELECT P.AL_NO,
+		       P.AL_CONTENT,
+		       P.DELIVERY_NO
+			FROM THISPUSHAL P  
+			WHERE P.M_NO = #{param1}
+			AND AL_GUBUN =3
+			ORDER BY P.AL_NO DESC
+	</select>
+	<select id="paymentcheck" resultType="com.travel.dto.user.DTO_pushal_user">
+		SELECT M.M_NAME,
+	       O.ORDER_DATE, 
+	       O.TOTAL_PRICE, 
+	       O.DISCOUNT_PRICE, 
+	       O.PAYMENT_PRICE,
+	       O.CHECK_IN_DATE,
+	       O.CHECK_OUT_DATE,
+	       S.S_NAME,
+	       C.CODENAME AS PAYMENT_METHOD_STR
+		FROM THISORDER O
+	    LEFT JOIN TMSTMEMBER M
+	        ON O.ORDER_NO = M.M_NO
+	    LEFT JOIN TMSTSTAY S
+	    	ON O.ORDER_NO = S.S_NO
+	   	LEFT JOIN TMSTCODE C
+	   		ON O.PAYMENT_METHOD = C.CODE
+	   		AND C.GRPCODE = 8
+		WHERE M.M_NO = #{param1}
+	</select>
+	<select id="refundcheck" resultType="com.travel.dto.user.DTO_pushal_user">
+		SELECT 		M.M_NAME, 
+            S.S_NAME,
+            R.REFUND_PRICE,
+            R.REFUND_PERCENTAGE, 
+            C.CODENAME AS REFUND_STEP_FLAG_STR, 
+            R.STEP1_DATE,
+            R.STEP2_DATE,
+            O.TOTAL_PRICE,
+            O.DISCOUNT_PRICE,
+            O.PAYMENT_PRICE,
+            O.ORDER_DATE
+			FROM 
+					THISREFUND R 
+			LEFT JOIN 
+					THISORDER O 
+					ON R.REFUND_NO = O.ORDER_NO 
+            LEFT JOIN TMSTMEMBER M 
+            		ON M.M_NO = O.ORDER_NO
+            LEFT JOIN TMSTSTAY S 
+            		ON S.S_NO = O.ORDER_NO
+           	LEFT JOIN TMSTCODE C
+           			ON R.STEP_FLAG = C.CODE
+           	AND C.GRPCODE = 14
+		 WHERE M.M_NO = #{param1}
+	</select>
+	<select id="deliverycheck" resultType="com.travel.dto.user.DTO_pushal_user">
+		SELECT E.EVENT_NAME, E.EVENT_STARTDATE, EVENT_ENDDATE, I.ITEM_NAME, 
+			   I.ITEM_NO, D.EVENT_DATE, C.CODENAME AS STEP_FLAG_STR, 
+			   D.DELIVERY_ADDR, D.STEP1_DATE AS STEP1_DATE_DE, 
+			   D.STEP2_DATE AS STEP2_DATE_DE, D.STEP3_DATE AS STEP3_DATE_DE
+		    FROM        TMSTEVENT E 
+		    LEFT JOIN 
+		                TMSTMEMBER M
+		                ON E.EVENT_NO = M.M_NO
+		    LEFT JOIN   TMSTITEM I
+		                ON I.ITEM_NO = M.M_NO
+		    LEFT JOIN   THISDELIVERY D
+		                ON D.DELIVERY_NO = E.EVENT_NO
+		    LEFT JOIN   TMSTCODE C
+		                ON D.STEP_FLAG = C.CODE
+		    AND C.GRPCODE = 13
+		WHERE M.M_NO =#{param1}
+	</select> -->
+</mapper>

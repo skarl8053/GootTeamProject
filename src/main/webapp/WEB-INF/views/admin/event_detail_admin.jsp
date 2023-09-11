@@ -60,6 +60,10 @@
         	text-align: center;
         }
 
+		 .event_textarea{
+            resize: none;
+        }
+        
         .item_name{
             width: 500px;
             height: 30px;
@@ -259,7 +263,15 @@
 	        var updated_event_startdate = document.getElementById("datepicker_startdate").value;
 	        var updated_event_enddate = document.getElementById("datepicker_enddate").value;
 	        var updated_event_file = document.getElementById("upload-name").value;
-	
+	        var updated_event_file2 = document.getElementById("upload-name2").value;
+	        var event_target = document.getElementById("event_target").value;
+			var event_caution = document.getElementById("event_caution").value;
+	        
+			if( ! valuechanged ){
+	    		alert("변경된 내용이 없습니다.");
+	    		return false;
+	    	}
+			
 	        if(updated_event_name.length < 1){
 	            alert("이벤트 명을 입력해주세요");
 	            return false;
@@ -270,51 +282,46 @@
 	            alert("이벤트 시작 / 종료 날짜를 입력해주세요");
 	            return false;
 	        }
-	
-	        if(updated_event_enddate.length < 1)
-	        {
-	            alert("사진을 등록해주세요");
-	            return false;
-	        }
+	        if(event_target.length < 1)
+			{
+				alert("이벤트 참여대상을 입력해주세요");
+				return false;
+			}
+
+            if(event_target.length > 1000)
+			{
+				alert("이벤트 참여대상은 1000자까지만 입력하실 수 있습니다.");
+				return false;
+			}
+            
+            if(event_caution.length < 1){
+            	alert("이벤트 주의사항을 입력해주세요");
+				return false;
+            }
+			
+            if(event_caution.length > 1000)
+			{
+				alert("이벤트 주의사항은 1000자까지만 입력하실 수 있습니다.");
+				return false;
+			}
+            if(updated_event_file.length < 1)
+			{
+				alert("이벤트 배너 사진을 등록해주세요");
+				return false;
+			}
+
+			if(updated_event_file2.length < 1)
+			{
+				alert("이벤트 상세 사진을 등록해주세요");
+				return false;
+			}
 	        
-	    	if( ! valuechanged ){
-	    		alert("변경된 내용이 없습니다.");
-	    		return false;
-	    	}
-	    	
 	    	return true;
 	    } 
 	    
 	    function eventdelete(event_no){
 	    	
-	    	// 이벤트 등록 전에 내용 다 입력했는지 확인
-	        var updated_event_name = document.getElementById("event_name").value;
-	        var updated_event_startdate = document.getElementById("datepicker_startdate").value;
-	        var updated_event_enddate = document.getElementById("datepicker_enddate").value;
-	        var updated_event_file = document.getElementById("upload-name").value;
-	        var updated_event_file2 = document.getElementById("upload-name2").value;
-	        
-	        if(updated_event_name.length < 1){
-	            alert("이벤트 명을 입력해주세요");
-	            return false;
-	        }
-	
-	        if(updated_event_startdate.length < 1 || updated_event_enddate.length < 1)
-	        {
-	            alert("이벤트 시작 / 종료 날짜를 입력해주세요");
-	            return false;
-	        }
-	
-	        if(updated_event_file.length < 1)
-	        {
-	            alert("이벤트 배너 사진을 등록해주세요");
-	            return false;
-	        }
-	        if(updated_event_file2.length < 1)
-	        {
-	            alert("이벤트 상세 사진을 등록해주세요");
-	            return false;
-	        }
+	    	
     		const truefalse = confirm("이벤트를 삭제하시면 복구 불가능합니다.");
     	    if (truefalse){
     	    	location.replace("event/delete?event_no=" + event_no);
@@ -465,6 +472,34 @@
 									<input type="text" id="datepicker_enddate" name="event_enddate" value="${list.event_enddate }" onchange="valueChanged()" autocomplete="off" readonly>
 								
 							</li>
+						</ul>
+					</td>
+				</tr>
+                <tr>
+                    <td><br><br></td>
+                    <td><br><br></td>
+                </tr>
+                <tr>
+					<td>이벤트 참여 대상</td>
+					<td>
+						<ul class="eventlist">
+							<li>
+                                <textarea name="event_target" id="event_target" class="event_textarea" cols="92" rows="5" onchange="valueChanged()">${list.event_target}</textarea>
+                            </li>
+						</ul>
+					</td>
+				</tr>
+                <tr>
+                    <td><br><br></td>
+                    <td><br><br></td>
+                </tr>
+                <tr>
+					<td>이벤트 주의사항</td>
+					<td>
+						<ul class="eventlist">
+							<li>
+                                <textarea name="event_caution" id="event_caution"  class="event_textarea" cols="92" rows="5" onchange="valueChanged()">${list.event_caution}</textarea>
+                            </li>
 						</ul>
 					</td>
 				</tr>

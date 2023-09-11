@@ -71,7 +71,7 @@
             <div class="container">
                 <ul class="buttonlist">
                     <li class="menu-etc" id="logo_img"><a href="javascript:siteLocation('purchase');"><img src="" alt="이미지 없음"></a></li>
-                    <li class="menu-bar"><a href="#">회원 / 매출 관리 <i class='fa fa-angle-down'></i></a>
+                    <li class="menu-bar"><a href="#">회원 / 매출 관리</a>
                         <ul>
                             <li>    
                                 <button class="inner_button" type="button" onclick="siteLocation('purchase');">구매 내역</button>
@@ -87,7 +87,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="menu-bar"><a href="#">숙소 관리 <i class='fa fa-angle-down'></i></a>
+                    <li class="menu-bar"><a href="#">숙소 관리</a>
                         <ul>
                             <li>    
                             	<button class="inner_button" type="button" onclick="siteLocation('stay');">숙소 등록</button>
@@ -97,7 +97,7 @@
                             </li>
                         </ul>
                     </li>
-                    <li class="menu-bar"><a href="#">이벤트 / 쿠폰 관리 <i class='fa fa-angle-down'></i></a>
+                    <li class="menu-bar"><a href="#">이벤트 / 쿠폰 관리</a>
                         <ul>
                             <li>    
                                 <button class="inner_button" type="button" onclick="siteLocation('event?page=1');">이벤트 관리</button>

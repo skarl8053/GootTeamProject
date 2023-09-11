@@ -37,9 +37,14 @@ public class Service_Cart_Select_user implements Interface_TravelService{
 			r_list_arr.add(r_list);
 		}
 		
-		
 		model.addAttribute("s_list", s_list);
 		model.addAttribute("r_list", r_list_arr);
 		
+		if(request.getParameter("msg") == null || request.getParameter("msg").equals("")) {
+			model.addAttribute("msg","");
+		}
+		else {
+			model.addAttribute("msg",request.getParameter("msg"));
+		}
 	}
 }

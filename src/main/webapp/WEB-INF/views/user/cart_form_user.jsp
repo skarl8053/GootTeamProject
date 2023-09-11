@@ -112,7 +112,10 @@
         
         function cartDelete(){
         	
+        	var m_no = "<c:out value='${param.m_no}'/>";
         	var checked_s_no = document.getElementById("checked_s_no").value;
+        
+        	
         	
         	if(checked_s_no.length < 1){
         		alert("장바구니에서 삭제할 숙소를 선택해주세요");
@@ -123,9 +126,19 @@
         		return false;
         	}
         	
-        	location.replace("/travel/user/cart_delete?m_no=${param.m_no}&s_no=" + checked_s_no);
+        	location.replace("cart_delete?m_no=" + m_no + "&s_no=" + checked_s_no);
         }
     </script>
+
+	<!-- 메세지 -->
+	<c:if test="${msg != ''}">
+			
+		<script>
+			alert("${msg}");
+			location.replace("cart?m_no=${m_no}");
+		</script>
+		
+	</c:if>
 
     <h1>장바구니</h1>
     <div id="form">
@@ -158,16 +171,16 @@
 	                    <c:forEach items="${s_list}" var="s_list" varStatus="st">
 		                    <tbody>
 		                        <tr>
-		                            <td rowspan="${fn:length(r_list)}" style="text-align: center;">
+		                            <td rowspan="${fn:length(r_list[st.index]) + 1}" style="text-align: center;">
 		                            	<input type="checkbox" class="select" name="select" onclick="checkOnlyOne(this,'${s_list.s_no}')">
 	                            	</td>
-		                            <td class="s_no" style="padding: 0 20px">${s_list.s_no }</td>
+		                            <td class="s_no" style="padding: 0 20px">${s_list.s_no }</td>  <!-- 숙소번호는 숨김 -->
 		                            <td style="padding: 0 20px; color: green;">${s_list.s_type}</td>
-		                            <td colspan="2" style="padding: 0 20px; color: blue;">${s_list.s_name}</td>
+		                            <td colspan="2" style="padding: 0 20px; color: blue;"><a href="stay_detail_user?s_no=${s_list.s_no}">${s_list.s_name}</a></td>
 		                        </tr>
 		                        <c:forEach items="${r_list[st.index]}" var="r_list">
 		                        	<tr>
-			                            <td class="r_no" style="padding: 0 20px">${r_list.r_no}</td>
+			                            <td class="r_no" style="padding: 0 20px">${r_list.r_no}</td> <!-- 객실 번호는 숨김 -->
 			                            <td colspan="2" style="padding: 0 20px; color: purple;">${r_list.r_name }</td>
 			                            <td style="padding: 0 20px; color: red;">${r_list.r_price} 원</td>
 			                        </tr>

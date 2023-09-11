@@ -79,6 +79,8 @@
 						,EVENT_NAME
 						,TO_CHAR(EVENT_STARTDATE, 'yyyy-MM-dd') AS EVENT_STARTDATE
 						,TO_CHAR(EVENT_ENDDATE, 'yyyy-MM-dd') AS EVENT_ENDDATE
+						,EVENT_TARGET
+						,EVENT_CAUTION
 						,FILENAME
 						,FILENAME2
 						,EVENT_FLAG
@@ -89,20 +91,22 @@
 	
 	<insert id="insertEvents">
 	
-			INSERT 	INTO TMSTEVENT (EVENT_NO, EVENT_NAME, EVENT_STARTDATE, EVENT_ENDDATE, FILENAME, FILENAME2, EVENT_FLAG, EVENT_MEMBER_FLAG)
-			VALUES((SELECT NVL(MAX(EVENT_NO),0) + 1 FROM TMSTEVENT), #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, 'N')
+			INSERT 	INTO TMSTEVENT (EVENT_NO, EVENT_NAME, EVENT_STARTDATE, EVENT_ENDDATE, EVENT_TARGET, EVENT_CAUTION, FILENAME, FILENAME2, EVENT_FLAG, EVENT_MEMBER_FLAG)
+			VALUES((SELECT NVL(MAX(EVENT_NO),0) + 1 FROM TMSTEVENT), #{param1}, #{param2}, #{param3}, #{param4}, #{param5}, #{param6}, #{param7}, #{param8}, 'N')
 			
 	</insert>
 	
 	<update id="updateEvents">
 	
-			UPDATE 	TMSTEVENT
+			UPDATE 		TMSTEVENT
 			SET 			EVENT_NAME = #{param2}
 							,EVENT_STARTDATE = #{param3}
 							,EVENT_ENDDATE = #{param4}
-							,FILENAME = #{param5}
-							,FILENAME2 = #{param6}
-							,EVENT_FLAG = #{param7}
+							,EVENT_TARGET = #{param5}
+							,EVENT_CAUTION = #{param6}
+							,FILENAME = #{param7}
+							,FILENAME2 = #{param8}
+							,EVENT_FLAG = #{param9}
 			WHERE 		EVENT_NO = #{param1}
 			
 	</update>

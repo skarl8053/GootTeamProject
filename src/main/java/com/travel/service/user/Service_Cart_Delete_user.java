@@ -1,6 +1,5 @@
 package com.travel.service.user;
 
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -8,16 +7,14 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.ui.Model;
 
-import com.travel.dao.user.IDao_pushal_user;
-import com.travel.dto.user.DTO_pushal_user;
+import com.travel.dao.user.IDao_Cart_user;
 import com.travel.service.admin.Interface_TravelService;
 
-public class Service_pushpayment_user implements Interface_TravelService{
+public class Service_Cart_Delete_user implements Interface_TravelService{
+	IDao_Cart_user dao = null;
 	
-	private SqlSession sqlSession;
-	
-	public Service_pushpayment_user(SqlSession sqlSession) {
-		this.sqlSession = sqlSession;
+	public Service_Cart_Delete_user(SqlSession sqlSession) {
+		dao = sqlSession.getMapper(IDao_Cart_user.class);
 	}
 
 	@Override
@@ -26,12 +23,13 @@ public class Service_pushpayment_user implements Interface_TravelService{
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
-		IDao_pushal_user dao = sqlSession.getMapper(IDao_pushal_user.class);
-		
 		String m_no = request.getParameter("m_no");
+		String s_no = request.getParameter("s_no");
 		
-		List<DTO_pushal_user> dto = dao.pushalpayment(m_no);
+		dao.deleteCartInfo(m_no, s_no);
 		
-		model.addAttribute("dto", dto);
+		
+		model.addAttribute("msg", "해당 숙소를 장바구니에서 삭제하였습니다.");
+		
 	}
 }

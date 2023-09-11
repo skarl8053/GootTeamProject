@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.travel.service.admin.Interface_TravelService;
 import com.travel.service.user.Service_CartToPayment_Select_user;
+import com.travel.service.user.Service_Cart_Delete_user;
 import com.travel.service.user.Service_Cart_Select_user;
 
 @Controller
@@ -40,6 +41,17 @@ public class Controller_Cart_user {
 		String url = srv.execute(model);
 		
 		return "redirect:" + url;
+	}
+	
+	@RequestMapping("cart_delete")
+	public String cart_delete(HttpServletRequest request, Model model) {
+		
+		model.addAttribute("request",request);
+		
+		service = new Service_Cart_Delete_user(sqlSession);
+		service.execute(model);
+		
+		return "redirect:cart?m_no=" + request.getParameter("m_no");
 	}
 	
 	

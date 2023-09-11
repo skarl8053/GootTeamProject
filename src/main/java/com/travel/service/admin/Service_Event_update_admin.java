@@ -40,10 +40,13 @@ public class Service_Event_update_admin implements Interface_TravelService {
 		String event_enddate = request.getParameter("event_enddate");
 		String event_flag = request.getParameter("event_flag");
 		
+		String event_target = request.getParameter("event_target");
+		String event_caution = request.getParameter("event_caution");
+		
 		String filename = returnFileName("file", path);
 		String filename2 = returnFileName("file2", detailpath);
 		
-		dao.updateEvents(event_no, event_name, event_startdate, event_enddate, filename, filename2, event_flag);
+		dao.updateEvents(event_no, event_name, event_startdate, event_enddate, event_target, event_caution, filename, filename2, event_flag);
 		
 		model.addAttribute("msg", "이벤트가 변경되었습니다.");
 	}

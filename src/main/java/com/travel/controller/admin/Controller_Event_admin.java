@@ -52,7 +52,7 @@ public class Controller_Event_admin {
 		
 		service = new Service_Event_selectdetail_admin(sqlSession);
 		service.execute(model);
-		
+	
 		// 상단 select_event 메서드로 이동
 		return "admin/event_detail_admin";
 	}

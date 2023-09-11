@@ -11,5 +11,7 @@ public interface IDao_Cart_user {
 	List<DTO_Cart_user> selectCartRoomList(String m_no, String s_no);
 
 	String[] selectCartInfo(String m_no, String s_no);
+
+	void deleteCartInfo(String m_no, String s_no);
 	
 }

@@ -36,13 +36,16 @@ public class Service_Event_insert_admin implements Interface_TravelService {
 		String event_enddate = request.getParameter("event_enddate");
 		String event_flag = request.getParameter("event_flag");
 		
+		String event_target = request.getParameter("event_target");
+		String event_caution = request.getParameter("event_caution");
+		
 		String path = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\event\\";
 		String detailpath = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\event\\detail\\";
 		
 		String filename = returnFileName("file", path);
 		String filename2 = returnFileName("file2", detailpath);
 		
-		dao.insertEvents(event_name, event_startdate, event_enddate, filename, filename2, event_flag);
+		dao.insertEvents(event_name, event_startdate, event_enddate, event_target, event_caution, filename, filename2, event_flag);
 		
 		model.addAttribute("msg", "이벤트가 등록되었습니다.");
 	}

@@ -40,4 +40,11 @@
 			AND 		A.S_NO = #{param2}
 				
 	</select>
+	
+	<delete id="deleteCartInfo">
+			DELETE 	FROM THISCART
+			WHERE 	M_NO = #{param1}
+			AND 		S_NO = #{param2}
+	</delete>
+	
 </mapper>

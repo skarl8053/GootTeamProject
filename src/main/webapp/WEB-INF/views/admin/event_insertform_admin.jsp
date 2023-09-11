@@ -60,6 +60,10 @@
         	text-align: center;
         }
 
+        .event_textarea{
+            resize: none;
+        }
+
         .item_name{
             width: 500px;
             height: 30px;
@@ -294,7 +298,9 @@
 			var updated_event_enddate = document.getElementById("datepicker_enddate").value;
 			var updated_event_file = document.getElementById("upload-name").value;
 			var updated_event_file2 = document.getElementById("upload-name2").value;
-			
+			var event_target = document.getElementById("event_target").value;
+			var event_caution = document.getElementById("event_caution").value;
+            
 			if(updated_event_name.length < 1){
 				alert("이벤트 명을 입력해주세요");
 				return false;
@@ -306,11 +312,35 @@
 				return false;
 			}
 
+			if(event_target.length < 1)
+			{
+				alert("이벤트 참여대상을 입력해주세요");
+				return false;
+			}
+
+            if(event_target.length > 1000)
+			{
+				alert("이벤트 참여대상은 1000자까지만 입력하실 수 있습니다.");
+				return false;
+			}
+            
+            if(event_caution.length < 1){
+            	alert("이벤트 주의사항을 입력해주세요");
+				return false;
+            }
+			
+            if(event_caution.length > 1000)
+			{
+				alert("이벤트 주의사항은 1000자까지만 입력하실 수 있습니다.");
+				return false;
+			}
+			
 			if(updated_event_file.length < 1)
 			{
 				alert("이벤트 배너 사진을 등록해주세요");
 				return false;
 			}
+
 			if(updated_event_file2.length < 1)
 			{
 				alert("이벤트 상세 사진을 등록해주세요");
@@ -438,6 +468,34 @@
 									  <span> ~ </span>
 									<input type="text" id="datepicker_enddate" name="event_enddate" value="${list.event_enddate }" onchange="valueChanged()" autocomplete="off" readonly>
 							</li>
+						</ul>
+					</td>
+				</tr>
+                <tr>
+                    <td><br><br></td>
+                    <td><br><br></td>
+                </tr>
+                <tr>
+					<td>이벤트 참여 대상</td>
+					<td>
+						<ul class="eventlist">
+							<li>
+                                <textarea name="event_target" id="event_target" class="event_textarea" cols="92" rows="5"></textarea>
+                            </li>
+						</ul>
+					</td>
+				</tr>
+                <tr>
+                    <td><br><br></td>
+                    <td><br><br></td>
+                </tr>
+                <tr>
+					<td>이벤트 주의사항</td>
+					<td>
+						<ul class="eventlist">
+							<li>
+                                <textarea name="event_caution" id="event_caution"  class="event_textarea" cols="92" rows="5"></textarea>
+                            </li>
 						</ul>
 					</td>
 				</tr>
