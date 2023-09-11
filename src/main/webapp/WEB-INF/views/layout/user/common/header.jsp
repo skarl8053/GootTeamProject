@@ -69,7 +69,7 @@
         <nav id="navigation">
             <div class="container">
                 <ul class="buttonlist">
-                    <li class="menu-etc" id="logo_img"><a href="/travel/main"><img src="" alt="이미지 없음"></a></li>
+                	<li id="logo_img" style="float: left"><a href="/travel/main"><img id="sub_logo" src="resources/img/sub_logo.png" alt="이미지 없음"></a></li>
                     <li class="menu-bar"><a href="#">지역</a>
                         <ul>
                             <li>    

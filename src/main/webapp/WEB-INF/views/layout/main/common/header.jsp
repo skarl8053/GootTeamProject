@@ -51,7 +51,8 @@
             	</c:if>
             	<c:if test="${ not empty sessionScope.m_email }">
             		 <ul class="" style="float: right">
-            		 	<li class="menu-etc" ><a href="#">알림</a></li>
+            		 	<li class="menu-etc" ><a href="user/pushal?m_no=${sessionScope.m_no}&page=1&searchType=0">알림</a></li>
+            		 	<li class="menu-etc" ><a href="user/cart?m_no=${sessionScope.m_no}">장바구니</a></li>
             		 	<li class="menu-etc" ><a href="user/mypage_info?m_no=${sessionScope.m_no}">마이페이지</a></li>
 	                    <li class="menu-etc" ><a href="javascript:logout();">로그아웃</a></li>
 	                </ul>

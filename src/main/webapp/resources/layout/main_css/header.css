@@ -18,7 +18,8 @@
     width: auto;
     height: 318px;
     font-family: 'GmarketSansMedium', sans-serif; 
-    background: #011343; 
+    /* background: #011343;   */
+    background-color: #14172C;
 }
 
 
@@ -30,7 +31,7 @@
     height: 150px;
 }
 #navigation { 
-    background: #011343; 
+    background-color: #14172C;
     height: 100px;
 }
 
@@ -73,15 +74,15 @@
     text-decoration: none;
 }
 
-.menu-bar:hover { background: #011343; }
+.menu-bar:hover { background: #14172C; }
 
 .menu-bar ul {
     background-color: white;
-    border-bottom: 5px solid #2ba0db;
+    border-bottom: 5px solid #14172C;
     display: none;
     position: absolute;
-    margin: 0 0 0 40px;
-    width: 310px;
+    margin: 0 0 0 92px;
+    width: 300px;
     
 }
 .menu-bar a{
@@ -95,13 +96,13 @@
     font-size: 20px;
     font-weight: bold;
     background-color: white;
-    color: #011967;
+    color: #14172C;
     border-style: none;
     border-radius: 5px;
     cursor: pointer;
 }
 
 .inner_button:hover{
-    background-color:#011967;
+    background-color: #14172C;
     color: rgb(235, 208, 28);
 }

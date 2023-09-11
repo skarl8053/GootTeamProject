@@ -67,6 +67,9 @@
 		table{
 			width: 1200px;
 		}
+		table tr{
+			height: 70px;
+		}
 		table tr td{
 			padding-left: 0;
 			font-size: 20px;
@@ -96,7 +99,7 @@
 </head>
 <body>
 	
-	<h1>알림</h1>
+	<h1>간단 알림</h1>
 	<div id="form">
 		<form action="pushal">
 			<input type="hidden" name="m_no" value="${sessionScope.m_no}" />
@@ -138,17 +141,29 @@
 				<table id="right-table">
 					<thead>
 						<tr>
-							<td width="130px" >번호</td>
-							<td width="400px">알림 내용</td>
-							<td width="400px">알림 일자</td>
+							<td width="10%" style="text-align: center;" >번호</td>
+							<td width="5%" style="text-align: center;">구분</td>
+							<td width="20%" style="text-align: center;">결제 / 환불 / 배송 번호</td>
+							<td width="45%" style="text-align: center;">알림 내용</td>
+							<td width="20%" style="text-align: center;">알림 일자</td>
 						</tr>
 					</thead>
 					<tbody>
 						<c:forEach items="${list}" var="list" varStatus="st">
 							<tr>
-								<td class="right-value">${st.index + 1}</td>
-								<td class="right-value"><a href="${list.order_no}">${ list.al_content }</a></td>
-								<td class="right-value">${list.al_time}</td>
+								<td style="text-align: center;">${list.row_num}</td>
+								<c:if test="${list.al_gubun == '결제'}">
+									<td style="text-align: center; color: green">${list.al_gubun}</td>
+								</c:if>
+								<c:if test="${list.al_gubun == '환불'}">
+									<td style="text-align: center; color: blue">${list.al_gubun}</td>
+								</c:if>
+								<c:if test="${list.al_gubun == '배송'}">
+									<td style="text-align: center; color: red">${list.al_gubun}</td>
+								</c:if>
+								<td style="text-align: center;">${ list.al_gubun_no }</td>
+								<td>${ list.al_content }</td>
+								<td style="text-align: center;">${list.al_time}</td>
 							</tr>
 						</c:forEach>
 					</tbody>
@@ -180,7 +195,6 @@
 									<span>${i}</span>
 								</c:otherwise>
 							</c:choose>
-							
 						</c:forEach>
 						<c:if test="${vo.page < vo.totPage}">
 							<a href="pushal?m_no=${param.m_no}&page=${vo.page+1 }&searchType=${param.searchType}"><i class="fa-solid fa-circle-chevron-right"></i></a>

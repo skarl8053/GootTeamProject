@@ -20,10 +20,10 @@
 			float: left;
 			padding: 20px 0px 0px 350px;
 		}
-		#left img{
+		/* #left img{
 			width: 150px;
 			height: 120px;
-		}
+		} */
 		#center{
 			padding: 20px 0px 0px 50px;
 		}
@@ -33,9 +33,9 @@
 <body>
 
 	<footer>
-		<div id="left">
+		<!-- <div id="left">
 			<img src="resources/img/bottom_logo.png"  alt="aa" />
-		</div>
+		</div> -->
 	  	<div id="center">
 	    	<p>&nbsp;All content Copyright 2023 어디갈래 Inc. all rights reserved </p>
 	   		<p>&nbsp;Contact mail : master@whereYouGo.com Tel: +82 1111 2222 3333</p>

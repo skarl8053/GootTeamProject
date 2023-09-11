@@ -4,22 +4,34 @@
 
 <mapper namespace="com.travel.dao.user.IDao_pushal_user">
 
-	<select id="pushalpayment" resultType="com.travel.dto.user.DTO_pushal_user">
+	<select id="pushalSelect" resultType="com.travel.dto.user.DTO_pushal_user">
 			
 			
 			<![CDATA[  
 			SELECT 		A.ROW_NUM
 							,A.AL_CONTENT
-							,A.ORDER_NO
+							,A.AL_GUBUN
+							,A.AL_GUBUN_NO
 							,A.AL_TIME
 			FROM(
-					SELECT   ROW_NUMBER() OVER(ORDER BY P.AL_TIME DESC) AS ROW_NUM,
-								P.AL_CONTENT ||   ' ( 객실 ' || COUNT(C.R_NO) || '건 )' AS AL_CONTENT,
-						       	P.ORDER_NO,
+					SELECT  DISTINCT 
+								ROW_NUMBER() OVER(ORDER BY P.AL_TIME DESC) AS ROW_NUM,
+								P.AL_CONTENT AS AL_CONTENT,
+								(
+									CASE P.AL_GUBUN 	WHEN 1 THEN '결제'
+																WHEN 2 THEN '환불'
+																WHEN 3 THEN '배송' END
+								) AS AL_GUBUN,
+						       	(
+						       		CASE P.AL_GUBUN	WHEN 1 THEN 	P.ORDER_NO
+						       								  	WHEN 2 THEN  	D.REFUND_NO
+						       								  	WHEN 3 THEN 	P.DELIVERY_NO END
+						       	) AS AL_GUBUN_NO,
 						       	P.AL_TIME
-					FROM 	THISPUSHAL P   	LEFT JOIN  	THISORDER 		B 	ON 		P.ORDER_NO = B.ORDER_NO
-		                                            	LEFT JOIN 	THISORDERDTL C 	ON 		B.ORDER_NO = C.ORDER_NO
-		                                                                                  		AND 		B.S_NO 		 = C.S_NO
+					FROM 	THISPUSHAL P   	LEFT JOIN  	THISORDER 		B 	ON 		P.ORDER_NO 	= B.ORDER_NO
+		                                            	LEFT JOIN 	THISORDERDTL 	C 	ON 		B.ORDER_NO 	= C.ORDER_NO
+		                                                                                  			AND 		B.S_NO 		 	= C.S_NO
+                                                        LEFT JOIN 	THISREFUND 		D  ON 		B.ORDER_NO  = D.ORDER_NO
 					WHERE 	P.M_NO = #{param1}
 					AND 		
 					(
@@ -27,7 +39,6 @@
 						OR 
 						(P.AL_GUBUN = #{param2})
 					)
-		            GROUP BY P.ORDER_NO, P.AL_TIME, P.AL_CONTENT
 					ORDER BY P.AL_TIME DESC
 			) A
 			WHERE ROW_NUM BETWEEN #{param3} AND #{param4}
