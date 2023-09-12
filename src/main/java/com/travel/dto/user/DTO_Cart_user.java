@@ -18,4 +18,6 @@ public class DTO_Cart_user {
 	private String r_name;
 	private String r_price;
 	
+	// 유사도 (Cosine Similarity)
+	private String s_img1;
 }
