@@ -2,7 +2,7 @@
 import sys
 import pandas as pd
 import numpy as np
-roomdf = pd.read_csv('C:\\GootTeamProject\\TMSTROOM_DATA_TABLE.csv')
+roomdf = pd.read_csv('C:\\GootTeamProject\\TravelProject\\TMSTROOM_DATA_TABLE.csv')
 
 
 from sklearn.feature_extraction.text import TfidfVectorizer
@@ -12,11 +12,9 @@ tfidf_matrix_room=tfidf.fit_transform(roomdf['R_DETAIL'])
 
 
 from sklearn.metrics.pairwise import linear_kernel
-cosine_sim_room=linear_kernel(tfidf_matrix_room,tfidf_matrix_room)
-print(cosine_sim_room)
+cosine_sim_room=linear_kernel(tfidf_matrix_room, tfidf_matrix_room)
 
 indices_room=pd.Series(roomdf.index,index=roomdf['R_NAME']).drop_duplicates()
-
 
 def get_recommendations_room(title,cosine_sim_room=cosine_sim_room):
 
