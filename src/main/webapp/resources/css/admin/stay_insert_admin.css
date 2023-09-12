@@ -18,10 +18,10 @@
 
 /* 스타일링을 위한 기본 스타일 */
 select {
-    padding: 10px;
+    padding: 5px;
     border: 1px solid #ccc;
     border-radius: 5px;
-    font-size: 20px;
+    font-size: 16px;
     outline: none;
 }
 
@@ -41,18 +41,21 @@ option:checked {
     background-color: #007BFF;
     color: #fff;
 }
-
-
 * {
 	font-family: 'GmarketSansMedium';
-	/* font-size : medium; */
-	text-align: center;
-	align-items: center;
+	/* align-items: center; */
 }
 
 p {
-	font-size: 24px;
+	font-size: 20px;
+    text-align: left;
 	color: rgb(1, 19, 67);
+    margin-bottom: 10px;
+}
+
+#title {
+    margin-right: 10px;
+    font-size: 20px;
 }
 
 span {
@@ -61,24 +64,32 @@ span {
 
 input[type="text"], textarea {
     font-size: 16px;
+    margin-right: 10px;
 }
 
-body {
-	/* width: 1200px; */
-	
+input[type="file"] {
+    margin-bottom: 10px;
+}
+
+.image {
+	border: 1px solid grey;
+    width: 250px;
+    height: 250px;
 }
 
 #stay_room_price {
 	margin-top: 10px;
 }
 
-/* #hashtag {
-	border: 1px solid grey;
-	border-radius: 30px;
-	padding: 20px 20px;
-	width: 800px;
-	margin: 0 auto;
-} */
+#hashtag, #stay_facility {
+	margin-bottom: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+
+#hashtag {
+	margin-top : 10px;
+}
 
 .btn {
 	margin-top: 10px;
@@ -93,6 +104,7 @@ body {
 
 .location, .category {
 	width: 200px;
+    margin-bottom: 10px;
 	font-size : 16px;
 }
 
@@ -105,19 +117,9 @@ body {
 	margin-top: 10px;
 }
 
-#titlefield {
-	margin-top: 20px;
-}
-
 .bed {
 	display: inline-flex;
 	margin: 10px;
-}
-
-.bed input[type="radio"] {
-	margin-left: 5px;
-	margin-right: 5px;
-	color: rgb(1, 19, 67);
 }
 
 #stayinfo, #staypolicy, #detailroominfo {
@@ -140,7 +142,6 @@ body {
 	padding: 5px 10px;
 	border: none;
 	border-radius: 5px;
-	margin-left: 5px;
 }
 
 #firstImage, #secondImage, #thirdImage {
@@ -180,6 +181,10 @@ body {
 	border: none;
 }
 
+p {
+	font-size : 20px;	
+}
+
 #stay_room_info {
 	margin-top: 20px;
 	align-items: center;
@@ -191,12 +196,10 @@ body {
 }
 
 .bed_text {
-	margin-left: 5px;
 	margin-right: 5px;
 }
 
-.register_text {
-	font-size: 16px;
-	color: rgb(1, 19, 67);
-	font-weight: bold;
+#addr_x, #addr_y {
+	margin-left: 5px;
+	margin-top: 5px;
 }

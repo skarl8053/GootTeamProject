@@ -4,6 +4,21 @@ $(function() {
 	// /////////////////////////
 	// 이벤트 슬라이드
 	
+	//	alert("aa");
+					
+    var imgData = '${on_evt_img.filename}';
+    var noData = '${on_evt_no.event_no}';
+    
+	//    alert("imgData: " + imgData);
+	//    alert("noData: " + noData);
+	
+	console.log("imgData type:", typeof imgData);
+	console.log("noData type:", typeof noData);
+
+    console.log("imgData: " + imgData);
+    console.log("noData: " + noData);
+
+
 	// 이미지 배열
 	var imageUrls = [
 	    'resources/upload_img/admin/event/서울 야경2.jpg',
@@ -13,12 +28,22 @@ $(function() {
 	];
 	
 	// 이미지에 대한 링크 배열
+	
+	// var event_no = document.querySelector('input[name="event_no"]');
+		
 	var linkUrls = [
-	    'http://localhost:8090/travel/main/event_page',
-	    'http://localhost:8090/travel/main/event_page2',
-	    'http://localhost:8090/travel/main/event_page3',
-	    'http://localhost:8090/travel/main/event_page4',
+	    'http://localhost:8090/travel/user/event_page?event_no=' + 1,
+	    'http://localhost:8090/travel/user/event_page?event_no=' + 2,
+	    'http://localhost:8090/travel/user/event_page?event_no=' + 3,
+	    'http://localhost:8090/travel/user/event_page?event_no=' +4
 	];
+	
+	//var str_split = str.split(',')
+	
+	//for(i = 0; i<str_split.length; i++)
+	//{
+	//	imageUrl.push("resources/upload_img/admin/event/" + str_split[i])
+	//}
 	
 	// 이미지 + 링크 배열
 	var printImgTag = "";

@@ -7,7 +7,6 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Insert title here</title>
-	<script>var eventNo = ${event_page.event_no};</script>
 	<script src="${pageContext.request.contextPath}/resources/layout/main_js/slide-js/slick-main.js"></script>
 	<style>
 		#content{
@@ -115,12 +114,7 @@
 		}
 	</style>
 	
-	<script>	
-		/* window.onload = function () {
-			const eventNo = ${event_page.event_no};
-			window.eventNo = eventNo;
-		} */
-	
+	<script>
 	    // 폼 제출
 	    function submitForm() {
 	        document.getElementById("eventForm").submit();
@@ -141,12 +135,12 @@
 <h2 class="event_title">EVENT 게시판</h2>
 <hr />
 <form action="event_attend" method="POST" onsubmit="event_attend_confirm(${check_event}, '${msg}');">
-<input type="hidden" name="event_no" id="event_no" value="${event_page.event_no }" />
-	<p class="event_title">${event_page.event_name }</p>
-	<p class="event_title">관리자 | ${event_page.event_startdate }</p>
+<input type="hidden" name="event_no" value="${event_page2.event_no }" />
+	<p class="event_title">${event_page2.event_name }</p>
+	<p class="event_title">관리자 | ${event_page2.event_startdate }</p>
 	<hr>
 	
-	<img src="../admin/resources/upload_img/admin/event/${event_page.filename2 }" alt="이미지 없음" class="event_img"  /><br />
+	<img src="../admin/resources/upload_img/admin/event/${event_page2.filename2 }" alt="이미지 없음" class="event_img"  /><br />
 	
 	<div class="event_content">
 		<div class="event_main">가족사랑) 가족사진 무료촬영 + 제주도 여행권 이벤트(서울지역)</div><br>
@@ -158,19 +152,19 @@
 		<div class="event_notice">
 			<p><span class="blue_text">이벤트 내용 : </span>가족사진 무료촬영 + 제주도 무료 여행 티켓 제공 </p>
 			
-			<p><span class="blue_text">이벤트 기간 : </span>${event_page.event_startdate } ~ ${event_page.event_enddate }  </p>
+			<p><span class="blue_text">이벤트 기간 : </span>${event_page2.event_startdate } ~ ${event_page2.event_enddate }  </p>
 			
-			<p><span class="blue_text">참 여 대 상 : </span>${event_page.event_target } </p><br />
+			<p><span class="blue_text">참 여 대 상 : </span>${event_page2.event_target } </p><br />
 		</div>
 
 		<div class="event_caution">주의사항</div><br>
 
-		<textarea id="textarea" cols="50" rows="13" readonly>${event_page.event_caution }</textarea> <br />
+		<textarea id="textarea" cols="50" rows="2" readonly>${event_page2.event_caution }</textarea> <br />
 
 		<div class="event_gift">
-			1등 경품 : ${event_page.item_name } <br />
-			2등 경품 : ${event_page.item_name_1 }<br />
-			3등 경품 : ${event_page.item_name_2 }<br /><br>
+			1등 경품 : ${event_page2.item_name } <br />
+			2등 경품 : ${event_page2.item_name_1 }<br />
+			3등 경품 : ${event_page2.item_name_2 }<br /><br>
 		</div>
 
 	</div>
@@ -195,14 +189,17 @@
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
     
-	 // 내용이 변경될 때마다 높이를 조절합니다.
-		textarea.addEventListener("input", function() {
-		  if (this.scrollHeight > this.clientHeight) {
-		    this.style.height = "auto"; // 스크롤 높이에 따라 높이를 설정합니다.
-		  } else {
-		    this.style.height = (this.scrollHeight) + "px"; // 축소할 때 높이를 조절합니다.
-		  }
-		});
+    // textarea 자동 정렬
+    const textarea = document.getElementById("myTextarea");
+
+	// 내용이 변경될 때마다 높이를 조절합니다.
+	textarea.addEventListener("input", function() {
+	  if (this.scrollHeight > this.clientHeight) {
+	    this.style.height = this.scrollHeight + "px"; // 스크롤 높이에 따라 높이를 설정합니다.
+	  } else {
+	    this.style.height = (this.scrollHeight - 10) + "px"; // 축소할 때 높이를 조절합니다.
+	  }
+	});
 </script>
 
 </body>

@@ -1,23 +1,20 @@
 package com.travel.controller.user;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import com.tech.sprj09.dto.SimDto;
 import com.travel.dto.user.DTO_Cart_user;
 import com.travel.service.admin.Interface_TravelService;
 
-@RestController
+// @RestController
+@Controller
 @RequestMapping("user")
 public class RestController_Cart_user {
 	
@@ -25,7 +22,7 @@ public class RestController_Cart_user {
 	private SqlSession sqlSession;
 	private Interface_TravelService service;
 	
-	@RequestMapping("cart")
+	@RequestMapping("cart_sim")
 	public List<DTO_Cart_user> cart_cosine_similarity(HttpServletRequest request, Model model) {
 		
 		// 유사도 데이터 추출 (Python)
@@ -61,9 +58,10 @@ public class RestController_Cart_user {
 //            System.out.println("비정상종료");
 //        }
 //        
-//        List<DTO_Cart_user> dto = dao.
+//       
 //        
 //        return simlist;
+        return null;
 	}
 	
 }
