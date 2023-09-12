@@ -65,27 +65,27 @@
 	        </div>
             <div>
 	            <ul class="buttonlist">
-	                <li class="menu-bar"><a href="#">지역<i class='fa fa-angle-down'></i></a>
+	                <li class="menu-bar"><a href="#">지역</a>
 	                    <ul>
 	                        <li>    
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">서울</button>
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">경기</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=1');">서울</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=2');">경기</button>
 	                        </li>
 	                        <li>    
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">인천</button>
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">제주</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=3');">인천</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=4');">제주</button>
 	                        </li>
 	                        <li>    
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">전라</button>
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">경상</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=5');">전라</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=6');">경상</button>
 	                        </li>
 	                        <li>    
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">충청</button>
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">강원</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=7');">충청</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=8');">강원</button>
 	                        </li>
 	                    </ul>
 	                </li>
-	                <li class="menu-bar"><a href="#">테마<i class='fa fa-angle-down'></i></a>
+	                <li class="menu-bar"><a href="#">테마</a>
 	                    <ul>
 	                        <li>    
 	                            <button class="inner_button" type="button" onclick="siteLocation('');">등산</button>
