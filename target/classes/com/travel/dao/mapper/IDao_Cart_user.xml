@@ -41,6 +41,19 @@
 				
 	</select>
 	
+	<select id="selectRecomendList" resultType="com.travel.dto.user.DTO_Cart_user">
+	
+			SELECT  	S_NO
+						,S_IMG1 
+			FROM   	TMSTSTAY
+			WHERE  S_NO IN
+			<foreach collection="array" item="s_no_list" index="index" open="(" separator="," close=")">
+			 	#{s_no_list.value}
+			</foreach>
+			ORDER BY S_NO
+		
+	</select>
+	
 	<delete id="deleteCartInfo">
 			DELETE 	FROM THISCART
 			WHERE 	M_NO = #{param1}

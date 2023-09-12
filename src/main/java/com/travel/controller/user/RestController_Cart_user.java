@@ -1,26 +1,28 @@
 package com.travel.controller.user;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+import com.travel.dao.user.IDao_Cart_user;
 import com.travel.dto.user.DTO_Cart_user;
-import com.travel.service.admin.Interface_TravelService;
 
-// @RestController
-@Controller
+
+@RestController
 @RequestMapping("user")
 public class RestController_Cart_user {
 	
 	@Autowired
 	private SqlSession sqlSession;
-	private Interface_TravelService service;
+
 	
 	@RequestMapping("cart_sim")
 	public List<DTO_Cart_user> cart_cosine_similarity(HttpServletRequest request, Model model) {
@@ -28,40 +30,48 @@ public class RestController_Cart_user {
 		// 유사도 데이터 추출 (Python)
 		// Cosine Similarity
 		
-//		List<DTO_Cart_user> list=new ArrayList<DTO_Cart_user>();
-//		
-//		String bt = request.getParameter("bt");
-//		String filePath = "C:\\GootTeamProject\\TravelProject\\TMSTROOM_DATA_TABLE.py";
-//		
-//        ProcessBuilder builder = new ProcessBuilder("python",filePath, bt);
-//        builder.redirectErrorStream(true);
-//        
-//        Process process = builder.start();
-//
-//        // 자식 프로세스가 종료될 때까지 기다림
-//        int exitval = process.waitFor();
-//
-//        //// 서브 프로세스가 출력하는 내용을 받기 위해
-//        BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(),"euc-kr"));
-//
-//        String line = "";
-//        
-//        while ((line = br.readLine()) != null) {
-//            System.out.println(">>>  " + line); // 표준출력에 쓴다
-//            
-//            DTO_Cart_user dto_obj=new DTO_Cart_user();
-//            dto_obj.setSimtitle(line);
-//            simlist.add(dto_obj);
-//        }
-//        
-//        if(exitval !=0){//비정상종료      
-//            System.out.println("비정상종료");
-//        }
-//        
-//       
-//        
-//        return simlist;
-        return null;
+		try {
+			
+			IDao_Cart_user dao =  sqlSession.getMapper(IDao_Cart_user.class);
+			
+			String bt = request.getParameter("s_no");
+			String filePath = "C:\\GootTeamProject\\TravelProject\\Cart_Similarity.py";
+			
+	        ProcessBuilder builder = new ProcessBuilder("python", filePath, bt);
+	        builder.redirectErrorStream(true);
+	        
+	        Process process = builder.start();
+
+	        // 자식 프로세스가 종료될 때까지 기다림
+	        int exitval = process.waitFor();
+
+	        //// 서브 프로세스가 출력하는 내용을 받기 위해
+	        BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(),"UTF-8"));
+
+	        String readText = "";
+	        int[] s_no_list = new int[5];
+	        
+	        int index = 0;
+	        
+	        while ((readText = br.readLine()) != null) {
+	        	if(index == 5) {
+	        		break;
+	        	}
+	        	s_no_list[index] = Integer.parseInt(readText.replace(" ", "").substring(1));
+	        	index++;
+	        }
+	        
+	        List<DTO_Cart_user> list = dao.selectRecomendList(s_no_list);
+	        
+	        if(exitval !=0){//비정상종료      
+	            System.out.println("비정상종료");
+	        }
+	        return list;
+		}
+		catch(Exception ex) {
+			ex.printStackTrace();
+			return null;
+		}
 	}
 	
 }

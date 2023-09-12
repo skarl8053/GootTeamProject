@@ -264,6 +264,8 @@
 	        var updated_event_enddate = document.getElementById("datepicker_enddate").value;
 	        var updated_event_file = document.getElementById("upload-name").value;
 	        var updated_event_file2 = document.getElementById("upload-name2").value;
+            var event_intro = document.getElementById("event_intro").value;
+            var event_content = document.getElementById("event_content").value;
 	        var event_target = document.getElementById("event_target").value;
 			var event_caution = document.getElementById("event_caution").value;
 	        
@@ -282,6 +284,31 @@
 	            alert("이벤트 시작 / 종료 날짜를 입력해주세요");
 	            return false;
 	        }
+        
+            if(event_intro.length < 1)
+			{
+				alert("이벤트 소개글을 입력해주세요");
+				return false;
+			}
+
+            if(event_intro.length > 1000)
+			{
+				alert("이벤트 소개글은 1000자까지만 입력하실 수 있습니다.");
+				return false;
+			}
+
+            if(event_content.length < 1)
+			{
+				alert("이벤트 내용을 입력해주세요");
+				return false;
+			}
+
+            if(event_content.length > 1000)
+			{
+				alert("이벤트 내용은 1000자까지만 입력하실 수 있습니다.");
+				return false;
+			}
+
 	        if(event_target.length < 1)
 			{
 				alert("이벤트 참여대상을 입력해주세요");
@@ -472,6 +499,34 @@
 									<input type="text" id="datepicker_enddate" name="event_enddate" value="${list.event_enddate }" onchange="valueChanged()" autocomplete="off" readonly>
 								
 							</li>
+						</ul>
+					</td>
+				</tr>
+                <tr>
+                    <td><br><br></td>
+                    <td><br><br></td>
+                </tr>
+                <tr>
+					<td>이벤트 소개</td>
+					<td>
+						<ul class="eventlist">
+							<li>
+                                <textarea name="event_intro" id="event_intro" class="event_textarea" cols="92" rows="5" onchange="valueChanged()">${list.event_intro}</textarea>
+                            </li>
+						</ul>
+					</td>
+				</tr>
+                <tr>
+                    <td><br><br></td>
+                    <td><br><br></td>
+                </tr>
+                <tr>
+					<td>이벤트 내용</td>
+					<td>
+						<ul class="eventlist">
+							<li>
+                                <textarea name="event_content" id="event_content" class="event_textarea" cols="92" rows="5" onchange="valueChanged()">${list.event_content}</textarea>
+                            </li>
 						</ul>
 					</td>
 				</tr>
