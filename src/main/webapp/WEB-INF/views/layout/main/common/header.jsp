@@ -88,24 +88,24 @@
 	                <li class="menu-bar"><a href="#">테마</a>
 	                    <ul>
 	                        <li>    
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">등산</button>
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">바다</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=1');">등산</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=2');">바다</button>
 	                        </li>
 	                        <li>    
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">도시</button>
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">계곡</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=3');">도시</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=4');">계곡</button>
 	                        </li>
 	                        <li>    
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">레저</button>
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">문화</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=5');">레저</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=6');">문화</button>
 	                        </li>
 	                        <li>    
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">맛집</button>
-	                            <button class="inner_button" type="button" onclick="siteLocation('');">파티</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=7');">맛집</button>
+	                            <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=8');">파티</button>
 	                        </li>
 	                    </ul>
 	                </li>
-	                <li class="menu-bar"><a href="#">더보기<i class='fa fa-angle-down'></i></a>
+	                <li class="menu-bar"><a href="#">더보기</a>
 	                    <ul>
 	                        <li>    
 	                            <button class="inner_button" type="button" onclick="siteLocation('');">이벤트</button>
