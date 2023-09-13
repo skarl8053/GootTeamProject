@@ -27,6 +27,18 @@ public class Service_stay_list_link_user implements Interface_TravelService {
 		Map<String, Object> map=model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		IDao_Stay_user dao=sqlSession.getMapper(IDao_Stay_user.class);
+		
+//		아이디 지역
+		String m_no=request.getParameter("m_no");
+		String s_loca=request.getParameter("s_loca");
+		
+		System.out.println("s_loca11"+s_loca);
+		
+		if (s_loca.equals(null)) {
+			s_loca="";
+		}
+		
+		System.out.println("s_loca22"+s_loca);
 
 //		링크
 		String scTop="";
@@ -47,20 +59,21 @@ public class Service_stay_list_link_user implements Interface_TravelService {
 		
 		 ArrayList<DTO_StayDetail_user> dto=null;
 		if (scTop.equals("rP")) {
-			model.addAttribute("listS",dao.sListTscRP());
-			totalRCont=dao.selectStayLlistRPTotCount();
+			model.addAttribute("listS",dao.sListTscRP(s_loca));
+			totalRCont=dao.selectStayLlistRPTotCount(s_loca);
 		} else if (scTop.equals("hP")) {
-			model.addAttribute("listS",dao.sListTscHP());
-			totalRCont=dao.selectStayLlistHPTotCount();
+			model.addAttribute("listS",dao.sListTscHP(s_loca));
+			totalRCont=dao.selectStayLlistHPTotCount(s_loca);
 		} else if (scTop.equals("hR")) {
-			model.addAttribute("listS",dao.sListTscHR());
-			totalRCont=dao.selectStayLlistHRTotCount();
+			model.addAttribute("listS",dao.sListTscHR(s_loca));
+			totalRCont=dao.selectStayLlistHRTotCount(s_loca);
 		} else if (scTop.equals(" ")){ 
-			model.addAttribute("listS",dao.sList());
-			totalRCont=dao.selectStayLlistTotCount();
+			model.addAttribute("listS",dao.sList(s_loca));
+			totalRCont=dao.selectStayLlistTotCount(s_loca);
 		}
 		
-		
+		model.addAttribute("m_no",m_no);
+		model.addAttribute("s_loca",s_loca);
 		model.addAttribute("SLtotalRCont",totalRCont);
 		
 	}

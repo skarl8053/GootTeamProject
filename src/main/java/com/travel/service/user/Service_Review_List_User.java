@@ -31,15 +31,13 @@ private SqlSession sqlSession;
 //		ArrayList<ReviewSearchDto> dtos=dao.rlist();
 		ArrayList<DTO_Review_user> rlist=null;
 		
-		
-//		들어올 수 있는 데이터값들
-//		rS룸이름이라 숙소 테이블이 완성 됬을 때 테스트 해보자
-	//  fS에서 최신순은 지금 테스트 가능 O , 인기순은... 음... 어떻게 되려나... 
 
 //		String rS=request.getParameter("rS");
 		String fS=request.getParameter("fS");
 		String s_no=request.getParameter("s_no");
-			model.addAttribute("s_no",s_no);		
+		model.addAttribute("s_no",s_no);		
+		String m_no=request.getParameter("m_no");
+		model.addAttribute("m_no",m_no);		
 		if (fS==null) {
 			fS="";
 		} else if (fS.equals("lately")) {
@@ -97,5 +95,7 @@ private SqlSession sqlSession;
 		model.addAttribute("listS",dto);
 			
 		}
+	
+		
 
 	}

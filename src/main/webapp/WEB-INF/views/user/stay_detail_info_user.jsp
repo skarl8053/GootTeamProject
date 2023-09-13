@@ -13,7 +13,7 @@
 </head>
 <body>
 
-	<div class="container">
+	<div class="total">
 		<div class="T1">
 			<c:forEach items="${listS }" var="list1">
 			<div class="links">

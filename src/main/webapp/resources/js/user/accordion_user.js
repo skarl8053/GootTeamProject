@@ -10,7 +10,7 @@ function getCheckboxValue() {
     result += `
       <span class="selectedValue">
         ${el.value}
-        <span class="close">X</span>
+        <span class="close"> </span>
       </span>
     `;
   });

@@ -11,46 +11,15 @@
 
 <link rel="stylesheet" href="resources/css/user/stay_detail_user.css" />
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
-<script src="resources/js/user/stay_detail_use.js"></script>
+<script src="resources/js/user/stay_detail_user.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-<script>
-
-function noticefunc() { 
-	$('#myModal').show();
-	
-	
-}
-</script>
 
 <title>Document</title>
 </head>
 <body>
-	<style>
-/* The Modal (background) */
-.modal {
-	display: none; /* Hidden by default */
-	position: fixed; /* Stay in place */
-	z-index: 1; /* Sit on top */
-	left: 0;
-	top: 0;
-	width: 100%; /* Full width */
-	height: 100%; /* Full height */
-	overflow: auto; /* Enable scroll if needed */
-	background-color: rgb(0, 0, 0); /* Fallback color */
-	background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
 
-/* Modal Content/Box */
-.modal-content {
-	background-color: #fefefe;
-	margin: 15% auto; /* 15% from the top and centered */
-	padding: 20px;
-	border: 1px solid #888;
-	width: 30%; /* Could be more or less, depending on screen size */
-}
-</style>
-	<!-- The Modal -->
-	<div id="myModal" class="modal">
+	<!-- The Modal0 -->
+	<div id="myModal0" class="modal">
 
 		<!-- Modal content -->
 		<div class="modal-content">
@@ -61,25 +30,141 @@ function noticefunc() {
 			</p>
 			<p style="text-align: center;">
 				<span style="font-size: 10pt;"><b><span
-						style="font-size: 10pt;">[선택하신 상품이 장바구니에 담겼습니다]</span></b></span>
+						style="font-size: 10pt;">[선택하신 ${listSDR[0].r_name} 장바구니에 담겼습니다]</span></b></span>
 			</p>
 
 			<div
 				style="cursor: pointer; background-color: #DDDDDD; text-align: center; padding-bottom: 10px; padding-top: 10px;"
-				onClick="close_pop();">
+				onClick="close_pop0();">
 				<span class="pop_bt" style="font-size: 13pt;"> 닫기 </span>
 			</div>
 		</div>
 
 	</div>
-	<!--End Modal-->
+	<!--End Modal0-->
+	<!-- The Modal1 -->
+	<div id="myModal1" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<p style="text-align: center;">
+				<span style="font-size: 14pt;"><b><span
+						style="font-size: 14pt;"><i
+							class="fa-solid fa-cart-shopping" style="color: #011343;"></i></span></b></span>
+			</p>
+			<p style="text-align: center;">
+				<span style="font-size: 10pt;"><b><span
+						style="font-size: 10pt;">[선택하신 ${listSDR[1].r_name} 장바구니에 담겼습니다]</span></b></span>
+			</p>
+
+			<div
+				style="cursor: pointer; background-color: #DDDDDD; text-align: center; padding-bottom: 10px; padding-top: 10px;"
+				onClick="close_pop1();">
+				<span class="pop_bt" style="font-size: 13pt;"> 닫기 </span>
+			</div>
+		</div>
+
+	</div>
+	<!--End Modal1-->
+	<!-- The Modal2 -->
+	<div id="myModal2" class="modal">
+
+		<!-- Modal content -->
+		<div class="modal-content">
+			<p style="text-align: center;">
+				<span style="font-size: 14pt;"><b><span
+						style="font-size: 14pt;"><i
+							class="fa-solid fa-cart-shopping" style="color: #011343;"></i></span></b></span>
+			</p>
+			<p style="text-align: center;">
+				<span style="font-size: 10pt;"><b><span
+						style="font-size: 10pt;">[선택하신 ${listSDR[2].r_name} 장바구니에 담겼습니다]</span></b></span>
+			</p>
+
+			<div
+				style="cursor: pointer; background-color: #DDDDDD; text-align: center; padding-bottom: 10px; padding-top: 10px;"
+				onClick="close_pop2();">
+				<span class="pop_bt" style="font-size: 13pt;"> 닫기 </span>
+			</div>
+		</div>
+
+	</div>
+	<!--End Modal2-->
 	<script type="text/javascript">
-		jQuery(document).ready(function() {
-			//$('#myModal').show();
-		});
+		/* jQuery(document).ready(function() {
+			$('#myModal').show();
+		}); */
+		// 장바구니 버튼 클릭 시 페이지로 파라미터를 전달하고 팝업 표시
+		function sendParametersAndShowPopup0() {
+			
+			// 팝업 표시
+			$('#myModal0').show();
+		}
+		
+	
 		//팝업 Close 기능
-		function close_pop(flag) {
-			$('#myModal').hide();
+		function close_pop0(flag) {
+			var m_no = "${m_no}";
+			var s_no = "${listS[0].s_no}";
+			var r_no = "${listSDR[0].r_no}";
+
+			// URL에 파라미터를 추가하여 페이지로 이동
+			var url = "cartInsert?m_no=" + m_no + "&s_no=" + s_no + "&r_no=" + r_no;
+			window.location.href = url;
+
+			$('#myModal0').hide();
+		};
+	</script>
+
+	<script type="text/javascript">
+		/* jQuery(document).ready(function() {
+			$('#myModal').show();
+		}); */
+		// 장바구니 버튼 클릭 시 페이지로 파라미터를 전달하고 팝업 표시
+		function sendParametersAndShowPopup1() {
+			
+			// 팝업 표시
+			$('#myModal1').show();
+		}
+		
+	
+		//팝업 Close 기능
+		function close_pop1(flag) {
+			var m_no = "${m_no}";
+			var s_no = "${listS[0].s_no}";
+			var r_no = "${listSDR[1].r_no}";
+
+			// URL에 파라미터를 추가하여 페이지로 이동
+			var url = "cartInsert?m_no=" + m_no + "&s_no=" + s_no + "&r_no=" + r_no;
+			window.location.href = url;
+
+			$('#myModal1').hide();
+		};
+	</script>
+
+	<script type="text/javascript">
+		/* jQuery(document).ready(function() {
+			$('#myModal').show();
+		}); */
+		// 장바구니 버튼 클릭 시 페이지로 파라미터를 전달하고 팝업 표시
+		function sendParametersAndShowPopup2() {
+			
+			// 팝업 표시
+			$('#myModal2').show();
+		}
+		
+	
+		//팝업 Close 기능
+		function close_pop2(flag) {
+			var m_no = "${m_no}";
+			var s_no = "${listS[0].s_no}";
+			var r_no = "${listSDR[2].r_no}";
+
+			// URL에 파라미터를 추가하여 페이지로 이동
+			var url = "cartInsert?m_no=" + m_no + "&s_no=" + s_no + "&r_no=" + r_no;
+			window.location.href = url;
+
+			$('#myModal2').hide();
 		};
 	</script>
 
@@ -91,16 +176,16 @@ function noticefunc() {
 			</div>
 			<div class="bo1">
 				<div class="bo1_1">
-					<img src="resources/upload/stay/${list1.s_img1 }" alt="img"
+					<img src="resources/upload_img/admin/room/${list1.s_img1 }" alt="img"
 						class="image image1" />
 				</div>
 				<div class="bo2">
 					<div class="bo1_2">
-						<img src="resources/upload/stay/${list1.s_img2 }" alt="img"
+						<img src="resources/upload_img/admin/room/${list1.s_img2 }" alt="img"
 							class="image image2" />
 					</div>
 					<div class="bo1_3">
-						<img src="resources/upload/stay/${list1.s_img3 }" alt="img"
+						<img src="resources/upload_img/admin/room/${list1.s_img3 }" alt="img"
 							class="image image3" />
 					</div>
 				</div>
@@ -113,7 +198,7 @@ function noticefunc() {
 					<a href="stay_detail_info_user?s_no=${list1.s_no }">숙소정보</a>
 				</div>
 				<div class="aa">
-					<a href="review_list_user?s_no=${list1.s_no }">후기</a>
+					<a href="review_list_user?s_no=${list1.s_no }&m_no=${m_no }">후기</a>
 				</div>
 			</div>
 		</c:forEach>
@@ -123,7 +208,7 @@ function noticefunc() {
 					<div class="bo3">
 						<div class="room1">
 
-							<img src="resources/upload/room/${listSDR[0].r_img1 }" alt="img"
+							<img src="resources/upload_img/admin/room/${listSDR[0].r_img1 }" alt="img"
 								class="image image4" />
 						</div>
 						<div class="room1TopR">
@@ -131,8 +216,15 @@ function noticefunc() {
 							<p class="accommodationBl">
 								가격: ${listSDR[0].r_price } 원 &nbsp&nbsp&nbsp&nbsp&nbsp<span>
 								
-								<button	class="button-24" role="button" onclick="noticefunc();">장바구니</button>
-								<a href="payment?m_no=1&s_no=${listS[0].s_no }&r_no=${listSDR[0].r_no }&checkindate=2023-05-05&checkoutdate=2023-05-08"><button	class="button-24" role="button">예약하기</button></a></span>
+								<button	class="button-24" role="button" onclick="sendParametersAndShowPopup0();">장바구니</button>
+								
+								<c:if test="${empty checkInDate || checkInDate eq null }">
+									<a href="payment?m_no=${m_no }&s_no=${listS[0].s_no }&r_no=${listSDR[0].r_no }"></c:if> 
+								<c:if test="${not empty checkInDate }">
+									<a href="payment?m_no=${m_no }&s_no=${listS[0].s_no }&r_no=${listSDR[0].r_no }&checkindate=${checkInDate }&checkoutdate=${checkOutDate }&personCount=${personCount }"></c:if> 
+								
+								
+								<button	class="button-24" role="button">예약하기</button></a></span>
 							</p>
 							<!-- 예약버튼 만들시에 보낼 파람값 -->
 							<!-- <a href="http://localhost:8090/travel/user/payment?m_no=1&s_no=1&r_no=1_2_3&checkindate=2023-05-05&checkoutdate=2023-05-08"><button>예약</button></a> -->
@@ -191,21 +283,21 @@ function noticefunc() {
 						<!-- Full-width images with number and caption text -->
 						<div class="mySlides fade">
 							<div class="numbertext">1 / 3</div>
-							<img src="resources/upload/room/${listSDR[0].r_img1 }"
+							<img src="resources/upload_img/admin/room/${listSDR[0].r_img1 }"
 								style="width: 100%">
 
 						</div>
 
 						<div class="mySlides fade">
 							<div class="numbertext">2 / 3</div>
-							<img src="resources/upload/room/${listSDR[0].r_img2 }"
+							<img src="resources/upload_img/admin/room/${listSDR[0].r_img2 }"
 								style="width: 100%">
 
 						</div>
 
 						<div class="mySlides fade">
 							<div class="numbertext">3 / 3</div>
-							<img src="resources/upload/room/${listSDR[0].r_img3 }"
+							<img src="resources/upload_img/admin/room/${listSDR[0].r_img3 }"
 								style="width: 100%">
 
 						</div>
@@ -231,15 +323,22 @@ function noticefunc() {
 					<div class="bo3">
 						<div class="room1">
 
-							<img src="resources/upload/room/${listSDR[1].r_img1 }" alt="img"
+							<img src="resources/upload_img/admin/room/${listSDR[1].r_img1 }" alt="img"
 								class="image image4" />
 						</div>
 						<div class="room1TopR">
 							<p class="accommodationName">객실명 : ${listSDR[1].r_name }</p>
 							<p class="accommodationBl">
 								가격: ${listSDR[1].r_price } 원 &nbsp&nbsp&nbsp&nbsp&nbsp <span>
-								<a href="cartInsert?m_no=1&s_no=${listS[0].s_no }&r_no=${listSDR[1].r_no }"><button	class="button-24" role="button onclick="noticefunc();">장바구니</button></a>
-									<a href="payment?m_no=1&s_no=${listS[0].s_no }&r_no=${listSDR[1].r_no }&checkindate=2023-05-05&checkoutdate=2023-05-08"><button	class="button-24" role="button">예약하기</button></a></span>
+								<button	class="button-24" role="button" onclick="sendParametersAndShowPopup1();">장바구니</button>
+								
+								
+									<c:if test="${empty checkInDate || checkInDate eq null }">
+										<a href="payment?m_no=${m_no }&s_no=${listS[0].s_no }&r_no=${listSDR[1].r_no }"></c:if> 
+									<c:if test="${not empty checkInDate }">
+										<a href="payment?m_no=${m_no }&s_no=${listS[0].s_no }&r_no=${listSDR[1].r_no }&checkindate=${checkInDate }&checkoutdate=${checkOutDate }&personCount=${personCount }"></c:if> 
+									
+									<button	class="button-24" role="button">예약하기</button></a></span>
 							</p>
 							<!-- 예약버튼 만들시에 보낼 파람값 -->
 							<!-- <a href="http://localhost:8090/travel/user/payment?m_no=1&s_no=1&r_no=1_2_3&checkindate=2023-05-05&checkoutdate=2023-05-08"><button>예약</button></a> -->
@@ -296,19 +395,19 @@ function noticefunc() {
 					<div class="slideshow-container12">
 						<div class="mySlides12 fade1">
 							<div class="numbertext">1 / 3</div>
-							<img src="resources/upload/room/${listSDR[1].r_img1 }"
+							<img src="resources/upload_img/admin/room/${listSDR[1].r_img1 }"
 								style="width: 100%">
 						</div>
 
 						<div class="mySlides12 fade1">
 							<div class="numbertext">2 / 3</div>
-							<img src="resources/upload/room/${listSDR[1].r_img2 }"
+							<img src="resources/upload_img/admin/room/${listSDR[1].r_img2 }"
 								style="width: 100%">
 						</div>
 
 						<div class="mySlides12 fade1">
 							<div class="numbertext">3 / 3</div>
-							<img src="resources/upload/room/${listSDR[1].r_img3 }"
+							<img src="resources/upload_img/admin/room/${listSDR[1].r_img3 }"
 								style="width: 100%">
 						</div>
 
@@ -336,15 +435,23 @@ function noticefunc() {
 					<div class="bo3">
 						<div class="room1">
 
-							<img src="resources/upload/room/${listSDR[2].r_img1 }" alt="img"
+							<img src="resources/upload_img/admin/room/${listSDR[2].r_img1 }" alt="img"
 								class="image image4" />
 						</div>
 						<div class="room1TopR">
 							<p class="accommodationName">객실명 : ${listSDR[2].r_name }</p>
 							<p class="accommodationBl">
 								가격: ${listSDR[2].r_price } 원 &nbsp&nbsp&nbsp&nbsp&nbsp <span>
-								<a href="cartInsert?m_no=1&s_no=${listS[0].s_no }&r_no=${listSDR[2].r_no }"><button	class="button-24" role="button onclick="noticefunc();">장바구니</button></a>
-									<a href="payment?m_no=1&s_no=${listS[0].s_no }&r_no=${listSDR[2].r_no }&checkindate=2023-05-05&checkoutdate=2023-05-08"><button	class="button-24" role="button">예약하기</button></a></span>
+							<button	class="button-24" role="button" onclick="sendParametersAndShowPopup2();">장바구니</button>
+								
+								<c:if test="${empty checkInDate || checkInDate eq null }">
+									<a href="payment?m_no=${m_no }&s_no=${listS[0].s_no }&r_no=${listSDR[2].r_no }"></c:if> 
+								<c:if test="${not empty checkInDate }">
+									<a href="payment?m_no=${m_no }&s_no=${listS[0].s_no }&r_no=${listSDR[2].r_no }&checkindate=${checkInDate }&checkoutdate=${checkOutDate }&personCount=${personCount }"></c:if> 
+									
+									
+									
+									<button	class="button-24" role="button">예약하기</button></a></span>
 							</p>
 							<!-- 예약버튼 만들시에 보낼 파람값 -->
 							<!-- <a href="http://localhost:8090/travel/user/payment?m_no=1&s_no=1&r_no=1_2_3&checkindate=2023-05-05&checkoutdate=2023-05-08"><button>예약</button></a> -->
@@ -401,19 +508,19 @@ function noticefunc() {
 					<div class="slideshow-container23">
 						<div class="mySlides23 fade">
 							<div class="numbertext">1 / 3</div>
-							<img src="resources/upload/room/${listSDR[2].r_img1 }"
+							<img src="resources/upload_img/admin/room/${listSDR[2].r_img1 }"
 								style="width: 100%">
 						</div>
 
 						<div class="mySlides23 fade">
 							<div class="numbertext">2 / 3</div>
-							<img src="resources/upload/room/${listSDR[2].r_img2 }"
+							<img src="resources/upload_img/admin/room/${listSDR[2].r_img2 }"
 								style="width: 100%">
 						</div>
 
 						<div class="mySlides23 fade">
 							<div class="numbertext">3 / 3</div>
-							<img src="resources/upload/room/${listSDR[2].r_img3 }"
+							<img src="resources/upload_img/admin/room/${listSDR[2].r_img3 }"
 								style="width: 100%">
 						</div>
 

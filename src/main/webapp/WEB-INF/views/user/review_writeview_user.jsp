@@ -34,7 +34,7 @@
 <body>
 
 	<form action="review_write_user" method="post" enctype="multipart/form-data">
-		<div class="container">
+		<div class="content">
 			<div class="a">
 				<div class="repl">후기 남기기</div>
 			</div>
@@ -70,9 +70,9 @@
 			<input type="hidden" name="m_no" value=${m_no } /> 
 			<input type="hidden" name="r_no" value=${r_no } /> 
 			<input type="hidden" name="s_no" value=${s_no } /> 
-			<input type="submit" value="submit" />
+			<input type="submit" value="저장" />
 	</form>
-	<a href="mypage_pay">취소</a>
+	<button class="button-24" role="button"><a href="mypage_pay">취소</a></button>
 	</div>
 </body>
 </html>

@@ -1,6 +1,7 @@
 package com.travel.service.user;
 
 import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -22,12 +23,49 @@ public class Service_Stay_List_User implements Interface_TravelService {
 	public void execute( Model model) {
 		System.out.println(">>>Service_Stay_List_User sign");
 
+		Map<String, Object> map=model.asMap();
+		HttpServletRequest request= (HttpServletRequest) map.get("request");
+		
+		String m_no=request.getParameter("m_no");
+		String s_loca=request.getParameter("s_loca");
+		String checkInDate =request.getParameter("checkInDate");
+		String checkOutDate =request.getParameter("checkOutDate");
+		String personCount =request.getParameter("personCount");
+		
+		 if (checkInDate==null || checkInDate=="" ){ checkInDate=""; }
+		 if (checkOutDate==null || checkOutDate=="" ){ checkOutDate=""; }
+		 if (personCount==null || personCount=="" ){ personCount="2"; }
+		
+		 System.out.println("11checkInDate"+checkInDate+"checkOutDate"+checkOutDate+"personCount"+personCount);
+		
+		  
+//		  DateTimeFormatter.ofPattern("yyyyMMdd"); LocalDate now = LocalDate.now();
+/*
+ * SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd"); String
+ * check_in_date=request.getParameter("check_in_date"); Date formatDate1 =
+ * newDtFormat.parse(check_in_date); if (formatDate1 == null) { formatDate1=
+ * now.plusDays(plus); } String
+ * check_out_date=request.getParameter("check_out_date");
+ */
+		 
+		
+		System.out.println("m_no :"+m_no+" s_loca :"+s_loca);
+		
 		IDao_Stay_user dao= sqlSession.getMapper(IDao_Stay_user.class);
-		ArrayList<DTO_StayDetail_user> dto=dao.sList();
+		ArrayList<DTO_StayDetail_user> dto=dao.sList(s_loca);
 		ArrayList<DTO_StayDetail_user> dtoSD=dao.sRList();
 		
 		int totalRCont=0;
-		totalRCont=dao.selectStayLlistTotCount();
+		totalRCont=dao.selectStayLlistTotCount(s_loca);
+		
+		System.out.println("22checkInDate"+checkInDate+"checkOutDate"+checkOutDate+"personCount"+personCount);
+		
+		model.addAttribute("m_no",m_no);
+		model.addAttribute("s_loca",s_loca);
+		
+		model.addAttribute("checkInDate",checkInDate);
+		model.addAttribute("checkOutDate",checkOutDate);
+		model.addAttribute("personCount",personCount);
 		
 		model.addAttribute("SLtotalRCont",totalRCont);
 		model.addAttribute("listS",dto);

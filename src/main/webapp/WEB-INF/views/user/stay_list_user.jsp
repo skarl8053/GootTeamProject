@@ -27,10 +27,38 @@
 		<div class="top_b">
 
 			<div class="tb2">
-				<div style="float: left; font-size: 40px; width: 600px; padding: 15px;">지역명</div>
+			    <c:if test="${s_loca eq '1' }">
+					<div style="float: left; font-size: 40px; width: 600px; padding: 15px;">서울</div>
+				</c:if>
+				<c:if test="${s_loca eq 2 }">
+					<div style="float: left; font-size: 40px; width: 600px; padding: 15px;">경기</div>
+				</c:if>
+				<c:if test="${s_loca eq 3 }">
+					<div style="float: left; font-size: 40px; width: 600px; padding: 15px;">인천</div>
+				</c:if>
+				<c:if test="${s_loca eq 4 }">
+					<div style="float: left; font-size: 40px; width: 600px; padding: 15px;">제주</div>
+				</c:if>
+				<c:if test="${s_loca eq 5 }">
+					<div style="float: left; font-size: 40px; width: 600px; padding: 15px;">전라</div>
+				</c:if>
+				<c:if test="${s_loca eq 6 }">
+					<div style="float: left; font-size: 40px; width: 600px; padding: 15px;">경상</div>
+				</c:if>
+				<c:if test="${s_loca eq 7 }">
+					<div style="float: left; font-size: 40px; width: 600px; padding: 15px;">충청</div>
+				</c:if>
+				<c:if test="${s_loca eq 8 }">
+					<div style="float: left; font-size: 40px; width: 600px; padding: 15px;">강원</div>
+				</c:if>
+				<c:if test="${s_loca eq null || s_loca eq '' }">
+					<div style="float: left; font-size: 40px; width: 600px; padding: 15px;">전국</div>
+				</c:if>
+				
 				<div
 					style="float: right; text-align: right; font-size: 20px; width: 600px;">
 				<!-- 	<a href="/k002test0808/">홈</a>>지역>지역 -->
+					
 				</div>
 			</div>
 			
@@ -40,16 +68,11 @@
   					<span id='result'><span id="selectedValues"></span>
  				</span>
 			</div>
-
-
-
 		</div>
-
 
 		<div class="left_b">
 
 			<div class="lb2">
-
 
 			</div>
 
@@ -58,7 +81,7 @@
 			<div class="lb3">
 
 			<section id="wrapper">
-				<div class="container">
+				<div class="containerAcco">
    					<ul class="accordion">
 				<form class="form" action="stay_list_search_user" method="post">
       					<li class="item">
@@ -140,6 +163,7 @@
 									<label for="party">파티</label> <br />
 								</div>
 							</li>
+							<submit type="hidden" name="s_loca" value="${s_loca ne null }"></submit>
 					<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
 				</form>
 						</ul>
@@ -155,7 +179,7 @@
 
 
 		<div class="right_b">
-			<div class="rb1"><a href="stay_list_link_user?scTop=rP">낮은가격순</a> | <a href="stay_list_link_user?scTop=hP">높은가격순</a> | <a href="stay_list_link_user?scTop=hR">고객평점순</a></div>
+			<div class="rb1"><a href="stay_list_link_user?scTop=rP&s_loca=${s_loca }&m_no=${m_no}">낮은가격순</a> | <a href="stay_list_link_user?scTop=hP&s_loca=${s_loca }&m_no=${m_no}">높은가격순</a> | <a href="stay_list_link_user?scTop=hR&s_loca=${s_loca }&m_no=${m_no}">고객평점순</a></div>
 
 
 			<!-- list -->
@@ -165,18 +189,31 @@
 					<div class="rbp">
 					
 					<a href="stay_detail_user?s_no=${list.s_no }">
-						<img src="resources/upload/stay/${list.s_img1 }" alt="호텔대표이미지">
+						<img src="resources/upload_img/admin/room/${list.s_img1 }" alt="호텔대표이미지">
 					</a>	
 					</div>
 					<div class="rbn">
-						<div class="rbn_l"> <a href="stay_detail_user?s_no=${list.s_no }">${list.s_name }  
+						<div class="rbn_l"> 
+								<c:if test="${empty checkInDate || checkInDate eq null }">
+							<a href="stay_detail_user?s_no=${list.s_no }&m_no=${m_no}"></c:if> 
+							 <c:if test="${not empty checkInDate }">
+							<a href="stay_detail_user?s_no=${list.s_no }&m_no=${m_no}&checkInDate=${checkInDate }&checkOutDate=${checkOutDate }&personCount=${personCount }"></c:if> 
+							${list.s_name }  
 						    <br /><br />
                             <span class="star"> <i class="fa-solid fa-star" ></i><i class="fa-solid fa-star" ></i><i class="fa-solid fa-star" ></i><i class="fa-solid fa-star" ></i><i class="fa-solid fa-star" ></i>
                                 
                                 <span id="star2_${list.s_no}" style="width: ${list.s_rate * 20}%;">
                                     <i class="fa-solid fa-star" ></i><i class="fa-solid fa-star" ></i><i class="fa-solid fa-star" ></i><i class="fa-solid fa-star" ></i><i class="fa-solid fa-star" ></i></span> 
                             <input type="range"  value="${list.s_rate}" step="1" min="1" max="5" oninput="callrating('${list.s_no}', this.value);">
-                             </span></a> </div>
+                             </span></a>
+                             
+                             
+                             
+                             
+                             
+                             
+                            
+                              </div>
 						
 						<div class="rbn_r">♡</div>
 					</div>

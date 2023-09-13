@@ -33,7 +33,13 @@ public class Service_Stay_CartInsert_User implements Interface_TravelService {
 		System.out.println("정보가 잘 들어오나"+m_no+s_no+r_no);
 		
 		IDao_Stay_user dao= sqlSession.getMapper(IDao_Stay_user.class);
-		dao.cartInsert(m_no,s_no,r_no);
+		
+		String chek_r_no=dao.cartCheck(m_no,r_no);
+		if (!r_no.equals(chek_r_no)) {
+			dao.cartInsert(m_no,s_no,r_no);
+		} 
+		
+		System.out.println("chek_r_no:"+chek_r_no+"r_no:"+r_no);
 		
 		model.addAttribute("s_no",s_no);
 	}

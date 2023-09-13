@@ -24,23 +24,24 @@
 </script>
 </head>
 <body onload="callrating();">
-	<a href="review_writeview_user?m_no=56&s_no=51&r_no=21">위치는 이동해야하지만 어쨋든 후기쓰기</a>
+	<a href="review_writeview_user?m_no=${m_no }&s_no=51&r_no=21">위치는 이동해야하지만 어쨋든 후기쓰기</a>
 	
 	<div class="tc">
-		<div  class="tcimg">
-			<img src="resources/upload/stay/${listS[0].s_img1 }" alt="호텔대표이미지">
-		</div>
-		<div class="tctext">
-			 ${listS[0].s_name } 여기에다가 이미지랑
-		</div>
-		 
-	</div>
-	
-	<div class="container">
 		<div class="a">
 			<div class="aa"><a href="stay_detail_user?s_no=${s_no }">객실</a></div>
 			<div class="aa"><a href="stay_detail_info_user?s_no=${s_no }">숙소정보</a></div>
 			<div class="aa">후기</div>
+		</div>
+		
+		 
+	</div>
+	
+	<div class="total">
+		<div  class="tcimg">
+			<img src="resources/upload_img/admin/room/${listS[0].s_img1 }" alt="호텔대표이미지">
+		</div>
+		<div class="tctext">
+			 ${listS[0].s_name } 
 		</div>
 		<div class="b">
 			<div class="repl">후기(${totalRCont })</div>
@@ -83,7 +84,7 @@
 
 	<!-- 평점 -->
 	<c:forEach items="${rlist}" var="dto">
-    <div class="container">
+    <div class="total">
         <div class="d">
             <div class="dt">
             
@@ -94,19 +95,22 @@
                         value="${dto.review_rate}" step="1" min="1" max="5" oninput="callrating('${dto.review_no}', this.value);">
                 </span>
             </div>
-            <div class="dl">이메일 : ${dto.m_no }&nbsp;&nbsp;&nbsp;&nbsp;
+            <div class="dl">아이디 : ${dto.m_no }&nbsp;&nbsp;&nbsp;&nbsp;
                 / 등록일 : ${dto.review_date }</div>
             <div class="dr">
             
-          <!--   0905 좋아요 수정 -->
+          <!--  좋아요 -->
           
-                <a href="review_user_like?review_no=${dto.review_no }&s_no=${s_no }&m_no=1"> <input type="image" name="button" src="resources/img/user/review/reviewLikeIcon.png" width="30px"></a>
+                <a href="review_user_like?review_no=${dto.review_no }&s_no=${s_no }&m_no=${m_no }"> <input type="image" name="button" src="resources/img/user/review/reviewLikeIcon.png" width="30px"></a>
                 ${dto.likes }
-                <a href="review_report?review_no=${dto.review_no }"><input type="image" name="button" src="resources/img/user/review/reviewAlertIcon.png" width="30px"></a>
+                <a href="review_report?review_no=${dto.review_no }">
+                <input type="image" name="button" src="resources/img/user/review/reviewAlertIcon.png" width="30px">
+               
+                </a>
                <%-- 합칠때 변경해야함  <a href="locallhost:8090/travel/user?review_no=${dto.review_no }"><input type="button" value="신고"></a> --%>
             </div>
             <div class="db">
-                <textarea name="" id="review_content" cols="156" rows="2">${dto.review_content }::::${dto.review_rate*20}%</textarea>
+                <textarea name="" id="review_content" cols="156" rows="2">${dto.review_content }</textarea>
             </div>
         </div>
         <c:if test="${dto.photo_url ne null }">

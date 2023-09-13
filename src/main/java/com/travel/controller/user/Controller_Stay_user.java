@@ -27,7 +27,8 @@ public class Controller_Stay_user {
 	
 		
 	@RequestMapping("/stay_list_user")
-	public String stay_list_user(Model model) {
+	public String stay_list_user(HttpServletRequest request, Model model) {
+		model.addAttribute("request",request);
 		
 		service = new Service_Stay_List_User(sqlSession);
 		service.execute(model);
@@ -35,7 +36,9 @@ public class Controller_Stay_user {
 		return "user/stay_list_user";
 	}
 
-	@RequestMapping(value="/stay_list_search_user", method=RequestMethod.POST)
+
+	/* @RequestMapping(value="/stay_list_search_user", method=RequestMethod.POST) */
+	@RequestMapping("/stay_list_search_user")
 	public String stay_list_search_user(HttpServletRequest request, Model model) {
 		
 		model.addAttribute("request",request);

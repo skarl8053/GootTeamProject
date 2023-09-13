@@ -6,7 +6,7 @@
 	
 	<select id="sList" resultType="com.travel.dto.user.DTO_StayDetail_user">
 		
-		SELECT * FROM TMSTSTAY
+		SELECT * FROM TMSTSTAY WHERE S_LOCA=#{param1}
 	</select>
 	
 	<select id="sRList" resultType="com.travel.dto.user.DTO_StayDetail_user">
@@ -35,39 +35,77 @@
 		
 	</sql>
 	
-	
 	<select id="sListTscRP" resultType="com.travel.dto.user.DTO_StayDetail_user">
-
-	SELECT DISTINCT TS.S_NO, TS.S_NAME, TS.S_IMG1, TS.S_RATE, TS.S_LOCA,TR.R_PRICE
+	SELECT DISTINCT TS.S_NO, TS.S_NAME, TS.S_IMG1, TS.S_RATE,
+	TR.R_PRICE
 	FROM TMSTSTAY TS
-	 INNER JOIN TMSTROOM TR ON TS.S_NO = TR.S_NO
-	 WHERE TR.R_PRICE = (
-	  SELECT MIN(R_PRICE)
-	  	FROM TMSTROOM
-	  		WHERE S_NO = TS.S_NO)
-				AND S_LOCA LIKE '%%'
-	ORDER BY TR.R_PRICE
+	INNER JOIN TMSTROOM TR ON TS.S_NO = TR.S_NO
+	WHERE TR.R_PRICE = (
+	SELECT
+	MIN(R_PRICE)
+	FROM
+	TMSTROOM
+	WHERE
+	S_NO = TS.S_NO
+	)
+
+	 		 <if test="s_loca == null or s_loca == ''">
+             AND S_LOCA LIKE '%%'
+            </if> 
+            <if test="s_loca != null and s_loca != ''">
+             AND S_LOCA LIKE '%' || #{s_loca} || '%'
+            </if>  		
+	ORDER BY
+	TR.R_PRICE
+
 	</select>
 	
 	<select id="sListTscHP" resultType="com.travel.dto.user.DTO_StayDetail_user">
 
-	SELECT DISTINCT TS.S_NO, TS.S_NAME, TS.S_IMG1, TS.S_RATE, TS.S_LOCA,TR.R_PRICE
+	SELECT DISTINCT TS.S_NO, TS.S_NAME, TS.S_IMG1, TS.S_RATE,
+	TR.R_PRICE
 	FROM TMSTSTAY TS
-	 INNER JOIN TMSTROOM TR ON TS.S_NO = TR.S_NO
-	 WHERE TR.R_PRICE = (
-	  SELECT MAX(R_PRICE)
-	  	FROM TMSTROOM
-	  		WHERE S_NO = TS.S_NO)
-				AND S_LOCA LIKE '%%'
+	INNER JOIN TMSTROOM TR ON TS.S_NO = TR.S_NO
+	WHERE TR.R_PRICE = (
+	SELECT
+	MIN(R_PRICE)
+	FROM
+	TMSTROOM
+	WHERE
+	S_NO = TS.S_NO
+	)
+
+	  		<if test="s_loca == null or s_loca == ''">
+             AND S_LOCA LIKE '%%'
+            </if> 
+            <if test="s_loca != null and s_loca != ''">
+             AND S_LOCA LIKE '%' || #{s_loca} || '%'
+            </if>  		
 	ORDER BY TR.R_PRICE DESC
 	</select>
 	
 	<select id="sListTscHR" resultType="com.travel.dto.user.DTO_StayDetail_user">
-     SELECT * FROM TMSTSTAY WHERE S_LOCA LIKE '%%' ORDER BY NVL(S_RATE,0) DESC
+     SELECT * FROM TMSTSTAY WHERE S_LOCA LIKE 
+     
+    		 <if test="s_loca == null or s_loca == ''">
+             '%%'
+            </if> 
+            <if test="s_loca != null and s_loca != ''">
+             '%' || #{s_loca} || '%'
+            </if>  		
+     ORDER BY NVL(S_RATE,0) DESC
 	</select>
 	
 	<select id="selectStayLlistTotCount" resultType="int">
 		SELECT COUNT(S_NO) FROM TMSTSTAY 
+			WHERE S_LOCA LIKE 
+     
+    		 <if test="s_loca == null or s_loca == ''">
+             '%%'
+            </if> 
+            <if test="s_loca != null and s_loca != ''">
+             '%' || #{s_loca} || '%'
+            </if>  		
 	</select>
 	
 	<select id="selectStayLlistSCTotCount" resultType="int">
@@ -139,7 +177,15 @@
 	SELECT MIN(R_PRICE)
 	FROM TMSTROOM
 	WHERE S_NO = TS.S_NO)
-	AND S_LOCA LIKE '%%'
+	AND S_LOCA LIKE 
+	
+	 		<if test="s_loca == null or s_loca == ''">
+             '%%'
+            </if> 
+            <if test="s_loca != null and s_loca != ''">
+             '%' || #{s_loca} || '%'
+            </if>  		
+	
 	ORDER BY TR.R_PRICE
 	</select>
 	
@@ -152,12 +198,29 @@
 	SELECT MAX(R_PRICE)
 	FROM TMSTROOM
 	WHERE S_NO = TS.S_NO)
-	AND S_LOCA LIKE '%%'
+	AND S_LOCA LIKE 
+	
+	 		<if test="s_loca == null or s_loca == ''">
+             '%%'
+            </if> 
+            <if test="s_loca != null and s_loca != ''">
+             '%' || #{s_loca} || '%'
+            </if>  		
+            
 	ORDER BY TR.R_PRICE DESC
 	</select>
 	
 	<select id="selectStayLlistHRTotCount" resultType="int">
-     SELECT COUNT(DISTINCT S_NO) FROM TMSTSTAY WHERE S_LOCA LIKE '%%' ORDER BY NVL(S_RATE,0) DESC
+     SELECT COUNT(DISTINCT S_NO) FROM TMSTSTAY WHERE S_LOCA LIKE 
+     
+	 		<if test="s_loca == null or s_loca == ''">
+             '%%'
+            </if> 
+            <if test="s_loca != null and s_loca != ''">
+             '%' || #{s_loca} || '%'
+            </if>  		
+     
+     ORDER BY NVL(S_RATE,0) DESC
 	</select>
 	
 	
@@ -236,6 +299,11 @@
 	<select id="sDRList" resultType="com.travel.dto.user.DTO_StayDetail_user">
 		SELECT * FROM TMSTROOM WHERE S_NO=#{param1}
 	</select>
+	
+	<select id="cartCheck" resultType="String">
+		SELECT R_NO FROM THISCART WHERE M_NO=#{param1} AND R_NO=#{param2}
+	</select>
+	
 	
 	<insert id="cartInsert">
 		
