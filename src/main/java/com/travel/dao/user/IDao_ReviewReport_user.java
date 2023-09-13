@@ -8,4 +8,6 @@ public interface IDao_ReviewReport_user {
 
 	public void reviewReport_update(int review_no, int new_report_no);
 
+	public int reportCheck(String review_no);
+
 }

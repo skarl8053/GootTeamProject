@@ -9,7 +9,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.travel.service.admin.Interface_TravelService;
-import com.travel.service.user.ReviewReport_Insert_Service;
+import com.travel.service.user.Service_ReviewReport_Insert_user;
+import com.travel.service.user.Service_ReviewReport_Select_user;
 
 @Controller
 @RequestMapping("user")
@@ -21,7 +22,13 @@ public class Controller_ReviewReport_user {
 	
 	@RequestMapping(value="report")
 	public String report(HttpServletRequest request, Model model) {
-		return "user/report_insertform_admin";
+		
+		model.addAttribute("request", request);
+		
+		Service_ReviewReport_Select_user serv = new Service_ReviewReport_Select_user(sqlSession);
+		String returnUrl = serv.execute(model);
+		
+		return returnUrl;
 	}
 	
 	@RequestMapping(value="reportinsert")
@@ -33,14 +40,16 @@ public class Controller_ReviewReport_user {
 		//		int report_type = Integer.parseInt(request.getParameter("report_type"));
 		//		String report_content = request.getParameter("report_content");
 		
+		String m_no = request.getParameter("m_no");
+		String s_no = request.getParameter("s_no");
 		
 		model.addAttribute("request", request);
 		
-		service = new ReviewReport_Insert_Service(sqlSession);
+		service = new Service_ReviewReport_Insert_user(sqlSession);
 		service.execute(model);
 		
 		// 변경할 것
-		return "";
+		return "redirect:review_list_user?m_no=" + m_no + "&s_no="+ s_no;
 	}
 	
 }
