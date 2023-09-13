@@ -64,5 +64,8 @@
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jetbrains/kotlinx/kotlinx-serialization-json-jvm/1.4.1/kotlinx-serialization-json-jvm-1.4.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/org/jetbrains/kotlinx/kotlinx-serialization-core-jvm/1.4.1/kotlinx-serialization-core-jvm-1.4.1.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="VARJAR" id="M2_REPO/com/jakewharton/retrofit/retrofit2-kotlinx-serialization-converter/0.8.0/retrofit2-kotlinx-serialization-converter-0.8.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-databind/2.9.2/jackson-databind-2.9.2.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-annotations/2.9.0/jackson-annotations-2.9.0.jar" enabled="true" runInBatchMode="false"/>
+    <factorypathentry kind="VARJAR" id="M2_REPO/com/fasterxml/jackson/core/jackson-core/2.9.2/jackson-core-2.9.2.jar" enabled="true" runInBatchMode="false"/>
     <factorypathentry kind="PLUGIN" id="org.eclipse.jst.ws.annotations.core" enabled="true" runInBatchMode="false"/>
 </factorypath>

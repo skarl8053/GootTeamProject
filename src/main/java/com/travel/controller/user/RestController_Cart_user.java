@@ -2,6 +2,7 @@ package com.travel.controller.user;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -49,7 +50,7 @@ public class RestController_Cart_user {
 	        BufferedReader br = new BufferedReader(new InputStreamReader(process.getInputStream(),"UTF-8"));
 
 	        String readText = "";
-	        int[] s_no_list = new int[5];
+	        List<Integer> s_no_list = new ArrayList<Integer>();
 	        
 	        int index = 0;
 	        
@@ -57,9 +58,10 @@ public class RestController_Cart_user {
 	        	if(index == 5) {
 	        		break;
 	        	}
-	        	// indexof + substring
-	        	s_no_list[index] = Integer.parseInt(readText.replace(" ", "").substring(1));
-	        	index++;
+	        	
+	        	s_no_list.add(Integer.parseInt(readText.substring(readText.lastIndexOf(" ") + 1)));
+	        	
+	        	index++; 
 	        }
 	        
 	        List<DTO_Cart_user> list = dao.selectRecomendList(s_no_list);

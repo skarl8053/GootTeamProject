@@ -43,6 +43,7 @@
         #cart_list, #recomend_list, tr, td{
             border: 1px solid black;
             border-collapse: collapse;
+            font-size: 20px;
         }
 
 		#recomend_list tbody img{
@@ -82,6 +83,11 @@
             display: none;
             visibility: collapse;
         }
+        
+        #recommend_field{
+        	display: none;
+        }
+        
         .button{
 		     background-color: #011343;
 		     color: #EBD01C;
@@ -105,16 +111,16 @@
 					type:"post",
 					url:"cart_sim?s_no=" + s_no,
 					success:function(result){
-						console.log("aaaa");
+						
+						
 						var img_path = "resources/upload_img/admin/stay/"
-
+						var link_path = "stay_detail_user?s_no=";
+						
 						for(i=0; i<5; i++){
 							
-							// 추천 숙소번호 넣기
-							$('#recomend_no' + (i+1)).innerHTML(result[i].s_no);
-
 							// 추천 숙소 이미지 넣기
 							$('#recomend_img' + (i+1)).attr("src", img_path + result[i].s_img1);
+							$('#recommend_link' + (i+1)).attr("href", link_path + result[i].s_no);
 							
 						}
 					}
@@ -135,6 +141,7 @@
             
             simfunc(element, s_no);
             
+            $("#recommend_field").css("display", "block");
         }
 
         function paymentCheck(){
@@ -239,48 +246,44 @@
 			    	 		<br /><br /><br />
 		    	 		</div>
 		    	 	</c:if>
-					<div>
+					<div id="recommend_field">
 						<hr>
 						<br>
 						<h3>이런 숙소들도 장바구니에 담아보세요!!</h3>
 						<table id="recomend_list">
 							<thead>
 								<tr>
-									<td>추천1</td>
-									<td>추천2</td>
-									<td>추천3</td>
-									<td>추천4</td>
-									<td>추천5</td>
+									<td>추천 숙소 1</td>
+									<td>추천 숙소 2</td>
+									<td>추천 숙소 3</td>
+									<td>추천 숙소 4</td>
+									<td>추천 숙소 5</td>
 								</tr>
 							</thead>
 							<tbody>
 								<tr>
 									<td>
-										<span id="recomend_no1" style="display:none"></span>
-										<img id="recomend_img1" src="" alt="">
+										<a id="recommend_link1" href=""><img id="recomend_img1" src="" alt=""></a>
 									</td>
 									<td>
-										<span id="recomend_no2" style="display:none"></span>
-										<img id="recomend_img2" src="" alt="">
+										<a id="recommend_link2" href=""><img id="recomend_img2" src="" alt=""></a>
 									</td>
 									<td>
-										<span id="recomend_no3" style="display:none"></span>
-										<img id="recomend_img3" src="" alt="">
+										<a id="recommend_link3" href=""><img id="recomend_img3" src="" alt=""></a>
 									</td>
 									<td>
-										<span id="recomend_no4" style="display:none"></span>
-										<img id="recomend_img4" src="" alt="">
+										<a id="recommend_link4" href=""><img id="recomend_img4" src="" alt=""></a>
 									</td>
 									<td>
-										<span id="recomend_no5" style="display:none"></span>
-										<img id="recomend_img5" src="" alt="">
+										<a id="recommend_link5" href=""><img id="recomend_img5" src="" alt=""></a>
 									</td>
 								</tr>
 							</tbody>
 							
 						</table>
 					</div>
-					<br>
+					<br><hr /><br />
+					
 		    	 	<span><input type="submit" class="button" value="결제 진행"></span>
 		    	 	&nbsp; &nbsp;
 		            <span><input type="button" class="button" value="선택내역 삭제" onclick="return cartDelete();"></span>

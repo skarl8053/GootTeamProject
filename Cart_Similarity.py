@@ -35,15 +35,13 @@ def get_recommendations_stay(title,cosine_sim_room=cosine_sim_room):
     
     return roomdf['S_NO'].iloc[room_indices_code];
 
-print(get_recommendations_stay(41));
-
-# def callsim(v4):
-#     btitle=get_recommendations_stay(v4)
+def callsim(v4):
+    btitle=get_recommendations_stay(v4)
     
-#     print(btitle)
-# def main(argv):
-#     #callsim(argv[1], argv[2])
-#     callsim(int(argv[1]))
+    print(btitle)
+def main(argv):
+    #callsim(argv[1], argv[2])
+    callsim(int(argv[1]))
     
-# if __name__ == "__main__":
-#     main(sys.argv)
+if __name__ == "__main__":
+    main(sys.argv)

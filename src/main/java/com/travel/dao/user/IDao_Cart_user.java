@@ -14,6 +14,6 @@ public interface IDao_Cart_user {
 
 	void deleteCartInfo(String m_no, String s_no);
 
-	List<DTO_Cart_user> selectRecomendList(int[] s_no_list);
+	List<DTO_Cart_user> selectRecomendList(List<Integer> s_no_list);
 	
 }

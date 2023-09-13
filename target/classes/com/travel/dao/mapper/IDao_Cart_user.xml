@@ -47,7 +47,7 @@
 						,S_IMG1 
 			FROM   	TMSTSTAY
 			WHERE  S_NO IN
-			<foreach collection="array" item="s_no_list" index="index" open="(" separator="," close=")">
+			<foreach collection="list" item="s_no_list" index="index" open="(" separator="," close=")">
 			 	#{s_no_list.value}
 			</foreach>
 			ORDER BY S_NO
