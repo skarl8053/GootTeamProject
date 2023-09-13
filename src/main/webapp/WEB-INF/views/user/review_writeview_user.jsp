@@ -27,13 +27,42 @@
 </script>
 
 <link rel="stylesheet" href="/travel/resources/css/user/reviewTReg_user.css" />
+<script>
 
+        function reviewCheck()
+        {
+            // 후기 내용을 모두 작성했는지 확인
+
+            var review_content = document.getElementById("review_text").value;
+
+            if(review_content.length < 1)
+            {
+                alert("후기 내용을 입력해주세요");
+                return false;
+            }
+
+            if(review_content.length > 175)
+            {
+                alert("후기 내용은 175자를 넘을 수 없습니다.");
+                return false;
+            }
+            
+            var review_rate = document.getElementById("review_rate").value;
+            
+            if (review_rate.length < 1) {
+            	 alert("평점을 클릭해주세요");
+                 return false;
+			}
+           
+        }
+
+    </script>
 
 
 </head>
 <body>
 
-	<form action="review_write_user" method="post" enctype="multipart/form-data">
+	<form action="review_write_user" onsubmit="return reviewCheck()" method="post" enctype="multipart/form-data">
 		<div class="content">
 			<div class="a">
 				<div class="repl">후기 남기기</div>
@@ -50,7 +79,7 @@
 				<span class="star"> ★★★★★ <span>★★★★★</span> <input
 					type="range" onclick="reratinglist(this);" oninput="drawStar(this)"
 					value="1" step="1" min="1" max="5">
-				</span><input type="hidden" name="review_rate" value="" size="20" />
+				</span><input type="hidden" name="review_rate" id="review_rate" value="" size="20" />
 			</div>
 
 			<div class="d">

@@ -10,12 +10,14 @@
     font-weight: normal;
     font-style: normal;
 }
-#content{
-		  height: auto;
-		}
+#content {
+	height: auto;
+	font-family: 'GmarketSansMedium';
+}
 
 .total {
 	width: 1200px;
+	
    
 }
 .tc{

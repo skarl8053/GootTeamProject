@@ -24,6 +24,21 @@
 </script>
 </head>
 <body onload="callrating();">
+
+
+	<!-- 남기문 (신고 완료 / 이미 신고되었다는 메세지 띄워줌..) -->
+	
+	<!-- 메세지 -->
+	<c:if test="${msg != ''}">
+			
+		<script>
+			alert("${msg}");
+			location.replace("review_list_user?m_no=${m_no}&s_no=${s_no}");
+		</script>
+		
+	</c:if>
+
+
 	<a href="review_writeview_user?m_no=${m_no }&s_no=51&r_no=21">위치는 이동해야하지만 어쨋든 후기쓰기</a>
 	
 	<div class="tc">
@@ -99,11 +114,11 @@
                 / 등록일 : ${dto.review_date }</div>
             <div class="dr">
             
-          <!--  좋아요 -->
+          <!--  좋아요 --> 
           
                 <a href="review_user_like?review_no=${dto.review_no }&s_no=${s_no }&m_no=${m_no }"> <input type="image" name="button" src="resources/img/user/review/reviewLikeIcon.png" width="30px"></a>
                 ${dto.likes }
-                <a href="review_report?review_no=${dto.review_no }">
+                <a href="report?review_no=${dto.review_no }">
                 <input type="image" name="button" src="resources/img/user/review/reviewAlertIcon.png" width="30px">
                
                 </a>

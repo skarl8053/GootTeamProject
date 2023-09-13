@@ -93,9 +93,15 @@ private SqlSession sqlSession;
 		ArrayList<DTO_StayDetail_user> dto=daost.sDList(s_no);
 		
 		model.addAttribute("listS",dto);
-			
-		}
-	
 		
+		// 남기문 ( 메세지 관련)
+
+		if (request.getParameter("msg") == null || request.getParameter("msg").equals("")) {
+			model.addAttribute("msg", "");
+		} else {
+			model.addAttribute("msg", request.getParameter("msg"));
+		}
 
 	}
+
+}
