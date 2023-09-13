@@ -18,6 +18,8 @@ public class DTO_Event_admin {
 	private String event_flag_name;
 	private String event_startdate;
 	private String event_enddate;
+	private String event_intro;
+	private String event_content;
 	private String event_target;
 	private String event_caution;
 	private String filename;

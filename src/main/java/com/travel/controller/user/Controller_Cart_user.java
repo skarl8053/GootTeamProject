@@ -29,7 +29,7 @@ public class Controller_Cart_user {
 		service = new Service_Cart_Select_user(sqlSession);
 		service.execute(model);
 		
-		return "user/cart_form_user";
+		return "user/cart_form_user"; 
 	}
 	
 	@RequestMapping("cart_to_payment")

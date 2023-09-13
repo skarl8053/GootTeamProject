@@ -38,7 +38,7 @@ public class Service_Pushal_Select_user implements Interface_TravelService{
 		vo.setPage(currentPage);
 		vo.pageCalculate(dao.pageCalculate_pushal(m_no, searchType)); 
 		
-		List<DTO_pushal_user> list = dao.pushalpayment(m_no, searchType, vo.getRowStart(), vo.getRowEnd());
+		List<DTO_pushal_user> list = dao.pushalSelect(m_no, searchType, vo.getRowStart(), vo.getRowEnd());
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("list", list);

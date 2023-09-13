@@ -36,6 +36,8 @@ public class Service_Event_insert_admin implements Interface_TravelService {
 		String event_enddate = request.getParameter("event_enddate");
 		String event_flag = request.getParameter("event_flag");
 		
+		String event_intro = request.getParameter("event_intro");
+		String event_content = request.getParameter("event_content");
 		String event_target = request.getParameter("event_target");
 		String event_caution = request.getParameter("event_caution");
 		
@@ -45,7 +47,7 @@ public class Service_Event_insert_admin implements Interface_TravelService {
 		String filename = returnFileName("file", path);
 		String filename2 = returnFileName("file2", detailpath);
 		
-		dao.insertEvents(event_name, event_startdate, event_enddate, event_target, event_caution, filename, filename2, event_flag);
+		dao.insertEvents(event_name, event_startdate, event_enddate, event_intro, event_content, event_target, event_caution, filename, filename2, event_flag);
 		
 		model.addAttribute("msg", "이벤트가 등록되었습니다.");
 	}

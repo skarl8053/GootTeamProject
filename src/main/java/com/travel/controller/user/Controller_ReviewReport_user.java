@@ -21,7 +21,7 @@ public class Controller_ReviewReport_user {
 	
 	@RequestMapping(value="report")
 	public String report(HttpServletRequest request, Model model) {
-		return "user/review_insertform_admin";
+		return "user/report_insertform_admin";
 	}
 	
 	@RequestMapping(value="reportinsert")

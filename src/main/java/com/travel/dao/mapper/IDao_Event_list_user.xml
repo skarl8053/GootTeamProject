@@ -1,0 +1,229 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.travel.dao.user.IDao_Event_list_user">
+	
+	<select id="event_notice_pageCalculate" resultType="Integer">
+		<![CDATA[
+		SELECT  	COUNT(*)
+		FROM    TMSTEVENT A 
+		WHERE
+	    (
+	        ( #{param1} = 1 )
+		    OR      ( #{param1} = 2 AND SYSDATE < A.EVENT_STARTDATE)
+		    OR      ( #{param1} = 3 AND SYSDATE BETWEEN A.EVENT_STARTDATE AND A.EVENT_ENDDATE + 1)
+		    OR      ( #{param1} = 4 AND SYSDATE > A.EVENT_ENDDATE + 1)
+	    )
+		AND LOWER(A.EVENT_NAME) LIKE '%' || LOWER(#{param2}) || '%'      
+		]]>
+	</select>
+	
+	<select id="event_list" resultType="com.travel.dto.user.DTO_Event_List_user">
+		<![CDATA[
+		SELECT  	A.EVENT_NO 
+			        ,A.EVENT_NAME
+			        ,A.EVENT_FLAG_NUM
+			        ,A.EVENT_FLAG_NAME
+			        ,A.FILENAME2
+			        ,A.EVENT_STARTDATE
+			        ,A.EVENT_ENDDATE
+			        ,(
+			        	CASE WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') > A.EVENT_ENDDATE THEN 'Y'
+			        			ELSE 'N' END					
+					) AS CHECK_WINNER_DATE
+		FROM
+		(
+			SELECT 	A.ROW_NUM
+						,A.EVENT_NAME
+						,A.EVENT_NO
+						,A.EVENT_STARTDATE
+						,A.EVENT_ENDDATE
+						,A.EVENT_FLAG_NUM
+						,A.FILENAME2
+						,B.CODENAME AS EVENT_FLAG_NAME
+			FROM
+			(
+			    	SELECT  	ROW_NUMBER() OVER(ORDER BY EVENT_STARTDATE DESC, EVENT_NO ASC) ROW_NUM
+			            		,A.EVENT_NO 
+					            ,A.EVENT_NAME
+					            ,A.FILENAME2
+					            ,(
+	                                CASE WHEN TO_CHAR(SYSDATE,'yyyy-MM-dd') < TO_CHAR(A.EVENT_STARTDATE, 'yyyy-MM-dd') THEN 1
+		                                    WHEN TO_CHAR(SYSDATE,'yyyy-MM-dd') > TO_CHAR(A.EVENT_ENDDATE, 'yyyy-MM-dd') THEN 3
+		                                    ELSE 2 END
+	                             ) AS EVENT_FLAG_NUM
+					            ,TO_CHAR(A.EVENT_STARTDATE, 'yyyy-MM-dd') AS EVENT_STARTDATE
+					            ,TO_CHAR(A.EVENT_ENDDATE, 'yyyy-MM-dd') AS EVENT_ENDDATE
+					FROM    TMSTEVENT A
+				    WHERE
+				    (
+				        ( #{param1} = 1 )
+					    OR      ( #{param1} = 2 AND SYSDATE < A.EVENT_STARTDATE)
+					    OR      ( #{param1} = 3 AND SYSDATE BETWEEN A.EVENT_STARTDATE AND A.EVENT_ENDDATE + 1)
+					    OR      ( #{param1} = 4 AND SYSDATE > A.EVENT_ENDDATE + 1)
+				    )
+				    AND LOWER(A.EVENT_NAME) LIKE '%' || LOWER(#{param2}) || '%'
+				    ORDER BY A.EVENT_STARTDATE DESC, EVENT_NO ASC
+		    )A LEFT JOIN TMSTCODE B 	ON 	B.GRPCODE 				= 11
+													AND 	A.EVENT_FLAG_NUM 	= B.CODE
+		)A
+		WHERE A.ROW_NUM BETWEEN #{param3} AND #{param4}
+		]]>
+	</select>
+	
+	<!-- 이벤트 중복 체크 -->
+	<select id="check_event" resultType="Integer">
+		SELECT COUNT(*) 
+		FROM THISATTEND 
+		WHERE EVENT_NO = #{param1} AND M_NO = #{param2}
+	</select>
+	
+	<!-- 이벤트 참가 -->
+	<insert id="event_attend" parameterType="com.travel.dto.user.DTO_Event_List_user">
+		INSERT INTO THISATTEND (
+		EVENT_NO, M_NO
+		) VALUES (
+		#{param1}, #{param2}
+		)
+	</insert>
+	
+	<!-- 진행 중인 이벤트 이미지 가져오기 -->
+	<select id="ongoing_event_img" resultType="com.travel.dto.user.DTO_Event_List_user">
+		SELECT FILENAME
+		FROM TMSTEVENT
+	</select>
+	
+	<!-- 진행 중인 이벤트 번호 가져오기 -->
+	<select id="ongoing_event_no" resultType="com.travel.dto.user.DTO_Event_List_user">
+		SELECT EVENT_NO
+		FROM TMSTEVENT
+	</select>
+	
+	<!-- 가장 최근 이벤트 정보 가져오기 -->
+	<select id="event_page" resultType="com.travel.dto.user.DTO_Event_List_user">
+		<![CDATA[
+		SELECT
+	    A.EVENT_NO,
+	    A.EVENT_NAME,
+	    TO_CHAR(A.EVENT_STARTDATE, 'YYYY-MM-DD') AS EVENT_STARTDATE,
+	    TO_CHAR(A.EVENT_ENDDATE, 'YYYY-MM-DD') AS EVENT_ENDDATE,
+	    A.EVENT_TARGET,
+	    A.EVENT_CAUTION,
+	    A.FILENAME2,
+	    B.ITEM_NAME,
+	    C.ITEM_NAME AS ITEM_NAME_1,
+	    D.ITEM_NAME AS ITEM_NAME_2,
+	    CASE
+	        WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') < TO_CHAR(A.EVENT_STARTDATE, 'yyyy-MM-dd') THEN 1
+	        WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') > TO_CHAR(A.EVENT_ENDDATE, 'yyyy-MM-dd') THEN 3
+	        ELSE 2
+	    END AS EVENT_STATUS
+		FROM
+		    TMSTEVENT A
+		LEFT JOIN
+		    TMSTITEM B ON B.ITEM_NO = 1 AND A.EVENT_NO = B.EVENT_NO
+		LEFT JOIN
+		    TMSTITEM C ON C.ITEM_NO = 2 AND A.EVENT_NO = C.EVENT_NO
+		LEFT JOIN
+		    TMSTITEM D ON D.ITEM_NO = 3 AND A.EVENT_NO = D.EVENT_NO
+		WHERE
+		    A.EVENT_NO = (SELECT MAX(EVENT_NO) FROM TMSTEVENT)
+	    ]]>
+	</select>
+	
+	<select id="event_page2" resultType="com.travel.dto.user.DTO_Event_List_user">
+		<![CDATA[
+		SELECT
+	    A.EVENT_NO,
+	    A.EVENT_NAME,
+	    TO_CHAR(A.EVENT_STARTDATE, 'YYYY-MM-DD') AS EVENT_STARTDATE,
+	    TO_CHAR(A.EVENT_ENDDATE, 'YYYY-MM-DD') AS EVENT_ENDDATE,
+	    A.EVENT_TARGET,
+	    A.EVENT_CAUTION,
+	    A.FILENAME2,
+	    B.ITEM_NAME,
+	    C.ITEM_NAME AS ITEM_NAME_1,
+	    D.ITEM_NAME AS ITEM_NAME_2,
+	    CASE
+	        WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') < TO_CHAR(A.EVENT_STARTDATE, 'yyyy-MM-dd') THEN 1
+	        WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') > TO_CHAR(A.EVENT_ENDDATE, 'yyyy-MM-dd') THEN 3
+	        ELSE 2
+	    END AS EVENT_STATUS
+		FROM
+		    TMSTEVENT A
+		LEFT JOIN
+		    TMSTITEM B ON B.ITEM_NO = 1 AND A.EVENT_NO = B.EVENT_NO
+		LEFT JOIN
+		    TMSTITEM C ON C.ITEM_NO = 2 AND A.EVENT_NO = C.EVENT_NO
+		LEFT JOIN
+		    TMSTITEM D ON D.ITEM_NO = 3 AND A.EVENT_NO = D.EVENT_NO
+		WHERE
+		    A.EVENT_NO = (SELECT MAX(EVENT_NO)-1 FROM TMSTEVENT)
+	    ]]>
+	</select>
+	
+	<select id="event_page3" resultType="com.travel.dto.user.DTO_Event_List_user">
+		<![CDATA[
+		SELECT
+	    A.EVENT_NO,
+	    A.EVENT_NAME,
+	    TO_CHAR(A.EVENT_STARTDATE, 'YYYY-MM-DD') AS EVENT_STARTDATE,
+	    TO_CHAR(A.EVENT_ENDDATE, 'YYYY-MM-DD') AS EVENT_ENDDATE,
+	    A.EVENT_TARGET,
+	    A.EVENT_CAUTION,
+	    A.FILENAME2,
+	    B.ITEM_NAME,
+	    C.ITEM_NAME AS ITEM_NAME_1,
+	    D.ITEM_NAME AS ITEM_NAME_2,
+	    CASE
+	        WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') < TO_CHAR(A.EVENT_STARTDATE, 'yyyy-MM-dd') THEN 1
+	        WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') > TO_CHAR(A.EVENT_ENDDATE, 'yyyy-MM-dd') THEN 3
+	        ELSE 2
+	    END AS EVENT_STATUS
+		FROM
+		    TMSTEVENT A
+		LEFT JOIN
+		    TMSTITEM B ON B.ITEM_NO = 1 AND A.EVENT_NO = B.EVENT_NO
+		LEFT JOIN
+		    TMSTITEM C ON C.ITEM_NO = 2 AND A.EVENT_NO = C.EVENT_NO
+		LEFT JOIN
+		    TMSTITEM D ON D.ITEM_NO = 3 AND A.EVENT_NO = D.EVENT_NO
+		WHERE
+		    A.EVENT_NO = (SELECT MAX(EVENT_NO)-2 FROM TMSTEVENT)
+	    ]]>
+	</select>
+	
+	<select id="event_page4" resultType="com.travel.dto.user.DTO_Event_List_user">
+		<![CDATA[
+		SELECT
+	    A.EVENT_NO,
+	    A.EVENT_NAME,
+	    TO_CHAR(A.EVENT_STARTDATE, 'YYYY-MM-DD') AS EVENT_STARTDATE,
+	    TO_CHAR(A.EVENT_ENDDATE, 'YYYY-MM-DD') AS EVENT_ENDDATE,
+	    A.EVENT_TARGET,
+	    A.EVENT_CAUTION,
+	    A.FILENAME2,
+	    B.ITEM_NAME,
+	    C.ITEM_NAME AS ITEM_NAME_1,
+	    D.ITEM_NAME AS ITEM_NAME_2,
+	    CASE
+	        WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') < TO_CHAR(A.EVENT_STARTDATE, 'yyyy-MM-dd') THEN 1
+	        WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') > TO_CHAR(A.EVENT_ENDDATE, 'yyyy-MM-dd') THEN 3
+	        ELSE 2
+	    END AS EVENT_STATUS
+		FROM
+		    TMSTEVENT A
+		LEFT JOIN
+		    TMSTITEM B ON B.ITEM_NO = 1 AND A.EVENT_NO = B.EVENT_NO
+		LEFT JOIN
+		    TMSTITEM C ON C.ITEM_NO = 2 AND A.EVENT_NO = C.EVENT_NO
+		LEFT JOIN
+		    TMSTITEM D ON D.ITEM_NO = 3 AND A.EVENT_NO = D.EVENT_NO
+		WHERE
+		    A.EVENT_NO = (SELECT MAX(EVENT_NO)-3 FROM TMSTEVENT)
+	    ]]>
+	</select>
+	
+	
+</mapper>

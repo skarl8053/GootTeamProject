@@ -23,7 +23,6 @@
 		function stayDelete(s_name) {
 	        if (confirm(s_name+" 숙소를 삭제하시겠습니까?")) {
 	        	return true;
-	        	
 	        } else {
 	        	return false;
 	        }	

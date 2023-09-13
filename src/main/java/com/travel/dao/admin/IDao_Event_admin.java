@@ -13,7 +13,7 @@ public interface IDao_Event_admin {
 
 	public void deleteEvents(Map<String, Object> event_no);
 
-	public void insertEvents(String event_name, String event_startdate, String event_enddate, String event_target, String event_caution, String filename, String filename2, String event_flag);
+	public void insertEvents(String event_name, String event_startdate, String event_enddate, String event_intro, String event_content, String event_target, String event_caution, String filename, String filename2, String event_flag);
 
 	public List<String> selectFiles(Map<String, Object> mp);
 

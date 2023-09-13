@@ -33,17 +33,17 @@ public class Service_Stay_list_admin implements Interface_TravelService {
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 
 		// 검색 결과 유지 과정
-		int currentPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
+		int currentPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1; 
 
 		int location = request.getParameter("location") != null ? Integer.parseInt(request.getParameter("location")) : 0;
 		int type = request.getParameter("type") != null ? Integer.parseInt(request.getParameter("type")) : 0;
-
+		
 		SearchVO vo = new SearchVO();
 		vo.setPage(currentPage);
 		vo.pageCalculate(dao.pageCalculate(location, type));
-
+		
 		List<DTO_Stay_admin> list = dao.list(vo.getRowStart(), vo.getRowEnd(), location, type);
-
+		
 		model.addAttribute("vo", vo);
 		model.addAttribute("list", list);
 		model.addAttribute("location", location);

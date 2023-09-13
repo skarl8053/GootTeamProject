@@ -25,11 +25,27 @@
             
         }
         #form{
+        	width: 1200px;
         	font-size: 20px;
         }
-		textarea{
+        #report_type{
+        	width: 200px;
+        	height: 30px;
+        }
+		#report_content{
+			width: 99%;
+			height: 200px;
 			resize: none;
+			font-size: 20px;
 		}
+		.button{
+            background-color:  #011343;
+            color: #EBD01C;
+            border-radius: 3px;
+            width: 100px;
+            height: 32px;
+            cursor: pointer;
+        }
 	</style>
 	
 </head>
@@ -51,7 +67,7 @@
 
             if(report_content.length > 1000)
             {
-                alert("내용은 1000자를 넘을 수 없습니다.");
+                alert("신고 내용은 1000자를 넘을 수 없습니다.");
                 return false;
             }
 
@@ -99,7 +115,7 @@
             </div>
             <div>
                 <br>
-                <input type="submit" value="신고">
+                <input type="submit" class="button" value="신고">
             </div>
         </form>
     </div>
