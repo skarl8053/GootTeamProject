@@ -239,40 +239,40 @@
                     <li class="menu-bar"><a href="#">지역</a>
                         <ul>
                             <li>    
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=1');">서울</button>
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=2');">경기</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_user?m_no=${sessionScope.m_no}&s_loca=1');">서울</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_user?m_no=${sessionScope.m_no}&s_loca=2');">경기</button>
                             </li>
                             <li>    
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=3');">인천</button>
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=4');">제주</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_user?m_no=${sessionScope.m_no}&s_loca=3');">인천</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_user?m_no=${sessionScope.m_no}&s_loca=4');">제주</button>
                             </li>
                             <li>    
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=5');">전라</button>
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=6');">경상</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_user?m_no=${sessionScope.m_no}&s_loca=5');">전라</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_user?m_no=${sessionScope.m_no}&s_loca=6');">경상</button>
                             </li>
                             <li>    
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=7');">충청</button>
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=8');">강원</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_user?m_no=${sessionScope.m_no}&s_loca=7');">충청</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_user?m_no=${sessionScope.m_no}&s_loca=8');">강원</button>
                             </li>
                         </ul>
                     </li>
                     <li class="menu-bar"><a href="#">테마</a>
                         <ul>
                             <li>    
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=1');">등산</button>
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=2');">바다</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_search_user?m_no=${sessionScope.m_no}&theme=등산');">등산</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_search_user?m_no=${sessionScope.m_no}&theme=바다');">바다</button>
                             </li>
                             <li>    
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=3');">도시</button>
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=4');">계곡</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_search_user?m_no=${sessionScope.m_no}&theme=도시');">도시</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_search_user?m_no=${sessionScope.m_no}&theme=계곡');">계곡</button>
                             </li>
                             <li>    
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=5');">레저</button>
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=6');">문화</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_search_user?m_no=${sessionScope.m_no}&theme=레저');">레저</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_search_user?m_no=${sessionScope.m_no}&theme=문화');">문화</button>
                             </li>
                             <li>    
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=7');">맛집</button>
-                                <button class="inner_button" type="button" onclick="siteLocation('user/stay_list_user?m_no=${sessionScope.m_no}&s_loca=8');">파티</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_search_user?m_no=${sessionScope.m_no}&theme=맛집');">맛집</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('stay_list_search_user?m_no=${sessionScope.m_no}&theme=파티');">파티</button>
                             </li>
                         </ul>
                     </li>

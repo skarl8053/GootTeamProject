@@ -10,11 +10,11 @@ import org.springframework.ui.Model;
 import com.travel.dao.user.IDao_ReviewReport_user;
 import com.travel.service.admin.Interface_TravelService;
 
-public class ReviewReport_Insert_Service implements Interface_TravelService {
+public class Service_ReviewReport_Insert_user implements Interface_TravelService {
 
 	IDao_ReviewReport_user dao;
 	
-	public ReviewReport_Insert_Service(SqlSession sqlSession) { 
+	public Service_ReviewReport_Insert_user(SqlSession sqlSession) { 
 		dao = sqlSession.getMapper(IDao_ReviewReport_user.class); 
 	}
 

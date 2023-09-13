@@ -5,6 +5,14 @@
 <!-- (namespace) 인터페이스 경로 -->
 <mapper namespace="com.travel.dao.user.IDao_ReviewReport_user">
 		
+		<select id="reportCheck" resultType="integer">
+				
+				SELECT  	COUNT(*)
+				FROM    	THISREVIEW A INNER JOIN THISREPORT B ON A.REPORT_NO = B.REPORT_NO
+				WHERE 	A.REVIEW_NO = #{param1}
+		
+		</select>
+		
 		<select id="reviewReport_createIndex" resultType="integer">
 		
 				SELECT 	NVL(MAX(REPORT_NO),0) + 1 

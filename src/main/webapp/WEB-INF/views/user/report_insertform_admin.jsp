@@ -90,6 +90,9 @@
 
 			<!-- 앞 화면에서 후기번호 가져옴.. -->
             <input type="hidden" name="review_no" value="${param.review_no}">
+            <input type="hidden" name="m_no" value="${sessionScope.m_no}">
+            <input type="hidden" name="s_no" value="${param.s_no}">
+			
 
             <div>
                 <span>신고 사유 :</span>
