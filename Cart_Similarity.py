@@ -2,7 +2,6 @@
 import sys
 import pandas as pd
 import numpy as np
-import jinja2 as ji
 roomdf = pd.read_csv('C:\\GootTeamProject\\TravelProject\\TMSTSTAY_DATA_TABLE.csv')
 
 

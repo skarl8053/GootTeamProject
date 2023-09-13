@@ -42,7 +42,7 @@ public class RestController_Cart_user {
 	        
 	        Process process = builder.start();
 
-	        // 자식 프로세스가 종료될 때까지 기다림
+	        // 자식 프로세스가 종료될 때까7지 기다림
 	        int exitval = process.waitFor();
 
 	        //// 서브 프로세스가 출력하는 내용을 받기 위해
@@ -57,6 +57,7 @@ public class RestController_Cart_user {
 	        	if(index == 5) {
 	        		break;
 	        	}
+	        	// indexof + substring
 	        	s_no_list[index] = Integer.parseInt(readText.replace(" ", "").substring(1));
 	        	index++;
 	        }
