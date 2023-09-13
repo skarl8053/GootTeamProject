@@ -29,9 +29,10 @@ public class Event_Attend_Service implements Interface_TravelService {
 	@Override
 	public void execute(Model model) {
 
-		System.out.println("Event_List_Service 신호");
+		System.out.println("Event_Attend_Service 신호");
 
 		Map<String, Object> map = model.asMap();
+		
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		HttpSession session = request.getSession();
 		
@@ -41,16 +42,16 @@ public class Event_Attend_Service implements Interface_TravelService {
 		System.out.println("event_no : "+event_no);
 		System.out.println("m_no : "+m_no);
 		
+		// 중복 참여체크
 		int check_event = dao.check_event(event_no,m_no);
 		
 		System.out.println("check_event : "+check_event);
 		
 		if (check_event > 0) {
-            String msg = "이미 이벤트에 참가하셨습니다.";
-            model.addAttribute("msg", msg);
-            model.addAttribute("check_event",check_event);
+            model.addAttribute("msg", "이미 이벤트에 참가하셨습니다.");
         } else {
             dao.event_attend(event_no, m_no);
+            model.addAttribute("msg", "이벤트 참여완료되었습니다.");
         }
 		
 	}

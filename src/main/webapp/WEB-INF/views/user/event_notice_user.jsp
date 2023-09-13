@@ -169,7 +169,7 @@
 			                <td>${event_list.event_no }</td>
 			                <td>${event_list.event_name }</td>
 			                <%-- <td><a href="#"><img src="resources/upload_img/admin/event/${event_list.filename2 }" alt="" /></a></td> --%>
-			                <td><a href="#"><img  class="event_img" src="../admin/resources/upload_img/admin/event/${event_list.filename2 }" alt="" /></a></td>
+			                <td><a href="event_page?event_no=${event_list.event_no }"><img  class="event_img" src="../admin/resources/upload_img/admin/event/${event_list.filename2 }" alt="" /></a></td>
 			                <td>
 			                		<c:if test="${event_list.event_flag_num eq 1 }">
 			                			<span>이벤트 시작 전</span>

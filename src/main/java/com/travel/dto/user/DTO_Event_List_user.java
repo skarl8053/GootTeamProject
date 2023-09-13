@@ -13,6 +13,8 @@ public class DTO_Event_List_user {
 
 	private int event_no;
 	private String event_name;
+	private String event_intro;
+	private String event_content;
 	private String event_startdate;
 	private String event_enddate;
 	private String event_target;
@@ -32,6 +34,4 @@ public class DTO_Event_List_user {
 	private String item_name_1;
 	private int item_no_2;
 	private String item_name_2;
-	
-	private int m_no;
 }

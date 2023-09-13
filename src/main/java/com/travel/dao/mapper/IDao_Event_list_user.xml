@@ -88,24 +88,18 @@
 		)
 	</insert>
 	
-	<!-- 진행 중인 이벤트 이미지 가져오기 -->
-	<select id="ongoing_event_img" resultType="com.travel.dto.user.DTO_Event_List_user">
-		SELECT FILENAME
-		FROM TMSTEVENT
-	</select>
-	
-	<!-- 진행 중인 이벤트 번호 가져오기 -->
-	<select id="ongoing_event_no" resultType="com.travel.dto.user.DTO_Event_List_user">
-		SELECT EVENT_NO
-		FROM TMSTEVENT
-	</select>
-	
 	<!-- 가장 최근 이벤트 정보 가져오기 -->
 	<select id="event_page" resultType="com.travel.dto.user.DTO_Event_List_user">
 		<![CDATA[
 		SELECT
+		A.M_NO1,
+		A.M_NO2,
+		A.M_NO3,
+		A.EVENT_FLAG,
 	    A.EVENT_NO,
 	    A.EVENT_NAME,
+	    A.EVENT_INTRO,
+	    A.EVENT_CONTENT,
 	    TO_CHAR(A.EVENT_STARTDATE, 'YYYY-MM-DD') AS EVENT_STARTDATE,
 	    TO_CHAR(A.EVENT_ENDDATE, 'YYYY-MM-DD') AS EVENT_ENDDATE,
 	    A.EVENT_TARGET,
@@ -128,102 +122,8 @@
 		LEFT JOIN
 		    TMSTITEM D ON D.ITEM_NO = 3 AND A.EVENT_NO = D.EVENT_NO
 		WHERE
-		    A.EVENT_NO = (SELECT MAX(EVENT_NO) FROM TMSTEVENT)
+		    A.EVENT_NO = #{param1}
 	    ]]>
 	</select>
-	
-	<select id="event_page2" resultType="com.travel.dto.user.DTO_Event_List_user">
-		<![CDATA[
-		SELECT
-	    A.EVENT_NO,
-	    A.EVENT_NAME,
-	    TO_CHAR(A.EVENT_STARTDATE, 'YYYY-MM-DD') AS EVENT_STARTDATE,
-	    TO_CHAR(A.EVENT_ENDDATE, 'YYYY-MM-DD') AS EVENT_ENDDATE,
-	    A.EVENT_TARGET,
-	    A.EVENT_CAUTION,
-	    A.FILENAME2,
-	    B.ITEM_NAME,
-	    C.ITEM_NAME AS ITEM_NAME_1,
-	    D.ITEM_NAME AS ITEM_NAME_2,
-	    CASE
-	        WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') < TO_CHAR(A.EVENT_STARTDATE, 'yyyy-MM-dd') THEN 1
-	        WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') > TO_CHAR(A.EVENT_ENDDATE, 'yyyy-MM-dd') THEN 3
-	        ELSE 2
-	    END AS EVENT_STATUS
-		FROM
-		    TMSTEVENT A
-		LEFT JOIN
-		    TMSTITEM B ON B.ITEM_NO = 1 AND A.EVENT_NO = B.EVENT_NO
-		LEFT JOIN
-		    TMSTITEM C ON C.ITEM_NO = 2 AND A.EVENT_NO = C.EVENT_NO
-		LEFT JOIN
-		    TMSTITEM D ON D.ITEM_NO = 3 AND A.EVENT_NO = D.EVENT_NO
-		WHERE
-		    A.EVENT_NO = (SELECT MAX(EVENT_NO)-1 FROM TMSTEVENT)
-	    ]]>
-	</select>
-	
-	<select id="event_page3" resultType="com.travel.dto.user.DTO_Event_List_user">
-		<![CDATA[
-		SELECT
-	    A.EVENT_NO,
-	    A.EVENT_NAME,
-	    TO_CHAR(A.EVENT_STARTDATE, 'YYYY-MM-DD') AS EVENT_STARTDATE,
-	    TO_CHAR(A.EVENT_ENDDATE, 'YYYY-MM-DD') AS EVENT_ENDDATE,
-	    A.EVENT_TARGET,
-	    A.EVENT_CAUTION,
-	    A.FILENAME2,
-	    B.ITEM_NAME,
-	    C.ITEM_NAME AS ITEM_NAME_1,
-	    D.ITEM_NAME AS ITEM_NAME_2,
-	    CASE
-	        WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') < TO_CHAR(A.EVENT_STARTDATE, 'yyyy-MM-dd') THEN 1
-	        WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') > TO_CHAR(A.EVENT_ENDDATE, 'yyyy-MM-dd') THEN 3
-	        ELSE 2
-	    END AS EVENT_STATUS
-		FROM
-		    TMSTEVENT A
-		LEFT JOIN
-		    TMSTITEM B ON B.ITEM_NO = 1 AND A.EVENT_NO = B.EVENT_NO
-		LEFT JOIN
-		    TMSTITEM C ON C.ITEM_NO = 2 AND A.EVENT_NO = C.EVENT_NO
-		LEFT JOIN
-		    TMSTITEM D ON D.ITEM_NO = 3 AND A.EVENT_NO = D.EVENT_NO
-		WHERE
-		    A.EVENT_NO = (SELECT MAX(EVENT_NO)-2 FROM TMSTEVENT)
-	    ]]>
-	</select>
-	
-	<select id="event_page4" resultType="com.travel.dto.user.DTO_Event_List_user">
-		<![CDATA[
-		SELECT
-	    A.EVENT_NO,
-	    A.EVENT_NAME,
-	    TO_CHAR(A.EVENT_STARTDATE, 'YYYY-MM-DD') AS EVENT_STARTDATE,
-	    TO_CHAR(A.EVENT_ENDDATE, 'YYYY-MM-DD') AS EVENT_ENDDATE,
-	    A.EVENT_TARGET,
-	    A.EVENT_CAUTION,
-	    A.FILENAME2,
-	    B.ITEM_NAME,
-	    C.ITEM_NAME AS ITEM_NAME_1,
-	    D.ITEM_NAME AS ITEM_NAME_2,
-	    CASE
-	        WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') < TO_CHAR(A.EVENT_STARTDATE, 'yyyy-MM-dd') THEN 1
-	        WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') > TO_CHAR(A.EVENT_ENDDATE, 'yyyy-MM-dd') THEN 3
-	        ELSE 2
-	    END AS EVENT_STATUS
-		FROM
-		    TMSTEVENT A
-		LEFT JOIN
-		    TMSTITEM B ON B.ITEM_NO = 1 AND A.EVENT_NO = B.EVENT_NO
-		LEFT JOIN
-		    TMSTITEM C ON C.ITEM_NO = 2 AND A.EVENT_NO = C.EVENT_NO
-		LEFT JOIN
-		    TMSTITEM D ON D.ITEM_NO = 3 AND A.EVENT_NO = D.EVENT_NO
-		WHERE
-		    A.EVENT_NO = (SELECT MAX(EVENT_NO)-3 FROM TMSTEVENT)
-	    ]]>
-	</select>
-	
 	
 </mapper>
