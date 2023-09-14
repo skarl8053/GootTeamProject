@@ -52,9 +52,9 @@ public class Service_Stay_modify_admin implements Interface_TravelService {
 		System.out.println("s_no" + s_no);
 
 		// 留λ턿 �씠誘몄� �뾽濡쒕뱶 寃쎈줈
-		String root = "/Users/sjh/Downloads/TeamProject/GootTeamProject0831/GootTeamProject/src/main/webapp/resources/upload_img/admin/stay/";
+		//String root = "/Users/sjh/Downloads/TeamProject/GootTeamProject0831/GootTeamProject/src/main/webapp/resources/upload_img/admin/stay/";
 
-//		String root = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\stay\\";
+		String root = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\stay\\";
 
 		List<String> changeFilesList = new ArrayList<String>();
 		List<MultipartFile> fileList = mtpRequest.getFiles("file");
@@ -189,14 +189,16 @@ public class Service_Stay_modify_admin implements Interface_TravelService {
 
 		List<String> changeRoomFilesList = new ArrayList<String>();
 		List<MultipartFile> RoomfileList = mtpRequest.getFiles("room_file");
-
+		
+		String root_room = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\room\\";
+		
 		for (MultipartFile mf : RoomfileList) {
 			String originFile = mf.getOriginalFilename();
 			System.out.println("빈 오리진 파일 확인 : " + originFile);
 			// long longtime = System.currentTimeMillis();
 			String changeRoomFile = mf.getOriginalFilename();
 			System.out.println("changeFile : " + changeRoomFile);
-			String pathfile = root + "/" + changeRoomFile;
+			String pathfile = root_room + "/" + changeRoomFile;
 			System.out.println("pathfile : " + pathfile);
 
 			changeRoomFilesList.add(changeRoomFile);
