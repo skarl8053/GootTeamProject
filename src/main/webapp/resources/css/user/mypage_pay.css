@@ -55,9 +55,6 @@ p#MyPage {
 	width: 900px;
 	margin-left:100px;
 }
-#pay_table,th,td{
-	border:1px solid #333;
-}
 #title {
 	font-size: 35px;
 	font-weight: bold;
@@ -92,4 +89,21 @@ table, th, td {
 	border-bottom: 1px solid rgb(1, 19, 67);
 	text-align: center;
 	border-collapse: collapse;
+}
+#paging{
+	text-align: center;
+	margin-top: 15px;
+}
+#refund_link, #review_link, .receipt_link{
+	text-decoration: none;
+	background-color: rgb(1, 19, 67);
+	color : rgb(235, 208, 28);
+	border-radius: 5px;
+	display:inline-block;
+	width:100px;
+	height:40px;
+	line-height: 40px;
+}
+.receipt_link{
+	margin-top:10px;
 }

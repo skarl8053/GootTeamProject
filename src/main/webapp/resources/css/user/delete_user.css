@@ -182,3 +182,8 @@ p.cancel_text {
 	color: rgb(1, 19, 67);
 	cursor: pointer;
 }
+
+hr{
+	height:2px;
+	background-color: rgb(1, 19, 67);
+}

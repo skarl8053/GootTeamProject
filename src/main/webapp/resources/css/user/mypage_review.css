@@ -76,13 +76,9 @@ hr {
 hr#menu_bar {
 	width: 200px;
 }
-#table{
-	margin-top: 20px;
-	height: auto;
-}
+
 
 #review_table, th, td {
-	border: 1px solid rgb(1, 19, 67);
 	border-collapse: collapse;
 }
 
@@ -91,7 +87,20 @@ hr#menu_bar {
 }
 
 #review_table {
-	margin-top: 50px;
 	width: 900px;
 	text-align: center;
+}
+#paging{
+	text-align: center;
+	margin-top: 15px;
+}
+#stay_name{
+	text-decoration: none;
+	color : rgb(1, 19, 67);
+	font-weight: bold;
+	font-size: 24px;
+}
+#s_img{
+	width: 180px;
+	height: 180px;
 }

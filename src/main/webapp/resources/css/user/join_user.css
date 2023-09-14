@@ -168,6 +168,7 @@ hr {
 	border: 0px;
 	cursor: pointer;
 	display: inline;
+	line-height: 50px;
 }
 
 #join_button:disabled {
@@ -188,6 +189,7 @@ hr {
 	display: inline-block;
 	line-height: 50px;
 	margin-left: 10px;
+	line-height: 50px;
 }
 
 .agree {
@@ -255,7 +257,7 @@ li {
 	border-radius: 10px;
 	border: 1px solid rgba(255, 255, 255, 0.18);
 	width: 400px;
-	height: 500px;
+	height: 480px;
 	position: relative;
 	top: 250px;
 	padding: 10px;
@@ -293,9 +295,9 @@ li {
 #modal1 .content, #modal2 .content {
 	margin-top: 10px;
 	padding: 0px 10px;
-	text-shadow: 1px 1px 2px gray;
-	color: white;
-	height: 370px;
+	width: 380px;
+	height: 362px;
+	overflow-y: auto;
 }
 
 .modal_content {
@@ -303,25 +305,24 @@ li {
 	font-size: 20px;
 	color: rgb(235, 208, 28);
 	text-shadow: 1px 1px 2px gray;
-	margin-top: 15px;
+	margin-top: 10px;
 	display: block;
+    white-space: pre-line;
 }
 
 .check_container {
 	width: 100px;
-	margin: 25px auto 0 auto;
+	margin: 15px auto 10px auto;
 }
 
 .last_check {
 	background: rgb(1, 19, 67, 0.9);
-	box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
-	backdrop-filter: blur(13.5px);
-	-webkit-backdrop-filter: blur(13.5px);
 	color: rgb(235, 208, 28);
 	border: 1px solid yellow;
 	border-radius: 5px;
 	width: 100px;
-	height: 30px;
+	height: 35px;
+	font-size: 16px;
 	cursor: pointer;
 }
 
@@ -332,4 +333,15 @@ li {
 #cancel_btn {
 	margin-left: 10px;
 }
+
+.content::-webkit-scrollbar {
+  width: 12px;
+}
+
+.content::-webkit-scrollbar-thumb {
+ background-color: rgb(235, 208, 28);
+  border-radius: 5px;
+}
+
+
 

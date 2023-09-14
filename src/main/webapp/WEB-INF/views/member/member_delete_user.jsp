@@ -26,7 +26,7 @@
 			<i class="fa-solid fa-eye fa-2xl"></i>
 	</div>
 	<div id="container">
-		<input id="btn-modal" value="»∏ø¯≈ª≈"> <a href="#"
+		<input id="btn-modal" value="»∏ø¯≈ª≈"> <a href="../user/mypage_info?m_no=${sessionScope.m_no}"
 			class="cancel_tag">
 			<p class="cancel_text">√Îº“</p>
 		</a>

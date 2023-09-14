@@ -96,3 +96,11 @@ td{
 b{
 	font-size: 12px;
 }
+.event_img{
+	margin-right: 10px;
+}
+
+.paging{
+	text-align: center;
+	margin-top: 15px;
+}

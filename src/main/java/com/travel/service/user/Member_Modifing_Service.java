@@ -32,24 +32,26 @@ public class Member_Modifing_Service implements Interface_TravelService {
 			HttpSession session = request.getSession();
 			
 			int m_no = (Integer) session.getAttribute("m_no");
-			
 			String pw = request.getParameter("m_pw");
 			String m_tel = request.getParameter("m_tel");
 			String m_roadAddress = request.getParameter("m_roadAddress");
 			String m_detailAddress = request.getParameter("m_detailAddress");
 
+			String m_marketing = request.getParameter("m_marketing") == null ? "N" : "Y";	
+			
+			
 //			여기서부터 null
-			System.out.println("시작");
-			String m_marketing = request.getParameter("m_marketing");
-			System.out.println(m_marketing);
-
-			String theme_list = request.getParameter("modify_tema");
-			System.out.println("?????"+theme_list);
-			String[] theme=theme_list.split(",");
-			System.out.println("123123"+theme);
+			String all_tema = request.getParameter("all_tema");
+			String all_area = request.getParameter("all_area");
+			System.out.println("all_tema : "+all_tema);
+			System.out.println("all_area : "+all_area);
+			String[] theme=all_tema.split(",");
+			String[] area=all_area.split(",");
+			System.out.println("theme : "+theme);
+			System.out.println("area : "+area);
 			
 			int[] theme_Arr = new int[3];
-			
+			System.out.println(theme_Arr);
 			for (int i = 0; i < 3; i++) {
 				if( i > theme.length-1 ) {
 					theme_Arr[i] = 0;
@@ -60,11 +62,12 @@ public class Member_Modifing_Service implements Interface_TravelService {
 			}
 			
 			int m_theme1 = theme_Arr[0];
+			System.out.println("m_theme1 : "+m_theme1);
 			int m_theme2 = theme_Arr[1];
+			System.out.println("m_theme2 : "+m_theme2);
 			int m_theme3 = theme_Arr[2];
+			System.out.println("m_theme3 : "+m_theme3);
 			
-			String all_area = request.getParameter("modify_area");
-			String[] area=all_area.split(",");
 			
 			int[] location_Arr = new int[3];
 			

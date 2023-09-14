@@ -394,10 +394,8 @@
 									        "&checkOutDate=" + checkOutDate +
 									        "&personCount=" + personCount;
 			
-			alert(searchURL);
-			//location.replace(searchURL);
-			
-			
+			/* alert(searchURL); */
+			location.replace(searchURL);
 		}
 	
 		///////////////////////////////////////////////////////////////////////////////////////

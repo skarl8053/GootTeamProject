@@ -24,6 +24,8 @@ import com.travel.service.user.Member_Login_Service;
 import com.travel.service.user.Member_Modifing_Service;
 import com.travel.service.user.Member_Modify_Service;
 import com.travel.service.user.Member_Send_Service;
+import com.travel.service.user.Service_Refund_Insert_User;
+import com.travel.service.user.Service_Refund_Select_User;
 
 @Controller
 @RequestMapping("member")
@@ -189,7 +191,7 @@ public class Controller_Member_user {
 		service = new Member_Modifing_Service(sqlSession);
 		service.execute(model);
 
-		return "../user/mypage_info_user";
+		return "redirect:/user/mypage_info";
 	}
 
 	@ResponseBody
@@ -228,5 +230,53 @@ public class Controller_Member_user {
 		
 		return "member/member_emailcheck_user";
 	}
+	
+	@RequestMapping("mypage_refund_popup")
+	public String refund_popup(HttpServletRequest request, Model model) {
+		
+		// 남기문
+		// 환불 팝업
+		// M_NO, ORDER_NO 파라미터 필요함..
+		
+		model.addAttribute("request",request);
+		
+		service = new Service_Refund_Select_User(sqlSession);
+		service.execute(model);
+
+		return "member/mypage_refundpopup_user";
+		
+	}
+	
+	@RequestMapping("mypage_refund_insert")
+	public String refund_insert(HttpServletRequest request, Model model) {
+		
+		// 남기문
+		// 환불 진행
+		
+		// 돌아갈 주소 정할 것
+		
+		model.addAttribute("request",request);
+		
+		service = new Service_Refund_Insert_User(sqlSession);
+		service.execute(model);
+
+		// 업데이트 후 창 닫기 구현 필요
+		
+		return "";
+	}
+	
+	@RequestMapping("mypage_receipt_popup")
+	public String receipt_popup(HttpServletRequest request, Model model) {
+		
+		model.addAttribute("request",request);
+		
+		service = new Service_Refund_Select_User(sqlSession);
+		service.execute(model);
+
+		return "member/mypage_receipt_user";
+		
+	}
+	
+	
 
 }

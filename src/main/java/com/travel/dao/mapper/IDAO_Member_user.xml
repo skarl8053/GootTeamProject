@@ -61,10 +61,12 @@
 	<!-- 회원정보 수정 -->
 	<update id="member_modify">
 		UPDATE TMSTMEMBER SET
-		M_PW=#{param2},M_TEL=#{param3},M_ROADADDRESS=#{param4}, M_DETAILADDRESS=#{param5},M_MARKETING=#{param6},M_AREA1=#{param7},M_AREA2=#{param8},M_AREA3=#{param9},
+		M_PW=#{param2},M_TEL=#{param3},
+		M_ROADADDRESS=#{param4}, M_DETAILADDRESS=#{param5},
+		M_MARKETING=#{param6},
+		M_AREA1=#{param7},M_AREA2=#{param8},M_AREA3=#{param9},
 		M_THEME1=#{param10},M_THEME2=#{param11},M_THEME3=#{param12}
-		WHERE
-		M_NO=#{param1}
+		WHERE M_NO=#{param1}
 	</update>
 	
 	<!-- 이메일 찾기 -->

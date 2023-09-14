@@ -11,7 +11,6 @@ import org.springframework.ui.Model;
 import com.travel.dao.user.IDao_Member_user;
 import com.travel.dto.user.DTO_Member_user;
 import com.travel.service.admin.Interface_TravelService;
-import com.travel.usetools.CryptoUtil;
 
 public class Member_Modify_Service implements Interface_TravelService {
 
@@ -57,6 +56,7 @@ public class Member_Modify_Service implements Interface_TravelService {
 			model.addAttribute("m_theme1",theme1);
 			model.addAttribute("m_theme2",theme2);
 			model.addAttribute("m_theme3",theme3);
+
 
 		}
 		catch(Exception ex) {
