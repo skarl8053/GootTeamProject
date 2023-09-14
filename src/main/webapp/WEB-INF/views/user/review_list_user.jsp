@@ -39,7 +39,7 @@
 	</c:if>
 
 
-	<a href="review_writeview_user?m_no=${m_no }&s_no=51&r_no=21">위치는 이동해야하지만 어쨋든 후기쓰기</a>
+	<a href="review_writeview_user?m_no=${m_no }&s_no=51&r_no=21&order_no=123">위치는 이동해야하지만 어쨋든 후기쓰기</a>
 	
 	<div class="tc">
 		<div class="a">

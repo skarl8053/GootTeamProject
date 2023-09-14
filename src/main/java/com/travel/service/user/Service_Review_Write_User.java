@@ -30,6 +30,10 @@ private SqlSession sqlSession;
 		String m_no = mtfRequest.getParameter("m_no");
 		String s_no = mtfRequest.getParameter("s_no");
 		String r_no = mtfRequest.getParameter("r_no");
+		String order_no = mtfRequest.getParameter("order_no");
+		
+		System.out.println("order_no"+order_no);
+		
 //		String photo_url = mtfRequest.getFilesystemName("file");
 		String review_rate = mtfRequest.getParameter("review_rate");
 		String review_content = mtfRequest.getParameter("review_content");
@@ -73,6 +77,8 @@ private SqlSession sqlSession;
 		/* 평점 stay table로 입력 */
 		dao.updateAvgRate(s_no);
 		
+		/* THISORDER table REVIEW_FLAG Y로 */
+		dao.updateOrderFlag(order_no);
 		
 		model.addAttribute("s_no",s_no);
 		

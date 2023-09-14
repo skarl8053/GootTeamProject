@@ -14,6 +14,8 @@ public interface IDao_Review_user {
 	
 	public void updateAvgRate(String s_no);
 	
+	public void updateOrderFlag(String order_no);
+	
 	public ArrayList<DTO_Review_user> rlist(String s_no);
 	public ArrayList<DTO_Review_user> rlistP(String s_no);
 	

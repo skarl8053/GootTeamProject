@@ -99,6 +99,7 @@
 			<input type="hidden" name="m_no" value=${m_no } /> 
 			<input type="hidden" name="r_no" value=${r_no } /> 
 			<input type="hidden" name="s_no" value=${s_no } /> 
+			<input type="hidden" name="order_no" value=${order_no } /> 
 			<input type="submit" value="저장" />
 	</form>
 	<button class="button-24" role="button"><a href="mypage_pay">취소</a></button>

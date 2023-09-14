@@ -57,12 +57,16 @@
 	height: 50px;
 	display: flex;
 	text-align: center;
-	text-decoration: none;
+	
 }
 
 .aa {
 	width: 80px;
 	padding: 20px;
+}
+
+.aa a{
+	text-decoration: none;
 }
 
 .b {
