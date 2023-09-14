@@ -53,7 +53,7 @@
 				</tr>
 				<tr>
 					<td><label>이름</label></td>
-					<td><input type="text" class="enter" name="m_name" 
+					<td><input type="text" class="enter" name="m_name"  id="m_name" 
 						placeholder="이름을 입력해주세요." autocomplete="off"/></td>
 				</tr>
 				<tr>
