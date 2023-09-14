@@ -19,19 +19,24 @@
     height: 318px;
     font-family: 'GmarketSansMedium', sans-serif; 
     /* background: #011343;   */
-    background-color: #14172C;
+    /* background-color: #14172C; */
+    background-color: rgb(1, 19, 67);
 }
 
 
 /* 상단바 네비게이션 스타일 */
 
 #header_img{
-	margin: 0 0 0 50px;
+	/* margin: 0 0 0 50px;
+    width: 200px;
+    height: 150px; */
+    margin: 0 0 0 50px;
     width: 200px;
     height: 150px;
 }
 #navigation { 
-    background-color: #14172C;
+    /* background-color: #14172C; */
+    background-color: rgb(1, 19, 67);
     height: 100px;
 }
 
@@ -69,7 +74,8 @@
     padding: 20px 14px;
     margin: 0 0 0 60px;
     width: 280px;
-    height: 60px;
+    /* height: 60px; */
+    height: 30px;
     color: rgb(235, 208, 28);
     transition: 0.3s linear;
     text-decoration: none;

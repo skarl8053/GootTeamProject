@@ -221,10 +221,12 @@ p {
 .bed_text {
 	margin-right: 5px;
 }
-
-#addr_x, #addr_y {
+#address {
 	margin-left: 5px;
-	margin-top: 5px;
+}
+#addr_x, #addr_y {
+	width : 200px;
+	margin-left: 5px;
 }
     	
     	#room_img_table img{
@@ -293,7 +295,7 @@ p {
 				</div><br /><br />
 		    	
 		    	<span>주소</span>
-		        <input type="text" id="address" name="address" placeholder="" value="${stay_view.s_addr }" style="width: 800px"readonly/>
+		        <input type="text" id="address" name="address" placeholder="" value="${stay_view.s_addr }" style="width: 800px;" readonly/>
 		    	
 		        <div class="xy">
 			        <span>위도</span>
