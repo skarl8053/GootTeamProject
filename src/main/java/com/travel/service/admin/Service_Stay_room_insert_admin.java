@@ -57,7 +57,7 @@ public class Service_Stay_room_insert_admin implements Interface_TravelService {
 //		System.out.println("stay_ stay_room_facility : "+Arrays.toString(stay_room_facility));
 
 		// 맥북 이미지 업로드 경로
-		String root = "/Users/sjh/Downloads/TeamProject/GootTeamProject0831/GootTeamProject/src/main/webapp/resources/upload_img/admin/stay/";
+		String root = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\room\\";
 		List<String> changeFilesList = new ArrayList<String>();
 		List<MultipartFile> fileList = mtpRequest.getFiles("file");
 

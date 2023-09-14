@@ -79,7 +79,7 @@ hr#menu_bar{
 }
 #point_table, .coupon_table{
    width: 900px;
-   height: 300px;
+   height: auto;
 }
 th{
    font-size: 20px;

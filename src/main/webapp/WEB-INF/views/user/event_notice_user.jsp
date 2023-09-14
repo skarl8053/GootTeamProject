@@ -15,7 +15,6 @@
 	<style>
 		#content{
 			height: auto;
-			margin: auto;
 		}
 		/* 
 		

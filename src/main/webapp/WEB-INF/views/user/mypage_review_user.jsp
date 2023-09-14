@@ -29,9 +29,9 @@
 					</li>
 					<li class="page_list"><a href="./mypage_info" class="menu"
 						id="info">기본 회원 정보</a> <br></li>
-					<li class="page_list"><a href="./mypage_pay" class="menu"
+					<li class="page_list"><a href="./mypage_pay?page=1" class="menu"
 						id="pay">결제 내역</a> <br></li>
-					<li class="page_list"><a href="./mypage_review" class="menu"
+					<li class="page_list"><a href="./mypage_review?page=1" class="menu"
 						id="review">숙소 후기</a> <br></li>
 					<li class="page_list"><a href="./mypage_event?ing_page=1&end_page=1" class="menu"
 						id="event">이벤트</a> <br></li>
@@ -50,7 +50,8 @@
 					<c:choose>
 						<c:when test="${empty dto }">
 							<tr>
-								<td colspan="5">등록된 후기가 없습니다.</td>
+								<td id="no_img" colspan="5"><img src="resources/img/No_Search.jpeg"  style="width: 150px; height: 150px; padding-top: 50px;"/> <br /><br />
+								등록된 후기가 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
@@ -63,8 +64,7 @@
 											<img src="resources/upload_img/admin/stay/${dto.photo_url }" alt="이미지 X"  id="s_img"/>
 										</c:if>
 										<c:if test="${empty dto.photo_url }">
-											<img src="resources/img/user/review/img_X.png" alt="이미지 X"  id="s_img"/>
-											<p>사진이 없넹</p>
+											<img src="resources/img/No_Image.png" alt="이미지 X"  id="s_img"/>
 										</c:if>
 									</td>
 									<td colspan="3" height="70px" 
@@ -77,7 +77,7 @@
 									</tr>
 									<tr>
 										<td class="border_bottom" width="60px" height="80px"><img
-											src="resources/upload_img/user/review/Like_Icon.png"
+											src="resources/img/user/review/reviewLikeIcon.png"
 											alt="좋아용" width="40px" height="40px" /></td>
 										<td class="border_bottom" width="30px">${dto.likes }</td>
 									</tr>
