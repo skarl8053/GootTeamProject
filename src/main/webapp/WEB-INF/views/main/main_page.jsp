@@ -462,6 +462,7 @@
 	</div>
 	
 	<c:if test="${empty sessionScope.m_no}">
+	
 		<!-- 로그인이 안 됐을 때 최근 등록한 숙소 보여준다. -->
 		<!-- 추천 숙소 슬라이드 -->
 		<h2 class="title-left">최근 등록된 숙소</h2>
@@ -478,7 +479,7 @@
 		<!-- 추천 숙소 슬라이드 -->
 		<h2 class="title-left">${ sessionScope.m_name } 님에게 추천하는 숙소</h2>
 		<div class="hot-deal">
-			<div class="stayinfo slider"></div>
+			<div class="stayinfo slider2"></div>
 		</div>
 		<br />
 		

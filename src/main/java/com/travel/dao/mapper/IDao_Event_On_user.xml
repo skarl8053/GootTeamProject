@@ -6,18 +6,24 @@
 	
 	<!-- 진행 중인 이벤트 이미지 가져오기 -->
 	<select id="ongoing_event_img" resultType="com.travel.dto.user.DTO_Event_List_user">
+		<![CDATA[
 		SELECT FILENAME
 		FROM TMSTEVENT
-		WHERE EVENT_FLAG = 2
+		WHERE SYSDATE >= EVENT_STARTDATE AND
+        SYSDATE < EVENT_ENDDATE
 		ORDER BY EVENT_NO DESC
+		]]>
 	</select>
 	
 	<!-- 진행 중인 이벤트 번호 가져오기 -->
 	<select id="ongoing_event_no" resultType="com.travel.dto.user.DTO_Event_List_user">
+		<![CDATA[
 		SELECT EVENT_NO
 		FROM TMSTEVENT
-		WHERE EVENT_FLAG = 2
+		WHERE SYSDATE >= EVENT_STARTDATE AND
+        SYSDATE < EVENT_ENDDATE
 		ORDER BY EVENT_NO DESC
+		]]>
 	</select>
 	
 	<select id="m_theme" resultType="com.travel.dto.user.DTO_Event_List_user">

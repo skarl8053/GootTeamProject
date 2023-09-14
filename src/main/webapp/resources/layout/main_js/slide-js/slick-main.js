@@ -76,7 +76,8 @@ $(function() {
 				+ Login_Stay_img[i] + '" /></a>';
 		}
 		// <div class="hdeal slider"> 태그 내부에 printImgTag2(html 태그) 삽입
-		$("div.stayinfo").addClass("slider").html(printImgTag);
+		$("div.stayinfo").addClass("slider2").html(printImgTag);
+		$("div.event-slider").empty();
 	}	
 	
 	$(".stayinfo").slick({
