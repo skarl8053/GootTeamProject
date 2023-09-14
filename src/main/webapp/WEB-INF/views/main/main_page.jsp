@@ -11,15 +11,24 @@
 	<!-- 개별 화면 content 크기를 조절하는 방법 -->
 	<style>
 		#content{
-			height: 1600px;
+			height: auto;
 		}
 		.title-left{
 			margin: 150px 0 0 470px;
 		}
 	</style>
-	
-	
-		<%-- <link rel="stylesheet"
+	<%-- <input type="hidden" name="event_no" value="<c:out value='${no}' />" /> --%>
+	<script>
+	    var imgData = '<c:out value="${img}" />';
+	    var noData = '<c:out value="${no}" />';
+	    
+	    var not_login_img = '<c:out value="${not_login_img}" />';
+	    var login_img = '<c:out value="${login_img}" />';
+	    var login_s_no = '<c:out value="${login_s_no}" />';
+	    var m_no = '<c:out value="${sessionScope.m_no}" />';
+	 </script>
+	    
+	<%-- <link rel="stylesheet"
 			href="${pageContext.request.contextPath}/resources/layout/main_css/search.css"> --%>
 		<link rel="stylesheet" href="datepicker.css">
 		<script src="${pageContext.request.contextPath}/resources/layout/main_js/search.js"></script>
@@ -230,7 +239,11 @@
 			background-color: rgb(1, 19, 67);
 			border-radius: 5px;
 		}
-		
+		.regular , .stayinfo {
+			width : 900px;
+			margin-left : auto;
+			margin-right : auto;
+		}
 	</style>
 	
 	
@@ -346,7 +359,7 @@
 			$("#datepicker1,#datepicker2").datepicker();
 		});
 		
-		function searchStay(){
+		function searchStay(m_no){
 			
 			// 메인에서 지역, 체크인, 체크아웃, 인원수 입력 후 검색 버튼 누르면 실행
 			
@@ -356,7 +369,7 @@
 			// 인원수
 	        var personCount = document.getElementById("personCount").innerHTML;
 			
-			if(locationNumber[0] == -1){
+			if(locationNumber.length < 1 || locationNumber[0] == -1){
 				alert("검색할 지역을 선택해주세요");
 				return false;
 			}
@@ -372,8 +385,17 @@
 			}
 			
 			// 숙소 페이지로 이동(입력할 것!!)
+			// http://localhost:9005/travel/user/stay_list_user?m_no=1&s_loca=3&checkInDate=2023-09-11&checkOutDate=2023-10-11&personCount=2
+					
+			var searchURL = "user/stay_list_user" +
+									        "?m_no=" + m_no +
+									        "&s_loca=" +locationNumber[0] +
+									        "&checkInDate=" + checkInDate +
+									        "&checkOutDate=" + checkOutDate +
+									        "&personCount=" + personCount;
 			
-			
+			alert(searchURL);
+			//location.replace(searchURL);
 			
 			
 		}
@@ -417,7 +439,7 @@
 			<div class="dropdown">
 				<div>
 					<span><button class="dropdown-btn">인원 수</button></span>
-					<span><button class="search_button" onclick="return searchStay();">검색</button></span>
+					<span><button class="search_button" onclick="return searchStay('${sessionScope.m_no}');">검색</button></span>
 				</div>
 				<div class="dropdown-content">
 					<div class="person">
@@ -440,8 +462,8 @@
 	</div>
 	
 	<c:if test="${empty sessionScope.m_no}">
-		
-		<!-- 회원가입 로그인이 완료된 경우 해당 사람의 테마, 선호지역 정보를 가져와 보여준다. -->
+	
+		<!-- 로그인이 안 됐을 때 최근 등록한 숙소 보여준다. -->
 		<!-- 추천 숙소 슬라이드 -->
 		<h2 class="title-left">최근 등록된 숙소</h2>
 		<div class="hot-deal">
@@ -457,7 +479,7 @@
 		<!-- 추천 숙소 슬라이드 -->
 		<h2 class="title-left">${ sessionScope.m_name } 님에게 추천하는 숙소</h2>
 		<div class="hot-deal">
-			<div class="stayinfo slider"></div>
+			<div class="stayinfo slider2"></div>
 		</div>
 		<br />
 		

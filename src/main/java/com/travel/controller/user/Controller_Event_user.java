@@ -58,39 +58,4 @@ public class Controller_Event_user {
 		return "user/event_user";
 	}
 
-	@RequestMapping(value = "event_page2")
-	public String event_page2(HttpServletRequest request, Model model) {
-		
-		System.out.println("event_page Controller");
-		model.addAttribute("request", request);
-
-		service = new Event_Page_Service(sqlSession);
-		service.execute(model);
-		
-		return "user/event_user2";
-	}
-
-	@RequestMapping(value = "event_page3")
-	public String event_page3(HttpServletRequest request, Model model) {
-		
-		System.out.println("event_page Controller");
-		model.addAttribute("request", request);
-
-		service = new Event_Page_Service(sqlSession);
-		service.execute(model);
-		
-		return "user/event_user3";
-	}
-
-	@RequestMapping(value = "event_page4")
-	public String event_page4(HttpServletRequest request, Model model) {
-		
-		System.out.println("event_page Controller");
-		model.addAttribute("request", request);
-
-		service = new Event_Page_Service(sqlSession);
-		service.execute(model);
-		
-		return "user/event_user4";
-	}
 }

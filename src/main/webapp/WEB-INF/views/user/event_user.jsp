@@ -63,7 +63,7 @@
 			height: 800px;
 		}
 		.event_main {
-			font-size: 22px;
+			font-size: 20px;
 		}
 		.event_content {
 			text-align: center;
@@ -127,20 +127,22 @@
 	    }
 	    
 	    // 중복 참여 체크 후 메시지
-	    function event_attend_confirm(check_event, msg) {
-        if (check_event < 0) {
-            alert(msg);
-        } else {
-            alert("이벤트 참여가 완료되었습니다.");
+	   function event_attend_confirm() {
+	    	
+	    	var check = confirm("이벤트를 참여하시겠습니까?");
+	    	
+	        if (check == false) {
+	        	return false;
+	        }
         }
-    }
+    	 
 </script>
 	
 </head>
 <body>
 <h2 class="event_title">EVENT 게시판</h2>
 <hr />
-<form action="event_attend" method="POST" onsubmit="event_attend_confirm(${check_event}, '${msg}');">
+<form action="event_attend" method="POST" onsubmit="return event_attend_confirm();">
 <input type="hidden" name="event_no" id="event_no" value="${event_page.event_no }" />
 	<p class="event_title">${event_page.event_name }</p>
 	<p class="event_title">관리자 | ${event_page.event_startdate }</p>
@@ -149,14 +151,10 @@
 	<img src="../admin/resources/upload_img/admin/event/${event_page.filename2 }" alt="이미지 없음" class="event_img"  /><br />
 	
 	<div class="event_content">
-		<div class="event_main">가족사랑) 가족사진 무료촬영 + 제주도 여행권 이벤트(서울지역)</div><br>
-
-		가족사랑 이용고객 30만 명 돌파 기념 감사 이벤트! <br>
-
-		가족사진도 찍고 제주도 여행도 가자! <br><br>
+		<textarea class="event_main" cols="50" rows="6" readonly>${event_page.event_intro }</textarea><br>
 
 		<div class="event_notice">
-			<p><span class="blue_text">이벤트 내용 : </span>가족사진 무료촬영 + 제주도 무료 여행 티켓 제공 </p>
+			<p><span class="blue_text">이벤트 내용 : </span>${event_page.event_content } </p>
 			
 			<p><span class="blue_text">이벤트 기간 : </span>${event_page.event_startdate } ~ ${event_page.event_enddate }  </p>
 			
@@ -174,8 +172,20 @@
 		</div>
 
 	</div>
-
-	<input type="submit" class="btn" value="이벤트 참가하기" />
+	<c:choose>
+		<c:when test="${event_page.event_flag eq 2 }">
+			<input type="submit" class="btn" value="이벤트 참가하기" />
+		</c:when>
+		<c:when test="${event_page.event_flag eq 3 }">
+			<div>
+				<p>당첨자 명단</p> <br />
+				1등 : ${event_page.m_no1 } <br />
+				2등 : ${event_page.m_no2 } <br />
+				3등 : ${event_page.m_no3 } 
+			</div>
+		</c:when>
+	</c:choose>
+	
     <hr />
     <div class="moveTopBtn">맨 위로</div>
     <button type="button" class="list_btn" onclick="goToListPage()">목록</button>

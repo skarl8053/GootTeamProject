@@ -1,0 +1,70 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<mapper namespace="com.travel.dao.user.IDao_Event_On_user">
+	
+	<!-- 진행 중인 이벤트 이미지 가져오기 -->
+	<select id="ongoing_event_img" resultType="com.travel.dto.user.DTO_Event_List_user">
+		<![CDATA[
+		SELECT FILENAME
+		FROM TMSTEVENT
+		WHERE SYSDATE >= EVENT_STARTDATE AND
+        SYSDATE < EVENT_ENDDATE
+		ORDER BY EVENT_NO DESC
+		]]>
+	</select>
+	
+	<!-- 진행 중인 이벤트 번호 가져오기 -->
+	<select id="ongoing_event_no" resultType="com.travel.dto.user.DTO_Event_List_user">
+		<![CDATA[
+		SELECT EVENT_NO
+		FROM TMSTEVENT
+		WHERE SYSDATE >= EVENT_STARTDATE AND
+        SYSDATE < EVENT_ENDDATE
+		ORDER BY EVENT_NO DESC
+		]]>
+	</select>
+	
+	<select id="m_theme" resultType="com.travel.dto.user.DTO_Event_List_user">
+		SELECT M_THEME1, M_THEME2, M_THEME3 
+		FROM TMSTMEMBER
+		WHERE M_NO = #{param1}
+	</select>
+	
+	<select id="recommend_not_login" resultType="com.travel.dto.user.DTO_Recommend_Stay_user">
+		<![CDATA[
+		SELECT S_IMG1
+		FROM (
+		    SELECT S_IMG1
+		    FROM TMSTSTAY
+		    ORDER BY S_NO DESC
+		)
+		WHERE ROWNUM <= 5
+		]]>
+	</select>
+	
+	<select id="recommend" resultType="com.travel.dto.user.DTO_Recommend_Stay_user">
+		SELECT  B.S_NO, B.S_IMG1
+		FROM   TMSTMEMBER A INNER JOIN (
+                     SELECT S_NO, S_IMG1,  ';' || TRIM(LEADING ';' 
+                                         FROM    NVL2(S_THEME1, ';' || S_THEME1, S_THEME1) ||
+	                                                     NVL2(S_THEME2, ';' || S_THEME2, S_THEME2) ||
+	                                                     NVL2(S_THEME3, ';' || S_THEME3, S_THEME3) ||
+	                                                     NVL2(S_THEME4, ';' || S_THEME4, S_THEME4) ||
+	                                                     NVL2(S_THEME5, ';' || S_THEME5, S_THEME5) ||
+	                                                     NVL2(S_THEME6, ';' || S_THEME6, S_THEME6) ||
+	                                                     NVL2(S_THEME7, ';' || S_THEME7, S_THEME7) ||
+	                                                     NVL2(S_THEME8, ';' || S_THEME8, S_THEME8)
+                                         ) || ';' AS S_THEME_LIST
+                         FROM TMSTSTAY
+                 ) B ON  (B.S_THEME_LIST LIKE '%;' || A.M_THEME1 || ';%') 
+                     OR (B.S_THEME_LIST LIKE '%;' || TO_CHAR(A.M_THEME2) || ';%') 
+                     OR (B.S_THEME_LIST LIKE '%;' || TO_CHAR(A.M_THEME3) || ';%')
+		WHERE A.M_NO = #{param1}
+	</select>
+	
+		
+		
+	
+</mapper>
