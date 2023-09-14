@@ -2,6 +2,7 @@ package com.travel.dao.user;
 
 import com.travel.dto.user.DTO_Member_user;
 
+
 public interface IDao_Member_user {
 
 	public void member_join(String m_email, String m_pw, String m_name, String m_tel, String m_roadaddress, String m_detailaddress,
@@ -32,6 +33,8 @@ public interface IDao_Member_user {
 	public DTO_Member_user Member_FindPw(String m_name, String m_tel, String m_email);
 
 	public void Change_Pw(String m_email, String tem_pw);
+
+
 	
 	
 

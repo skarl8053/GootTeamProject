@@ -9,9 +9,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.travel.service.admin.Interface_TravelService;
+import com.travel.service.user.MyPage_Event_Service;
 import com.travel.service.user.MyPage_Info_Service;
-import com.travel.service.user.Service_Refund_Insert_User;
-import com.travel.service.user.Service_Refund_Select_User;
+import com.travel.service.user.MyPage_Pay_Service;
+import com.travel.service.user.MyPage_Point_Coupon_Service;
+import com.travel.service.user.MyPage_Review_Service;
 
 @Controller
 @RequestMapping("user")
@@ -21,39 +23,7 @@ public class Controller_Mypage_user {
 	private SqlSession sqlSession;
 	private Interface_TravelService service;
 	
-	@RequestMapping("mypage_refund_popup")
-	public String refund_popup(HttpServletRequest request, Model model) {
-		
-		// 남기문
-		// 환불 팝업
-		// M_NO, ORDER_NO 파라미터 필요함..
-		
-		model.addAttribute("request",request);
-		
-		service = new Service_Refund_Select_User(sqlSession);
-		service.execute(model);
-
-		return "/user/mypage_refundpopup_user";
-		
-	}
 	
-	@RequestMapping("mypage_refund_insert")
-	public String refund_insert(HttpServletRequest request, Model model) {
-		
-		// 남기문
-		// 환불 진행
-		
-		// 돌아갈 주소 정할 것
-		
-		model.addAttribute("request",request);
-		
-		service = new Service_Refund_Insert_User(sqlSession);
-		service.execute(model);
-
-		// 업데이트 후 창 닫기 구현 필요
-		
-		return "";
-	}
 	@RequestMapping("mypage_info")
 	public String mypage_info(HttpServletRequest request, Model model) {
 		
@@ -70,9 +40,9 @@ public class Controller_Mypage_user {
 		
 		System.out.println("마이페이지 이벤트");
 		
-//		model.addAttribute("request",request);
-//		service = new Service_Refund_Insert_User(sqlSession);
-//		service.execute(model);
+		model.addAttribute("request",request);
+		service = new MyPage_Event_Service(sqlSession);
+		service.execute(model);
 		
 		return "user/mypage_event_user";
 	}
@@ -81,9 +51,9 @@ public class Controller_Mypage_user {
 		
 		System.out.println("마이페이지 결제내역");
 		
-//		model.addAttribute("request",request);
-//		service = new Service_Refund_Insert_User(sqlSession);
-//		service.execute(model);
+		model.addAttribute("request",request);
+		service = new MyPage_Pay_Service(sqlSession);
+		service.execute(model);
 		
 		return "user/mypage_pay_user";
 	}
@@ -92,9 +62,9 @@ public class Controller_Mypage_user {
 		
 		System.out.println("마이페이지 포인트/쿠폰");
 		
-//		model.addAttribute("request",request);
-//		service = new Service_Refund_Insert_User(sqlSession);
-//		service.execute(model);
+		model.addAttribute("request",request);
+		service = new MyPage_Point_Coupon_Service(sqlSession);
+		service.execute(model);
 		
 		return "user/mypage_point_user";
 	}
@@ -103,9 +73,9 @@ public class Controller_Mypage_user {
 		
 		System.out.println("마이페이지 숙소후기");
 		
-//		model.addAttribute("request",request);
-//		service = new Service_Refund_Insert_User(sqlSession);
-//		service.execute(model);
+		model.addAttribute("request",request);
+		service = new MyPage_Review_Service(sqlSession);
+		service.execute(model);
 		
 		return "user/mypage_review_user";
 	}

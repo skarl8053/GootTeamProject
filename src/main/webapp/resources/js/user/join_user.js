@@ -253,9 +253,7 @@
 							}
 							console.log("themeArr : " + themeArr);
 						});
-				
 
-				
 				
 				$('.btn2').each(function(index) {
 					$(this).attr('btn2-index', index);
@@ -291,9 +289,7 @@
 							}
 							console.log("locationArr : " + locationArr);
 						});
-				
-			
-				
+
 			});
 	////////////////////// 테마 / 선호 지역 선택 : 남기문 /////////////////////////
 	
@@ -312,6 +308,8 @@
 	
 		var phone_number = $("input[id=m_tel]").val();
 	
+		var name = $("input[id=m_name]").val();
+		
 		var roadaddress = $("input[id=m_roadAddress]").val();
 		var detailaddress = $("input[id=m_detailAddress]").val();
 		
@@ -348,6 +346,10 @@
 	
 		if( p1 != p2 ) {
 			alert("비밀번호가 일치하지 않습니다.");
+			return false;
+		}
+		if(name.length < 1){
+			alert("이름을 입력해주세요");
 			return false;
 		}
 	

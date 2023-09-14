@@ -33,10 +33,10 @@
 						id="pay">결제 내역</a> <br></li>
 					<li class="page_list"><a href="./mypage_review" class="menu"
 						id="review">숙소 후기</a> <br></li>
-					<li class="page_list"><a href="./mypage_event" class="menu"
+					<li class="page_list"><a href="./mypage_event?ing_page=1&end_page=1" class="menu"
 						id="event">이벤트</a> <br></li>
-					<li class="page_list"><a href="./mypage_point" class="menu"
-						id="coupon">포인트 / 쿠폰</a> <br></li>
+					<li class="page_list"><a href="./mypage_point?point_page=1&coupon_page=1" class="menu"
+						id="coupon">포인트 / 쿠폰</a> <br></li> 
 				</ul>
 			</nav>
 		</div>

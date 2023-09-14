@@ -97,6 +97,11 @@
 	text-decoration: underline;
 }
 
+hr{
+	height:2px;
+	background-color: rgb(1, 19, 67);
+}
+
 /* ===============건들지 마시오=============== */
 
 .coupon-event {

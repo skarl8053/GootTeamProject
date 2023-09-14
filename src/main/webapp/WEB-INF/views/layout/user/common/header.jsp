@@ -279,7 +279,7 @@
                     <li class="menu-bar"><a href="#">더보기</a>
                         <ul>
                             <li>    
-                                <button class="inner_button" type="button" onclick="siteLocation('');">이벤트</button>
+                                <button class="inner_button" type="button" onclick="siteLocation('event_notice?page=1');">이벤트</button>
                                 <button class="inner_button" style="visibility: hidden;" type="button" >준비중</button>
                             </li>
                         </ul>

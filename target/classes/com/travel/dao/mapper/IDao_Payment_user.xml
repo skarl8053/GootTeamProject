@@ -132,7 +132,7 @@
 			(
 				ORDER_NO, M_NO, S_NO, COUPON_NO, ORDER_DATE, TOTAL_PRICE, DISCOUNT_PRICE,
 				PAYMENT_PRICE, PAYMENT_METHOD, PAYMENT_CARDNO, PAYMENT_FLAG, HOT_DEAL_FLAG, 
-				CHECK_IN_DATE, CHECK_OUT_DATE
+				CHECK_IN_DATE, CHECK_OUT_DATE, REVIEW_FLAG
 			)
 			VALUES
 			(
@@ -149,7 +149,8 @@
 				#{payment_flag},
 				#{deal_flag},
 				#{checkindate},
-				#{checkoutdate}
+				#{checkoutdate},
+				'N'
 			)
 			
 	</insert>

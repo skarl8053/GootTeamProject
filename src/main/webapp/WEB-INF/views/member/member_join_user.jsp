@@ -53,7 +53,7 @@
 				</tr>
 				<tr>
 					<td><label>이름</label></td>
-					<td><input type="text" class="enter" name="m_name" 
+					<td><input type="text" class="enter" name="m_name"  id="m_name" 
 						placeholder="이름을 입력해주세요." autocomplete="off"/></td>
 				</tr>
 				<tr>
@@ -162,11 +162,22 @@
 								<p class="modal_title">이용약관 동의</p>
 							</div>
 							<div class="content">
-								<p class="modal_content">
-									동의? <br> 할거지? <br> 안할거야? <br> 왜? <br> 왜
-									안하는거야? <br> 집착해도 될까? <br> 동의할 때까지 물어봐도 될까? <br>
-									안하면 회원가입 못하는데? <br> 회원탈퇴는 안할거지? <br> 뭘 고민하는거야? <br>
-									아직도 동의안해? <br> 아직도? <br> 이제 하지? <br>
+								<p class="modal_content">동의?   <!-- <br /> 태그 필요없음 -->
+									할거지? 
+									안할거야?
+									왜? 
+									왜 안하는거야? 
+									집착해도 될까?
+									동의할 때까지 물어봐도 될까? 동의할 때까지 물어봐도 될까?
+									안하면 회원가입 못하는데? 
+									회원탈퇴는 안할거지? 
+									뭘 고민하는거야? 
+									아직도 동의안해? 
+									아직도? 
+									이제 하지? 
+									과연 늘어나나? 
+									늘어나야해 
+									늘어난다!
 								</p>
 							</div>
 							<div class="check_container">

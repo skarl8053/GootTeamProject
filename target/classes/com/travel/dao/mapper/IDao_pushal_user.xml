@@ -3,81 +3,86 @@
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.travel.dao.user.IDao_pushal_user">
-
-	<select id="pushalSelect" resultType="com.travel.dto.user.DTO_pushal_user">
-			
-			
-			<![CDATA[  
-			SELECT 		A.ROW_NUM
-							,A.AL_CONTENT
-							,A.AL_GUBUN
-							,A.AL_GUBUN_NO
-							,A.AL_TIME
-			FROM(
-					SELECT  DISTINCT 
-								ROW_NUMBER() OVER(ORDER BY P.AL_TIME DESC) AS ROW_NUM,
-								P.AL_CONTENT AS AL_CONTENT,
-								(
-									CASE P.AL_GUBUN 	WHEN 1 THEN '결제'
-																WHEN 2 THEN '환불'
-																WHEN 3 THEN '배송' END
-								) AS AL_GUBUN,
-						       	(
-						       		CASE P.AL_GUBUN	WHEN 1 THEN 	P.ORDER_NO
-						       								  	WHEN 2 THEN  	D.REFUND_NO
-						       								  	WHEN 3 THEN 	P.DELIVERY_NO END
-						       	) AS AL_GUBUN_NO,
-						       	P.AL_TIME
-					FROM 	THISPUSHAL P   	LEFT JOIN  	THISORDER 		B 	ON 		P.ORDER_NO 	= B.ORDER_NO
-		                                            	LEFT JOIN 	THISORDERDTL 	C 	ON 		B.ORDER_NO 	= C.ORDER_NO
-		                                                                                  			AND 		B.S_NO 		 	= C.S_NO
-                                                        LEFT JOIN 	THISREFUND 		D  ON 		B.ORDER_NO  = D.ORDER_NO
-					WHERE 	P.M_NO = #{param1}
-					AND 		
-					(
-						#{param2} = 0
-						OR 
-						(P.AL_GUBUN = #{param2})
-					)
-					ORDER BY P.AL_TIME DESC
-			) A
-			WHERE ROW_NUM BETWEEN #{param3} AND #{param4}
-			]]>
-			
+	<select id="pushalpayment" resultType="com.travel.dto.user.DTO_pushal_user">
+			SELECT B.AL_NO,
+			       B.AL_CONTENT,
+			       B.ORDER_NO
+			FROM
+            (
+            SELECT 	ROW_NUMBER() OVER(ORDER BY AL_NO DESC) AS ROW_NUM,
+               P.AL_NO,
+		       P.AL_CONTENT,
+		       P.ORDER_NO
+               FROM
+               THISPUSHAL P
+                WHERE P.M_NO = #{param1}
+                AND AL_GUBUN =1
+                ORDER BY P.AL_NO DESC
+            )
+            B
+			WHERE B.ROW_NUM BETWEEN #{param2} AND #{param3}
 	</select>
 	
-	<select id="pageCalculate_pushal" resultType="integer">
+	<select id="countpayment" resultType="Integer">
 	
-			SELECT 	COUNT(*)
-			FROM 	THISPUSHAL
-			WHERE 	M_NO = #{param1}
-			AND 		
-			(
-					#{param2} = 0
-					OR 
-					(AL_GUBUN = #{param2})
-			)
-			<!-- 조건절 넣을 것 -->
+		SELECT 	COUNT(*)
+		FROM 	THISPUSHAL
+		WHERE 	M_NO = #{param1}
+		AND 	AL_GUBUN = 1
+		
+	</select>
+	<select id="countrefund" resultType="Integer">
 	
+		SELECT 	COUNT(*)
+		FROM 	THISPUSHAL
+		WHERE 	M_NO = #{param1}
+		AND     AL_GUBUN = 2
+		
+	</select>
+	<select id="countdelivery" resultType="Integer">
+	
+		SELECT 	COUNT(*)
+		FROM 	THISPUSHAL
+		WHERE 	M_NO = #{param1}
+		AND     AL_GUBUN = 3
+		
 	</select>
 	
-	<!-- <select id="pushalrefund" resultType="com.travel.dto.user.DTO_pushal_user">
+	<select id="pushalrefund" resultType="com.travel.dto.user.DTO_pushal_user">
 			SELECT P.AL_NO,
 				   P.AL_CONTENT,
 				   P.ORDER_NO
-				FROM THISPUSHAL P  
-			WHERE P.M_NO = #{param1}
-			AND AL_GUBUN =2
-			ORDER BY P.AL_NO DESC
+			FROM
+            (
+	            SELECT 	ROW_NUMBER() OVER(ORDER BY AL_NO DESC) AS ROW_NUM,
+	               	   P.AL_NO,
+					   P.AL_CONTENT,
+					   P.ORDER_NO
+						FROM THISPUSHAL P  
+				WHERE P.M_NO = #{param1}
+				AND AL_GUBUN =2
+				ORDER BY P.AL_NO DESC
+            )
+            P
+			WHERE P.ROW_NUM BETWEEN #{param2} AND #{param3}
 	</select>
 	<select id="pushaldelivery" resultType="com.travel.dto.user.DTO_pushal_user">
-		SELECT P.AL_NO,
-		       P.AL_CONTENT,
-		       P.DELIVERY_NO
-			FROM THISPUSHAL P  
-			WHERE P.M_NO = #{param1}
-			AND AL_GUBUN =3
-			ORDER BY P.AL_NO DESC
+		SELECT 	   P.AL_NO,
+				   P.AL_CONTENT,
+				   P.DELIVERY_NO
+			FROM
+            (
+	            SELECT 	ROW_NUMBER() OVER(ORDER BY AL_NO DESC) AS ROW_NUM,
+	               	   P.AL_NO,
+					   P.AL_CONTENT,
+					   P.DELIVERY_NO
+						FROM THISPUSHAL P  
+				WHERE P.M_NO = #{param1}
+				AND AL_GUBUN =3
+				ORDER BY P.AL_NO DESC
+            )
+            P
+			WHERE P.ROW_NUM BETWEEN #{param2} AND #{param3}
 	</select>
 	<select id="paymentcheck" resultType="com.travel.dto.user.DTO_pushal_user">
 		SELECT M.M_NAME,
@@ -142,5 +147,5 @@
 		                ON D.STEP_FLAG = C.CODE
 		    AND C.GRPCODE = 13
 		WHERE M.M_NO =#{param1}
-	</select> -->
+	</select>
 </mapper>

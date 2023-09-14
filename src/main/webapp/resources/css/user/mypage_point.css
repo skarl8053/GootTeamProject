@@ -31,7 +31,7 @@ li {
 
 .page_list {
 	margin-top: 20px;
-	width: 200px;
+	width: 100%;
 }
 
 #coupon{
@@ -61,7 +61,7 @@ p#MyPage{
 }
 #title_coupon{
    font-size: 35px;
-   margin-top: 50px;
+   margin-top: 80px;
    font-weight: bold;
 }
 hr{
@@ -106,14 +106,14 @@ table:first-child, th:first-child, td:first-child{
 }
 #p_point{
    font-size: 20px;
-   width: 100px;
-   margin-left: 575px;
+   width: 150px;
+   margin-left: 570px;
    display: inline-block;
 }
 #p_coupon{
    font-size: 20px;
    width: 150px;
-   margin-left: 530px;
+   margin-left: 540px;
    display: inline-block;
 }
 input{
@@ -130,4 +130,19 @@ input{
    margin-top: 30px;
    margin-left: 10px;;
    font-size: 20px;
+}
+
+#paging, #paging_coupon{
+	text-align: center;
+	margin-top: 15px;
+}
+#receipt_link{
+	text-decoration: none;
+	background-color: rgb(1, 19, 67);
+	color : rgb(235, 208, 28);
+	border-radius: 5px;
+	display:inline-block;
+	width:100px;
+	height:40px;
+	line-height: 40px;
 }
