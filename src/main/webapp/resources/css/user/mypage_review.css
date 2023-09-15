@@ -88,6 +88,7 @@ hr#menu_bar {
 #review_table {
 	width: 900px;
 	text-align: center;
+	border-collapse: collapse;
 }
 #paging{
 	text-align: center;

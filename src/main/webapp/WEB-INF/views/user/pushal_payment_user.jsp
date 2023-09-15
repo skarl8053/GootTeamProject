@@ -67,17 +67,14 @@
 							<c:forEach items="${dto }" var="payment">
 								<div id="data_form">
 									<!-- 링크로 넘어게가끔 해놓음, 클릭시 데이터 넘어감 -->
-									<a href="paymentcheck?m_no=${paymentcheck.m_no }"
-										id="data" 
-										onclick="payment('${payment.al_no}',
-														 '${payment.al_content }',
-														 '${payment.order_no })">
+								<a href="../member/mypage_receipt_popup?m_no=${sessionScope.m_no }&order_no=${payment.order_no}"
+								   id="data">
 										알림번호 : ${payment.al_no } <br/>
 										
 										결제내용 : ${payment.al_content } <br/>
 										
 										결제번호 : ${payment.order_no } 
-										</a>
+								</a> 
 									<hr id="content_bar">
 								</div>
 							</c:forEach>

@@ -68,16 +68,17 @@
 							<c:forEach items="${dto }" var="delivery">
 								<div id="data_form">
 									<!-- 링크로 넘어게가끔 해놓음, 클릭시 데이터 넘어감 -->
-									<a href="deliverycheck?m_no=${deli.m_no }"
-										id="data"
-										onclick="delivery('${delivery.al_no}',
-														  '${delivery.al_content }',
-														  '${delivery.delivery_no }')">
-
+									
+<%-- 									  <a href="deliverycheck?m_no=${deli.m_no }" --%>
+<!-- 										id="data" -->
+<%-- 										onclick="delivery('${delivery.al_no}', --%>
+<%-- 														  '${delivery.al_content }', --%>
+<%-- 														  '${delivery.delivery_no }')"> --%>
+<!-- 									  </a>   -->
 										알림번호 : ${delivery.al_no } <br /> 
 										배송내용 : ${delivery.al_content } <br /> 
 										주문번호 : ${delivery.delivery_no }
-									</a>
+									
 									<hr id="content_bar">
 								</div>
 							</c:forEach>

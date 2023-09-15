@@ -85,7 +85,7 @@ public class Service_Payment_Service implements Interface_TravelService {
 				Date checkin_date_dt = new SimpleDateFormat("yyyy-MM-dd").parse(checkin_date);
 		        Date checkout_date_dt = new SimpleDateFormat("yyyy-MM-dd").parse(checkout_date);
 		        
-		        diffDay = ((checkout_date_dt.getTime() - checkin_date_dt.getTime()) / 1000 / (24*60*60)) + 1;
+		        diffDay = ((checkout_date_dt.getTime() - checkin_date_dt.getTime()) / 1000 / (24*60*60));
 		        
 			}
 			catch(Exception ex) {

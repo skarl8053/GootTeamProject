@@ -63,11 +63,9 @@
 								</c:when>
 								<c:otherwise>
 									<c:forEach items="${dtoS }" var="dto">
-										<td class="event_img"><a
-											href="user/event_page?event_no=${dto.event_no }"> <img
-												src="resources/upload_img/${dto.filename2 }"
-												alt="진행중인 이벤트 사진 없음" />
-										</a></td>
+										<td class="event_img">
+										<a href="./event_page?event_no=${dto.event_no }"> <img src="resources/upload_img/admin/event/detail/${dto.filename2 }" width="250px" height="350px" /></a>
+										</td>
 									</c:forEach>
 								</c:otherwise>
 							</c:choose>

@@ -508,7 +508,7 @@ p {
 									    <c:when test="${stay_room_view.r_facility3 == 5}"><button id="border-facility">조식 포함</button></c:when>
 									    <c:when test="${stay_room_view.r_facility3 == 6}"><button id="border-facility">무료 와이파이</button></c:when>
 									</c:choose>
-								<br />
+									<br />
 								
 									<c:choose>       
 									    <c:when test="${stay_room_view.r_facility4 == 4}"><button id="border-facility">넷플릭스</button></c:when>

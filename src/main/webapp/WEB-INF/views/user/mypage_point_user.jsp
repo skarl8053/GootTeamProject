@@ -59,16 +59,15 @@
 					<c:choose>
 						<c:when test="${empty dto_point}">
 							<tr>
-								<td colspan="5"><img
-									src="resources/img/No_Search.jpeg" width="150px"
-									height="150px" /> <br />
-								<br /> 사용 가능한 포인트가 없습니다.</td>
+								<td colspan="5"><img src="resources/img/No_Search.jpeg"
+									width="150px" height="150px" /> <br /> <br /> 사용 가능한 포인트가
+									없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
 							<c:forEach items="${dto_point}" var="dto">
 								<tr>
-									<td height="40px">${dto.point_no}</td>
+									<td height="40px">${dto.row_num}</td>
 									<td>${dto.point_usedate}</td>
 									<c:choose>
 										<c:when test="${dto.point_type == 1}">
@@ -144,13 +143,22 @@
 								<th class="Date" width="30%">쿠폰명</th>
 								<th class="content" width="30%">수량</th>
 							</tr>
-							<c:forEach items="${dto_coupon }" var="dto">
-								<tr>
-									<td height="40px">${dto.row_number }</td>
-									<td>${dto.coupon_no }</td>
-									<td>${dto.coupon_qty }</td>
-								</tr>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${empty dto_coupon }">
+									<td colspan="3"><img src="resources/img/No_Search.jpeg"
+										width="150px" height="150px" /> <br /> <br /> 보유 중인 쿠폰이
+										없습니다.</td>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${dto_coupon }" var="dto">
+										<tr>
+											<td height="40px">${dto.row_number }</td>
+											<td>${dto.coupon_no }</td>
+											<td>${dto.coupon_qty }</td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</table>
 						<div id="all_coupon">
 							<p id="p_coupon">총 쿠폰 개수 :</p>
@@ -178,10 +186,9 @@
 							</tr>
 							<c:choose>
 								<c:when test="${empty dto_usecoupon }">
-									<td colspan="4"><img
-										src="resources/img/No_Search.jpeg" width="150px"
-										height="150px" /> <br />
-									<br /> 쿠폰 사용 내역이 없습니다.</td>
+									<td colspan="4"><img src="resources/img/No_Search.jpeg"
+										width="150px" height="150px" /> <br /> <br /> 쿠폰 사용 내역이
+										없습니다.</td>
 								</c:when>
 								<c:otherwise>
 									<c:forEach items="${dto_usecoupon }" var="dto">

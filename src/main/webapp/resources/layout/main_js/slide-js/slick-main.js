@@ -39,7 +39,7 @@ $(function() {
 	// /////////////////////////
 	// 숙소 추천 슬라이드
 	printImgTag2 = ""; // 동적으로 추가할 이미지 슬라이드
-	
+	printImgTag3 = "";
 	var not_login_img_split = not_login_img.split(",");
 	var login_img_split = login_img.split(",");
 	var login_s_no_split = login_s_no.split(",");
@@ -64,21 +64,21 @@ $(function() {
 	
 	// 비로그인 / 로그인 시 이미지 , 링크 뿌려주기
 	if (m_no == "" || m_no == null) {
-		for (i = 0; i < not_login_img_split.length; i++) {
+		for (i = 0; i < 5; i++) {
 		printImgTag2 += '<a href="' + Not_Login_Stay_link[i] + '"><img src="'
 				+ Not_Login_Stay_img[i] + '" /></a>';
 		}
-		// <div class="hdeal slider"> 태그 내부에 printImgTag2(html 태그) 삽입
 		$("div.stayinfo").addClass("slider").html(printImgTag2);
-	} else {
-		for (i = 0; i < 5; i++) {
-		printImgTag += '<a href="' + Login_Stay_link[i] + '"><img src="'
-				+ Login_Stay_img[i] + '" /></a>';
+		} else {
+		    // 로그인 상태에서는 이미지와 링크 배열에서 무작위로 5개를 선택합니다.
+		    var randomIndices = getRandomIndices(Login_Stay_img.length, 5); 
+
+		    for (var i = 0; i < randomIndices.length; i++) {
+		        var randomIndex = randomIndices[i];
+		        printImgTag3 += '<a href="' + Login_Stay_link[randomIndex] + '"><img src="' + Login_Stay_img[randomIndex] + '" /></a>';
+		    }
+		    $("div.stayinfo").addClass("slider").html(printImgTag3);
 		}
-		// <div class="hdeal slider"> 태그 내부에 printImgTag2(html 태그) 삽입
-		$("div.stayinfo").addClass("slider2").html(printImgTag);
-		$("div.event-slider").empty();
-	}	
 	
 	$(".stayinfo").slick({
 		dots : true /* 페이지 네비게이션(이미지 하단의 ...) */,
@@ -92,3 +92,18 @@ $(function() {
 		centerMode : true
 	});
 });
+
+// 랜덤값 구하기
+function getRandomIndices(max, count) {
+    var indices = [];
+    for (var i = 0; i < max; i++) {
+        indices.push(i);
+    }
+    var randomIndices = [];
+    while (randomIndices.length < count && indices.length > 0) {
+        var randomIndex = Math.floor(Math.random() * indices.length);
+        randomIndices.push(indices[randomIndex]);
+        indices.splice(randomIndex, 1);
+    }
+    return randomIndices;
+}

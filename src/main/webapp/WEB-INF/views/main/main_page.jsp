@@ -384,6 +384,11 @@
 				return false;
 			}
 			
+			if(checkInDate == checkOutDate){
+				alert("체크인 / 체크아웃 날짜가 동일할 수 없습니다.");
+				return false;
+			}
+			
 			// 숙소 페이지로 이동(입력할 것!!)
 			// http://localhost:9005/travel/user/stay_list_user?m_no=1&s_loca=3&checkInDate=2023-09-11&checkOutDate=2023-10-11&personCount=2
 					
@@ -430,9 +435,9 @@
 		<br /><br />
 		<div class="date-guest-search">
 			<div>
-				<input type="text" id="datepicker1" placeholder="체크인">
+				<input type="text" id="datepicker1" placeholder="체크인" autocomplete="off">
 				<span> ~ </span> 
-				<input type="text" id="datepicker2" placeholder="체크아웃">
+				<input type="text" id="datepicker2" placeholder="체크아웃" autocomplete="off">
 			</div>
 			<div class="dropdown">
 				<div>

@@ -411,7 +411,15 @@
         	
             var paymethod = document.getElementById("paymethod").value;
             var cardnumber = document.getElementById("card_number").value;
-
+			
+            var checkindate = "${param.checkindate}";
+            var checkoutdate = "${param.checkoutdate}"
+            
+            if(checkindate == checkoutdate){
+            	alert("체크인 / 체크아웃 날짜가 동일할 수 없습니다.");
+            	return false;
+            }
+            
             if(paymethod == 1){
                 
                 if(cardnumber.length < 1)
@@ -698,7 +706,7 @@
                                     
                                      <c:forEach items="${roomList}" var="li">
                                      		<tr class="second_row">
-		                                        <td class="first_col"><img class="r_img" src="resources/upload_img/admin/stay/${li.r_img1}" alt="이미지 없음"></td>
+		                                        <td class="first_col"><img class="r_img" src="resources/upload_img/admin/room/${li.r_img1}" alt="이미지 없음"></td>
 		                                        <td class="second_col">
 		                                            <div>
 		                                                <span>${li.r_name }</span>

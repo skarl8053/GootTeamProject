@@ -1,5 +1,6 @@
 package com.travel.service.user;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -35,15 +36,73 @@ public class MyPage_Pay_Service implements Interface_TravelService {
 
 		int currentPage = request.getParameter("page") != null ? Integer.parseInt(request.getParameter("page")) : 1;
 		SearchVO vo = new SearchVO();
-		vo.setDisplayRowCount(5);
+		vo.setDisplayRowCount(30);
 		vo.setPage(currentPage);
 		vo.pageCalculate(dao.paging_pay(m_no));
-
-		List<DTO_Mypage_user> dto = dao.pay_list(m_no, vo.getRowStart(), vo.getRowEnd());
+		System.out.println("행 개수 : "+vo.getTotRow());
 		
-		model.addAttribute("dto", dto);
-		model.addAttribute("vo", vo);
+		List<DTO_Mypage_user> dto = dao.pay_list(m_no, vo.getRowStart(), vo.getRowEnd());
 
+//		String r_name1 = "";
+//		String r_name2 = "";
+//		String r_name3 = "";
+//	    String[] room_name= new String [3];
+//	    String[] r_name = new String[3];
+//		
+//		System.out.println("여기까지");
+//		
+//		for (int i = 0; i < dto.size(); i++) {
+//			System.out.println("------"+i+"---------");
+//			
+//			System.out.println("dto : "+dto.size());
+//			System.out.println("저장된 내용 : "+dto.get(i).getR_name());
+//			
+//	    	room_name = dto.get(i).getR_name().split(",");
+//	    	
+//	    	for (int j = 0; j < 3; j++) {
+//	    		if (j > room_name.length - 1) {
+//	    			r_name[j] = "";
+//	    		} else {
+//	    			r_name[j] = room_name[j];
+//	    		}
+//	    	r_name1 = r_name[0];
+//	    	System.out.println(r_name1);
+//	    	r_name2 = r_name[1];
+//	    	System.out.println(r_name2);
+//	    	r_name3 = r_name[2];			
+//	    	System.out.println(r_name3);
+//		
+//	    }
+	    	
+		List<List<String>> r_name = new ArrayList();
+
+		for (int i = 0; i < dto.size(); i++) {
+			
+			List<String> room = new ArrayList();
+		    String[] room_name = dto.get(i).getR_name().split(",");
+		    
+		    for (int j = 0; j < 3; j++) {
+		        if (j < room_name.length) {
+		        	room.add(room_name[j]);
+		        }
+		    }
+		    r_name.add(room); 
+		}
+	    
+
+
+	    model.addAttribute("dto", dto);
+	    model.addAttribute("vo", vo);
+//	    model.addAttribute("r_name1", r_name1);
+//	    model.addAttribute("r_name2", r_name2);
+//	    model.addAttribute("r_name3", r_name3);
+	    model.addAttribute("r_name", r_name);
+	    
+	    if(request.getParameter("msg") == null || request.getParameter("msg").equals("")) {
+	         model.addAttribute("msg","");
+	      }
+	      else {
+	         model.addAttribute("msg",request.getParameter("msg"));
+	      }
 	}
-
-}
+	}
