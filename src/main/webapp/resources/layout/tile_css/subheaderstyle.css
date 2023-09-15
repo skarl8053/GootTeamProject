@@ -1,8 +1,7 @@
-
 /* 
-	제작 : 남기문 
-    일자 : 2023. 09. 02
-*/
+			제작 : 남기문 
+		    일자 : 2023. 09. 02
+		*/
 
 @font-face {
     font-family: 'GmarketSansMedium';
@@ -38,8 +37,7 @@ body {
 /* 상단바 네비게이션 스타일 */
 
 #navigation { 
-    /* background: #14172C; */
-    background-color: rgb(1, 19, 67);
+    background: rgb(1, 19, 67);
     height: 85px;
 }
 
@@ -79,6 +77,54 @@ body {
     transition: 0.3s linear;
     text-decoration: none;
 }
+
+/* max-width: 1700px  */
+
+@media (min-width: 1400px) and (max-width: 1700px){
+
+	.menu-bar a{
+	    display: block;
+	    font-size: 25px;
+	    padding: 15px 0px;
+	    margin-right: 50px;
+	    width: 200px;
+	    height: 40px;
+	    color: rgb(235, 208, 28);
+	    transition: 0.3s linear;
+	    text-decoration: none;
+	}
+} 
+
+@media (min-width: 1000px) and (max-width: 1400px){
+
+	.menu-bar a{
+	    display: block;
+	    font-size: 25px;
+	    padding: 15px 0px;
+	    margin-right: 50px;
+	    width: 100px;
+	    height: 40px;
+	    color: rgb(235, 208, 28);
+	    transition: 0.3s linear;
+	    text-decoration: none;
+	}
+} 
+
+@media (min-width: 800px) and (max-width: 1000px){
+
+	.menu-bar a{
+	    display: block;
+	    font-size: 25px;
+	    padding: 15px 0px;
+	    margin-right: 50px;
+	    width: 80px;
+	    height: 40px;
+	    color: rgb(235, 208, 28);
+	    transition: 0.3s linear;
+	    text-decoration: none;
+	}
+} 
+
 
 .menu-bar:hover { background-color: #14172C;}
 

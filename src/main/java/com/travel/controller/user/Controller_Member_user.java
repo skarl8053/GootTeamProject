@@ -262,7 +262,7 @@ public class Controller_Member_user {
 
 		// 업데이트 후 창 닫기 구현 필요
 		
-		return "";
+		return "redirect:../user/mypage_pay";
 	}
 	
 	@RequestMapping("mypage_receipt_popup")
@@ -274,6 +274,17 @@ public class Controller_Member_user {
 		service.execute(model);
 
 		return "member/mypage_receipt_user";
+		
+	}
+	@RequestMapping("mypage_refundreceipt_popup")
+	public String refundreceipt_popup(HttpServletRequest request, Model model) {
+		
+		model.addAttribute("request",request);
+		
+		service = new Service_Refund_Select_User(sqlSession);
+		service.execute(model);
+		
+		return "member/mypage_refundreceipt_user";
 		
 	}
 	

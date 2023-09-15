@@ -36,7 +36,7 @@ body {
 /* 상단바 네비게이션 스타일 */
 
 #navigation { 
-    background: #14172C;
+    background: rgb(1, 19, 67);
     height: 85px;
 }
 
@@ -83,8 +83,8 @@ body {
 	    display: block;
 	    font-size: 25px;
 	    padding: 15px 0px;
-	    margin-right: 50px;
-	    width: 200px;
+	    margin-right: 40px;
+	    width: 300px;
 	    height: 40px;
 	    color: rgb(235, 208, 28);
 	    transition: 0.3s linear;
@@ -92,14 +92,14 @@ body {
 	}
 } 
 
-@media (min-width: 1000px) and (max-width: 1400px){
+@media (min-width: 1000px) and (max-width: 1401px){
 
 	.menu-bar a{
 	    display: block;
 	    font-size: 25px;
 	    padding: 15px 0px;
-	    margin-right: 50px;
-	    width: 100px;
+	    margin-right: 20px;
+	    width: 250px;
 	    height: 40px;
 	    color: rgb(235, 208, 28);
 	    transition: 0.3s linear;
@@ -107,7 +107,7 @@ body {
 	}
 } 
 
-@media (min-width: 800px) and (max-width: 1000px){
+@media (min-width: 800px) and (max-width: 1001px){
 
 	.menu-bar a{
 	    display: block;

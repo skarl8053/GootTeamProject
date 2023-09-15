@@ -52,24 +52,29 @@
 					<tr>
 						<th width="5%" height="50px">No</th>
 						<th width="25%">숙소 정보</th>
-						<th width="20%">객실 정보</th>
-						<th width="18%">예약 날짜</th>
-						<th width="17%">예약일</th>
+						<th width="25%">객실 정보</th>
+						<th width="15%">숙박일</th>
+						<th width="15%">예약일</th>
 						<th width="15%">상태</th>
 					</tr>
 					<c:choose>
-						<c:when test="${empty dto }">
+						<c:when test="${empty dto }" >
 							<tr>
 								<td colspan="6"><img src="resources/img/No_Search.jpeg" width="150px" height="150px" /> <br /><br />
 								결제 내역이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>
-							<c:forEach items="${dto }" var="dto">
+							<c:forEach items="${dto }" var="dto"  varStatus="loop">
 								<tr>
-									<td height="200px">${dto.row_num }</td>
-									<td><a href="#"><img src="resources/upload_img/admin/stay/${dto.s_img1 }" alt="첨부안함" /></a></td>
-									<td>${dto.r_name }</td>
+									<td height="200px">${dto.order_no }</td>
+									<td><a href="#"><img src="resources/upload_img/admin/stay/${dto.s_img1 }" alt="첨부안함" /><br />
+											${dto.s_name }</a></td>
+									<td>
+											<c:forEach items="${r_name[loop.index]}" var="r_name" >
+           								    		${r_name } <br />
+          									 </c:forEach>
+									</td>
 									<td>${dto.check_in_date }<br />~ <br />${dto.check_out_date }
 									</td>
 									<td>${dto.order_date }</td>
@@ -78,13 +83,13 @@
 									<td>환불 검토 중</td>
 									</c:when>
 									<c:when test="${dto.step_flag eq 2 }">
-									<td>환불 완료</td>
+									<td><a href="../member/mypage_refundreceipt_popup?m_no=${sessionScope.m_no}&order_no=${dto.order_no}"  id="refund_link">환불 내역</a></td>
 									</c:when>
 									<c:when test="${dto.step_flag eq 3 }">
 									<td><a href="../member/mypage_refund_popup?m_no=${sessionScope.m_no}&order_no=${dto.order_no}"  id="refund_link">환불 신청</a></td>
 									</c:when>
 									<c:when test="${dto.step_flag eq 4 }">
-									<td><a href="user/review_writeview_user?m_no=${sessionScope.m_no}&s_no=${dto.s_no}&r_no=${dto.r_no}&order_no=${dto.order_no}" id="review_link">후기 작성</a> <br />
+									<td><a href="./review_writeview_user?m_no=${sessionScope.m_no}&s_no=${dto.s_no}&r_no=${dto.r_no}&order_no=${dto.order_no}" id="review_link">후기 작성</a> <br />
 									<a href="../member/mypage_receipt_popup?m_no=${sessionScope.m_no }&order_no=${dto.order_no}" class="receipt_link">구매 내역</a></td>
 									</c:when>
 									<c:when test="${dto.step_flag eq 5 }">
@@ -124,5 +129,11 @@
 		</div>
 	</div>
 </body>
+	<c:if test="${not empty msg}">      
+      <script>
+         alert("${msg}");
+         location.replace("mypage_pay?page=1")
+      </script>
+   </c:if>
 
 </html>
