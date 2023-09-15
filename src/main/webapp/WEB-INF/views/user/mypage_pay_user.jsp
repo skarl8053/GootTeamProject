@@ -16,7 +16,8 @@
 <style>
 #content {
 	width: auto;
-	height: auto;
+	min-height: 700px;
+	height : auto;
 }
 </style>
 <body>
@@ -67,8 +68,8 @@
 						<c:otherwise>
 							<c:forEach items="${dto }" var="dto"  varStatus="loop">
 								<tr>
-									<td height="200px">${dto.order_no }</td>
-									<td><a href="#"><img src="resources/upload_img/admin/stay/${dto.s_img1 }" alt="Ã·ºÎ¾ÈÇÔ" /><br />
+									<td height="200px">${dto.row_num }</td>
+									<td><a href="stay_detail_user?s_no=${dto.s_no }" id="s_link"><img src="resources/upload_img/admin/stay/${dto.s_img1 }"  id="s_img"/><br />
 											${dto.s_name }</a></td>
 									<td>
 											<c:forEach items="${r_name[loop.index]}" var="r_name" >

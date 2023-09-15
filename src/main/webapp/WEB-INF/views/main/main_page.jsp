@@ -435,9 +435,9 @@
 		<br /><br />
 		<div class="date-guest-search">
 			<div>
-				<input type="text" id="datepicker1" placeholder="체크인">
+				<input type="text" id="datepicker1" placeholder="체크인" autocomplete="off">
 				<span> ~ </span> 
-				<input type="text" id="datepicker2" placeholder="체크아웃">
+				<input type="text" id="datepicker2" placeholder="체크아웃" autocomplete="off">
 			</div>
 			<div class="dropdown">
 				<div>

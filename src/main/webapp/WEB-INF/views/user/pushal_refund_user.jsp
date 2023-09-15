@@ -66,15 +66,13 @@
 							<c:forEach items="${dto }" var="refund">
 								<div id="data_form">
 									<!-- 링크로 넘어게가끔 해놓음, 클릭시 데이터 넘어감 -->
-									<a href="refundcheck?m_no=${refundinfo.m_no }"
-										id="data"
-										onclick="refunnd('${refund.al_no}',
-														 '${refund.al_content }',
-														  ${refund.order_no })">
+									<a href="../member/mypage_receipt_popup?m_no=${sessionScope.m_no }&order_no=${refund.order_no}">
 									
 										알림번호 : ${refund.al_no } <br/>
-										환불내용 : ${refund.al_content } <br/>
-										환불번호 : ${refund.order_no }
+										
+										결제내용 : ${refund.al_content } <br/>
+										
+										결제번호 : ${refund.order_no } 
 									</a>
 									<hr id="content_bar">
 								</div>
