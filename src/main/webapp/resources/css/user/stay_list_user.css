@@ -332,10 +332,10 @@ a{
    position: relative;
    color: #fff;
    background-color: #aaa;
-   font-size: 20px;
+   font-size: 18px;
    text-align: center;
    height: 50px;
-   line-height: 50px;
+   line-height: 40px;
    display: revert;
    cursor: pointer;
    border: 3px solid transparent;

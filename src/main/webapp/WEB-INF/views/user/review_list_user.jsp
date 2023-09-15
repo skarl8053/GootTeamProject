@@ -126,7 +126,7 @@
                 <a href="review_user_like?review_no=${dto.review_no }&s_no=${s_no }&m_no=${m_no }"> <input type="image" name="button" src="resources/img/user/review/reviewLikeIcon.png" width="30px"></a>
 					${dto.likes }
 
-
+		  <!--  신고하기 --> 
 					<c:if test="${dto.report_no eq '0' }">
 						 <a href="report?review_no=${dto.review_no }">
                 <input type="image" name="button" src="resources/img/user/review/reviewAlertIcon.png" width="30px">
@@ -147,7 +147,6 @@
                 <input type="image" name="button" src="resources/img/user/review/reviewAlertIcon.png" width="30px">
                
                 </a> --%>
-               <%-- 합칠때 변경해야함  <a href="locallhost:8090/travel/user?review_no=${dto.review_no }"><input type="button" value="신고"></a> --%>
             </div>
             <div class="db">
                 <textarea name="" id="review_content" cols="156" rows="2">${dto.review_content }</textarea>

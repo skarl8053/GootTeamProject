@@ -218,6 +218,8 @@
 								
 								<button	class="button-24" role="button" onclick="sendParametersAndShowPopup0();">장바구니</button>
 								
+								<!-- 예약버튼  -->
+								
 								<c:if test="${empty checkInDate || checkInDate eq null }">
 									<a href="payment?m_no=${m_no }&s_no=${listS[0].s_no }&r_no=${listSDR[0].r_no }"></c:if> 
 								<c:if test="${not empty checkInDate }">
@@ -226,9 +228,7 @@
 								
 								<button	class="button-24" role="button">예약하기</button></a></span>
 							</p>
-							<!-- 예약버튼 만들시에 보낼 파람값 -->
-							<!-- <a href="http://localhost:8090/travel/user/payment?m_no=1&s_no=1&r_no=1_2_3&checkindate=2023-05-05&checkoutdate=2023-05-08"><button>예약</button></a> -->
-							<!-- <a href="http://localhost:8090/travel/user/payment?m_no=1&s_no=1&r_no=1_2_3"><button>예약</button></a> -->
+							
 						</div>
 					</div>
 				</summary>
@@ -332,7 +332,7 @@
 								가격: ${listSDR[1].r_price } 원 &nbsp&nbsp&nbsp&nbsp&nbsp <span>
 								<button	class="button-24" role="button" onclick="sendParametersAndShowPopup1();">장바구니</button>
 								
-								
+								<!-- 예약버튼  -->
 									<c:if test="${empty checkInDate || checkInDate eq null }">
 										<a href="payment?m_no=${m_no }&s_no=${listS[0].s_no }&r_no=${listSDR[1].r_no }"></c:if> 
 									<c:if test="${not empty checkInDate }">
@@ -340,9 +340,6 @@
 									
 									<button	class="button-24" role="button">예약하기</button></a></span>
 							</p>
-							<!-- 예약버튼 만들시에 보낼 파람값 -->
-							<!-- <a href="http://localhost:8090/travel/user/payment?m_no=1&s_no=1&r_no=1_2_3&checkindate=2023-05-05&checkoutdate=2023-05-08"><button>예약</button></a> -->
-							<!-- <a href="http://localhost:8090/travel/user/payment?m_no=1&s_no=1&r_no=1_2_3"><button>예약</button></a> -->
 						</div>
 					</div>
 				</summary>
@@ -443,7 +440,7 @@
 							<p class="accommodationBl">
 								가격: ${listSDR[2].r_price } 원 &nbsp&nbsp&nbsp&nbsp&nbsp <span>
 							<button	class="button-24" role="button" onclick="sendParametersAndShowPopup2();">장바구니</button>
-								
+								<!-- 예약버튼  -->
 								<c:if test="${empty checkInDate || checkInDate eq null }">
 									<a href="payment?m_no=${m_no }&s_no=${listS[0].s_no }&r_no=${listSDR[2].r_no }"></c:if> 
 								<c:if test="${not empty checkInDate }">
@@ -453,9 +450,6 @@
 									
 									<button	class="button-24" role="button">예약하기</button></a></span>
 							</p>
-							<!-- 예약버튼 만들시에 보낼 파람값 -->
-							<!-- <a href="http://localhost:8090/travel/user/payment?m_no=1&s_no=1&r_no=1_2_3&checkindate=2023-05-05&checkoutdate=2023-05-08"><button>예약</button></a> -->
-							<!-- <a href="http://localhost:8090/travel/user/payment?m_no=1&s_no=1&r_no=1_2_3"><button>예약</button></a> -->
 						</div>
 					</div>
 				</summary>
@@ -523,8 +517,6 @@
 							<img src="resources/upload_img/admin/room/${listSDR[2].r_img3 }"
 								style="width: 100%">
 						</div>
-
-
 
 
 						<a class="prev1" onclick="moveSlides2(-1)">&#10094;</a> <a

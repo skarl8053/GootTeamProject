@@ -208,11 +208,6 @@
                             <input type="range"  value="${list.s_rate}" step="1" min="1" max="5" oninput="callrating('${list.s_no}', this.value);">
                              </span></a>
                              
-                             
-                             
-                             
-                             
-                             
                             
                               </div>
 						
