@@ -35,7 +35,8 @@
   overflow: hidden;
 }
 .tcimg img{
-	position: absolute;
+  z-index: -10;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
