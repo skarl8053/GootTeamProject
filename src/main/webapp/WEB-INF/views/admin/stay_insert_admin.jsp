@@ -14,7 +14,8 @@
         #content{
             height: auto;
             width : 1200px;
-            margin : 0 auto;
+            margin-left : auto;
+            margin-right : auto;
         }
     </style>
     
@@ -168,9 +169,9 @@
 	    	<button id="searchButton">주소 검색</button>
 	        <div class="xy">
 		        <span>위도</span>
-		        <input type="text" onfocus="this.value='';" name="addr_x" id="addr_x" placeholder="위도를 입력해주세요." readonly>
+		        <input type="text"  name="addr_x" id="addr_x" placeholder="위도를 입력해주세요." readonly>
 		        <span>경도</span>
-		        <input type="text" onfocus="this.value='';" name="addr_y" id="addr_y" placeholder="경도를 입력해주세요." readonly>
+		        <input type="text"  name="addr_y" id="addr_y" placeholder="경도를 입력해주세요." readonly>
 	        </div>
 	        
 	         <!-- 주소 검색 및 위도 경도 구하기 -->
