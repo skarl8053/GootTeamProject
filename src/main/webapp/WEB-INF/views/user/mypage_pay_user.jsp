@@ -31,9 +31,9 @@
 					</li>
 					<li class="page_list"><a href="./mypage_info" class="menu"
 						id="info">기본 회원 정보</a> <br></li>
-					<li class="page_list"><a href="./mypage_pay" class="menu"
+					<li class="page_list"><a href="./mypage_pay?page=1" class="menu"
 						id="pay">결제 내역</a> <br></li>
-					<li class="page_list"><a href="./mypage_review" class="menu"
+					<li class="page_list"><a href="./mypage_review?page=1" class="menu"
 						id="review">숙소 후기</a> <br></li>
 					<li class="page_list"><a href="./mypage_event?ing_page=1&end_page=1" class="menu"
 						id="event">이벤트</a> <br></li>
@@ -60,7 +60,8 @@
 					<c:choose>
 						<c:when test="${empty dto }">
 							<tr>
-								<td colspan="6">데이터가 없습니다.</td>
+								<td colspan="6"><img src="resources/img/No_Search.jpeg" width="150px" height="150px" /> <br /><br />
+								결제 내역이 없습니다.</td>
 							</tr>
 						</c:when>
 						<c:otherwise>

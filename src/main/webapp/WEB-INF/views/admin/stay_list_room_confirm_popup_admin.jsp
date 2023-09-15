@@ -100,7 +100,7 @@
 			<tr>
 				<td>${room_list.s_no }</td>
 				<td>${room_list.r_name }</td>
-				<td><img src="resources/upload_img/admin/stay/${room_list.r_img1 }" alt="이미지 없음" width="250px;" height="250px;"/></td>
+				<td><img src="resources/upload_img/admin/room/${room_list.r_img1 }" alt="이미지 없음" width="250px;" height="250px;"/></td>
 				<td><input type="submit" value="삭제" class="btn" onclick="return deleteRoom(${room_list.r_name })"/></td>
 			</tr>
 		</c:forEach>

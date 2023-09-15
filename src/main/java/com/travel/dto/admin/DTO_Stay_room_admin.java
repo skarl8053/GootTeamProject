@@ -32,4 +32,5 @@ public class DTO_Stay_room_admin {
 
 	private String s_img1;
 	private String s_name;
+
 }

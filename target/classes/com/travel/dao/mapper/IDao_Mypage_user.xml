@@ -138,7 +138,7 @@
 			WHERE A.ROW_NUM BETWEEN #{param2} AND #{param3} -->
 
 
-		SELECT A.ROW_NUM, A.S_NO, A.S_IMG1, A.R_NAME, A.ORDER_NO, A.R_NO, A.STEP_FLAG,
+		<!-- SELECT A.ROW_NUM, A.S_NO, A.S_IMG1, A.R_NAME, A.ORDER_NO, A.R_NO, A.STEP_FLAG,
 		TO_CHAR(A.CHECK_IN_DATE, 'YYYY-MM-DD') AS CHECK_IN_DATE,
 		TO_CHAR(A.CHECK_OUT_DATE, 'YYYY-MM-DD') AS CHECK_OUT_DATE,
 		TO_CHAR(A.ORDER_DATE, 'YYYY-MM-DD') AS ORDER_DATE, A.REVIEW_FLAG
@@ -163,7 +163,40 @@
 		LEFT JOIN THISREFUND RF ON O.ORDER_NO = RF.ORDER_NO
 		WHERE M.M_NO=#{param1}
 		) A
-		WHERE A.ROW_NUM BETWEEN #{param2} AND #{param3}
+		WHERE A.ROW_NUM BETWEEN #{param2} AND #{param3} -->
+		
+		SELECT A.S_NO, A.S_IMG1,  A.ORDER_NO,  A.STEP_FLAG, A.R_NAME,
+		TO_CHAR(A.CHECK_IN_DATE, 'YYYY-MM-DD') AS CHECK_IN_DATE,
+		TO_CHAR(A.CHECK_OUT_DATE, 'YYYY-MM-DD') AS CHECK_OUT_DATE,
+		TO_CHAR(A.ORDER_DATE, 'YYYY-MM-DD') AS ORDER_DATE, A.REVIEW_FLAG
+		FROM (
+            SELECT S.S_NO, S.S_IMG1, O.ORDER_NO, O.REVIEW_FLAG,
+            (
+                CASE WHEN RF.STEP_FLAG IS NOT NULL THEN RF.STEP_FLAG
+                WHEN RF.STEP_FLAG IS NULL THEN
+                (
+                    CASE WHEN TO_CHAR(O.CHECK_IN_DATE, 'YYYY-MM-DD') > TO_CHAR(SYSDATE, 'YYYY-MM-DD') THEN 3
+                         WHEN (TO_CHAR(SYSDATE,'YYYY-MM-DD') >= TO_CHAR(O.CHECK_IN_DATE,
+                    'YYYY-MM-DD') AND O.REVIEW_FLAG = 'N' ) THEN 4
+                         WHEN (TO_CHAR(SYSDATE,'YYYY-MM-DD') >= TO_CHAR(O.CHECK_IN_DATE,
+                    'YYYY-MM-DD') AND O.REVIEW_FLAG = 'Y' ) THEN 5 END
+                ) END
+            ) AS STEP_FLAG,
+            O.CHECK_IN_DATE, O.CHECK_OUT_DATE, O.ORDER_DATE,
+            ROW_NUMBER() OVER (ORDER BY O.ORDER_DATE) AS ROW_NUM,
+            LISTAGG(R.R_NAME,',') WITHIN GROUP(ORDER BY R.R_NAME) AS R_NAME
+            FROM THISORDER O 	LEFT JOIN TMSTMEMBER 	M 		ON 	M.M_NO 			=	O.M_NO
+                                        LEFT JOIN THISORDERDTL 	OD 	ON 	O.ORDER_NO 	= 	OD.ORDER_NO
+                                                                                	AND 	O.S_NO 			= 	OD.S_NO
+            LEFT JOIN TMSTSTAY S 		ON 	O.S_NO 			= S.S_NO
+            LEFT JOIN TMSTROOM R 	ON 	OD.S_NO 		= R.S_NO
+                                			 	AND 	OD.R_NO 		= R.R_NO
+            LEFT JOIN THISREFUND RF 	ON 	O.ORDER_NO 	= RF.ORDER_NO
+            WHERE M.M_NO = #{param1}
+            GROUP BY S.S_NO, S.S_IMG1, O.ORDER_NO, O.REVIEW_FLAG, RF.STEP_FLAG, O.CHECK_IN_DATE, O.CHECK_OUT_DATE, O.ORDER_DATE
+		) A
+		WHERE A.ROW_NUM BETWEEN #{param2] AND #{param3}
+        
 	</select>
 
 

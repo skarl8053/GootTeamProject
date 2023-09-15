@@ -132,7 +132,7 @@ table {
 					<tr>
 						<td class="first_col">번호</td>
 						<td class="second_col" colspan="2">객실명</td>
-						<td class="third_col">금액</td>
+						<td class="third_col">금액 (1박 기준)</td>
 					</tr>
 					<c:forEach items="${r_list}" var="li">
 						<tr>

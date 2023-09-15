@@ -15,7 +15,7 @@
 <style>
 #content {
 	width: auto;
-	height: 1600px;
+	height: 1500px;
 }
 </style>
 <body>
@@ -29,11 +29,12 @@
 					</li>
 					<li class="page_list"><a href="./mypage_info" class="menu"
 						id="info">기본 회원 정보</a> <br></li>
-					<li class="page_list"><a href="./mypage_pay" class="menu"
-						id="pay">결제 내역</a> <br></li>
-					<li class="page_list"><a href="./mypage_review" class="menu"
-						id="review">숙소 후기</a> <br></li>
-					<li class="page_list"><a href="./mypage_event?ing_page=1&end_page=1" class="menu"
+					<li class="page_list"><a href="./mypage_pay?page=1"
+						class="menu" id="pay">결제 내역</a> <br></li>
+					<li class="page_list"><a href="./mypage_review?page=1"
+						class="menu" id="review">숙소 후기</a> <br></li>
+					<li class="page_list"><a
+						href="./mypage_event?ing_page=1&end_page=1" class="menu"
 						id="event">이벤트</a> <br></li>
 					<li class="page_list"><a
 						href="./mypage_point?point_page=1&coupon_page=1" class="menu"
@@ -55,26 +56,45 @@
 						<th class="point" width="20%">Point In</th>
 						<th class="point" width="20%">Point Out</th>
 					</tr>
-					<c:forEach items="${dto_point}" var="dto">
-						<tr>
-							<td height="40px">${dto.point_no}</td>
-							<td>${dto.point_usedate}</td>
-							<c:choose>
-								<c:when test="${dto.point_type == 1}">
-									<td>숙소 예약 획득</td>
-								</c:when>
-								<c:when test="${dto.point_type == 2}">
-									<td>숙소 예약 차감</td>
-								</c:when>
-							</c:choose>
-							<td>${dto.point_in}</td>
-							<td>${dto.point_out}</td>
-						</tr>
-					</c:forEach>
+					<c:choose>
+						<c:when test="${empty dto_point}">
+							<tr>
+								<td colspan="5"><img
+									src="resources/img/No_Search.jpeg" width="150px"
+									height="150px" /> <br />
+								<br /> 사용 가능한 포인트가 없습니다.</td>
+							</tr>
+						</c:when>
+						<c:otherwise>
+							<c:forEach items="${dto_point}" var="dto">
+								<tr>
+									<td height="40px">${dto.point_no}</td>
+									<td>${dto.point_usedate}</td>
+									<c:choose>
+										<c:when test="${dto.point_type == 1}">
+											<td>숙박 예약 획득</td>
+										</c:when>
+										<c:when test="${dto.point_type == 2}">
+											<td>숙박 예약 차감</td>
+										</c:when>
+									</c:choose>
+									<td>${dto.point_in}</td>
+									<td>${dto.point_out}</td>
+								</tr>
+							</c:forEach>
+						</c:otherwise>
+					</c:choose>
 				</table>
 				<div id="all_point">
 					<p id="p_point">총 포인트 :</p>
-					<input type="text" value="${dto_point[0].m_point} p" disabled>
+					<c:choose>
+						<c:when test="${empty dto_point }">
+							<input type="text" value="0 p" disabled>
+						</c:when>
+						<c:otherwise>
+							<input type="text" value="${dto_point[0].m_point} p" disabled>
+						</c:otherwise>
+					</c:choose>
 				</div>
 
 				<!-- Pagination for Points -->
@@ -126,7 +146,7 @@
 							</tr>
 							<c:forEach items="${dto_coupon }" var="dto">
 								<tr>
-									<td>${dto.row_number }</td>
+									<td height="40px">${dto.row_number }</td>
 									<td>${dto.coupon_no }</td>
 									<td>${dto.coupon_qty }</td>
 								</tr>
@@ -156,16 +176,26 @@
 								<th class="content" width="30%">사용 날짜</th>
 								<th class="point" width="30%">사용 내역</th>
 							</tr>
-							<c:forEach items="${dto_usecoupon }" var="dto">
-								<tr>
-									<td>${dto.row_number }</td>
-									<td>${dto.coupon_no }</td>
-									<td>${dto.coupon_usedate }</td>
-									<td><a
-										href="../member/mypage_receipt_popup?m_no=${sessionScope.m_no }&order_no=${dto.order_no}" id="receipt_link">구매
-											내역</a></td>
-								</tr>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${empty dto_usecoupon }">
+									<td colspan="4"><img
+										src="resources/img/No_Search.jpeg" width="150px"
+										height="150px" /> <br />
+									<br /> 쿠폰 사용 내역이 없습니다.</td>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${dto_usecoupon }" var="dto">
+										<tr>
+											<td>${dto.row_number }</td>
+											<td>${dto.coupon_no }</td>
+											<td>${dto.coupon_usedate }</td>
+											<td><a
+												href="../member/mypage_receipt_popup?m_no=${sessionScope.m_no }&order_no=${dto.order_no}"
+												id="receipt_link">구매 내역</a></td>
+										</tr>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</table>
 
 						<!-- Pagination for Points -->

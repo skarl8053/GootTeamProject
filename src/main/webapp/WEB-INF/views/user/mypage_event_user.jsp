@@ -29,11 +29,12 @@
 					</li>
 					<li class="page_list"><a href="./mypage_info" class="menu"
 						id="info">기본 회원 정보</a> <br></li>
-					<li class="page_list"><a href="./mypage_pay" class="menu"
-						id="pay">결제 내역</a> <br></li>
-					<li class="page_list"><a href="./mypage_review" class="menu"
-						id="review">숙소 후기</a> <br></li>
-					<li class="page_list"><a href="./mypage_event?ing_page=1&end_page=1" class="menu"
+					<li class="page_list"><a href="./mypage_pay?page=1"
+						class="menu" id="pay">결제 내역</a> <br></li>
+					<li class="page_list"><a href="./mypage_review?page=1"
+						class="menu" id="review">숙소 후기</a> <br></li>
+					<li class="page_list"><a
+						href="./mypage_event?ing_page=1&end_page=1" class="menu"
 						id="event">이벤트</a> <br></li>
 					<li class="page_list"><a
 						href="./mypage_point?point_page=1&coupon_page=1" class="menu"
@@ -53,13 +54,23 @@
 				<div id="table">
 					<table id="event_table">
 						<tr>
-							<c:forEach items="${dtoS }" var="dto">
-								<td class="event_img"><a
-									href="user/event_page?event_no=${dto.event_no }"> <img
-										src="resources/upload_img/${dto.filename2 }"
-										alt="진행중인 이벤트 사진 없음" />
-								</a></td>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${empty dtoS }">
+									<td class="no_img"></td>
+									<td><img src="resources/img/No_Search.jpeg"
+										width="150px" height="150px" /> <br />
+									<br /> 참가중인 이벤트가 없습니다.</td>
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${dtoS }" var="dto">
+										<td class="event_img"><a
+											href="user/event_page?event_no=${dto.event_no }"> <img
+												src="resources/upload_img/${dto.filename2 }"
+												alt="진행중인 이벤트 사진 없음" />
+										</a></td>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 					</table>
 				</div>
@@ -104,13 +115,24 @@
 				<div id="table">
 					<table id="event_table">
 						<tr>
-							<c:forEach items="${dtoE }" var="dto">
-								<td class="event_img"><a
-									href="user/event_page?event_no=${dto.event_no }"> <img
-										src="resources/upload_img/${dto.filename2 }"
-										alt="종료된 이벤트 사진 없음" />
-								</a></td>
-							</c:forEach>
+							<c:choose>
+								<c:when test="${empty dtoE }">
+									<td class="no_img"></td>
+									<td><img src="resources/img/No_Search.jpeg"
+										width="150px" height="150px" /> <br />
+									<br /> 당첨된 이벤트가 없습니다.</td>
+							
+								</c:when>
+								<c:otherwise>
+									<c:forEach items="${dtoE }" var="dto">
+										<td class="event_img"><a
+											href="user/event_page?event_no=${dto.event_no }"> <img
+												src="resources/upload_img/${dto.filename2 }"
+												alt="종료된 이벤트 사진 없음" />
+										</a></td>
+									</c:forEach>
+								</c:otherwise>
+							</c:choose>
 						</tr>
 					</table>
 				</div>
@@ -118,8 +140,7 @@
 			<!-- 종료 이벤트 페이징 -->
 			<div class="paging">
 				<c:if test="${vo2.page > 1}">
-					<a
-						href="./mypage_event?ing_page=${param.ing_page }&end_page=1"><i
+					<a href="./mypage_event?ing_page=${param.ing_page }&end_page=1"><i
 						class="fa-solid fa-angles-left"></i></a>
 					<a
 						href="./mypage_event?ing_page=${param.ing_page }&end_page=${vo2.page - 1}"><i

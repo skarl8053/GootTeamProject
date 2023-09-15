@@ -1,8 +1,7 @@
-
 /* 관리자 헤더 타일 (2023. 09. 02) - 남기문 수정 */
-	
-
-
+			
+		
+		
 /* @import url(https://fonts.googleapis.com/css?family=Roboto:400,700,500); */
 @font-face {
     font-family: 'GmarketSansMedium';
@@ -19,27 +18,32 @@
     height: 318px;
     font-family: 'GmarketSansMedium', sans-serif; 
     /* background: #011343;   */
-    background-color: #14172C;
+    /* background-color: #14172C; */
+    background-color: rgb(1, 19, 67);
 }
 
 
 /* 상단바 네비게이션 스타일 */
 
 #header_img{
-	margin: 0 0 0 50px;
+	/* margin: 0 0 0 50px;
     width: 200px;
-    height: 150px;
+    height: 150px; */
+    margin: 0 0 0 50px;
+    width: 150px;
+    height: 200px;
 }
 #navigation { 
-    background-color: #14172C;
-    height: 100px;
+    /* background-color: #14172C; */
+    background-color: rgb(1, 19, 67);
+    height: 50px;
 }
 
 .buttonlist {
     font-size: 0;
     margin: 0;
     padding: 0;
-    padding: 87px 0 0 0;        /* 지역, 테마, 더보기 버튼을 밑으로 내림 */
+    padding: 17px 0 0 0;        /* 지역, 테마, 더보기 버튼을 밑으로 내림 */
     
 }
 
@@ -66,23 +70,24 @@
 .menu-bar a{
     display: block;
     font-size: 25px;
-    padding: 20px 14px;
+    padding: 0 14px;
     margin: 0 0 0 60px;
     width: 280px;
-    height: 60px;
+    /* height: 60px; */
+    height: 50px;
     color: rgb(235, 208, 28);
     transition: 0.3s linear;
     text-decoration: none;
 }
 
-.menu-bar:hover { background: #14172C; }
+.menu-bar:hover { background: rgb(1, 19, 67); }
 
 .menu-bar ul {
     background-color: white;
     border-bottom: 5px solid #14172C;
     display: none;
     position: absolute;
-    margin: 0 0 0 92px;
+    margin: 15px 0 0 92px;
     width: 300px;
     
 }

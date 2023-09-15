@@ -119,7 +119,6 @@ input[type="file"] {
 
 .bed {
 	display: inline-flex;
-	margin: 10px;
 }
 
 #stayinfo, #staypolicy, #detailroominfo {
@@ -188,9 +187,9 @@ p {
 #stay_room_info {
 	margin-top: 20px;
 	align-items: center;
-	margin: 20px auto; /* 수평 가운데 정렬 */
+	/* margin: 20px auto; 수평 가운데 정렬 */
 	border: 1px solid grey;
-	border-radius: 30px;
+/* 	border-radius: 30px; */
 	padding: 20px 20px;
 	width: 800px;
 }

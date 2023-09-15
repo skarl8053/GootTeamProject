@@ -10,9 +10,6 @@
 	<script>var eventNo = ${event_page.event_no};</script>
 	<script src="${pageContext.request.contextPath}/resources/layout/main_js/slide-js/slick-main.js"></script>
 	<style>
-		#content{
-			height: auto;
-		}
 		@font-face {
 			font-family: 'GmarketSansMedium';
 			src:
@@ -29,7 +26,8 @@
 		}
 		#content{
 			height: auto;
-		    margin: auto;
+		    margin-left: auto;
+		    margin-right: auto;
 		    display: flex; 
 		    flex-direction: column; 
 		    justify-content: center;
@@ -59,11 +57,8 @@
 		.event_img {
 			margin-top: 30px;
 			margin-bottom: 30px;
-			width :600px;
-			height: 800px;
-		}
-		.event_main {
-			font-size: 20px;
+			width :auto;
+			height: auto;
 		}
 		.event_content {
 			text-align: center;
@@ -108,7 +103,8 @@
 			color: blue;
 			text-align : left;
 		}
-		textarea {
+		#textarea {
+			height:auto;
 			border: none;
 			font-size : 20px;
 			resize: none;
@@ -147,11 +143,11 @@
 	<p class="event_title">${event_page.event_name }</p>
 	<p class="event_title">관리자 | ${event_page.event_startdate }</p>
 	<hr>
-	
-	<img src="../admin/resources/upload_img/admin/event/${event_page.filename2 }" alt="이미지 없음" class="event_img"  /><br />
+
+	<img src="resources/upload_img/admin/event/detail/${event_page.filename2 }" alt="이미지 없음" class="event_img"  /><br />
 	
 	<div class="event_content">
-		<textarea class="event_main" cols="50" rows="6" readonly>${event_page.event_intro }</textarea><br>
+		<textarea  id="textarea"  readonly>${event_page.event_intro }</textarea><br>
 
 		<div class="event_notice">
 			<p><span class="blue_text">이벤트 내용 : </span>${event_page.event_content } </p>
@@ -163,7 +159,7 @@
 
 		<div class="event_caution">주의사항</div><br>
 
-		<textarea id="textarea" cols="50" rows="13" readonly>${event_page.event_caution }</textarea> <br />
+		<textarea id="textarea"  readonly>${event_page.event_caution }</textarea> <br />
 
 		<div class="event_gift">
 			1등 경품 : ${event_page.item_name } <br />
@@ -187,7 +183,7 @@
 	</c:choose>
 	
     <hr />
-    <div class="moveTopBtn">맨 위로</div>
+    <div class="moveTopBtn">TOP</div>
     <button type="button" class="list_btn" onclick="goToListPage()">목록</button>
 </form>
 

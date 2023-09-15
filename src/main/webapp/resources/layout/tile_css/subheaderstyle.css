@@ -38,7 +38,8 @@ body {
 /* 상단바 네비게이션 스타일 */
 
 #navigation { 
-    background: #14172C;
+    /* background: #14172C; */
+    background-color: rgb(1, 19, 67);
     height: 85px;
 }
 

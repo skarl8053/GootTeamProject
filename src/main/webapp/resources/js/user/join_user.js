@@ -182,7 +182,7 @@
 	let timeout;
 	let password = document.getElementById('m_pw')
 	let strengthBadge = document.getElementById('StrengthDisp')
-	let strongPassword = new RegExp('(?=.*[^a-z0-9])(?=.{8,})')
+	let strongPassword = new RegExp('(?=.*[a-z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})')
 	function StrengthChecker(PasswordParameter) {
 		if (strongPassword.test(PasswordParameter)) {
 			strengthBadge.style.color = "green"

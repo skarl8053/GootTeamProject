@@ -50,5 +50,7 @@ public interface IDao_Mypage_user {
 	List<DTO_Mypage_user> event_list(int m_no, Integer rowStart, Integer rowEnd);
 	
 	List<DTO_Mypage_user> endevent_list(int m_no, Integer rowStart, Integer rowEnd);
+
+	void orderInfoUpdate(String m_no, String order_no);
 	
 }

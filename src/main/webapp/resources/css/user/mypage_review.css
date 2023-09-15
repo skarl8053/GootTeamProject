@@ -77,13 +77,12 @@ hr#menu_bar {
 	width: 200px;
 }
 
-
-#review_table, th, td {
-	border-collapse: collapse;
-}
-
 .border_bottom {
 	border-bottom: 1px solid rgb(1, 19, 67);
+}
+#no_img{
+	border-bottom: 1px solid rgb(1, 19, 67);
+	padding-bottom: 45px;	
 }
 
 #review_table {

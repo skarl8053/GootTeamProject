@@ -184,6 +184,11 @@
         		return false;
        		}
         	
+        	if(checkindate == checkoutdate){
+        		alert("체크인 / 체크아웃 일자가 동일할 수 없습니다.");
+        		return false;
+        	}
+        	
         	if(confirm("예약일자를 확정하시겠습니까?") == false){
         		return false;
         	}
@@ -558,7 +563,7 @@
 	            onClose: function( selectedDate ) {
 	                // 종료일(toDate) datepicker가 닫힐때
 	                // 시작일(fromDate)의 선택할수있는 최대 날짜(maxDate)를 선택한 종료일로 지정 
-	                $("#datepicker_startdate").datepicker( "option", "maxDate", selectedDate );
+	                $("#datepicker_startdate").datepicker( "option", "maxDate", selectedDate);
 	 
 	                if(selected_StartDate == null){
                 		selected_StartDate = document.getElementById("datepicker_startdate").value;
@@ -602,7 +607,7 @@
         	const checkOutDate = new Date(checkOutDate_str).getTime();
         	
         	// 예약일자 (체크인 ~ 체크아웃 일자)
-    		var resvDate = ((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24)) + 1;
+    		var resvDate = ((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
     		
         	$("#diffday").html(resvDate);
         	
