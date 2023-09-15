@@ -31,6 +31,11 @@ public class Service_Refund_Insert_User implements Interface_TravelService{
 		// 환불 신청 정보 등록
 		dao.refundInsert(m_no, order_no, refund_reason);
 		
+		// 환불 신청 시 Orderno의 CouponNo 제거
+		dao.orderInfoUpdate(m_no, order_no);
+		
+		
+		
 		// 포인트 및 쿠폰을 정상적으로 환불받는 경우 : admin/refund에서 최종 환불 처리가 완료되어야 한다.
 
 		dao.insertPushAL(m_no, order_no, "환불 신청이 완료되었습니다.");
