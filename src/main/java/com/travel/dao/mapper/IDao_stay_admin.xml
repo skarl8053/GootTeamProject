@@ -60,14 +60,19 @@
 		
 	<!-- 숙소 상세보기에서 숙소 정보 얻어오기 -->
 		<select id="stay_view" resultType="com.travel.dto.admin.DTO_Stay_admin">
-		   	SELECT *
+		   	SELECT S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,
+								S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,
+								S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,
+								S_THEME5,S_THEME6,S_THEME7,S_THEME8
 		   	FROM TMSTSTAY 
 		   	WHERE S_NO=#{param1}
 		</select>
 		
 	<!-- 숙소 상세보기에서 객실 정보 얻어오기 -->
 		<select id="stay_room_view" resultType="com.travel.dto.admin.DTO_Stay_room_admin">
-		   	SELECT *
+		   	SELECT R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,
+								R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,
+								R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6
 		   	FROM TMSTROOM 
 		   	WHERE S_NO=#{param1}
 		</select>

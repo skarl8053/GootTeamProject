@@ -25,17 +25,12 @@ public class Service_Stay_edit_admin implements Interface_TravelService {
 	public void execute(Model model) {
 		
 		System.out.println("stay_edit_service 신호");
-		
-		// 페이징 처리
+
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
 		
 		String s_no = request.getParameter("s_no");
 		System.out.println("s_no"+s_no);
-		
-		// ArrayList<DTO_Stay_admin> dtos = dao.edit(s_no);
-		
-		// model.addAttribute("list",dtos);
 		
 	}
 

@@ -65,7 +65,7 @@
 		        const stay_hashtag = document.querySelectorAll('input[name="stay_hashtag"]:checked');
 		        /* const stay_room_facility = document.querySelectorAll('input[name="stay_room_facility"]:checked'); */
 		         /* || stay_room_facility.length === 0 */
-		        if (stay_facility.length === 0 || stay_hashtag.length === 0) {
+		        if (stay_facility.length == 0 || stay_hashtag.length == 0) {
 		            alert('숙소 편의시설 / 해시태그 / 객실 편의시설은 필수 선택입니다. \n변경 사항이 없다면 이전과 같은 값을 체크해주세요.'); 
 		            return false; 
 		        }
@@ -277,9 +277,9 @@
 			    <div id="stay_room_info">
 				    <p>숙소 객실 정보</p>
 			        <div class="image-container">
-					    <img src="resources/upload_img/admin/stay/${stay_room_view.r_img1 }" alt="이미지 없음" class="image" id="firstImage" width="250px;" height="250px;">
-					    <img src="resources/upload_img/admin/stay/${stay_room_view.r_img2 }" alt="이미지 없음" class="image2" id="secondImage" />
-					    <img src="resources/upload_img/admin/stay/${stay_room_view.r_img3 }" alt="이미지 없음" class="image3" id="thirdImage" /><br />
+					    <img src="resources/upload_img/admin/room/${stay_room_view.r_img1 }" alt="이미지 없음" class="image" id="firstImage" width="250px;" height="250px;">
+					    <img src="resources/upload_img/admin/room/${stay_room_view.r_img2 }" alt="이미지 없음" class="image2" id="secondImage" />
+					    <img src="resources/upload_img/admin/room/${stay_room_view.r_img3 }" alt="이미지 없음" class="image3" id="thirdImage" /><br />
 				    <div class="filebox" id="firstFileBox">
 				        <input type="file" name="room_file" class="real-upload" accept="image/*" multiple onchange="imagePreview(event, this) onclick="preventFormSubmission(event);">
 				        <button class="button" id="deleteButton" onclick="onClickDeleteUpload();" >파일 삭제</button>
