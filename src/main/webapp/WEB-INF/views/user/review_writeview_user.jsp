@@ -92,7 +92,7 @@
 
 				</div>
 				<div class="db">
-					<textarea name="review_content" id="review_text" cols="143" rows="3"></textarea>
+					<textarea name="review_content" id="review_text" cols="143" rows="6"></textarea>
 				</div>
 			</div>
 			

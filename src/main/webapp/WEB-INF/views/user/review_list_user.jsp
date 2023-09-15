@@ -22,6 +22,13 @@
 		starElement.style.width = rate * 20 + "%";
 	}
 </script>
+<script>
+	 function reportCheck() {
+			alert("이미 신고된 글입니다");
+			
+		}
+</script>
+
 </head>
 <body onload="callrating();">
 
@@ -53,7 +60,7 @@
 	
 	<div class="total">
 		<div  class="tcimg">
-			<img src="resources/upload_img/admin/room/${listS[0].s_img1 }" alt="호텔대표이미지">
+			<img src="resources/upload_img/admin/stay/${listS[0].s_img1 }" alt="호텔대표이미지">
 		</div>
 		<div class="tctext">
 			 ${listS[0].s_name } 
@@ -117,11 +124,29 @@
           <!--  좋아요 --> 
           
                 <a href="review_user_like?review_no=${dto.review_no }&s_no=${s_no }&m_no=${m_no }"> <input type="image" name="button" src="resources/img/user/review/reviewLikeIcon.png" width="30px"></a>
-                ${dto.likes }
-                <a href="report?review_no=${dto.review_no }">
+					${dto.likes }
+
+
+					<c:if test="${dto.report_no eq '0' }">
+						 <a href="report?review_no=${dto.review_no }">
                 <input type="image" name="button" src="resources/img/user/review/reviewAlertIcon.png" width="30px">
                
                 </a>
+					</c:if>
+					<c:if test="${dto.report_no eq '1' }">
+						
+                <input type="image" name="button"  onclick="reportCheck();" src="resources/img/user/review/reviewAlertIcon.png" width="30px">
+               
+             
+					</c:if>
+
+
+
+					<%--    <a href="report?review_no=${dto.review_no }"> --%>
+              <%--   <a href="report?review_no=${dto.review_no }">
+                <input type="image" name="button" src="resources/img/user/review/reviewAlertIcon.png" width="30px">
+               
+                </a> --%>
                <%-- 합칠때 변경해야함  <a href="locallhost:8090/travel/user?review_no=${dto.review_no }"><input type="button" value="신고"></a> --%>
             </div>
             <div class="db">

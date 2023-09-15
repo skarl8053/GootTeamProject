@@ -38,15 +38,7 @@ public class Service_Stay_List_User implements Interface_TravelService {
 		
 		 System.out.println("11checkInDate"+checkInDate+"checkOutDate"+checkOutDate+"personCount"+personCount);
 		
-		  
-//		  DateTimeFormatter.ofPattern("yyyyMMdd"); LocalDate now = LocalDate.now();
-/*
- * SimpleDateFormat newDtFormat = new SimpleDateFormat("yyyy-MM-dd"); String
- * check_in_date=request.getParameter("check_in_date"); Date formatDate1 =
- * newDtFormat.parse(check_in_date); if (formatDate1 == null) { formatDate1=
- * now.plusDays(plus); } String
- * check_out_date=request.getParameter("check_out_date");
- */
+	
 		 
 		
 		System.out.println("m_no :"+m_no+" s_loca :"+s_loca);

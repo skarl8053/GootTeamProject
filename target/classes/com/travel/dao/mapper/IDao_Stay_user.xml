@@ -5,8 +5,24 @@
 <mapper namespace="com.travel.dao.user.IDao_Stay_user">
 	
 	<select id="sList" resultType="com.travel.dto.user.DTO_StayDetail_user">
+	SELECT DISTINCT TS.S_NO, TS.S_NAME, TS.S_IMG1, TS.S_RATE, TR.R_PRICE
+	FROM
+	TMSTSTAY TS
+	INNER JOIN TMSTROOM TR ON TS.S_NO = TR.S_NO
+	WHERE TR.R_PRICE
+	= (
+	SELECT
+	MIN(R_PRICE)
+	FROM
+	TMSTROOM
+	WHERE
+	S_NO = TS.S_NO
+	)
+	and TS.S_LOCA=#{param1}
 		
-		SELECT * FROM TMSTSTAY WHERE S_LOCA=#{param1}
+		
+		
+		<!-- SELECT * FROM TMSTSTAY WHERE S_LOCA=#{param1} -->
 	</select>
 	
 	<select id="sRList" resultType="com.travel.dto.user.DTO_StayDetail_user">
@@ -85,7 +101,30 @@
 	</select>
 	
 	<select id="sListTscHR" resultType="com.travel.dto.user.DTO_StayDetail_user">
-     SELECT * FROM TMSTSTAY WHERE S_LOCA LIKE 
+
+	SELECT DISTINCT TS.S_NO, TS.S_NAME, TS.S_IMG1, TS.S_RATE,
+	TR.R_PRICE
+	FROM TMSTSTAY TS
+	INNER JOIN TMSTROOM TR ON TS.S_NO = TR.S_NO
+	WHERE
+	TR.R_PRICE = (
+	SELECT
+	MIN(R_PRICE)
+	FROM
+	TMSTROOM
+	WHERE
+	S_NO = TS.S_NO
+	)
+	<if test="s_loca == null or s_loca == ''">
+		AND S_LOCA LIKE '%%'
+	</if>
+	<if test="s_loca != null and s_loca != ''">
+		AND S_LOCA LIKE '%' || #{s_loca} || '%'
+	</if>
+	ORDER BY NVL(S_RATE,0) DESC
+    
+    
+     <!-- SELECT * FROM TMSTSTAY WHERE S_LOCA LIKE 
      
     		 <if test="s_loca == null or s_loca == ''">
              '%%'
@@ -93,19 +132,21 @@
             <if test="s_loca != null and s_loca != ''">
              '%' || #{s_loca} || '%'
             </if>  		
-     ORDER BY NVL(S_RATE,0) DESC
+     ORDER BY NVL(S_RATE,0) DESC -->
 	</select>
 	
 	<select id="selectStayLlistTotCount" resultType="int">
-		SELECT COUNT(S_NO) FROM TMSTSTAY 
-			WHERE S_LOCA LIKE 
-     
-    		 <if test="s_loca == null or s_loca == ''">
-             '%%'
-            </if> 
-            <if test="s_loca != null and s_loca != ''">
-             '%' || #{s_loca} || '%'
-            </if>  		
+
+
+	SELECT COUNT(S_NO) FROM TMSTSTAY
+	
+
+	<if test="s_loca == null or s_loca == ''">
+		WHERE S_LOCA LIKE '%%'
+	</if>
+	<if test="s_loca != null and s_loca != ''">
+		WHERE S_LOCA LIKE '%' || #{s_loca} || '%'
+	</if>  		
 	</select>
 	
 	<select id="selectStayLlistSCTotCount" resultType="int">
@@ -228,7 +269,74 @@
 	
 	<select id="sListM" resultType="com.travel.dto.user.DTO_StayDetail_user">
 	
-	SELECT DISTINCT TS.S_NO, TS.S_NAME, TS.S_IMG1,TS.S_RATE, TS.S_FACILITY1, TS.S_FACILITY2
+	SELECT DISTINCT TS.S_NO, TS.S_NAME, TS.S_IMG1,TS.S_RATE, TS.S_FACILITY1, TS.S_FACILITY2, TR.R_PRICE
+		FROM TMSTSTAY TS INNER JOIN TMSTCODE  S1 ON TS.S_LOCA= S1.CODE
+						 INNER JOIN TMSTROOM TR ON TS.S_NO = TR.S_NO
+    		    LEFT JOIN TMSTCODE  S2 ON TS.S_THEME1= S2.CODE
+                LEFT JOIN TMSTCODE  S2 ON TS.S_THEME2= S2.CODE
+                LEFT JOIN TMSTCODE  S2 ON TS.S_THEME3= S2.CODE
+                LEFT JOIN TMSTCODE  S2 ON TS.S_THEME4= S2.CODE
+                LEFT JOIN TMSTCODE  S2 ON TS.S_THEME5= S2.CODE
+                INNER JOIN TMSTCODE  S3 ON TS.S_TYPE= S3.CODE
+                LEFT JOIN TMSTCODE  S4 ON TS.S_FACILITY1= S4.CODE
+                LEFT JOIN TMSTCODE  S4 ON TS.S_FACILITY2= S4.CODE
+                LEFT JOIN TMSTCODE  S4 ON TS.S_FACILITY3= S4.CODE
+                LEFT JOIN TMSTCODE  S4 ON TS.S_FACILITY4= S4.CODE
+                LEFT JOIN TMSTCODE  S4 ON TS.S_FACILITY5= S4.CODE
+                LEFT JOIN TMSTCODE  S4 ON TS.S_FACILITY6= S4.CODE
+                
+                INNER JOIN TMSTCODEGRP B ON B.GRP_CODE= S2.GRPCODE
+                INNER JOIN TMSTCODEGRP B ON B.GRP_CODE= S4.GRPCODE
+                
+                AND S1.GRPCODE=1 
+                AND S2.GRPCODE=2 
+                AND S3.GRPCODE=3      
+                AND S4.GRPCODE=4
+                 
+             WHERE TR.R_PRICE = (
+				SELECT
+				MIN(R_PRICE)
+				FROM
+				TMSTROOM
+				WHERE
+				S_NO = TS.S_NO
+				)
+
+             AND  S1.CODE LIKE '%%'
+            
+            <if test="type != null and type != ''">
+              AND  S3.CODE LIKE '%' || #{type} || '%'
+            </if>
+            <if test="type == null or type == ''">
+              AND  S3.CODE LIKE '%%'
+            </if>
+            <if test="star != null and star != ''">
+              AND TS.S_RATE LIKE '%' || #{star} || '%'
+            </if>
+            <if test="star == null or star == ''">
+               AND  S3.CODE LIKE '%%'
+            </if>
+            <if test="accommofacil != null and accommofacil != ''">
+              
+                AND TS.S_FACILITY1 LIKE '%' || #{accommofacil} || '%'
+                OR TS.S_FACILITY2 LIKE '%' || #{accommofacil} || '%'
+                OR TS.S_FACILITY3 LIKE '%' || #{accommofacil} || '%'
+                OR TS.S_FACILITY4 LIKE '%' || #{accommofacil} || '%'
+                OR TS.S_FACILITY5 LIKE '%' || #{accommofacil} || '%'
+                OR TS.S_FACILITY6 LIKE '%' || #{accommofacil} || '%'
+              
+              
+            </if>
+            <if test="accommofacil == null or accommofacil == ''">
+             AND  S2.CODE LIKE '%%'
+            </if>
+            <if test="theme != null and theme != ''">
+              AND  S2.CODE LIKE '%' || #{theme} || '%'
+            </if>
+            <if test="theme == null or theme == ''">
+              AND  S2.CODE LIKE '%%'
+            </if>
+<!-- 	SELECT DISTINCT TS.S_NO, TS.S_NAME, TS.S_IMG1,TS.S_RATE, TS.S_FACILITY1, TS.S_FACILITY2
 		FROM TMSTSTAY TS INNER JOIN TMSTCODE  S1 ON TS.S_LOCA= S1.CODE
     		    LEFT JOIN TMSTCODE  S2 ON TS.S_THEME1= S2.CODE
                 LEFT JOIN TMSTCODE  S2 ON TS.S_THEME2= S2.CODE
@@ -283,7 +391,7 @@
             </if>
             <if test="theme == null or theme == ''">
               AND  S2.CODE LIKE '%%'
-            </if>
+            </if> -->
         
     </select>
 	

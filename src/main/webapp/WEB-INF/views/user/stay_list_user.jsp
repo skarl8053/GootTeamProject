@@ -164,7 +164,8 @@
 								</div>
 							</li>
 							<submit type="hidden" name="s_loca" value="${s_loca ne null }"></submit>
-					<button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+					<!-- <button type="submit"><i class="fa-solid fa-magnifying-glass"></i></button> -->
+					<button type="submit">&nbsp&nbsp&nbsp<i class="fa-solid fa-magnifying-glass"></i>&nbsp&nbsp&nbsp</button>
 				</form>
 						</ul>
 					</div>
@@ -189,7 +190,7 @@
 					<div class="rbp">
 					
 					<a href="stay_detail_user?s_no=${list.s_no }">
-						<img src="resources/upload_img/admin/room/${list.s_img1 }" alt="호텔대표이미지">
+						<img src="resources/upload_img/admin/stay/${list.s_img1 }" alt="호텔대표이미지">
 					</a>	
 					</div>
 					<div class="rbn">
@@ -215,7 +216,7 @@
                             
                               </div>
 						
-						<div class="rbn_r">♡</div>
+						<div class="rbn_r">${list.r_price } 원~</div>
 					</div>
 					<div class="rb_price"></div>
 						

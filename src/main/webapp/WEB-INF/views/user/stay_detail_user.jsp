@@ -176,16 +176,16 @@
 			</div>
 			<div class="bo1">
 				<div class="bo1_1">
-					<img src="resources/upload_img/admin/room/${list1.s_img1 }" alt="img"
+					<img src="resources/upload_img/admin/stay/${list1.s_img1 }" alt="img"
 						class="image image1" />
 				</div>
 				<div class="bo2">
 					<div class="bo1_2">
-						<img src="resources/upload_img/admin/room/${list1.s_img2 }" alt="img"
+						<img src="resources/upload_img/admin/stay/${list1.s_img2 }" alt="img"
 							class="image image2" />
 					</div>
 					<div class="bo1_3">
-						<img src="resources/upload_img/admin/room/${list1.s_img3 }" alt="img"
+						<img src="resources/upload_img/admin/stay/${list1.s_img3 }" alt="img"
 							class="image image3" />
 					</div>
 				</div>

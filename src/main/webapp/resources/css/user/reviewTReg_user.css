@@ -8,9 +8,13 @@
     font-weight: normal;
     font-style: normal;
 }
-.content {
+
+
+#content {
 	font-family: 'GmarketSansMedium';
 	width: 1200px;
+	height: 500px;
+	
 }
 
 .a {
@@ -82,7 +86,7 @@
 
 .d {
 	width: 1052px;
-	height: 100px;
+	height: 130px;
 	padding: 2%;
 	background-color: lightgray;
 }
