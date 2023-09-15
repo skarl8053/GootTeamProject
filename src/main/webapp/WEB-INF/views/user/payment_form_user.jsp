@@ -614,8 +614,8 @@
         	const checkInDate = new Date(checkInDate_str).getTime();
         	const checkOutDate = new Date(checkOutDate_str).getTime();
         	
-        	// 예약일자 (체크인 ~ 체크아웃 일자)
-    		var resvDate = ((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24));
+        	// 숙박일자 (체크인 ~ 체크아웃 일자)
+    		var resvDate = ((checkOutDate - checkInDate) / (1000 * 60 * 60 * 24) + 1);
     		
         	$("#diffday").html(resvDate);
         	
@@ -661,7 +661,7 @@
                                 		<tr>
 	                                        <td class="check_date_header_row" >체크인 일자</td>
 	                                        <td class="check_date_header_row">체크아웃 일자</td>
-	                                        <td class="check_date_header_row">총 예약 일자</td>
+	                                        <td class="check_date_header_row">총 숙박일</td>
 	                                    </tr>
 	                                    <tr>
 	                                        <td class="check_date_data_row">${checkin_date }</td>
@@ -673,7 +673,7 @@
                                 		<tr>
 	                                        <td class="check_date_header_row">체크인 일자</td>
 	                                        <td class="check_date_header_row">체크아웃 일자</td>
-	                                        <td class="check_date_header_row">총 예약 일자</td>
+	                                        <td class="check_date_header_row">총 숙박일</td>
 	                                    </tr>
 	                                    <tr>
 	                                        <td class="check_date_data_row">
