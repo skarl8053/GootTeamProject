@@ -16,6 +16,10 @@
 	font-style: normal;
 }
 
+.button {
+	margin-left:auto;
+}
+
 /* 스타일링을 위한 기본 스타일 */
 select {
     padding: 5px;
@@ -143,7 +147,8 @@ input[type="file"] {
 	border-radius: 5px;
 }
 
-#firstImage, #secondImage, #thirdImage {
+#firstImage, #secondImage, #thirdImage,
+#room_firstImage,#room_secondImage,#room_thirdImage {
 	width: 250px;
 	height: 250px;
 }
@@ -201,4 +206,14 @@ p {
 #addr_x, #addr_y {
 	margin-left: 5px;
 	margin-top: 5px;
+}
+
+#border-facility{
+	width: 180px;
+	height: 40px;
+	background-color: #011343;
+	color: #EBD01C;
+	font-size: 20px;
+	margin: 5px 10px;
+	border-radius: 15px;
 }

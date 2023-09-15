@@ -139,8 +139,9 @@ public class Controller_Stay_admin {
 		service.execute(model);
 
 		String s_no = request.getParameter("s_no");
-
-		return "redirect:/admin/stay_list_room_confirm?s_no=" + s_no;
+		System.out.println("s_no : "+s_no);
+//		http://localhost:8090/travel/admin/stay_list_room_confirm_popup?s_no=20
+		return "redirect:/admin/stay_list_room_confirm_popup?s_no=" + s_no;
 	}
 
 	// 숙소 상세보기 페이지 및 과정
