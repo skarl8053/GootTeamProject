@@ -24,7 +24,6 @@
         	width: 250px;
         	height: 200px;
         	border: 1px solid black;
-        	
         }
     </style>
     
@@ -186,14 +185,16 @@
 			        <input type="file" name="file" class="real-upload" accept="image/*" multiple onchange="imagePreview(this)">
 			        <button class="button" id="deleteButton" onclick="onClickDeleteUpload();">파일 삭제</button>
 			    </div>
+			    <br /><br />
 			</div>
-	    	<input type="text" id="address" name="address" placeholder="주소를 입력해주세요." readonly/>
-	    	<button id="searchButton">주소 검색</button>
+			<span>주소</span>
+	    	<input type="text" id="address" name="address" placeholder="주소를 입력해주세요." readonly style="width: 600px"/>
+	    	<button id="searchButton">주소 검색</button><br /><br />
 	        <div class="xy">
 		        <span>위도</span>
-		        <input type="text"  name="addr_x" id="addr_x" placeholder="위도를 입력해주세요." readonly>
+		        <input type="text"  name="addr_x" id="addr_x" placeholder="위도를 입력해주세요." readonly><br />
 		        <span>경도</span>
-		        <input type="text"  name="addr_y" id="addr_y" placeholder="경도를 입력해주세요." readonly>
+		        <input type="text"  name="addr_y" id="addr_y" placeholder="경도를 입력해주세요." readonly><br />
 	        </div>
 	        
 	         <!-- 주소 검색 및 위도 경도 구하기 -->
@@ -230,12 +231,19 @@
 			    
 	        <p>숙소 편의시설</p>
 	            <div id="stay_facility">
-	                <input type="checkbox" name="stay_facility" value="1"> 반려동물
-	                <input type="checkbox" name="stay_facility" value="2"> 레스토랑
-	                <input type="checkbox" name="stay_facility" value="3"> 주차시설 <br>
-	                <input type="checkbox" name="stay_facility" value="4"> 물품보관
-	                <input type="checkbox" name="stay_facility" value="5"> 수영장
-	                <input type="checkbox" name="stay_facility" value="6"> 흡연구역
+	            	<table>
+	            		<tr>
+	            			<td><input type="checkbox" name="stay_facility" value="1"> 반려동물</td>
+	            			<td><input type="checkbox" name="stay_facility" value="2"> 레스토랑</td>
+	            			<td><input type="checkbox" name="stay_facility" value="3"> 주차시설</td>
+	            		</tr>
+	            		<tr>
+	            			<td><input type="checkbox" name="stay_facility" value="4"> 물품보관</td>
+	            			<td><input type="checkbox" name="stay_facility" value="5"> 수영장</td>
+	            			<td><input type="checkbox" name="stay_facility" value="6"> 흡연구역</td>
+	            		</tr>
+	            	</table>
+	                 <br>
 	            </div>
 	        <p>숙소 정보 및 정책</p>
 	        <textarea name="stay_info" class="stay_info" onfocus="this.value='';" id="" cols="30" rows="10" placeholder="숙소 공통 정보 및 정책을 입력해주세요."></textarea>

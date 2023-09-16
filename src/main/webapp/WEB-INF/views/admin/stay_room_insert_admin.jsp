@@ -14,6 +14,14 @@
         #content{
             height: auto;
         }
+        #table_img{
+        	border-collapse: collapse;
+        }
+        #table_img tr td{
+        	width: 250px;
+        	height: 200px;
+        	border: 1px solid black;
+        }
     </style>
     
     <script>
@@ -68,29 +76,37 @@
 		            return false; 
 		        }
 
+		    	if (stay_title === "숙소명을 입력하세요." || stay_title === "" || stay_title === " ") {
+		            alert("숙소명을 입력해주세요.");
+		            document.querySelector('#stay_title').focus();
+		            return false; 
+		        }
+		    	
 		        if (firstImage === "" || firstImage === null) {
 		            alert("객실 사진을 등록해주세요.");
 		            document.querySelector('#firstImage').focus();
 		            return false; 
 		        }
 
-		        if (stay_room_name === "객실번호를 입력하세요.") {
-		            alert("객실 번호를 입력해주세요.");
+		        
+		        if (stay_room_name.length < 1) {
+		            alert("객실명을 입력해주세요.");
 		            document.querySelector('#stay_room_name').focus();
 		            return false; 
 		        }
 
+		        if (stay_room_person == " ") {
+		            alert("인원 수를 입력해주세요.");
+		            document.querySelector('#stay_room_person').focus();
+		            return false; 
+		        }
+		        
 		        if (stay_room_price === "가격을 입력하세요." || stay_room_price === "" || stay_room_price === " ") {
 		            alert("객실 가격을 입력해주세요.");
 		            document.querySelector('#stay_room_price').focus();
 		            return false; 
 		        }
-
-		        if (stay_room_person === "인원 수") {
-		            alert("인원 수를 입력해주세요.");
-		            document.querySelector('#stay_room_person').focus();
-		            return false; 
-		        }
+		        
 
 		        if (stay_room_detailinfo === "객실 상세정보를 입력하세요." || stay_room_detailinfo === "" || stay_room_detailinfo === " "
 		        	 || stay_room_detailinfo.length < 10) {
@@ -298,12 +314,12 @@
 </head>
 <body>
 	
+	<h1>숙소 객실 등록</h1>
+	
 	<form action="${pageContext.request.contextPath}/admin/stay_room_insert_service" method="post" enctype="multipart/form-data" onsubmit="return onSubmitForm();">
-		
-	        <p>숙소 객실 등록</p>
 	        <hr />
 	        <p>숙소명</p>
-	            <input type="text" id="stay_title" name="stay_title" value="숙소명을 입력하세요." onclick="openNewWindow()" readonly>
+	            <input type="text" id="stay_title" name="stay_title" value="여기를 눌러 숙소를 선택해주세요" onclick="openNewWindow()" readonly style="width: 400px">
 	            <div class="popup-overlay" id="popup">
 				    <div class="popup-content">
 				        <button class="popup-close" onclick="closePopup()">창 닫기</button>
@@ -311,20 +327,30 @@
 				    </div>
 				</div>
 
-		    	<p>숙소 객실 정보</p>
 	        <div class="image-container">
-			    <img src="" alt="이미지 없음" class="image" id="firstImage" />
-			    <img src="" alt="이미지 없음" class="image2" id="secondImage" />
-			    <img src="" alt="이미지 없음" class="image3" id="thirdImage" /><br />
+	        	<p>메인 이미지</p>
+	        	<table id="table_img">
+	       			<tr>
+	       				<td>
+	       					<img src="" alt="이미지 없음" class="image" id="firstImage" />
+	       				</td>
+	       				<td>
+	       					<img src="" alt="이미지 없음" class="image2" id="secondImage" />
+       					</td>
+	       				<td>
+	       					<img src="" alt="이미지 없음" class="image3" id="thirdImage" />
+	       				</td>
+	       			</tr>
+	       		</table>
 			    <div class="filebox" id="firstFileBox">
 			        <input type="file" name="file" class="real-upload" accept="image/*" multiple onchange="imagePreview(this)">
-			        <button class="button" id="deleteButton" onclick="onClickDeleteUpload();">파일 삭제</button>
+			        <button type="button" class="button" id="deleteButton" onclick="onClickDeleteUpload();">파일 삭제</button>
 			    </div>
 			</div>
-	        
-	            <p>메인 이미지</p>
-	            <span>숙소 객실번호</span>
-	            <input type="text" onfocus="this.value='';" id="stay_room_name" name="stay_room_name" value="객실번호를 입력하세요.">
+				<br />
+	            <span>객실 이름</span>
+	            <input type="text" onfocus="this.value='';" id="stay_room_name" name="stay_room_name" placeholder="객실명을 입력해주세요" style="width: 400px">
+	            <br />
 	            <span>인원 수</span>
 	            <select name="stay_room_person" id="stay_room_person">
 	                <option value=" " selected>인원 수</option>
@@ -334,10 +360,12 @@
 	                <option value="5">5</option>
 	                <option value="6">6</option>
 	            </select><br>
+	            <br />
 	            <span>가격</span>
-	            <input type="text" id="stay_room_price" name="stay_room_price" onfocus="this.value='';" value="가격을 입력하세요.">
+	            <input type="text" id="stay_room_price" name="stay_room_price" onfocus="this.value='';" placeholder="가격을 입력하세요.">
 	            <p>객실 상세정보</p>
 	            <textarea name="stay_room_detailinfo" id="stay_room_detailinfo" cols="30" rows="10" onfocus="this.value='';">객실 상세정보를 입력하세요.</textarea><br>
+	            <br />
 	            <span>침대</span> <br>
 	            <div class="bed">
 	                <span class="bed_text">싱글 베드</span>
@@ -355,7 +383,7 @@
 	                   		<option value="Y">Y</option>
 	                   		<option value="N">N</option>
 	                   	</select>
-	            </div> <br>
+	            </div> <br><br />
 	            <span>객실 편의시설</span>
 	            <div id="stay_room_facility">
 	                <input type="checkbox" value="1" name="stay_room_facility"> 노트북 작업공간
@@ -375,7 +403,7 @@
 	        
 	        <script>
 		        function goToMainPage() {
-		            window.location.href = '/travel/main';
+		            window.location.href = 'stay_list';
 		        }
 	        </script>
 	</form>
