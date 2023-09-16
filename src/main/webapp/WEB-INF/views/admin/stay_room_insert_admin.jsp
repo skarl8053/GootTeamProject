@@ -12,10 +12,7 @@
     <!-- 개별 화면 content 크기를 조절하는 방법 -->
     <style>
         #content{
-        	min-height : 800px;
             height: auto;
-            width : 1200px;
-            margin : auto;
         }
     </style>
     
@@ -300,7 +297,8 @@
     
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/admin/stay_room_insert_service" method="post" enctype="multipart/form-data" onsubmit="return onSubmitForm();">
+	
+	<form action="${pageContext.request.contextPath}/admin/stay_room_insert_service" method="post" enctype="multipart/form-data" onsubmit="return onSubmitForm();">
 		
 	        <p>숙소 객실 등록</p>
 	        <hr />

@@ -13,7 +13,8 @@
 
 		UPDATE THISORDER
 		SET COUPON_NO = NULL
-		WHERE M_NO = #{param1}
+		WHERE M_NO =
+		#{param1}
 		AND ORDER_NO = #{param2}
 
 	</update>
@@ -125,13 +126,32 @@
 	<!-- 환불 내역 끝 -->
 
 
+	<sql id="includeList">
+		<choose>
+			<when test="param5==1">
+				WHERE M.M_NO = #{param1} AND S.S_NAME LIKE '%'||#{param4}||'%'
+			</when>
+			<when test="param5==2">
+				WHERE M.M_NO = #{param1} AND R.R_NAME LIKE'%'||#{param4}||'%'
+			</when>
+			<when test="param5==3">
+				WHERE M.M_NO = #{param1} AND (S.S_NAME LIKE '%'||#{param4}||'%' OR R.R_NAME LIKE '%'||#{param4}||'%')
+			</when>
+			<otherwise>
+
+			</otherwise>
+		</choose>
+
+	</sql>
+
+
 	<select id="pay_list"
 		resultType="com.travel.dto.user.DTO_Mypage_user">
 
-		SELECT A.ROW_NUM,A.S_NO, A.S_IMG1, A.S_NAME, A.ORDER_NO, A.STEP_FLAG, A.R_NAME, A.R_NO,
-				TO_CHAR(A.CHECK_IN_DATE, 'YYYY-MM-DD') AS CHECK_IN_DATE,
-				TO_CHAR(A.CHECK_OUT_DATE, 'YYYY-MM-DD') AS CHECK_OUT_DATE,
-				TO_CHAR(A.ORDER_DATE, 'YYYY-MM-DD') AS ORDER_DATE, A.REVIEW_FLAG
+		SELECT A.ROW_NUM, A.S_NO, A.S_IMG1, A.S_NAME, A.ORDER_NO, A.STEP_FLAG, A.R_NAME,
+		TO_CHAR(A.CHECK_IN_DATE, 'YYYY-MM-DD') AS CHECK_IN_DATE,
+		TO_CHAR(A.CHECK_OUT_DATE, 'YYYY-MM-DD') AS CHECK_OUT_DATE,
+		TO_CHAR(A.ORDER_DATE, 'YYYY-MM-DD') AS ORDER_DATE, A.REVIEW_FLAG
 		FROM (
 		SELECT S.S_NO, S.S_IMG1, S.S_NAME, O.ORDER_NO, O.REVIEW_FLAG,
 		(
@@ -147,7 +167,7 @@
 		) END
 		) AS STEP_FLAG,
 		O.CHECK_IN_DATE, O.CHECK_OUT_DATE, O.ORDER_DATE,
-		ROW_NUMBER() OVER (ORDER BY O.ORDER_NO DESC) AS ROW_NUM, R.R_NO,
+		ROW_NUMBER() OVER (ORDER BY O.ORDER_NO DESC) AS ROW_NUM,
 		LISTAGG(R.R_NAME,',') WITHIN GROUP(ORDER BY R.R_NAME) AS R_NAME
 		FROM THISORDER O LEFT JOIN TMSTMEMBER M ON M.M_NO = O.M_NO
 		LEFT JOIN THISORDERDTL OD ON O.ORDER_NO = OD.ORDER_NO
@@ -156,12 +176,11 @@
 		LEFT JOIN TMSTROOM R ON OD.S_NO = R.S_NO
 		AND OD.R_NO = R.R_NO
 		LEFT JOIN THISREFUND RF ON O.ORDER_NO = RF.ORDER_NO
-		WHERE M.M_NO = #{param1}
+		<include refid="includeList"/>
 		GROUP BY S.S_NO, S.S_IMG1, S.S_NAME, O.ORDER_NO, O.REVIEW_FLAG,
-		RF.STEP_FLAG, O.CHECK_IN_DATE, O.CHECK_OUT_DATE, O.ORDER_DATE, R.R_NO
+		RF.STEP_FLAG, O.CHECK_IN_DATE, O.CHECK_OUT_DATE, O.ORDER_DATE
 		) A
-		WHERE
-		A.ROW_NUM BETWEEN #{param2} AND #{param3}
+		WHERE A.ROW_NUM BETWEEN #{param2} AND #{param3}
 	</select>
 
 
@@ -238,20 +257,26 @@
 
 	<select id="point_list"
 		resultType="com.travel.dto.user.DTO_Mypage_user">
-		SELECT A.ROW_NUM, A.POINT_NO, TO_CHAR(A.POINT_USEDATE, 'YYYY-MM-DD')
+		SELECT A.ROW_NUM, A.POINT_NO, TO_CHAR(A.POINT_USEDATE,
+		'YYYY-MM-DD')
 		AS POINT_USEDATE,
-		A.POINT_TYPE, A.POINT_IN, A.POINT_OUT, A.M_POINT
+		A.POINT_TYPE, A.POINT_IN, A.POINT_OUT,
+		A.M_POINT
 		FROM
 		(
 		SELECT
-		P.POINT_NO, P.POINT_USEDATE, P.POINT_TYPE, P.POINT_IN,
+		P.POINT_NO, P.POINT_USEDATE, P.POINT_TYPE,
+		P.POINT_IN,
 		P.POINT_OUT, M.M_POINT,
-		ROW_NUMBER() OVER (ORDER BY P.POINT_NO DESC) AS ROW_NUM
+		ROW_NUMBER() OVER (ORDER BY
+		P.POINT_NO DESC) AS ROW_NUM
 		FROM THISPOINT P
-		LEFT JOIN TMSTMEMBER M ON P.M_NO = M.M_NO
+		LEFT JOIN TMSTMEMBER M ON
+		P.M_NO = M.M_NO
 		WHERE M.M_NO = #{param1}
 		) A
-		WHERE A.ROW_NUM BETWEEN #{param2} AND #{param3}
+		WHERE A.ROW_NUM BETWEEN
+		#{param2} AND #{param3}
 	</select>
 
 	<select id="coupon_list"

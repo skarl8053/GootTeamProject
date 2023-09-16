@@ -1,9 +1,6 @@
 package com.travel.controller.user;
 
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,9 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.travel.dao.admin.IDao_Cosine_Similarity_admin;
 import com.travel.dao.user.IDao_Cart_user;
-import com.travel.dto.admin.DTO_Cosine_Similarity_admin;
 import com.travel.dto.user.DTO_Cart_user;
 
 
@@ -34,10 +29,9 @@ public class RestController_Cart_user {
 	public List<DTO_Cart_user> cart_cosine_similarity(HttpServletRequest request, Model model) {
 		
 		// 유사도 데이터 추출 (Python)
-		// Cosine Similarity
+		// 남기문
 		
 		try {
-			createCSV();
 			
 			IDao_Cart_user dao =  sqlSession.getMapper(IDao_Cart_user.class);
 			
@@ -83,56 +77,6 @@ public class RestController_Cart_user {
 		}
 	}
 	
-	private boolean createCSV() {
-		
-		// 유사도 CSV 파일 생성
-		
-		String filepath = "C:\\GootTeamProject\\TravelProject\\TMSTSTAY_DATA_TABLE.csv";
-		
-		File file = new File(filepath);
-		
-		if(file.exists()) {
-			file.delete();
-		}
-		
-		BufferedWriter bw = null;
-		
-		String NEW_LINE = System.lineSeparator();
-		
-		try {
-			
-			bw = new BufferedWriter(new FileWriter(new File(filepath)));
-			
-			IDao_Cosine_Similarity_admin cos_dao = sqlSession.getMapper(IDao_Cosine_Similarity_admin.class);
-			
-			List<DTO_Cosine_Similarity_admin> list = cos_dao.selectCsvData();
-			
-			bw.write("S_NO,S_INFO" + NEW_LINE);
-			
-			for (int i = 0; i < list.size(); i++) {
-				
-				String str = list.get(i).getS_no() + "," + list.get(i).getS_info();
-				
-				if(i != list.size() -1) {
-					bw.write(str + NEW_LINE);
-				}
-				else {
-					bw.write(str);
-				}
-				
-			}	
-			
-			bw.flush();
-			bw.close();
-			
-			return true;
-		}
-		catch(Exception ex) {
-			ex.printStackTrace();
-			return false;
-		}
-		
-	}
 	
 	
 }

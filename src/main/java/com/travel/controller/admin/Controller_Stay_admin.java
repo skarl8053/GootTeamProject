@@ -20,6 +20,7 @@ import com.travel.service.admin.Service_Stay_list_room_confirm_admin;
 import com.travel.service.admin.Service_Stay_modify_admin;
 import com.travel.service.admin.Service_Stay_room_insert_admin;
 import com.travel.service.admin.Service_Stay_view_admin;
+import com.travel.usetools.Cosine_Similarity_CreateCSV;
 import com.travel.usetools.SearchVO;
 
 @Controller
@@ -183,5 +184,23 @@ public class Controller_Stay_admin {
 		service.execute(model);
 
 		return "/admin/stay_list_room_confirm_popup_admin";
+	}
+	
+	// 남기문
+	// 숙소 장바구니 - 코사인 유사도 알고리즘 사용을 위한 CSV 파일 다운로드
+	@RequestMapping(value = "stay_list_algorithm_update")
+	public String stay_list_algorithm_update(HttpServletRequest request, Model model) {
+
+		Cosine_Similarity_CreateCSV cosine_similarity = new Cosine_Similarity_CreateCSV(sqlSession);
+		cosine_similarity.createCSV();
+		
+		if(cosine_similarity.createCSV()) {
+			model.addAttribute("msg", "알고리즘 업데이트가 완료되었습니다.");
+		}
+		else {
+			model.addAttribute("msg", "알고리즘 업데이트가 실패하였습니다.");
+		}
+
+		return "redirect:stay_list";
 	}
 }

@@ -17,6 +17,15 @@
             margin-left : auto;
             margin-right : auto;
         }
+        #table_img{
+        	border-collapse: collapse;
+        }
+        #table_img tr td{
+        	width: 250px;
+        	height: 200px;
+        	border: 1px solid black;
+        	
+        }
     </style>
     
     <script>
@@ -67,13 +76,13 @@
 		    	const addr_y = document.querySelector('#addr_y').value;
 		    	const stay_info = document.querySelector('.stay_info').value;
 		    	
-		    	if (location == "") {
+		    	if (location == " ") {
 		            alert("지역을 선택해주세요.");
 		            document.querySelector('.location').focus();
 		            return false; 
 		        }
 
-		        if (category == "") {
+		        if (category == " ") {
 		            alert("카테고리를 선택해주세요.");
 		            document.querySelector('.category').focus();
 		            return false; 
@@ -131,7 +140,7 @@
 </head>
 <body>
 <form action="${pageContext.request.contextPath}/admin/stay_insert_service" method="post" enctype="multipart/form-data" onsubmit="return onSubmitForm();">
-		<p class="stay_registration_text">숙소 등록</p>
+		<h1>숙소 등록</h1>
 	    <hr>
 	    <p>숙소 공통 정보</p>
 	    <select class="location" name="location">
@@ -150,16 +159,29 @@
 	        <option value="1">호텔</option>
 	        <option value="2">모텔</option>
 	        <option value="3">펜션</option>
-	    </select> <br>
+	    </select> <br><br />
 	    <div id="textfield">
-		    <span id="title">숙소명</span>
+		    <span id="title">숙소 이름</span>
 		    <input type="text" onfocus="this.value='';" name="stay_title" class="title" placeholder="숙소명을 입력하세요.">
 	    </div>
 	    <p>숙소 공통 사진</p>
 	       	<div class="image-container">
-			    <img src="" alt="이미지 없음" class="image" id="firstImage" />
-			    <img src="" alt="이미지 없음" class="image2" id="secondImage" />
-			    <img src="" alt="이미지 없음" class="image3" id="thirdImage" /><br />
+	       		<table id="table_img">
+	       			<tr>
+	       				<td>
+	       					<img src="" alt="이미지 없음" class="image" id="firstImage" />
+	       				</td>
+	       				<td>
+	       					<img src="" alt="이미지 없음" class="image2" id="secondImage" />
+       					</td>
+	       				<td>
+	       					<img src="" alt="이미지 없음" class="image3" id="thirdImage" />
+	       				</td>
+	       			</tr>
+	       		</table>
+			    
+			    <br />
+			    
 			    <div class="filebox" id="firstFileBox">
 			        <input type="file" name="file" class="real-upload" accept="image/*" multiple onchange="imagePreview(this)">
 			        <button class="button" id="deleteButton" onclick="onClickDeleteUpload();">파일 삭제</button>
