@@ -72,6 +72,10 @@
 		 }
 		 table thead tr td{
 		     border-bottom: 1px solid black;
+		     
+		 }
+		 table tbody tr td{
+		 	height: 50px;
 		 }
 		#paging{
 			width: 1200px;
@@ -356,11 +360,17 @@
 	                        <td><span><input type="checkbox" name="chk"/></span></td>
 	                        <td><span>${li.review_no }</span></td>
 	                        <td><span>${li.report_date }</span></td>
-	                        <td><span><a href="reportdetail?report_no=${li.report_no}">${li.review_content }</a></span></td>
+	                        <td><span><a href="reportdetail?report_no=${li.report_no}">${li.review_content}</a></span></td>
 	                        <td style="display: none"><span>${li.m_no}</span></td>
 	                        <td> <!--스위치-->
-	                        
 	                        	<c:if test="${li.restrict_flag == 'Y'}">
+	                        		<span>Y</span>
+	                        	</c:if>
+	                        	<c:if test="${li.restrict_flag == 'N'}">
+	                        		<span>N</span>
+	                        	</c:if>
+	                        	
+	                        	<%-- <c:if test="${li.restrict_flag == 'Y'}">
 	                        	
 	                        		<input type="checkbox" id="switch" onclick="switch_toggle(${li.m_no})" checked>
 		                            <label for="switch" class="switch_label">
@@ -373,14 +383,14 @@
 		                            <label for="switch" class="switch_label">
 		                            <span class="onf_btn"></span>
 	                        	
-	                        	</c:if>
+	                        	</c:if> --%>
+	                        	
 	                        </td>
                     	</tr>
-                    	
                 	</c:forEach>
                 	
                 </tbody>
-            </table>
+            </table> 
             
             <br /><br />
         </div>
