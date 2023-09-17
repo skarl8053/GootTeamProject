@@ -356,7 +356,7 @@
 	                        <td><span><input type="checkbox" name="chk"/></span></td>
 	                        <td><span>${li.review_no }</span></td>
 	                        <td><span>${li.report_date }</span></td>
-	                        <td><span><a href="reportdetail?report_no=${li.review_no}">${li.review_content }</a></span></td>
+	                        <td><span><a href="reportdetail?report_no=${li.report_no}">${li.review_content }</a></span></td>
 	                        <td style="display: none"><span>${li.m_no}</span></td>
 	                        <td> <!--스위치-->
 	                        

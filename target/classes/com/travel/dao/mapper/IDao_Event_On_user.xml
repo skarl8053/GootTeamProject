@@ -34,7 +34,7 @@
 	
 	<select id="recommend_not_login" resultType="com.travel.dto.user.DTO_Recommend_Stay_user">
 		<![CDATA[
-		SELECT S_IMG1
+		SELECT NVL(S_IMG1,'-') AS S_IMG1
 		FROM (
 		    SELECT S_IMG1
 		    FROM TMSTSTAY

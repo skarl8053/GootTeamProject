@@ -512,7 +512,8 @@
 					// 결제 정보 등록
                     location.replace("payment_exec?m_no=" + m_no + "&s_no=" + s_no + "&r_no=" + r_no + "&checkindate=" 
                     + checkindate + "&pay_type=2&checkoutdate=" + checkoutdate + "&totalAllPrice=" + totalAllPrice + "&totalDiscountPrice=" + totalDiscountPrice
-                    + "&totalResultPrice=" + totalResultPrice + "&totalUsePoint=" + totalUsePoint + "&totalEarnPoint=" + + totalEarnPoint + "&coupon_no=" + coupon_no + "&cardNumber=" + card_number);
+                    + "&totalResultPrice=" + totalResultPrice + "&totalUsePoint=" + totalUsePoint + "&totalEarnPoint=" 
+                    + totalEarnPoint + "&coupon_no=" + coupon_no + "&cardNumber=" + card_number);
                         
                 } else {
                     console.log(rsp);

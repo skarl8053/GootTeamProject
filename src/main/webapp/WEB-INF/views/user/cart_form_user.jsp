@@ -112,7 +112,6 @@
 					url:"cart_sim?s_no=" + s_no,
 					success:function(result){
 						
-						
 						var img_path = "resources/upload_img/admin/stay/"
 						var link_path = "stay_detail_user?s_no=";
 						
