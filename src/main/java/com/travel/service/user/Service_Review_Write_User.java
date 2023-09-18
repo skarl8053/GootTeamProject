@@ -29,7 +29,7 @@ private SqlSession sqlSession;
 		
 		String m_no = mtfRequest.getParameter("m_no");
 		String s_no = mtfRequest.getParameter("s_no");
-		String r_no = mtfRequest.getParameter("r_no");
+//		String r_no = mtfRequest.getParameter("r_no");
 		String order_no = mtfRequest.getParameter("order_no");
 		
 		System.out.println("order_no"+order_no);
@@ -40,7 +40,7 @@ private SqlSession sqlSession;
 
 		
 		System.out.println("stay_code"+s_no);
-		System.out.println("room_code"+r_no);
+//		System.out.println("room_code"+r_no);
 		System.out.println("review_text:"+review_content);
 		System.out.println("m_no:"+m_no);
 		/* System.out.println("file:"+photo_url); */
@@ -71,8 +71,8 @@ private SqlSession sqlSession;
 			ex.printStackTrace();
 		}
 		IDao_Review_user dao=sqlSession.getMapper(IDao_Review_user.class);
-//		dao.rwrite(s_no,r_no,review_content,photo_url,review_rate);
-		dao.rwrite(m_no,s_no,r_no,photo_url,review_rate,review_content);
+//		dao.rwrite(m_no,s_no,r_no,photo_url,review_rate,review_content);
+		dao.rwrite(m_no,s_no,photo_url,review_rate,review_content);
 		
 		/* 평점 stay table로 입력 */
 		dao.updateAvgRate(s_no);
@@ -81,6 +81,7 @@ private SqlSession sqlSession;
 		dao.updateOrderFlag(order_no);
 		
 		model.addAttribute("s_no",s_no);
+		model.addAttribute("m_no",m_no);
 		
 	}
 	
