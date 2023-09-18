@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.travel.dao.admin.IDao_stay_admin;
+import com.travel.usetools.Cosine_Similarity_CreateCSV;
 
 public class Service_Stay_modify_admin implements Interface_TravelService {
 
@@ -21,9 +22,11 @@ public class Service_Stay_modify_admin implements Interface_TravelService {
 //	숙소정보 수정
 //	관리자
 
+	SqlSession sqlSession;
 	IDao_stay_admin dao;
 
 	public Service_Stay_modify_admin(SqlSession sqlSession) {
+		this.sqlSession = sqlSession;
 		dao = sqlSession.getMapper(IDao_stay_admin.class);
 	}
 
@@ -48,14 +51,18 @@ public class Service_Stay_modify_admin implements Interface_TravelService {
 		String[] stay_facility = request.getParameterValues("stay_facility");
 		String stay_info = request.getParameter("stay_info");
 		String[] stay_hashtag = request.getParameterValues("stay_hashtag");
+		String stay_file1 = request.getParameter("stay_file1");
+		String stay_file2 = request.getParameter("stay_file2");
+		String stay_file3 = request.getParameter("stay_file3");
 
 		System.out.println("s_no" + s_no);
 
 		// 留λ턿 �씠誘몄� �뾽濡쒕뱶 寃쎈줈
 		//String root = "/Users/sjh/Downloads/TeamProject/GootTeamProject0831/GootTeamProject/src/main/webapp/resources/upload_img/admin/stay/";
 
+//		String root = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\stay\\";
 		String root = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\stay\\";
-
+		
 		List<String> changeFilesList = new ArrayList<String>();
 		List<MultipartFile> fileList = mtpRequest.getFiles("file");
 
@@ -89,7 +96,9 @@ public class Service_Stay_modify_admin implements Interface_TravelService {
 			if (i < fileList.size()) {
 				changeFilesArray[i] = changeFilesList.get(i);
 			} else {
-				changeFilesArray[i] = "";
+				changeFilesArray[0] = stay_file1;
+				changeFilesArray[1] = stay_file2;
+				changeFilesArray[2] = stay_file3;
 			}
 		}
 
@@ -186,23 +195,39 @@ public class Service_Stay_modify_admin implements Interface_TravelService {
 		String stay_room_double_bed = request.getParameter("stay_room_double_bed");
 		String stay_room_queen_bed = request.getParameter("stay_room_queen_bed");
 		String[] stay_room_facility = request.getParameterValues("stay_room_facility");
+		String room_file1 = request.getParameter("room_file1");
+		String room_file2 = request.getParameter("room_file2");
+		String room_file3 = request.getParameter("room_file3");
+		String r_no = request.getParameter("r_no");
+		System.out.println("room file1 : "+room_file1);
+		System.out.println("room file2 : "+room_file2);
+		System.out.println("room file3 : "+room_file3);
+		System.out.println("r_no : "+r_no);
+		
 
 		List<String> changeRoomFilesList = new ArrayList<String>();
-		List<MultipartFile> RoomfileList = mtpRequest.getFiles("room_file");
+		List<MultipartFile> RoomfileList = mtpRequest.getFiles("file_2");
 		
 		String root_room = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\room\\";
 		
+		System.out.println("RoomfileList : "+RoomfileList);
 		for (MultipartFile mf : RoomfileList) {
 			String originFile = mf.getOriginalFilename();
 			System.out.println("빈 오리진 파일 확인 : " + originFile);
-			// long longtime = System.currentTimeMillis();
 			String changeRoomFile = mf.getOriginalFilename();
 			System.out.println("changeFile : " + changeRoomFile);
 			String pathfile = root_room + "/" + changeRoomFile;
 			System.out.println("pathfile : " + pathfile);
-
-			changeRoomFilesList.add(changeRoomFile);
-
+			
+			if (changeRoomFile == null || changeRoomFile == "") {
+				changeRoomFilesList.add(room_file1);
+				changeRoomFilesList.add(room_file2);
+				changeRoomFilesList.add(room_file3);
+			} else {
+				changeRoomFilesList.add(changeRoomFile);				
+			}
+			System.out.println("changeRoomFilesList^^ : "+changeRoomFilesList );
+			
 			try {
 				if (!originFile.equals("")) {
 					mf.transferTo(new File(pathfile));
@@ -218,7 +243,9 @@ public class Service_Stay_modify_admin implements Interface_TravelService {
 			if (i < RoomfileList.size()) {
 				changeRoomFilesArray[i] = changeRoomFilesList.get(i);
 			} else {
-				changeRoomFilesArray[i] = "";
+				changeRoomFilesArray[0] = room_file1;
+				changeRoomFilesArray[1] = room_file2;
+				changeRoomFilesArray[2] = room_file3;
 			}
 		}
 
@@ -267,7 +294,11 @@ public class Service_Stay_modify_admin implements Interface_TravelService {
 			StayRoomData.add(arr_room_facility[i]);
 		}
 
-		dao.ModifiyRoom(StayRoomData, s_no);
+		dao.ModifiyRoom(StayRoomData, r_no);
+		
+		// 유사도 분석
+		Cosine_Similarity_CreateCSV consine_similarity = new Cosine_Similarity_CreateCSV(sqlSession);
+		consine_similarity.createCSV();
 	}
 
 }

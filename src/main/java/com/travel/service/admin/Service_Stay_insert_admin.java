@@ -14,22 +14,25 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.travel.dao.admin.IDao_stay_admin;
+import com.travel.usetools.Cosine_Similarity_CreateCSV;
 
 public class Service_Stay_insert_admin implements Interface_TravelService {
 	
 	// �떊�옱�솚
 	// �닕�냼�벑濡� 
 
-	IDao_stay_admin dao;
+	private SqlSession sqlSession;
+	private IDao_stay_admin dao;
 	
 	public Service_Stay_insert_admin(SqlSession sqlSession) { 
+		this.sqlSession = sqlSession;
 		dao = sqlSession.getMapper(IDao_stay_admin.class); 
 	}
 
 	@Override
 	public void execute(Model model) {
 		
-		System.out.println("stay_insert_service �떊�샇");
+//		System.out.println("stay_insert_service �떊�샇");
 	
 		Map<String, Object> map = model.asMap();
 		
@@ -47,9 +50,6 @@ public class Service_Stay_insert_admin implements Interface_TravelService {
 		String stay_info = request.getParameter("stay_info");
 		String[] stay_hashtag = request.getParameterValues("stay_hashtag");
 		
-		// 留λ턿 �씠誘몄� �뾽濡쒕뱶 寃쎈줈
-		//String root = "/Users/sjh/Downloads/TeamProject/GootTeamProject0831/GootTeamProject/src/main/webapp/resources/upload_img/admin/stay/";
-		
 		String root = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\stay\\";
 		
 		List<String> changeFilesList = new ArrayList<String>();
@@ -58,7 +58,6 @@ public class Service_Stay_insert_admin implements Interface_TravelService {
 		for (MultipartFile mf : fileList) {
 			String originFile = mf.getOriginalFilename();
 			System.out.println("鍮� �삤由ъ쭊 �뙆�씪 �솗�씤 : "+originFile);
-			// long longtime = System.currentTimeMillis();
 			String changeFile = mf.getOriginalFilename();
 			System.out.println("changeFile : "+changeFile);
 			String pathfile = root + "/" + changeFile;
@@ -120,7 +119,7 @@ public class Service_Stay_insert_admin implements Interface_TravelService {
 		    }
 		}
 		
-		System.out.println("arr_facility : "+Arrays.toString(arr_facility));
+//		System.out.println("arr_facility : "+Arrays.toString(arr_facility));
 
 		for (int i = 0; i < stay_hashtag_int.length; i++) {
 		   if (i < stay_hashtag_int.length) {
@@ -130,7 +129,7 @@ public class Service_Stay_insert_admin implements Interface_TravelService {
 		   }
 		}
 		
-		System.out.println("arr_hashtag : "+Arrays.toString(arr_hashtag));
+//		System.out.println("arr_hashtag : "+Arrays.toString(arr_hashtag));
 		
 		List<Object> StayData = new ArrayList<Object>();
 		StayData.add(stay_title);
@@ -153,20 +152,19 @@ public class Service_Stay_insert_admin implements Interface_TravelService {
 			StayData.add(arr_hashtag[i]);
 		}
 		
-		System.out.println("媛� 諛쏆� �썑 ");
-		System.out.println("location : "+location);
-		System.out.println("category : "+category);
-		System.out.println("stay_title : "+stay_title);
-		System.out.println("stay_facility : "+Arrays.toString(stay_facility));
-		System.out.println("stay_info : "+stay_info);
-		System.out.println("arr_facility : "+Arrays.toString(arr_facility));
-		System.out.println("arr_hashtag : "+Arrays.toString(arr_hashtag));
-		
 		for (Object object : StayData) {
 			System.out.println(object.toString());
 		}
 		
 		dao.stayInsert(StayData);
+		
+		// 남기문
+		
+		// 코사인 유사도 이용하여 숙소 추천 알고리즘 CSV 파일 생성
+		// 여기서 생성되는 CSV는 장바구니에서 사용된다.
+		Cosine_Similarity_CreateCSV cosine_similarity = new Cosine_Similarity_CreateCSV(sqlSession);
+		cosine_similarity.createCSV();
+		
 	}
 	
 }

@@ -51,12 +51,14 @@ public class Service_Stay_list_room_confirm_admin implements Interface_TravelSer
 		model.addAttribute("stay_list", stay_list);
 		model.addAttribute("room_list", room_list);
 		
-		if(request.getParameter("msg") == null) {
-			model.addAttribute("msg", "해당 객실이 삭제되었습니다.");
-		}
-		else {
-			model.addAttribute("msg","");
-		}
-
+		model.addAttribute("msg2", request.getParameter("msg2"));
+		
+//		if(request.getParameter("msg2") == null || request.getParameter("msg2").equals("")) {
+//			model.addAttribute("msg2", "해당 객실이 삭제되었습니다.");
+//		}
+//		else {
+//			model.addAttribute("msg2", "");
+//		}
+		
 	}
 }

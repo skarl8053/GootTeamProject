@@ -37,8 +37,8 @@ def get_recommendations_stay(title,cosine_sim_room=cosine_sim_room):
 
 def callsim(v4):
     btitle=get_recommendations_stay(v4)
-    
     print(btitle)
+    
 def main(argv):
     #callsim(argv[1], argv[2])
     callsim(int(argv[1]))

@@ -29,7 +29,7 @@ public class RestController_Cart_user {
 	public List<DTO_Cart_user> cart_cosine_similarity(HttpServletRequest request, Model model) {
 		
 		// 유사도 데이터 추출 (Python)
-		// Cosine Similarity
+		// 남기문
 		
 		try {
 			
@@ -76,5 +76,7 @@ public class RestController_Cart_user {
 			return null;
 		}
 	}
+	
+	
 	
 }

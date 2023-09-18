@@ -49,6 +49,15 @@ public class Service_Stay_list_admin implements Interface_TravelService {
 		model.addAttribute("location", location);
 		model.addAttribute("type", type);
 
+		// 남기문
+		// 숙소 알고리즘 안내 메세지 띄워줘야 해서 추가
+		if(request.getParameter("msg") == null || request.getParameter("msg").equals("")) {
+			model.addAttribute("msg","");
+		}
+		else {
+			model.addAttribute("msg",request.getParameter("msg"));
+		}
+		
 	}
 
 }

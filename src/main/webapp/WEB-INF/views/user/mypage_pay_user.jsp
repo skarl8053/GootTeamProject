@@ -44,11 +44,37 @@
 			</nav>
 		</div>
 		<div id="Whole">
+		 	<form action="mypage_pay" id="Search">
 			<div id="title">
-				결제 내역
-				<hr>
+				<p id="pay_text">결제 내역</p>
+			<div id="searchBox">
+				 	<select name="searchSelect" id="searchSelect">
+        	<c:choose>
+        		<c:when test="${stay_n }">
+						<option value="all_n">모두</option>
+						<option value="stay_n" selected>숙소명</option>
+						<option value="room_n">객실명</option>
+        		</c:when>
+        		<c:when test="${room_n }">
+						<option value="all_n">모두</option>
+						<option value="stay_n">숙소명</option>
+						<option value="room_n" selected>객실명</option>
+        		</c:when>
+        		<c:otherwise>
+						<option value="all_n" selected>모두</option>
+						<option value="stay_n">숙소명</option>
+						<option value="room_n">객실명</option>
+        		</c:otherwise>
+        	</c:choose>
+ 					 </select>
+				<input type="text"  name="searchInput" id="searchInput" value="${searchInput }"/>
+				<input type="submit" value="조회"  id="inputbox"/>
 			</div>
+				
+			</div>
+				<hr>
 			<div id="table">
+          	     
 				<table id="pay_table">
 					<tr>
 						<th width="5%" height="50px">No</th>
@@ -126,6 +152,10 @@
 					<a href="mypage_pay?page=${vo.totPage }"><i class="fa-solid fa-angles-right"></i></a>
 				</c:if>
         	</div>
+
+        	
+        	</form>
+				
 			</div>
 		</div>
 	</div>

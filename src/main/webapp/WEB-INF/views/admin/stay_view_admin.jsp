@@ -95,11 +95,6 @@ input[type="file"] {
 textarea{
 	resize: none;
 }
-.image {
-	border: 1px solid grey;
-    width: 250px;
-    height: 250px;
-}
 
 #stay_room_price {
 	margin-top: 10px;
@@ -197,17 +192,14 @@ textarea{
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 	overflow: hidden;
 }
-
 #popup-iframe {
 	width: 100%;
 	height: 100%;
 	border: none;
 }
-
 p {
 	font-size : 20px;	
 }
-
 #stay_room_info {
 	margin-top: 20px;
 	align-items: center;
@@ -217,7 +209,6 @@ p {
 	padding: 20px 20px;
 	width: 800px;
 }
-
 .bed_text {
 	margin-right: 5px;
 }
@@ -228,22 +219,19 @@ p {
 	width : 200px;
 	margin-left: 5px;
 }
-    	
-    	#room_img_table img{
-    		width: 260px;
-    		height: 250px;
-    	}
-    
-    	#border-facility{
-    	
-    		width: 180px;
-    		height: 40px;
-    		background-color: #011343;
-    		color: #EBD01C;
-    		font-size: 20px;
-    		margin: 5px 10px;
-    		border-radius: 15px;
-    	}
+#room_img_table img{
+	width: 260px;
+	height: 250px;
+}
+#border-facility{
+	width: 180px;
+	height: 40px;
+	background-color: #011343;
+	color: #EBD01C;
+	font-size: 20px;
+	margin: 5px 10px;
+	border-radius: 15px;
+}
     </style>
     
 </head>
@@ -286,12 +274,17 @@ p {
 			    <p>숙소 공통 사진</p>
 			    
 		        <div class="image-container">
-				    <%-- <img src="/Users/sjh/Downloads/TeamProject/GootTeamProject0831/GootTeamProject/src/main/webapp/resources/upload_img/admin/stay"${stay_view.s_img1 } alt="이미지 없음" class="image" id="firstImage" />${stay_view.s_img1 } --%>
-				    <img src="resources/upload_img/admin/stay/${stay_view.s_img1 }" alt="이미지 없음" class="image" id="firstImage">
-				    <img src="resources/upload_img/admin/stay/${stay_view.s_img2 }" alt="이미지 없음" class="image2" id="secondImage" />
-				    <img src="resources/upload_img/admin/stay/${stay_view.s_img3 }" alt="이미지 없음" class="image3" id="thirdImage" /><br />
-				    <div class="filebox" id="firstFileBox">
-				    </div>
+					    	<tr>
+					            <td>
+					                <img src="resources/upload_img/admin/stay/${stay_view.s_img1 }" alt="이미지 없음" class="image" id="firstImage" />
+					            </td>
+					            <td>
+					                <img src="resources/upload_img/admin/stay/${stay_view.s_img2 }" alt="이미지 없음" class="image2" id="secondImage" />
+					            </td>
+					            <td>
+					                <img src="resources/upload_img/admin/stay/${stay_view.s_img3 }" alt="이미지 없음" class="image3" id="thirdImage" />
+					            </td>
+					        </tr>
 				</div><br /><br />
 		    	
 		    	<span>주소</span>
@@ -335,7 +328,7 @@ p {
 	                	<c:when test="${stay_view.s_facility3 == 4 }"><button id="border-facility">물품보관</button></c:when>
 	                	<c:when test="${stay_view.s_facility3 == 5 }"><button id="border-facility">수영장</button></c:when>
 	                	<c:when test="${stay_view.s_facility3 == 6 }"><button id="border-facility">흡연구역</button></c:when>
-	                </c:choose>
+	                </c:choose> <br>
                 </span>
                 <span>
 	                <c:choose>
@@ -398,7 +391,7 @@ p {
 		            	<c:when test="${stay_view.s_theme4 == 6}"><button id="border-facility">#문화</button></c:when>
 		            	<c:when test="${stay_view.s_theme4 == 7}"><button id="border-facility">#맛집</button></c:when>
 		            	<c:when test="${stay_view.s_theme4 == 8}"><button id="border-facility">#파티</button></c:when>
-		            </c:choose>
+		            </c:choose> <br>		
 		            <c:choose>
 		            	<c:when test="${stay_view.s_theme5 == 5}"><button id="border-facility">#레저</button></c:when>
 		            	<c:when test="${stay_view.s_theme5 == 6}"><button id="border-facility">#문화</button></c:when>
@@ -421,110 +414,119 @@ p {
 		        
 		        <br /><br /><br /><br /><br /><br />
 		       
-		        <h1>객실 상세보기</h1>
-		         <hr />
-		         
-		        <c:forEach items="${stay_room_view }" var="stay_room_view">
-				    <div id="stay_room_info">
-					    <h2>숙소 객실 정보</h2>
-					    <br />
-					    <p>메인 이미지</p>
-				        <div class="image-container">
-				        	<table id="room_img_table">
-				        		<tr>
-				        			<td><img src="resources/upload_img/admin/room/${stay_room_view.r_img1 }" alt="이미지 없음" class="image" id="firstImage" width="250px;" height="250px;"></td>
-				        			<td><img src="resources/upload_img/admin/room/${stay_room_view.r_img2 }" alt="이미지 없음" class="image2" id="secondImage" /></td>
-				        			<td><img src="resources/upload_img/admin/room/${stay_room_view.r_img3 }" alt="이미지 없음" class="image3" id="thirdImage" /></td>
-				        		</tr>
-				        	</table>
+		       <c:if test="${not empty stay_room_view }">
+		       
+			        <h1>객실 상세보기</h1>
+			         <hr />
+			         
+			        <c:forEach items="${stay_room_view }" var="stay_room_view">
+					    <div id="stay_room_info">
+						    <h2>숙소 객실 정보</h2>
 						    <br />
-					    <div class="filebox" id="firstFileBox">
-					       
-					    </div>
-					</div>
-				        	<table>
-				        		<tr>
-				        			<td style="width: 200px"><span>객실 이름</span></td>
-				        			<td><span>${stay_room_view.r_name }</span></td>
-				        		</tr>
-				        		<tr>
-				        			<td style="width: 200px"><span>인원 수</span></td>
-				        			<td><span>${stay_room_view.r_person_cnt}</span></td>
-				        		</tr>
-				        		<tr>
-				        			<td style="width: 200px" ><span>가격</span></td>
-				        			<td><span>${stay_room_view.r_price }</span></td>
-				        		</tr>
-				        	</table>
-				        
-				            <p>객실 상세정보</p>
-				            <textarea name="stay_room_detailinfo" id="stay_room_detailinfo" cols="76" rows="10" readonly>${stay_room_view.r_detail }</textarea><br>
-				            
-				            <br />
-				            <span>침대</span> <br />
-				            <div class="bed">
-				                <span class="bed_text">싱글 베드</span>
-				                   	<select name="stay_room_single_bed" onFocus='this.initialSelect = this.selectedIndex;'
-										onChange='this.selectedIndex = this.initialSelect;'>
-					                   	<option value="Y" ${stay_room_view.r_single_bed_flag == "Y" ? 'selected' : ''}>Y</option>
-					                   	<option value="N" ${stay_room_view.r_single_bed_flag == "N" ? 'selected' : ''}>N</option>
-				                   	</select> &nbsp; &nbsp;&nbsp;
-				                   	<br />
-				                    <span class="bed_text">더블 베드</span>
-				                    <select name="stay_room_double_bed" onFocus='this.initialSelect = this.selectedIndex;'
-										onChange='this.selectedIndex = this.initialSelect;'>
-				                    	<option value="Y" ${stay_room_view.r_double_bed_flag == "Y" ? 'selected' : ''}>Y</option>
-					                   	<option value="N" ${stay_room_view.r_double_bed_flag == "N" ? 'selected' : ''}>N</option>
-				                   	</select> &nbsp; &nbsp;&nbsp;
-				                   	<br />
-				                    <span class="bed_text">퀸 베드</span>
-				                    <select name="stay_room_queen_bed"	onFocus='this.initialSelect = this.selectedIndex;'
-										onChange='this.selectedIndex = this.initialSelect;'>
-				                   		<option value="Y" ${stay_room_view.r_queen_bed_flag == "Y" ? 'selected' : ''}>Y</option>
-					                   	<option value="N" ${stay_room_view.r_queen_bed_flag == "N" ? 'selected' : ''}>N</option>
-				                   	</select> &nbsp; &nbsp;&nbsp;
-				            </div> <br><br />
-				           
-							    <p>등록된 객실 편의시설<p> <br />
-							    
-								    <c:choose>
-									    <c:when test="${stay_room_view.r_facility1 == 1}"><button id="border-facility">노트북 작업공간</button></c:when> 
-									    <c:when test="${stay_room_view.r_facility1 == 2}"><button id="border-facility">웰컴 드링크</button></c:when>
-									    <c:when test="${stay_room_view.r_facility1 == 3}"><button id="border-facility">어매니티</button></c:when>
-									    <c:when test="${stay_room_view.r_facility1 == 4}"><button id="border-facility">넷플릭스</button></c:when>
-									    <c:when test="${stay_room_view.r_facility1 == 5}"><button id="border-facility">조식 포함</button></c:when>
-									    <c:when test="${stay_room_view.r_facility1 == 6}"><button id="border-facility">무료 와이파이</button></c:when>
-									</c:choose>
-									<c:choose>
-									    <c:when test="${stay_room_view.r_facility2 == 2}"><button id="border-facility">웰컴 드링크</button></c:when>
-									    <c:when test="${stay_room_view.r_facility2 == 3}"><button id="border-facility">어매니티</button></c:when>
-									    <c:when test="${stay_room_view.r_facility2 == 4}"><button id="border-facility">넷플릭스</button></c:when>
-									    <c:when test="${stay_room_view.r_facility2 == 5}"><button id="border-facility">조식 포함</button></c:when>
-									    <c:when test="${stay_room_view.r_facility2 == 6}"><button id="border-facility">무료 와이파이</button></c:when>
-									</c:choose>
-									<c:choose>       
-									    <c:when test="${stay_room_view.r_facility3 == 3}"><button id="border-facility">어매니티</button></c:when>
-									    <c:when test="${stay_room_view.r_facility3 == 4}"><button id="border-facility">넷플릭스</button></c:when>
-									    <c:when test="${stay_room_view.r_facility3 == 5}"><button id="border-facility">조식 포함</button></c:when>
-									    <c:when test="${stay_room_view.r_facility3 == 6}"><button id="border-facility">무료 와이파이</button></c:when>
-									</c:choose>
-									<br />
-								
-									<c:choose>       
-									    <c:when test="${stay_room_view.r_facility4 == 4}"><button id="border-facility">넷플릭스</button></c:when>
-									    <c:when test="${stay_room_view.r_facility4 == 5}"><button id="border-facility">조식 포함</button></c:when>
-									    <c:when test="${stay_room_view.r_facility4 == 6}"><button id="border-facility">무료 와이파이</button></c:when>
-									</c:choose>
-									<c:choose>       
-									    <c:when test="${stay_room_view.r_facility5 == 5}"><button id="border-facility">조식 포함</button></c:when>
-									    <c:when test="${stay_room_view.r_facility5 == 6}"><button id="border-facility">무료 와이파이</button></c:when>
-									</c:choose>
-									<c:choose>       
-									    <c:when test="${stay_room_view.r_facility6 == 6}"><button id="border-facility">무료 와이파이</button></c:when>
-									</c:choose>
-								 <br />
+						    <p>메인 이미지</p>
+					        <div class="image-container">
+					        	<table id="room_img_table">
+							    	<tr>
+							            <td>
+							                <img src="resources/upload_img/admin/room/${stay_room_view.r_img1 }" alt="이미지 없음" class="image" id="firstImage" />
+							            </td>
+							            <td>
+							                <img src="resources/upload_img/admin/room/${stay_room_view.r_img2 }" alt="이미지 없음" class="image2" id="secondImage" />
+							            </td>
+							            <td>
+							                <img src="resources/upload_img/admin/room/${stay_room_view.r_img3 }" alt="이미지 없음" class="image3" id="thirdImage" />
+							            </td>
+							        </tr>
+					        	</table>
+							    <br />
+						    <div class="filebox" id="firstFileBox">
+						       
+						    </div>
 						</div>
-		    </c:forEach>
+					        	<table>
+					        		<tr>
+					        			<td style="width: 200px"><span>객실 이름</span></td>
+					        			<td><span>${stay_room_view.r_name }</span></td>
+					        		</tr>
+					        		<tr>
+					        			<td style="width: 200px"><span>인원 수</span></td>
+					        			<td><span>${stay_room_view.r_person_cnt}</span></td>
+					        		</tr>
+					        		<tr>
+					        			<td style="width: 200px" ><span>가격</span></td>
+					        			<td><span>${stay_room_view.r_price }</span></td>
+					        		</tr>
+					        	</table>
+					        
+					            <p>객실 상세정보</p>
+					            <textarea name="stay_room_detailinfo" id="stay_room_detailinfo" cols="76" rows="10" readonly>${stay_room_view.r_detail }</textarea><br>
+					            
+					            <br />
+					            <span>침대</span> <br />
+					            <div class="bed">
+					                <span class="bed_text">싱글 베드</span>
+					                   	<select name="stay_room_single_bed" onFocus='this.initialSelect = this.selectedIndex;'
+											onChange='this.selectedIndex = this.initialSelect;'>
+						                   	<option value="Y" ${stay_room_view.r_single_bed_flag == "Y" ? 'selected' : ''}>Y</option>
+						                   	<option value="N" ${stay_room_view.r_single_bed_flag == "N" ? 'selected' : ''}>N</option>
+					                   	</select> &nbsp; &nbsp;&nbsp;
+					                   	<br />
+					                    <span class="bed_text">더블 베드</span>
+					                    <select name="stay_room_double_bed" onFocus='this.initialSelect = this.selectedIndex;'
+											onChange='this.selectedIndex = this.initialSelect;'>
+					                    	<option value="Y" ${stay_room_view.r_double_bed_flag == "Y" ? 'selected' : ''}>Y</option>
+						                   	<option value="N" ${stay_room_view.r_double_bed_flag == "N" ? 'selected' : ''}>N</option>
+					                   	</select> &nbsp; &nbsp;&nbsp;
+					                   	<br />
+					                    <span class="bed_text">퀸 베드</span>
+					                    <select name="stay_room_queen_bed"	onFocus='this.initialSelect = this.selectedIndex;'
+											onChange='this.selectedIndex = this.initialSelect;'>
+					                   		<option value="Y" ${stay_room_view.r_queen_bed_flag == "Y" ? 'selected' : ''}>Y</option>
+						                   	<option value="N" ${stay_room_view.r_queen_bed_flag == "N" ? 'selected' : ''}>N</option>
+					                   	</select> &nbsp; &nbsp;&nbsp;
+					            </div> <br><br />
+					           
+								    <p>등록된 객실 편의시설<p> <br />
+								    
+									    <c:choose>
+										    <c:when test="${stay_room_view.r_facility1 == 1}"><button id="border-facility">노트북 작업공간</button></c:when> 
+										    <c:when test="${stay_room_view.r_facility1 == 2}"><button id="border-facility">웰컴 드링크</button></c:when>
+										    <c:when test="${stay_room_view.r_facility1 == 3}"><button id="border-facility">어매니티</button></c:when>
+										    <c:when test="${stay_room_view.r_facility1 == 4}"><button id="border-facility">넷플릭스</button></c:when>
+										    <c:when test="${stay_room_view.r_facility1 == 5}"><button id="border-facility">조식 포함</button></c:when>
+										    <c:when test="${stay_room_view.r_facility1 == 6}"><button id="border-facility">무료 와이파이</button></c:when>
+										</c:choose>
+										<c:choose>
+										    <c:when test="${stay_room_view.r_facility2 == 2}"><button id="border-facility">웰컴 드링크</button></c:when>
+										    <c:when test="${stay_room_view.r_facility2 == 3}"><button id="border-facility">어매니티</button></c:when>
+										    <c:when test="${stay_room_view.r_facility2 == 4}"><button id="border-facility">넷플릭스</button></c:when>
+										    <c:when test="${stay_room_view.r_facility2 == 5}"><button id="border-facility">조식 포함</button></c:when>
+										    <c:when test="${stay_room_view.r_facility2 == 6}"><button id="border-facility">무료 와이파이</button></c:when>
+										</c:choose>
+										<c:choose>       
+										    <c:when test="${stay_room_view.r_facility3 == 3}"><button id="border-facility">어매니티</button></c:when>
+										    <c:when test="${stay_room_view.r_facility3 == 4}"><button id="border-facility">넷플릭스</button></c:when>
+										    <c:when test="${stay_room_view.r_facility3 == 5}"><button id="border-facility">조식 포함</button></c:when>
+										    <c:when test="${stay_room_view.r_facility3 == 6}"><button id="border-facility">무료 와이파이</button></c:when>
+										</c:choose>
+										<br />
+									
+										<c:choose>       
+										    <c:when test="${stay_room_view.r_facility4 == 4}"><button id="border-facility">넷플릭스</button></c:when>
+										    <c:when test="${stay_room_view.r_facility4 == 5}"><button id="border-facility">조식 포함</button></c:when>
+										    <c:when test="${stay_room_view.r_facility4 == 6}"><button id="border-facility">무료 와이파이</button></c:when>
+										</c:choose>
+										<c:choose>       
+										    <c:when test="${stay_room_view.r_facility5 == 5}"><button id="border-facility">조식 포함</button></c:when>
+										    <c:when test="${stay_room_view.r_facility5 == 6}"><button id="border-facility">무료 와이파이</button></c:when>
+										</c:choose>
+										<c:choose>       
+										    <c:when test="${stay_room_view.r_facility6 == 6}"><button id="border-facility">무료 와이파이</button></c:when>
+										</c:choose>
+									 <br />
+							</div>
+			    </c:forEach>
+		    </c:if>
 	</div>
 
       <button type="button" class="btn" onclick="goToListPage()">돌아가기</button>

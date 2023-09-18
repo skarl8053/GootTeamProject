@@ -21,24 +21,24 @@
 	</insert>	
 
 	<!-- 숙소 객실 정보 등록 -->	
-			<insert id="stayRoomInsert" parameterType="com.travel.dto.admin.DTO_Stay_room_admin">
-			     <selectKey keyProperty="s_no" resultType="java.lang.Integer" order="BEFORE">
-			        SELECT S_NO FROM TMSTSTAY WHERE S_NAME = #{stay_title}
-			    </selectKey>
-			    
-			    INSERT INTO TMSTROOM (
-			        R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,
-			        R_IMG1,R_IMG2,R_IMG3,
-			        R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,
-			        R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6
-			    ) VALUES (
-			        (SELECT NVL(MAX(R_NO),0) + 1 FROM TMSTROOM),
-			        #{s_no},
-			        <foreach collection="stayRoomData" separator="," item="data">
-			            #{data}
-			        </foreach>
-			    )
-			</insert>
+	<insert id="stayRoomInsert" parameterType="com.travel.dto.admin.DTO_Stay_room_admin">
+	     <selectKey keyProperty="s_no" resultType="java.lang.Integer" order="BEFORE">
+	        SELECT S_NO FROM TMSTSTAY WHERE S_NAME = #{stay_title}
+	    </selectKey>
+	    
+	    INSERT INTO TMSTROOM (
+	        R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,
+	        R_IMG1,R_IMG2,R_IMG3,
+	        R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,
+	        R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6
+	    ) VALUES (
+	        (SELECT NVL(MAX(R_NO),0) + 1 FROM TMSTROOM),
+	        #{s_no},
+	        <foreach collection="stayRoomData" separator="," item="data">
+	            #{data}
+	        </foreach>
+	    )
+	</insert>
 		
 	<!-- 숙소 삭제하기 -->
 		<delete id="stay_delete">
@@ -83,44 +83,44 @@
 
 		<!-- 등록된 숙소 리스트 불러오기 / 페이징 처리 -->
 		<sql id="search_list">
-		<if test="param4 == 0">
-			<if test="param3 == 0">
-		</if>
-			<if test="param3 != 0">
-				WHERE S_LOCA = #{param3}
+			<if test="param4 == 0">
+				<if test="param3 == 0">
 			</if>
-		</if>
-	
-		<if test="param4 == 1">
-			<if test="param3 == 0">
-				WHERE S_TYPE = #{param4}
+				<if test="param3 != 0">
+					WHERE S_LOCA = #{param3}
+				</if>
 			</if>
-			<if test="param3 != 0">
-				WHERE S_LOCA = #{param3}
-				AND S_TYPE = #{param4}
+		
+			<if test="param4 == 1">
+				<if test="param3 == 0">
+					WHERE S_TYPE = #{param4}
+				</if>
+				<if test="param3 != 0">
+					WHERE S_LOCA = #{param3}
+					AND S_TYPE = #{param4}
+				</if>
 			</if>
-		</if>
-	
-		<if test="param4 == 2">
-			<if test="param3 == 0">
-				WHERE S_TYPE = #{param4}
+		
+			<if test="param4 == 2">
+				<if test="param3 == 0">
+					WHERE S_TYPE = #{param4}
+				</if>
+				<if test="param3 != 0">
+					WHERE S_LOCA = #{param3}
+					AND S_TYPE = #{param4}
+				</if>
 			</if>
-			<if test="param3 != 0">
-				WHERE S_LOCA = #{param3}
-				AND S_TYPE = #{param4}
+		
+			<if test="param4 == 3">
+				<if test="param3 == 0">
+					WHERE S_TYPE = #{param4}
+				</if>
+				<if test="param3 != 0">
+					WHERE S_LOCA = #{param3}
+					AND S_TYPE = #{param4}
+				</if>
 			</if>
-		</if>
-	
-		<if test="param4 == 3">
-			<if test="param3 == 0">
-				WHERE S_TYPE = #{param4}
-			</if>
-			<if test="param3 != 0">
-				WHERE S_LOCA = #{param3}
-				AND S_TYPE = #{param4}
-			</if>
-		</if>
-	</sql>
+		</sql>	
 	
 		<select id="list" resultType="com.travel.dto.admin.DTO_Stay_admin">
 		    SELECT *
@@ -183,7 +183,7 @@
 					R_FACILITY4 = #{StayRoomData[13]},
 					R_FACILITY5 = #{StayRoomData[14]},
 					R_FACILITY6 = #{StayRoomData[15]}
-		    WHERE S_NO = #{s_no}
+		    WHERE R_NO = #{r_no}
 		</update>
 		
 		<select  id="stay_list_confirm_admin" resultType="com.travel.dto.admin.DTO_Stay_admin">

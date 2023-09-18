@@ -25,25 +25,18 @@
 	<select id="selectEvents" resultType="com.travel.dto.admin.DTO_Event_admin">
 	
 		<![CDATA[
-		SELECT  	A.EVENT_NO 
-			        ,A.EVENT_NAME
-			        ,A.EVENT_FLAG_NUM
-			        ,A.EVENT_FLAG_NAME
-			        ,A.EVENT_STARTDATE
-			        ,A.EVENT_ENDDATE
-			        ,(
-			        	CASE WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') > A.EVENT_ENDDATE THEN 'Y'
-			        			ELSE 'N' END					
-					) AS CHECK_WINNER_DATE
-		FROM
-		(
-			SELECT 	A.ROW_NUM
+		
+			SELECT 	A.EVENT_NO
 						,A.EVENT_NAME
-						,A.EVENT_NO
-						,A.EVENT_STARTDATE
-						,A.EVENT_ENDDATE
 						,A.EVENT_FLAG_NUM
 						,B.CODENAME AS EVENT_FLAG_NAME
+						,A.EVENT_STARTDATE
+						,A.EVENT_ENDDATE
+						,(
+				        	CASE WHEN TO_CHAR(SYSDATE, 'yyyy-MM-dd') > A.EVENT_ENDDATE THEN 'Y'
+				        			ELSE 'N' END					
+						) AS CHECK_WINNER_DATE
+						
 			FROM
 			(
 			    	SELECT  	ROW_NUMBER() OVER(ORDER BY EVENT_STARTDATE DESC, EVENT_NO ASC) ROW_NUM
@@ -67,9 +60,9 @@
 				    AND LOWER(A.EVENT_NAME) LIKE '%' || LOWER(#{param2}) || '%'
 				    ORDER BY A.EVENT_STARTDATE DESC, EVENT_NO ASC
 		    )A LEFT JOIN TMSTCODE B 	ON 	B.GRPCODE 				= 11
-													AND 	A.EVENT_FLAG_NUM 	= B.CODE
-		)A
-		WHERE A.ROW_NUM BETWEEN #{param3} AND #{param4}
+												AND 	A.EVENT_FLAG_NUM 	= B.CODE
+			WHERE A.ROW_NUM BETWEEN #{param3} AND #{param4}
+		
 		]]>
 	</select>
 	

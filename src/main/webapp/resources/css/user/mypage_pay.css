@@ -107,6 +107,9 @@ table, th, td {
 .receipt_link{
 	margin-top:10px;
 }
+#refund_link:hover, #review_link:hover, .receipt_link:hover{
+	box-shadow: 5px 5px 5px gray;
+}
 #s_link{
 	color: rgb(1, 19, 67);
 	text-decoration: none;
@@ -121,4 +124,31 @@ table, th, td {
 }
 #s_img:hover{
 	box-shadow: 5px 5px 5px gray;
+}
+#pay_text{
+	display:inline;
+}
+#searchBox{
+	float: right;
+}
+#inputbox{
+	color : rgb(235, 208, 28);
+	background-color: rgb(1, 19, 67);
+	width : 70px;
+	height: 35px;
+	border:0px;
+	border-radius: 5px;
+	cursor: pointer;
+}
+#inputbox:hover{
+	box-shadow: 3px 3px 3px gray;
+}
+#searchInput{
+	width:200px;
+	height:30px;
+	padding-left : 10px;
+}
+#searchSelect{
+	width:70px;
+	height:33px;
 }

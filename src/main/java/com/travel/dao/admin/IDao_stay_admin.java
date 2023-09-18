@@ -37,7 +37,7 @@ public interface IDao_stay_admin {
 	public void Modify(@Param("StayData") List<Object> StayData, @Param("s_no") String s_no);
 
 	// 숙소 객실 수정
-	public void ModifiyRoom(@Param("StayRoomData") List<Object> stayRoomData, @Param("s_no") String s_no);
+	public void ModifiyRoom(@Param("StayRoomData") List<Object> stayRoomData, @Param("r_no") String r_no);
 
 	// 숙소 리스트 검색결과 유지
 	public Integer pageCalculate(int location, int type);

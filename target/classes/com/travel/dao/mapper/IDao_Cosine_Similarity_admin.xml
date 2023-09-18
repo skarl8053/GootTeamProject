@@ -1,0 +1,18 @@
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+    
+<!-- (namespace) 인터페이스 경로 -->
+<mapper namespace="com.travel.dao.admin.IDao_Cosine_Similarity_admin">
+
+	<select id="selectCsvData" resultType="com.travel.dto.admin.DTO_Cosine_Similarity_admin">
+	
+			<!-- 모든 숙소의 데이터를 CSV로 제작함.. -->
+			
+			SELECT 	S_NO
+						,S_INFO
+			FROM  	TMSTSTAY
+			
+	</select>
+	
+</mapper>

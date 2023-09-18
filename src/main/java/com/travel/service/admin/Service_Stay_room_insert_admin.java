@@ -46,17 +46,6 @@ public class Service_Stay_room_insert_admin implements Interface_TravelService {
 		String stay_room_queen_bed = request.getParameter("stay_room_queen_bed");
 		String[] stay_room_facility = request.getParameterValues("stay_room_facility");
 
-//		System.out.println("stay_ title : "+stay_title);
-//		System.out.println("stay_ stay_room_no : "+stay_room_no);
-//		System.out.println("stay_ stay_room_person : "+stay_room_person);
-//		System.out.println("stay_ stay_room_price : "+stay_room_price);
-//		System.out.println("stay_ stay_room_detailinfo : "+stay_room_detailinfo);
-//		System.out.println("stay_ stay_room_single_bed : "+stay_room_single_bed);
-//		System.out.println("stay_ stay_room_double_bed : "+stay_room_double_bed);
-//		System.out.println("stay_ stay_room_queen_bed : "+stay_room_queen_bed);
-//		System.out.println("stay_ stay_room_facility : "+Arrays.toString(stay_room_facility));
-
-		// 맥북 이미지 업로드 경로
 		String root = "C:\\GootTeamProject\\TravelProject\\src\\main\\webapp\\resources\\upload_img\\admin\\room\\";
 		List<String> changeFilesList = new ArrayList<String>();
 		List<MultipartFile> fileList = mtpRequest.getFiles("file");

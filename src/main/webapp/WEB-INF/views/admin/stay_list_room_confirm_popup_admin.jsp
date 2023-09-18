@@ -11,18 +11,12 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 	
 	
-	<c:if test="${not empty msg}">
-		<script>
-			alert("${msg}");
-			window.close();
-		</script>
-	</c:if>
+	
 	
 	<script>
 		
 		function stayDelete(s_name) {
 	        if (confirm(s_name+" 숙소를 삭제하시겠습니까?")) {
-	        	
 	        	return true;
 	        } else {
 	        	return false;
@@ -62,6 +56,22 @@
 			box-sizing: border-box;
 		}
 	</style>
+	
+ 	<c:if test="${not empty msg}">
+		<script>
+			alert("${msg}");
+			window.opener.location.href = "http://localhost:8090/travel/admin/stay_list?page=1";
+	        window.close();
+		</script>
+	</c:if>
+	
+	<c:if test="${not empty msg2}">
+		<script>
+			alert("${msg2}");
+			location.replace("stay_list_room_confirm_popup?s_no=" + "${stay_list.s_no}")
+		</script>
+	</c:if>
+	
 </head>
 <body>
 <h2>숙소 / 객실 리스트</h2>
@@ -79,7 +89,14 @@
 			<tr>
 				<td>${stay_list.s_no }</td>
 				<td>${stay_list.s_name}</td>
-				<td><img src="resources/upload_img/admin/stay/${stay_list.s_img1 }" alt="이미지 없음" width="250px;" height="250px;"/></td>
+				<c:choose>
+					<c:when test="${firstImage ne ''}">
+						<td><img src="resources/upload_img/admin/stay/${stay_list.s_img1 }" alt="이미지 없음" id="firstImage" style="width:250px; height:250px;"/></td>
+					</c:when>
+					<c:otherwise>
+						<td><img src="resources/img/PL_Search.png" alt="이미지 없음" id="firstImage"/></td>
+					</c:otherwise>
+				</c:choose>
 				<td><input type="submit" value="삭제" class="btn"/></td>
 			</tr>
 			

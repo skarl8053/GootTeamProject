@@ -86,7 +86,7 @@
 			    ,POINT_OUT
 			    ,POINT_USEDATE
 			)
-			SELECT  	NVL(MAX(POINT_NO),0) + 1
+			SELECT  	(SELECT NVL(MAX(POINT_NO),0) + 1 FROM THISPOINT)
 				        ,M_NO
 				        ,ORDER_NO
 				        ,2

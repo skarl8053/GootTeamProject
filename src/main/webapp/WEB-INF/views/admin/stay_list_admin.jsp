@@ -22,10 +22,10 @@
         
 		/* 화면 디자인 */
 		@font-face {
-				    font-family: 'GmarketSansMedium';
-				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-				    font-weight: normal;
-				    font-style: normal;
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
 		}
 		
 		*{
@@ -75,7 +75,11 @@
 			color: #EBD01C;
 			cursor: pointer;
 		}
-
+		
+		#algorithm_button{
+			margin: 0 30px;
+			width: 300px;
+		}
     </style>
 	
 </head>
@@ -110,17 +114,26 @@
             
         }
 
+	    function csvUpdate(){
+	    	
+	    	if(confirm("알고리즘 업데이트를 진행하시겠습니까?") == false){
+	    		return false;
+	    	}
+	    	
+	    	location.replace("stay_list_algorithm_update");
+	    }
+	    
 	</script>
 
 	<!-- 메세지 -->
-	<%-- <c:if test="${msg != ''}">
+	<c:if test="${msg != ''}">
 			
 		<script>
 			alert("${msg}");
-			location.replace("event?page=1");
+			location.replace("stay_list?page=1");
 		</script>
 		
-	</c:if> --%>
+	</c:if>
 
     <!-- 메인 -->
     <h1>숙소 조회</h1>
@@ -264,6 +277,7 @@
 			</span>
     		<span>
     			<input type="submit" class="button" value="검색" onclick="searchExecute();">
+    			<input type="button" class="button" id="algorithm_button" value="숙소 추천 알고리즘 업데이트" onclick="return csvUpdate();">
     		</span>
     	</div>
     	<br><br>
@@ -285,8 +299,9 @@
 						<input type="hidden" id="s_no" value="${list.s_no }" />
 							<tr>
 								<td>${list.s_no }</td>
-								<td class="img_col" > <a href="stay_view?s_no=${list.s_no }">
-									<img class="s_img1" src="resources/upload_img/admin/stay/${list.s_img1 }" alt="이미지 없음" /></a></td>
+				    		<td class="img_col" > <a href="stay_view?s_no=${list.s_no }">
+							<img class="s_img1" src="resources/upload_img/admin/stay/${list.s_img1 }" alt="이미지 없음" /></a></td>
+								
 								<td><a href="stay_view?s_no=${list.s_no }">${list.s_name }</a></td>
 								<td>
 									<c:choose>

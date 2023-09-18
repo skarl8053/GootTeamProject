@@ -19,6 +19,9 @@ body {
 
 .slick-slide img {
   width: 100%;
+  height: auto;
+  min-height: 250px;
+  max-height: 500px;
 }
 
 .slick-prev:before,

@@ -23,6 +23,7 @@
 	<select id="selectReportData" resultType="com.travel.dto.admin.DTO_Report_admin">
 	
 		SELECT 		A.REVIEW_NO
+						,A.REPORT_NO
 				        ,A.S_NAME
 				        ,A.REPORT_TYPE
 				        ,A.REVIEW_CONTENT
@@ -34,6 +35,7 @@
 		(
 			SELECT  ROW_NUMBER() OVER(ORDER BY A.REPORT_DATE DESC) AS ROW_NUM
 						,B.REVIEW_NO
+						,A.REPORT_NO
 				        ,C.S_NAME
 				        ,E.CODENAME AS REPORT_TYPE
 				        ,B.REVIEW_CONTENT

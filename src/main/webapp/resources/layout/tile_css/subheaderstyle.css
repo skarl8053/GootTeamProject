@@ -126,7 +126,7 @@ body {
 } 
 
 
-.menu-bar:hover { background-color: #14172C;}
+.menu-bar:hover { background-color: rgb(1, 19, 67);}
 
 .menu-bar ul {
     background-color: white;

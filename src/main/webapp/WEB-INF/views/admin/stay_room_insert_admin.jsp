@@ -12,17 +12,37 @@
     <!-- 개별 화면 content 크기를 조절하는 방법 -->
     <style>
         #content{
-        	min-height : 800px;
             height: auto;
-            width : 1200px;
-            margin : auto;
+        }
+        #table_img{
+        	border-collapse: collapse;
+        }
+        #table_img tr td{
+        	width: 250px;
+        	height: 250px;
+        }
+        #stay_room_person {
+        	margin-top: 10px;
+        	margin-bottom: 10px;
+        	margin-left : 24px;
+        }
+        #stay_room_price {
+        	margin-left : 51px;
+        }
+        #stay_room_name {
+        	margin-left : 5px;
         }
     </style>
     
     <script>
 	    
-		    function imagePreview(input) {
+		    function imagePreview(event, input) {
 		        const imageIds = ['firstImage', 'secondImage', 'thirdImage'];
+		        
+		        if(document.getElementById("file").files.length != 3){
+		        	alert("객실 이미지를 3개 등록해주세요");
+            		return;
+            	}
 		        
 		        if (input.files && input.files.length > 0) {
 		            for (let i = 0; i < input.files.length; i++) {
@@ -38,7 +58,7 @@
 		        }	
 		    }
 		
-		    function onClickDeleteUpload(event) {
+		    function onClickDeleteUpload() {
 		    	event.preventDefault();
 		        // 이미지 미리보기 삭제
 		        const imageIds = ['firstImage', 'secondImage', 'thirdImage'];
@@ -64,39 +84,41 @@
 		    	const stay_room_price = document.querySelector('#stay_room_price').value;
 		    	const stay_room_person = document.querySelector('#stay_room_person').value;
 		    	const stay_room_detailinfo = document.querySelector('#stay_room_detailinfo').value;
+		    	const stay_room_facility = document.querySelectorAll('input[name="stay_room_facility"]:checked');
 		    	
-		    	if (stay_title === "숙소명을 입력하세요." || stay_title === "" || stay_title === " ") {
+		    	if (stay_title == "여기를 눌러 숙소를 선택해주세요") {
 		            alert("숙소명을 입력해주세요.");
 		            document.querySelector('#stay_title').focus();
 		            return false; 
 		        }
-
-		        if (firstImage === "" || firstImage === null) {
-		            alert("객실 사진을 등록해주세요.");
+		    	
+		    	if (firstImage == "" || firstImage == " ") {
+		            alert("이미지를 등록해주세요.");
 		            document.querySelector('#firstImage').focus();
 		            return false; 
 		        }
 
-		        if (stay_room_name === "객실번호를 입력하세요.") {
-		            alert("객실 번호를 입력해주세요.");
+		        
+		        if (stay_room_name.length < 1) {
+		            alert("객실명을 입력해주세요.");
 		            document.querySelector('#stay_room_name').focus();
 		            return false; 
 		        }
 
-		        if (stay_room_price === "가격을 입력하세요." || stay_room_price === "" || stay_room_price === " ") {
-		            alert("객실 가격을 입력해주세요.");
-		            document.querySelector('#stay_room_price').focus();
-		            return false; 
-		        }
-
-		        if (stay_room_person === "인원 수") {
+		        if (stay_room_person == " ") {
 		            alert("인원 수를 입력해주세요.");
 		            document.querySelector('#stay_room_person').focus();
 		            return false; 
 		        }
+		        
+		        if (stay_room_price == "가격을 입력하세요." || stay_room_price == "" || stay_room_price == " ") {
+		            alert("객실 가격을 입력해주세요.");
+		            document.querySelector('#stay_room_price').focus();
+		            return false; 
+		        }
+		        
 
-		        if (stay_room_detailinfo === "객실 상세정보를 입력하세요." || stay_room_detailinfo === "" || stay_room_detailinfo === " "
-		        	 || stay_room_detailinfo.length < 10) {
+		        if (stay_room_detailinfo == "객실 상세정보를 입력하세요." || stay_room_detailinfo == "" || stay_room_detailinfo == " ") {
 		            alert("객실 상세정보를 입력해주세요.");
 		            document.querySelector('#stay_room_detailinfo').focus();
 		            return false; 
@@ -106,6 +128,11 @@
 		            alert("객실 상세정보를 10글자 이상 입력해주세요.");
 		            document.querySelector('#stay_room_detailinfo').focus();
 		            return false; 
+		        }
+		        
+		        if (stay_room_facility.length < 1) {
+		            alert("객실 편의시설을 1개 이상 선택해주세요.");
+		            return false;
 		        }
 
 		        alert("숙소 객실이 등록되었습니다.");
@@ -132,7 +159,7 @@
 	}
 	
 	function openNewWindow() {
-	    const option = "width=600,height=600,left=500,top=120";
+	    const option = "width=auto,height=auto,left=500,top=200";
 	    const popupWindow = window.open("stay_list_confirm", "숙소 등록 리스트 팝업", option);
 	    
 	    /* const screenWidth = window.screen.width;
@@ -300,12 +327,13 @@
     
 </head>
 <body>
-<form action="${pageContext.request.contextPath}/admin/stay_room_insert_service" method="post" enctype="multipart/form-data" onsubmit="return onSubmitForm();">
-		
-	        <p>숙소 객실 등록</p>
+	
+	<h1>숙소 객실 등록</h1>
+	
+	<form action="${pageContext.request.contextPath}/admin/stay_room_insert_service" method="post" enctype="multipart/form-data" onsubmit="return onSubmitForm();">
 	        <hr />
 	        <p>숙소명</p>
-	            <input type="text" id="stay_title" name="stay_title" value="숙소명을 입력하세요." onclick="openNewWindow()" readonly>
+	            <input type="text" id="stay_title" name="stay_title" value="여기를 눌러 숙소를 선택해주세요" onclick="openNewWindow()" readonly style="width: 400px">
 	            <div class="popup-overlay" id="popup">
 				    <div class="popup-content">
 				        <button class="popup-close" onclick="closePopup()">창 닫기</button>
@@ -313,20 +341,35 @@
 				    </div>
 				</div>
 
-		    	<p>숙소 객실 정보</p>
 	        <div class="image-container">
-			    <img src="" alt="이미지 없음" class="image" id="firstImage" />
-			    <img src="" alt="이미지 없음" class="image2" id="secondImage" />
-			    <img src="" alt="이미지 없음" class="image3" id="thirdImage" /><br />
+	        	<p>객실 이미지</p>
+	        	<table id="table_img">
+					    <c:if test="${empty firstImageSrc}">
+					        <tr>
+					            <td>
+					                <img src="resources/img/PL_Search.png" alt="이미지 없음" class="image" id="firstImage" />
+					            </td>
+					            <td>
+					                <img src="resources/img/PL_Search.png" alt="이미지 없음" class="image2" id="secondImage" />
+					            </td>
+					            <td>
+					                <img src="resources/img/PL_Search.png" alt="이미지 없음" class="image3" id="thirdImage" />
+					            </td>
+					        </tr>
+					    </c:if>
+	       		</table>
 			    <div class="filebox" id="firstFileBox">
-			        <input type="file" name="file" class="real-upload" accept="image/*" multiple onchange="imagePreview(this)">
-			        <button class="button" id="deleteButton" onclick="onClickDeleteUpload();">파일 삭제</button>
+			        <input type="file" name="file" id="file" class="real-upload" accept="image/*" multiple onchange="imagePreview(event,this)">
+			        <button type="button" class="button" id="deleteButton" onclick="onClickDeleteUpload();">파일 삭제</button>
 			    </div>
 			</div>
-	        
-	            <p>메인 이미지</p>
-	            <span>숙소 객실번호</span>
-	            <input type="text" onfocus="this.value='';" id="stay_room_name" name="stay_room_name" value="객실번호를 입력하세요.">
+				<br />
+	            <span>객실 이름</span>
+	            <input type="text" id="stay_room_name" name="stay_room_name" placeholder="객실명을 입력해주세요" style="width: 400px">
+	            <br />
+	            
+	            <span>가격</span>
+	            <input type="text" id="stay_room_price" name="stay_room_price" placeholder="가격을 입력하세요."><br>
 	            <span>인원 수</span>
 	            <select name="stay_room_person" id="stay_room_person">
 	                <option value=" " selected>인원 수</option>
@@ -336,10 +379,9 @@
 	                <option value="5">5</option>
 	                <option value="6">6</option>
 	            </select><br>
-	            <span>가격</span>
-	            <input type="text" id="stay_room_price" name="stay_room_price" onfocus="this.value='';" value="가격을 입력하세요.">
 	            <p>객실 상세정보</p>
-	            <textarea name="stay_room_detailinfo" id="stay_room_detailinfo" cols="30" rows="10" onfocus="this.value='';">객실 상세정보를 입력하세요.</textarea><br>
+	            <textarea name="stay_room_detailinfo" id="stay_room_detailinfo" cols="30" rows="10" placeholder="객실 상세정보를 입력하세요."></textarea><br>
+	            <br />
 	            <span>침대</span> <br>
 	            <div class="bed">
 	                <span class="bed_text">싱글 베드</span>
@@ -357,7 +399,7 @@
 	                   		<option value="Y">Y</option>
 	                   		<option value="N">N</option>
 	                   	</select>
-	            </div> <br>
+	            </div> <br><br />
 	            <span>객실 편의시설</span>
 	            <div id="stay_room_facility">
 	                <input type="checkbox" value="1" name="stay_room_facility"> 노트북 작업공간
@@ -377,7 +419,7 @@
 	        
 	        <script>
 		        function goToMainPage() {
-		            window.location.href = '/travel/main';
+		            window.location.href = 'stay_list';
 		        }
 	        </script>
 	</form>

@@ -30,7 +30,7 @@ public interface IDao_Mypage_user {
 
 	void insertPushAL(String m_no, String order_no, String msg);
 	
-	public List<DTO_Mypage_user> pay_list(int m_no, Integer rowStart, Integer rowEnd);
+	public List<DTO_Mypage_user> pay_list(int m_no, Integer rowStart, Integer rowEnd, String content, String Num);
 
 	public Integer paging_pay(int m_no);
 	public Integer paging_review(int m_no);
