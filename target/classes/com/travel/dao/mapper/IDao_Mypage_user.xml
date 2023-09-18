@@ -129,13 +129,16 @@
 	<sql id="includeList">
 		<choose>
 			<when test="param5==1">
-				WHERE M.M_NO = #{param1} AND S.S_NAME LIKE '%'||#{param4}||'%'
+				WHERE M.M_NO = #{param1} AND S.S_NAME LIKE
+				'%'||#{param4}||'%'
 			</when>
 			<when test="param5==2">
-				WHERE M.M_NO = #{param1} AND R.R_NAME LIKE'%'||#{param4}||'%'
+				WHERE M.M_NO = #{param1} AND R.R_NAME
+				LIKE'%'||#{param4}||'%'
 			</when>
 			<when test="param5==3">
-				WHERE M.M_NO = #{param1} AND (S.S_NAME LIKE '%'||#{param4}||'%' OR R.R_NAME LIKE '%'||#{param4}||'%')
+				WHERE M.M_NO = #{param1} AND (S.S_NAME LIKE
+				'%'||#{param4}||'%' OR R.R_NAME LIKE '%'||#{param4}||'%')
 			</when>
 			<otherwise>
 
@@ -327,21 +330,20 @@
 
 	<select id="endevent_list"
 		resultType="com.travel.dto.user.DTO_Mypage_user">
-		SELECT A.FILENAME2, A.EVENT_NO
+		SELECT DISTINCT A.FILENAME2, A.EVENT_NO
 		FROM (
-		SELECT E.FILENAME2,
-		E.EVENT_NO
-		FROM TMSTEVENT E
-		LEFT JOIN THISATTEND TA ON E.EVENT_NO =
-		TA.EVENT_NO
+		SELECT
+		E.FILENAME2, E.EVENT_NO FROM TMSTEVENT E
+		LEFT JOIN THISATTEND TA ON
+		E.EVENT_NO = TA.EVENT_NO
 		WHERE E.EVENT_FLAG = 3
-		AND (
-		E.M_NO1 = #{param1}
-		OR E.M_NO2 =
+		AND ( E.M_NO1 =
 		#{param1}
+		OR E.M_NO2 = #{param1}
 		OR E.M_NO3 = #{param1} )
-		) A
-		WHERE ROWNUM BETWEEN #{param2} AND
-		#{param3}
+		)
+		A
+		WHERE ROWNUM
+		BETWEEN #{param2} AND #{param3}
 	</select>
 </mapper>
