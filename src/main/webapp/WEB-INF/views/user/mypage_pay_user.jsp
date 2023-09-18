@@ -116,7 +116,7 @@
 									<td><a href="../member/mypage_refund_popup?m_no=${sessionScope.m_no}&order_no=${dto.order_no}"  id="refund_link">환불 신청</a></td>
 									</c:when>
 									<c:when test="${dto.step_flag eq 4 }">
-									<td><a href="./review_writeview_user?m_no=${sessionScope.m_no}&s_no=${dto.s_no}&r_no=${dto.r_no}&order_no=${dto.order_no}" id="review_link">후기 작성</a> <br />
+									<td><a href="./review_writeview_user?m_no=${sessionScope.m_no}&s_no=${dto.s_no}&order_no=${dto.order_no}" id="review_link">후기 작성</a> <br />
 									<a href="../member/mypage_receipt_popup?m_no=${sessionScope.m_no }&order_no=${dto.order_no}" class="receipt_link">구매 내역</a></td>
 									</c:when>
 									<c:when test="${dto.step_flag eq 5 }">

@@ -46,7 +46,7 @@
 	</c:if>
 
 
-	<a href="review_writeview_user?m_no=${m_no }&s_no=51&r_no=21&order_no=123">위치는 이동해야하지만 어쨋든 후기쓰기</a>
+
 	
 	<div class="tc">
 		<div class="a">
@@ -128,12 +128,12 @@
 
 		  <!--  신고하기 --> 
 					<c:if test="${dto.report_no eq '0' }">
-						 <a href="report?review_no=${dto.review_no }">
+						 <a href="report?review_no=${dto.review_no }&s_no=${s_no }">
                 <input type="image" name="button" src="resources/img/user/review/reviewAlertIcon.png" width="30px">
                
                 </a>
 					</c:if>
-					<c:if test="${dto.report_no eq '1' }">
+					<c:if test="${dto.report_no ne '0' }">
 						
                 <input type="image" name="button"  onclick="reportCheck();" src="resources/img/user/review/reviewAlertIcon.png" width="30px">
                
@@ -141,12 +141,6 @@
 					</c:if>
 
 
-
-					<%--    <a href="report?review_no=${dto.review_no }"> --%>
-              <%--   <a href="report?review_no=${dto.review_no }">
-                <input type="image" name="button" src="resources/img/user/review/reviewAlertIcon.png" width="30px">
-               
-                </a> --%>
             </div>
             <div class="db">
                 <textarea name="" id="review_content" cols="156" rows="2">${dto.review_content }</textarea>

@@ -123,10 +123,7 @@
 								</c:when>
 								<c:otherwise>
 									<c:forEach items="${dtoE }" var="dto">
-										<td class="event_img"><a
-											href="user/event_page?event_no=${dto.event_no }"> <img
-												src="resources/upload_img/${dto.filename2 }"
-												alt="종료된 이벤트 사진 없음" />
+										<td class="event_img"><a href="./event_page?event_no=${dto.event_no }"> <img src="resources/upload_img/admin/event/detail/${dto.filename2 }" alt="종료된 이벤트 사진 없음" width="250px" height="350px" />
 										</a></td>
 									</c:forEach>
 								</c:otherwise>

@@ -72,9 +72,9 @@
 					숙소 : ${srName[0].s_name }
 				</div>
 
-				<div class="binfor">
+				<%-- <div class="binfor">
 					객실 : ${srName[0].r_name }
-				</div>
+				</div> --%>
 
 				<span class="star"> ★★★★★ <span>★★★★★</span> <input
 					type="range" onclick="reratinglist(this);" oninput="drawStar(this)"
@@ -97,7 +97,7 @@
 			</div>
 			
 			<input type="hidden" name="m_no" value=${m_no } /> 
-			<input type="hidden" name="r_no" value=${r_no } /> 
+		<%-- 	<input type="hidden" name="r_no" value=${r_no } />  --%>
 			<input type="hidden" name="s_no" value=${s_no } /> 
 			<input type="hidden" name="order_no" value=${order_no } /> 
 			<input type="submit" value="저장" />

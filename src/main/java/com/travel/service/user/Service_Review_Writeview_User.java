@@ -30,18 +30,18 @@ private SqlSession sqlSession;
 		
 		String m_no = request.getParameter("m_no");
 		String s_no = request.getParameter("s_no");
-		String r_no = request.getParameter("r_no");
+//		String r_no = request.getParameter("r_no");
 		String order_no = request.getParameter("order_no");
 		
 	
 
 		IDao_Review_user dao=sqlSession.getMapper(IDao_Review_user.class);
-		ArrayList<DTO_StayDetail_user> dto=dao.rwriteview(s_no,r_no);
+		ArrayList<DTO_StayDetail_user> dto=dao.rwriteview(s_no);
 
 		
 		System.out.println("m_no:"+m_no);
 		System.out.println("stay_code"+s_no);
-		System.out.println("room_code"+r_no);
+//		System.out.println("room_code"+r_no);
 		System.out.println("후기쓰기완료전order_no"+order_no);
 		
 	
@@ -50,7 +50,7 @@ private SqlSession sqlSession;
 		model.addAttribute("srName",dto);
 		model.addAttribute("m_no",m_no);
 		model.addAttribute("s_no",s_no);
-		model.addAttribute("r_no",r_no);
+//		model.addAttribute("r_no",r_no);
 		model.addAttribute("order_no",order_no);
 		
 	}
