@@ -29,9 +29,9 @@
 					</li>
 					<li class="page_list"><a href="./mypage_info" class="menu"
 						id="info">기본 회원 정보</a> <br></li>
-					<li class="page_list"><a href="./mypage_pay" class="menu"
+					<li class="page_list"><a href="./mypage_pay?page=1" class="menu"
 						id="pay">결제 내역</a> <br></li>
-					<li class="page_list"><a href="./mypage_review" class="menu"
+					<li class="page_list"><a href="./mypage_review?page=1" class="menu"
 						id="review">숙소 후기</a> <br></li>
 					<li class="page_list"><a href="./mypage_event?ing_page=1&end_page=1" class="menu"
 						id="event">이벤트</a> <br></li>
