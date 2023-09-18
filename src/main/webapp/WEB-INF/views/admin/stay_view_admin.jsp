@@ -454,7 +454,7 @@ p {
 					        		</tr>
 					        		<tr>
 					        			<td style="width: 200px" ><span>가격</span></td>
-					        			<td><span>${stay_room_view.r_price }</span></td>
+					        			<td><span>${stay_room_view.r_price }원</span></td>
 					        		</tr>
 					        	</table>
 					        

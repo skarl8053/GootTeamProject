@@ -205,7 +205,7 @@
                                 
                                 <span id="star2_${list.s_no}" style="width: ${list.s_rate * 20}%;">
                                     <i class="fa-solid fa-star" ></i><i class="fa-solid fa-star" ></i><i class="fa-solid fa-star" ></i><i class="fa-solid fa-star" ></i><i class="fa-solid fa-star" ></i></span> 
-                            <input type="range"  value="${list.s_rate}" step="1" min="1" max="5" oninput="callrating('${list.s_no}', this.value);">
+                            <input type="range"  value="${list.s_rate}" step="1" min="1" max="5" oninput="callrating(this.value);">
                              </span></a>
                              
                             

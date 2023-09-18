@@ -86,7 +86,6 @@
 <body>
     
 	<script>
-		
 		function update_click(s_no){
 			
 			location.replace("stay_edit?s_no=" + s_no);
@@ -290,7 +289,6 @@
 						<td style="width: 20%">숙소명</td>
 						<td style="width: 10%">지역</td>
 						<td style="width: 10%">카테고리</td>
-						<td style="width: 10%">별점</td>
 						<td style="width: 20%">수정 및 삭제</td>
 					</tr>
     			</thead>
@@ -324,7 +322,6 @@
 										<c:otherwise>기타</c:otherwise>
 									</c:choose>
 								</td>
-								<td><%-- ${list.s_rate } --%></td>
 								<td>
 									<input type="button" value="수정" class="button" onclick="update_click('${list.s_no }');"/>
 									<input type="button" value="삭제" class="button" onclick="openNewWindow(${list.s_no})" />

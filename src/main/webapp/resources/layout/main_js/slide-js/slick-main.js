@@ -62,7 +62,7 @@ $(function() {
 		Login_Stay_img[i] = "resources/upload_img/admin/stay/" + login_img_split[i]
 		Login_Stay_link[i] = "user/stay_detail_user?s_no=" + login_s_no_split[i] + "&m_no=" + m_no
 	}
-	
+
 	// 비로그인 / 로그인 시 이미지 , 링크 뿌려주기
 	if (m_no == "" || m_no == null) {
 		for (i = 0; i < 5; i++) {
@@ -80,7 +80,7 @@ $(function() {
 		    }
 		    $("div.stayinfo").addClass("slider").html(printImgTag3);
 		}
-	
+	// console.log("사용자에게 맞는 해당 숙소 번호 : "+randomIndices);
 	$(".stayinfo").slick({
 		dots : true /* 페이지 네비게이션(이미지 하단의 ...) */,
 		infinite : true /* 페이지 반복 설정 */,
@@ -97,7 +97,7 @@ $(function() {
 // 랜덤값 구하기
 function getRandomIndices(max, count) {
     var indices = [];
-    for (var i = 0; i < max; i++) {
+    for (var i = 1; i < max; i++) {
         indices.push(i);
     }
     var randomIndices = [];
