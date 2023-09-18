@@ -22,10 +22,10 @@
         
 		/* 화면 디자인 */
 		@font-face {
-				    font-family: 'GmarketSansMedium';
-				    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
-				    font-weight: normal;
-				    font-style: normal;
+		    font-family: 'GmarketSansMedium';
+		    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+		    font-weight: normal;
+		    font-style: normal;
 		}
 		
 		*{
@@ -299,8 +299,9 @@
 						<input type="hidden" id="s_no" value="${list.s_no }" />
 							<tr>
 								<td>${list.s_no }</td>
-								<td class="img_col" > <a href="stay_view?s_no=${list.s_no }">
-									<img class="s_img1" src="resources/upload_img/admin/stay/${list.s_img1 }" alt="이미지 없음" /></a></td>
+				    		<td class="img_col" > <a href="stay_view?s_no=${list.s_no }">
+							<img class="s_img1" src="resources/upload_img/admin/stay/${list.s_img1 }" alt="이미지 없음" /></a></td>
+								
 								<td><a href="stay_view?s_no=${list.s_no }">${list.s_name }</a></td>
 								<td>
 									<c:choose>

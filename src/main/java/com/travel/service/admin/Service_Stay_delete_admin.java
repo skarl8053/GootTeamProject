@@ -34,6 +34,7 @@ public class Service_Stay_delete_admin implements Interface_TravelService {
 
 		System.out.println("s_no : " + s_no);
 
+		// 객실 포함 숙소까지 전체 삭제
 		dao.stay_delete(s_no);
 		dao.stay_room_All_delete(s_no);
 		

@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,14 +22,18 @@
         }
         #table_img tr td{
         	width: 250px;
-        	height: 200px;
-        	border: 1px solid black;
+        	height: 250px;
         }
     </style>
     
     <script>
-		    function imagePreview(input) {
+		    function imagePreview(event, input) {
 		        const imageIds = ['firstImage', 'secondImage', 'thirdImage'];
+		        
+		        if(document.getElementById("file").files.length != 3){
+		        	alert("숙소 이미지를 3개 등록해주세요");
+            		return;
+            	}
 		        
 		        if (input.files && input.files.length > 0) {
 		            for (let i = 0; i < input.files.length; i++) {
@@ -70,10 +74,13 @@
 		    	const category = document.querySelector('.category').value;
 		    	const title = document.querySelector('.title').value;
 		    	const firstImage = document.querySelector('#firstImage').value;
+		    	const file = document.querySelector('#file').value;
 		    	const address = document.querySelector('#address').value;
 		    	const addr_x = document.querySelector('#addr_x').value;
 		    	const addr_y = document.querySelector('#addr_y').value;
+		    	const stay_facility = document.querySelectorAll('input[name="stay_facility"]:checked');
 		    	const stay_info = document.querySelector('.stay_info').value;
+		    	const stay_hashtag = document.querySelectorAll('input[name="stay_hashtag"]:checked');
 		    	
 		    	if (location == " ") {
 		            alert("지역을 선택해주세요.");
@@ -90,6 +97,12 @@
 		        if (firstImage == "") {
 		            alert("이미지를 등록해주세요.");
 		            document.querySelector('#firstImage').focus();
+		            return false; 
+		        }
+		        
+		        if (file == " ") {
+		            alert("이미지를 등록해주세요.");
+		            document.querySelector('#file').focus();
 		            return false; 
 		        }
 		        
@@ -116,6 +129,12 @@
 		            document.querySelector('#addr_y').focus();
 		            return false; 
 		        }
+		        
+		        if (stay_facility.length < 1) {
+		            alert("숙소 편의시설을 1개 이상 선택해주세요.");
+		            document.querySelector('#stay_facility').focus();
+		            return false; 
+		        }
 
 		        if (stay_info == "" ) {
 		            alert("숙소 정보 및 정책을 입력해주세요.");
@@ -127,6 +146,11 @@
 		        	alert("숙소 정보 및 정책을 10글자 이상 입력해주세요.");
 		            document.querySelector('.stay_info').focus();
 		            return false; 
+		        }
+		        
+		        if (stay_hashtag.length < 1) {
+		            alert("해시태그를 1개 이상 선택해주세요.");
+		            return false;
 		        }
 				
 		        alert("숙소가 등록되었습니다.");
@@ -161,28 +185,45 @@
 	    </select> <br><br />
 	    <div id="textfield">
 		    <span id="title">숙소 이름</span>
-		    <input type="text" onfocus="this.value='';" name="stay_title" class="title" placeholder="숙소명을 입력하세요.">
+		    <input type="text" name="stay_title" class="title" placeholder="숙소명을 입력하세요.">
 	    </div>
 	    <p>숙소 공통 사진</p>
 	       	<div class="image-container">
 	       		<table id="table_img">
-	       			<tr>
-	       				<td>
-	       					<img src="" alt="이미지 없음" class="image" id="firstImage" />
-	       				</td>
-	       				<td>
-	       					<img src="" alt="이미지 없음" class="image2" id="secondImage" />
-       					</td>
-	       				<td>
-	       					<img src="" alt="이미지 없음" class="image3" id="thirdImage" />
-	       				</td>
-	       			</tr>
+	       			<c:choose>
+	       				<c:when test="${empty firstImageSrc}">
+	       					<tr>
+			       				<td>
+			       					<img src="resources/img/PL_Search.png" alt="이미지 없음" class="image" id="firstImage" />
+			       				</td>
+			       				<td>
+			       					<img src="resources/img/PL_Search.png" alt="이미지 없음" class="image2" id="secondImage" />
+		       					</td>
+			       				<td>
+			       					<img src="resources/img/PL_Search.png" alt="이미지 없음" class="image3" id="thirdImage" />
+			       				</td>
+	       					</tr>
+	       				</c:when>
+	       				<c:when test="${not empty firstImageSrc}">
+	       					<tr>
+			       				<td>
+			       					<img src="" alt="이미지 없음" class="image" id="firstImage" />
+			       				</td>
+			       				<td>
+			       					<img src="" alt="이미지 없음" class="image2" id="secondImage" />
+		       					</td>
+			       				<td>
+			       					<img src="" alt="이미지 없음" class="image3" id="thirdImage" />
+			       				</td>
+	       					</tr>
+	       				</c:when>
+	       			</c:choose>
 	       		</table>
 			    
 			    <br />
 			    
 			    <div class="filebox" id="firstFileBox">
-			        <input type="file" name="file" class="real-upload" accept="image/*" multiple onchange="imagePreview(this)">
+			        <input type="file" id="file" name="file" class="real-upload" accept="image/*" multiple onchange="imagePreview(event, this)">
 			        <button class="button" id="deleteButton" onclick="onClickDeleteUpload();">파일 삭제</button>
 			    </div>
 			    <br /><br />
@@ -192,9 +233,9 @@
 	    	<button id="searchButton">주소 검색</button><br /><br />
 	        <div class="xy">
 		        <span>위도</span>
-		        <input type="text"  name="addr_x" id="addr_x" placeholder="위도를 입력해주세요." readonly><br />
+		        <input type="text" name="addr_x" id="addr_x" placeholder="위도를 입력해주세요." readonly><br />
 		        <span>경도</span>
-		        <input type="text"  name="addr_y" id="addr_y" placeholder="경도를 입력해주세요." readonly><br />
+		        <input type="text" name="addr_y" id="addr_y" placeholder="경도를 입력해주세요." readonly><br />
 	        </div>
 	        
 	         <!-- 주소 검색 및 위도 경도 구하기 -->
@@ -246,7 +287,7 @@
 	                 <br>
 	            </div>
 	        <p>숙소 정보 및 정책</p>
-	        <textarea name="stay_info" class="stay_info" onfocus="this.value='';" id="" cols="30" rows="10" placeholder="숙소 공통 정보 및 정책을 입력해주세요."></textarea>
+	        <textarea name="stay_info" class="stay_info" id="" cols="30" rows="10" placeholder="숙소 공통 정보 및 정책을 입력해주세요."></textarea>
 	        <p>해시태그</p>
 	        <div id="hashtag">   
 	            <input type="checkbox" value="1" name="stay_hashtag"> 등산

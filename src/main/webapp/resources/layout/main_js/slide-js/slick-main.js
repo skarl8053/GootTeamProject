@@ -52,6 +52,7 @@ $(function() {
 		Not_Login_Stay_img[i] = "resources/upload_img/admin/stay/" + not_login_img_split[i]
 		Not_Login_Stay_link[i] = "http://localhost:8090/travel/member/login"
 	}
+	
 
 	// 이미지 파일 이름들을 저장하는 배열 (로그인 상태)
 	var Login_Stay_img = new Array();

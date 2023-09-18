@@ -58,7 +58,6 @@ public class Service_Stay_insert_admin implements Interface_TravelService {
 		for (MultipartFile mf : fileList) {
 			String originFile = mf.getOriginalFilename();
 			System.out.println("鍮� �삤由ъ쭊 �뙆�씪 �솗�씤 : "+originFile);
-			// long longtime = System.currentTimeMillis();
 			String changeFile = mf.getOriginalFilename();
 			System.out.println("changeFile : "+changeFile);
 			String pathfile = root + "/" + changeFile;
@@ -152,15 +151,6 @@ public class Service_Stay_insert_admin implements Interface_TravelService {
 		for (int i = 0; i < arr_hashtag.length; i++) {
 			StayData.add(arr_hashtag[i]);
 		}
-		
-//		System.out.println("媛� 諛쏆� �썑 ");
-//		System.out.println("location : "+location);
-//		System.out.println("category : "+category);
-//		System.out.println("stay_title : "+stay_title);
-//		System.out.println("stay_facility : "+Arrays.toString(stay_facility));
-//		System.out.println("stay_info : "+stay_info);
-//		System.out.println("arr_facility : "+Arrays.toString(arr_facility));
-//		System.out.println("arr_hashtag : "+Arrays.toString(arr_hashtag));
 		
 		for (Object object : StayData) {
 			System.out.println(object.toString());

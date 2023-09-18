@@ -239,11 +239,6 @@
 			background-color: rgb(1, 19, 67);
 			border-radius: 5px;
 		}
-		.regular , .stayinfo {
-			width : 900px;
-			margin-left : auto;
-			margin-right : auto;
-		}
 	</style>
 	
 	
@@ -405,6 +400,9 @@
 	
 		///////////////////////////////////////////////////////////////////////////////////////
 		
+		function loginservice() {
+			alert("로그인이 필요한 서비스입니다.")
+		}
 	</script>
 	
 	<!-- 숙소 검색 -->
@@ -470,7 +468,8 @@
 		<!-- 추천 숙소 슬라이드 -->
 		<h2 class="title-left">최근 등록된 숙소</h2>
 		<div class="hot-deal">
-			<div class="stayinfo slider"></div>
+			<div class="stayinfo slider" onclick="loginservice();">
+			</div>
 		</div>
 		<br />
 		
@@ -482,7 +481,14 @@
 		<!-- 추천 숙소 슬라이드 -->
 		<h2 class="title-left">${ sessionScope.m_name } 님에게 추천하는 숙소</h2>
 		<div class="hot-deal">
-			<div class="stayinfo slider2"></div>
+			<div class="stayinfo slider2">
+				<style>
+					.slider2 {
+						width:800px;
+						height:500px;
+					}
+				</style>
+			</div>
 		</div>
 		<br />
 		

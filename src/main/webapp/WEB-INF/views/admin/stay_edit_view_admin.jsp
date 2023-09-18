@@ -49,6 +49,21 @@
             overflow: hidden;
             border: 0;
         }
+        .room_image {
+        	width: 250px;
+        	height: 250px;
+        }
+        #stay_room_person,
+        #stay_room_name,
+        #stay_room_price {
+        	margin-bottom : 5px;
+        }
+        #stay_room_person {
+        	margin-left : 57px;
+        }
+        #stay_room_price {
+        	margin-left : 84px;
+        }
         
     </style>
     <script>
@@ -312,7 +327,7 @@
 				<option value="1" ${stay_view.s_loca == 1 ? 'selected' : ''}>서울</option>
 				<option value="2" ${stay_view.s_loca == 2 ? 'selected' : ''}>경기</option>
 				<option value="3" ${stay_view.s_loca == 3 ? 'selected' : ''}>인천</option>
-				<option value="4" ${stay_view.s_loca == 4? 'selected' : ''}>제주</option>
+				<option value="4" ${stay_view.s_loca == 4 ? 'selected' : ''}>제주</option>
 				<option value="5" ${stay_view.s_loca == 5 ? 'selected' : ''}>전라</option>
 				<option value="6" ${stay_view.s_loca == 6 ? 'selected' : ''}>경상</option>
 				<option value="7" ${stay_view.s_loca == 7 ? 'selected' : ''}>충청</option>
@@ -340,15 +355,15 @@
 					<table>
 						<tr>
 							<td>파일 1 : </td>
-							<td><input id="upload-name1" value="${stay_view.s_img1 }" placeholder="첨부파일"  readonly autocomplete="off"></td>
+							<td><input id="upload-name1" value="${stay_view.s_img1 }" name="stay_file1" placeholder="첨부파일"  readonly autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>파일 2 : </td>
-							<td><input id="upload-name2" value="${stay_view.s_img2 }" placeholder="첨부파일"  readonly autocomplete="off"></td>
+							<td><input id="upload-name2" value="${stay_view.s_img2 }" name="stay_file2" placeholder="첨부파일"  readonly autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>파일 3 : </td>
-							<td><input id="upload-name3" value="${stay_view.s_img3}" placeholder="첨부파일"  readonly autocomplete="off"></td>
+							<td><input id="upload-name3" value="${stay_view.s_img3}" name="stay_file3" placeholder="첨부파일"  readonly autocomplete="off"></td>
 						</tr>
 					</table>
 					<br /><br />
@@ -442,7 +457,7 @@
 	                	<c:when test="${stay_view.s_facility3 == 4 }"><button id="border-facility" type="button">물품보관</button></c:when>
 	                	<c:when test="${stay_view.s_facility3 == 5 }"><button id="border-facility" type="button">수영장</button></c:when>
 	                	<c:when test="${stay_view.s_facility3 == 6 }"><button id="border-facility" type="button">흡연구역</button></c:when>
-	                </c:choose>
+	                </c:choose><br>
                 </span>
                 <span>
 	                <c:choose>
@@ -466,7 +481,7 @@
 		        <br /><br />
 	            
 	        <p>숙소 정보 및 정책</p>
-	        <textarea class="stay_info" name="stay_info" id="" cols="30" rows="10" onchange="valueChanged()">${stay_view.s_info }</textarea>
+	        <textarea class="stay_info" name="stay_info" id="" cols="75" rows="10" onchange="valueChanged()">${stay_view.s_info }</textarea>
 	        	
 	        <p>해시태그</p>
 	        
@@ -542,36 +557,43 @@
 	        </c:forEach> 
 	        
 	        <c:forEach items="${stay_room_view }" var="stay_room_view" varStatus="st">
+	        	<input type="hidden" name="r_no" value="${stay_room_view.r_no }"/>
 			    <div id="stay_room_info">
 				    <p>숙소 객실 정보</p>
 		        <div class="image-container">
-				    <img src="resources/upload_img/admin/room/${stay_room_view.r_img1 }" alt="이미지 없음" class="image" id="room_firstImage_${st.index}">
-				    <img src="resources/upload_img/admin/room/${stay_room_view.r_img2 }" alt="이미지 없음" class="image2" id="room_secondImage_${st.index }" />
-				    <img src="resources/upload_img/admin/room/${stay_room_view.r_img3 }" alt="이미지 없음" class="image3" id="room_thirdImage_${st.index}" /><br />
+				    <img src="resources/upload_img/admin/room/${stay_room_view.r_img1 }" alt="이미지 없음" class="room_image" id="room_firstImage_${st.index}">
+				    <img src="resources/upload_img/admin/room/${stay_room_view.r_img2 }" alt="이미지 없음" class="room_image" id="room_secondImage_${st.index }" />
+				    <img src="resources/upload_img/admin/room/${stay_room_view.r_img3 }" alt="이미지 없음" class="room_image" id="room_thirdImage_${st.index}" /><br />
 				    <table>
 						<tr>
 							<td>파일 1 : </td>
-							<td><input id="upload-name4_${st.index}" value="${stay_room_view.r_img1  }" placeholder="첨부파일"  readonly autocomplete="off"></td>
+							<td><input id="upload-name4_${st.index}" value="${stay_room_view.r_img1  }" name="room_file1" placeholder="첨부파일"  readonly autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>파일 2 : </td>
-							<td><input id="upload-name5_${st.index}" value="${stay_room_view.r_img2  }" placeholder="첨부파일"  readonly autocomplete="off"></td>
+							<td><input id="upload-name5_${st.index}" value="${stay_room_view.r_img2  }" name="room_file2" placeholder="첨부파일"  readonly autocomplete="off"></td>
 						</tr>
 						<tr>
 							<td>파일 3 : </td>
-							<td><input id="upload-name6_${st.index}" value="${stay_room_view.r_img3 }" placeholder="첨부파일"  readonly autocomplete="off"></td>
+							<td><input id="upload-name6_${st.index}" value="${stay_room_view.r_img3 }" name="room_file3" placeholder="첨부파일"  readonly autocomplete="off"></td>
 						</tr>
 					</table>
 				    <br />
 				    <div class="filebox" id="firstFileBox">
 		    			<label for="file" >파일찾기</label> 
-			  			<input type="file" id="file_${st.index}" name="file_${st.index}" class="real-upload" accept="image/*"  multiple onchange="imagePreview_stay(event, this,'${st.index}')" onchange="valueChanged()">
+			  			<%-- <input type="file" id="file_${st.index}" name="file_${st.index}" class="real-upload" accept="image/*"  multiple onchange="imagePreview_stay(event, this,'${st.index}')" onchange="valueChanged()"> --%>
+			  			<input type="file" id="file_${st.index}" name="file_2" class="real-upload" accept="image/*"  multiple onchange="imagePreview_stay(event, this,'${st.index}')" onchange="valueChanged()">
 				    </div>  
 				</div>
-			        	
-	            <p>메인 이미지</p>
-	            <span>숙소 객실번호</span>
-	            <input type="text" id="stay_room_name" name="stay_room_name" onchange="valueChanged()" value="${stay_room_view.r_name }">
+	        	
+	        	<p>객실 상세정보</p>
+	            <textarea name="stay_room_detailinfo" id="stay_room_detailinfo" cols="76" rows="10">${stay_room_view.r_detail }</textarea><br>
+	            
+	            <span>숙소 객실번호</span> 
+	            <input type="text" id="stay_room_name" name="stay_room_name" onchange="valueChanged()" value="${stay_room_view.r_name }"><br>
+	            <span>가격</span>
+	            <input type="text" id="stay_room_price" name="stay_room_price" value="${stay_room_view.r_price }" onchange="valueChanged()"> <br>
+	            
 	            <span>인원 수</span>
 	            <select name="stay_room_person" id="stay_room_person">
 	                <option value=" " selected>인원 수</option>
@@ -581,27 +603,24 @@
 	                <option value="5" ${stay_room_view.r_person_cnt == 5 ? 'selected' : ''}>5</option>
 	                <option value="6" ${stay_room_view.r_person_cnt == 6 ? 'selected' : ''}>6</option>
 	            </select><br>
-	            <span>가격</span>
-	            <input type="text" id="stay_room_price" name="stay_room_price" value="${stay_room_view.r_price }" onchange="valueChanged()">
-	            <p>객실 상세정보</p>
-	            <textarea name="stay_room_detailinfo" id="stay_room_detailinfo" cols="30" rows="10" onchange="valueChanged()">${stay_room_view.r_detail }</textarea><br>
+	            
 	            <span>침대</span> <br>
 	            <div class="bed">
 	                <span class="bed_text">싱글 베드 침대</span>
 	                   	<select name="stay_room_single_bed" onchange="valueChanged()">
 		                   	<option value="Y" ${stay_room_view.r_single_bed_flag == "Y" ? 'selected' : ''}>Y</option>
 		                   	<option value="N" ${stay_room_view.r_single_bed_flag == "N" ? 'selected' : ''}>N</option>
-	                   	</select>
+	                   	</select> &nbsp; &nbsp;&nbsp;
 	                    <span class="bed_text">더블 베드 침대</span>
 	                    <select name="stay_room_double_bed"  onchange="valueChanged()">
 	                    	<option value="Y" ${stay_room_view.r_double_bed_flag == "Y" ? 'selected' : ''}>Y</option>
 		                   	<option value="N" ${stay_room_view.r_double_bed_flag == "N" ? 'selected' : ''}>N</option>
-	                   	</select>
+	                   	</select> &nbsp; &nbsp;&nbsp;
 	                    <span class="bed_text">퀸 베드 침대</span>
 	                    <select name="stay_room_queen_bed"  onchange="valueChanged()">
 	                   		<option value="Y" ${stay_room_view.r_queen_bed_flag == "Y" ? 'selected' : ''}>Y</option>
 		                   	<option value="N" ${stay_room_view.r_queen_bed_flag == "N" ? 'selected' : ''}>N</option>
-	                   	</select>
+	                   	</select> 
 	            </div> <br>
 	            <span>객실 편의시설</span>
 	            <div id="stay_room_facility">
@@ -615,39 +634,39 @@
 				    
 				   <div>등록된 객실 편의시설</div>  <br />
 					    <c:choose>
-								    <c:when test="${stay_room_view.r_facility1 == 1}"><button id="border-facility" type="button">노트북 작업공간</button></c:when> 
-								    <c:when test="${stay_room_view.r_facility1 == 2}"><button id="border-facility" type="button">웰컴 드링크</button></c:when>
-								    <c:when test="${stay_room_view.r_facility1 == 3}"><button id="border-facility" type="button">어매니티</button></c:when>
-								    <c:when test="${stay_room_view.r_facility1 == 4}"><button id="border-facility" type="button">넷플릭스</button></c:when>
-								    <c:when test="${stay_room_view.r_facility1 == 5}"><button id="border-facility" type="button">조식 포함</button></c:when>
-								    <c:when test="${stay_room_view.r_facility1 == 6}"><button id="border-facility" type="button">무료 와이파이</button></c:when>
+						    <c:when test="${stay_room_view.r_facility1 == 1}"><button id="border-facility" type="button">노트북 작업공간</button></c:when> 
+						    <c:when test="${stay_room_view.r_facility1 == 2}"><button id="border-facility" type="button">웰컴 드링크</button></c:when>
+						    <c:when test="${stay_room_view.r_facility1 == 3}"><button id="border-facility" type="button">어매니티</button></c:when>
+						    <c:when test="${stay_room_view.r_facility1 == 4}"><button id="border-facility" type="button">넷플릭스</button></c:when>
+						    <c:when test="${stay_room_view.r_facility1 == 5}"><button id="border-facility" type="button">조식 포함</button></c:when>
+						    <c:when test="${stay_room_view.r_facility1 == 6}"><button id="border-facility" type="button">무료 와이파이</button></c:when>
 						</c:choose>
 						<c:choose>
-								    <c:when test="${stay_room_view.r_facility2 == 2}"><button id="border-facility" type="button">웰컴 드링크</button></c:when>
-								    <c:when test="${stay_room_view.r_facility2 == 3}"><button id="border-facility" type="button">어매니티</button></c:when>
-								    <c:when test="${stay_room_view.r_facility2 == 4}"><button id="border-facility" type="button">넷플릭스</button></c:when>
-								    <c:when test="${stay_room_view.r_facility2 == 5}"><button id="border-facility" type="button">조식 포함</button></c:when>
-								    <c:when test="${stay_room_view.r_facility2 == 6}"><button id="border-facility" type="button">무료 와이파이</button></c:when>
+						    <c:when test="${stay_room_view.r_facility2 == 2}"><button id="border-facility" type="button">웰컴 드링크</button></c:when>
+						    <c:when test="${stay_room_view.r_facility2 == 3}"><button id="border-facility" type="button">어매니티</button></c:when>
+						    <c:when test="${stay_room_view.r_facility2 == 4}"><button id="border-facility" type="button">넷플릭스</button></c:when>
+						    <c:when test="${stay_room_view.r_facility2 == 5}"><button id="border-facility" type="button">조식 포함</button></c:when>
+						    <c:when test="${stay_room_view.r_facility2 == 6}"><button id="border-facility" type="button">무료 와이파이</button></c:when>
 						</c:choose>
 						<c:choose>       
-								    <c:when test="${stay_room_view.r_facility3 == 3}"><button id="border-facility" type="button">어매니티</button></c:when>
-								    <c:when test="${stay_room_view.r_facility3 == 4}"><button id="border-facility" type="button">넷플릭스</button></c:when>
-								    <c:when test="${stay_room_view.r_facility3 == 5}"><button id="border-facility" type="button">조식 포함</button></c:when>
-								    <c:when test="${stay_room_view.r_facility3 == 6}"><button id="border-facility" type="button">무료 와이파이</button></c:when>
+						    <c:when test="${stay_room_view.r_facility3 == 3}"><button id="border-facility" type="button">어매니티</button></c:when>
+						    <c:when test="${stay_room_view.r_facility3 == 4}"><button id="border-facility" type="button">넷플릭스</button></c:when>
+						    <c:when test="${stay_room_view.r_facility3 == 5}"><button id="border-facility" type="button">조식 포함</button></c:when>
+						    <c:when test="${stay_room_view.r_facility3 == 6}"><button id="border-facility" type="button">무료 와이파이</button></c:when>
 						</c:choose>
 								<br />
 							
 						<c:choose>       
-								    <c:when test="${stay_room_view.r_facility4 == 4}"><button id="border-facility" type="button">넷플릭스</button></c:when>
-								    <c:when test="${stay_room_view.r_facility4 == 5}"><button id="border-facility" type="button">조식 포함</button></c:when>
-								    <c:when test="${stay_room_view.r_facility4 == 6}"><button id="border-facility" type="button">무료 와이파이</button></c:when>
-						</c:choose>
-								<c:choose>       
-								    <c:when test="${stay_room_view.r_facility5 == 5}"><button id="border-facility" type="button">조식 포함</button></c:when>
-								    <c:when test="${stay_room_view.r_facility5 == 6}"><button id="border-facility" type="button">무료 와이파이</button></c:when>
+						    <c:when test="${stay_room_view.r_facility4 == 4}"><button id="border-facility" type="button">넷플릭스</button></c:when>
+						    <c:when test="${stay_room_view.r_facility4 == 5}"><button id="border-facility" type="button">조식 포함</button></c:when>
+						    <c:when test="${stay_room_view.r_facility4 == 6}"><button id="border-facility" type="button">무료 와이파이</button></c:when>
 						</c:choose>
 						<c:choose>       
-								    <c:when test="${stay_room_view.r_facility6 == 6}"><button id="border-facility" type="button">무료 와이파이</button></c:when>
+						    <c:when test="${stay_room_view.r_facility5 == 5}"><button id="border-facility" type="button">조식 포함</button></c:when>
+						    <c:when test="${stay_room_view.r_facility5 == 6}"><button id="border-facility" type="button">무료 와이파이</button></c:when>
+						</c:choose>
+						<c:choose>       
+						    <c:when test="${stay_room_view.r_facility6 == 6}"><button id="border-facility" type="button">무료 와이파이</button></c:when>
 						</c:choose>
 						<br />
 				</div>

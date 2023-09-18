@@ -24,7 +24,7 @@ public class Service_Stay_Room_delete_admin implements Interface_TravelService {
 	@Override
 	public void execute(Model model) {
 
-		System.out.println("stay_delete_service 신호");
+		System.out.println("stay_room_delete_service 신호");
 
 		Map<String, Object> map = model.asMap();
 		HttpServletRequest request = (HttpServletRequest) map.get("request");
@@ -36,5 +36,14 @@ public class Service_Stay_Room_delete_admin implements Interface_TravelService {
 		System.out.println("r_no : " + r_no);
 
 		dao.stay_room_delete(r_no);
+		
+//		if(request.getParameter("msg") == null) {
+//			model.addAttribute("msg", "객실이 삭제되었습니다.");
+//		}
+//		else {
+//			model.addAttribute("msg","");
+//		}
+		
+		
 	}
 }
