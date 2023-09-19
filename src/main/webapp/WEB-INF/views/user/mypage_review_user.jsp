@@ -57,7 +57,7 @@
 						<c:otherwise>
 							<c:forEach items="${dto }" var="dto">
 								<tr>
-									<td class="border_bottom" rowspan="3" width="5%" >${dto.review_no }</td>
+									<td class="border_bottom" rowspan="3" width="5%" >${dto.row_num }</td>
 
 									<td class="border_bottom" rowspan="3" width="30%" height="350px">
 										<c:if test="${not empty dto.photo_url}">
@@ -68,7 +68,8 @@
 										</c:if>
 									</td>
 									<td colspan="3" height="70px" 
-										style="text-align: left; padding-left: 20px; padding-top:10px;"><a href="user/stay_detail_user?s_no=${dto.s_no }&m_no=${sessionScope.m_no }" id="stay_name">${dto.s_name }</a></td>
+										style="text-align: left; padding-left: 20px; padding-top:10px;">
+										<a href="user/stay_detail_user?s_no=${dto.s_no }&m_no=${sessionScope.m_no }" id="stay_name">${dto.s_name }</a></td>
 									</tr>
 									<tr>
 										<td class="border_bottom" rowspan="2" width="50%"
