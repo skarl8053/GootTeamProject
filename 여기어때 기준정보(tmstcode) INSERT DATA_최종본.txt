@@ -1,0 +1,503 @@
+-- 공통코드 테이블 INSERT 데이터
+
+
+
+-- 웹을 실행하기 전 이 데이터들이 TMSTCODEGRP, TMSTCODE 테이블에 있어야 정상적으로 실행된다!!!!!!!
+
+
+
+-- 이 소스를 복사 / 붙여넣기하여 실행하면 기준정보 데이터가 INSERT 된다.
+-- TMSTCODEGRP, TMSTCODE 테이블이 필요하다.
+
+-----------------------------------------------------------------------------------------------
+
+-- 상위 코드
+
+INSERT INTO TMSTCODEGRP VALUES(1,  '지역');
+INSERT INTO TMSTCODEGRP VALUES(2,  '숙소 테마');
+INSERT INTO TMSTCODEGRP VALUES(3,  '숙소 종류');
+INSERT INTO TMSTCODEGRP VALUES(4,  '숙소 시설');
+INSERT INTO TMSTCODEGRP VALUES(5,  '객실 시설');
+INSERT INTO TMSTCODEGRP VALUES(6,  '문의 유형');
+INSERT INTO TMSTCODEGRP VALUES(7,  '포인트 적립 / 사용 유형');
+INSERT INTO TMSTCODEGRP VALUES(8,  '결제 방식');
+INSERT INTO TMSTCODEGRP VALUES(9,  '환불 사유');
+INSERT INTO TMSTCODEGRP VALUES(10, '신고 사유');
+INSERT INTO TMSTCODEGRP VALUES(11, '이벤트 진행 여부');
+INSERT INTO TMSTCODEGRP VALUES(12, '핫딜 진행 상태 여부');
+INSERT INTO TMSTCODEGRP VALUES(13, '경품 배송 상태 여부');
+INSERT INTO TMSTCODEGRP VALUES(14, '환불 상태 여부 (숙소)');
+INSERT INTO TMSTCODEGRP VALUES(15, '핫딜 진행 상태 여부');
+
+
+-----------------------------------------------------------------------------------------------
+
+
+-- 하위 코드
+
+-- 1번 지역
+INSERT INTO TMSTCODE VALUES (1, 1, '서울');
+INSERT INTO TMSTCODE VALUES (1, 2, '경기');
+INSERT INTO TMSTCODE VALUES (1, 3, '인천');
+INSERT INTO TMSTCODE VALUES (1, 4, '제주');
+INSERT INTO TMSTCODE VALUES (1, 5, '전라');
+INSERT INTO TMSTCODE VALUES (1, 6, '경상');
+INSERT INTO TMSTCODE VALUES (1, 7, '충청');
+INSERT INTO TMSTCODE VALUES (1, 8, '강원');
+
+-- 2번 숙소 테마
+INSERT INTO TMSTCODE VALUES (2, 1, '등산');
+INSERT INTO TMSTCODE VALUES (2, 2, '바다');
+INSERT INTO TMSTCODE VALUES (2, 3, '도시');
+INSERT INTO TMSTCODE VALUES (2, 4, '계곡');
+INSERT INTO TMSTCODE VALUES (2, 5, '레저');
+INSERT INTO TMSTCODE VALUES (2, 6, '문화');
+INSERT INTO TMSTCODE VALUES (2, 7, '맛집');
+INSERT INTO TMSTCODE VALUES (2, 8, '파티');
+
+-- 3번 숙소 종류
+INSERT INTO TMSTCODE VALUES (3, 1, '호텔');
+INSERT INTO TMSTCODE VALUES (3, 2, '모텔');
+INSERT INTO TMSTCODE VALUES (3, 3, '펜션');
+
+-- 4번 숙소 시설
+INSERT INTO TMSTCODE VALUES (4, 1, '반려동물');
+INSERT INTO TMSTCODE VALUES (4, 2, '레스토랑');
+INSERT INTO TMSTCODE VALUES (4, 3, '주차시설');
+INSERT INTO TMSTCODE VALUES (4, 4, '물품보관');
+INSERT INTO TMSTCODE VALUES (4, 5, '수영장');
+INSERT INTO TMSTCODE VALUES (4, 6, '흡연구역');
+
+
+-- 5번 객실 시설
+INSERT INTO TMSTCODE VALUES (5, 1, '노트북 작업 공간');
+INSERT INTO TMSTCODE VALUES (5, 2, '웰컴 드링크');
+INSERT INTO TMSTCODE VALUES (5, 3, '어매니티');
+INSERT INTO TMSTCODE VALUES (5, 4, '넷플릭스');
+INSERT INTO TMSTCODE VALUES (5, 5, '조식 포함');
+INSERT INTO TMSTCODE VALUES (5, 6, '무료 와이파이');
+
+-- 6번 문의유형
+INSERT INTO TMSTCODE VALUES(6, 1, '숙소 결제/환불');
+INSERT INTO TMSTCODE VALUES(6, 2, '이벤트/경품/핫딜');
+INSERT INTO TMSTCODE VALUES(6, 3, '포인트/쿠폰');
+INSERT INTO TMSTCODE VALUES(6, 4, '사이트/시스템 장애');
+INSERT INTO TMSTCODE VALUES(6, 5, '기타');
+
+
+-- 7번 포인트 적립 / 사용 유형
+INSERT INTO TMSTCODE VALUES (7, 1, '포인트 적립 / 사용');
+INSERT INTO TMSTCODE VALUES (7, 2, '환불로 인하여 취소');
+
+
+-- 8번 결제 방식
+INSERT INTO TMSTCODE VALUES (8, 1, '카드');
+INSERT INTO TMSTCODE VALUES (8, 2, '카카오페이');
+
+-- 9번 환불 사유
+INSERT INTO TMSTCODE VALUES (9, 1, '숙소가 필요 없어졌어요');
+INSERT INTO TMSTCODE VALUES (9, 2, '실수로 예약했어요');
+INSERT INTO TMSTCODE VALUES (9, 3, '숙소를 변경하고 싶어요');
+INSERT INTO TMSTCODE VALUES (9, 4, '여행 날짜가 변경되었어요');
+
+-- 10번 신고 사유
+INSERT INTO TMSTCODE VALUES (10, 1, '욕설/인신공격');
+INSERT INTO TMSTCODE VALUES (10, 2, '성희롱');
+INSERT INTO TMSTCODE VALUES (10, 3, '내용도배');
+INSERT INTO TMSTCODE VALUES (10, 4, '불법광고');
+INSERT INTO TMSTCODE VALUES (10, 5, '허위내용');
+INSERT INTO TMSTCODE VALUES (10, 6, '개인정보 노출');
+
+-- 11번 이벤트 진행 여부
+INSERT INTO TMSTCODE VALUES (11, 1, '이벤트 시작 전');
+INSERT INTO TMSTCODE VALUES (11, 2, '이벤트 진행 중');
+INSERT INTO TMSTCODE VALUES (11, 3, '이벤트 종료');
+
+-- 12번 핫딜 진행 상태 여부
+INSERT INTO TMSTCODE VALUES (12, 1, '핫딜 시작 전');
+INSERT INTO TMSTCODE VALUES (12, 2, '핫딜 진행 중');
+INSERT INTO TMSTCODE VALUES (12, 3, '핫딜 종료');
+
+-- 13번 경품 배송 상태 여부
+INSERT INTO TMSTCODE VALUES (13, 1, '배송주문 확인 완료');
+INSERT INTO TMSTCODE VALUES (13, 2, '배송 준비 완료');
+INSERT INTO TMSTCODE VALUES (13, 3, '배송중');
+INSERT INTO TMSTCODE VALUES (13, 4, '배송완료');
+
+-- 14번 환불 상태 여부 (숙소)
+INSERT INTO TMSTCODE VALUES (14, 1, '환불 요청 승인 완료');      
+INSERT INTO TMSTCODE VALUES (14, 2, '환불 완료');          -- 환불 완료 즉시 입금된 돈을 돌려주는 상황임..
+
+
+-----------------------------------------------------------------------------------------------
+
+
+
+-- 숙소 정보 INSERT
+
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (37,'그랜드하얏트호텔',1,'안내 이용안내
+클럽 올림퍼스 및 수영장 방역수칙
+클럽 올림퍼스 운영시간: 6:30 AM ? 10:00 PM
+쾌적한 시설 이용 및 개인의 사생활 보호를 위해 타인과의 적정한 거리를 유지해 주시기 바랍니다.
+공용 용품이 제공되지 않음으로 운동복, 운동화, 구명조끼, 수영모 및 수경 등의 물품은 개인 용품을 이용해 주시기 바랍니다.
+수영장 락커 이용 제한으로 객실에서의 환복 및 샤워를 부탁드립니다.
+동시간 최대 수용인원 초과 시 입장이 제한될 수 있습니다
+실내수영장 이용안내
+운영시간ㅣ6:30 AM ? 10:00 PM (매일)
+최대 수용인원 60명
+깊이ㅣ.3M ~ 1.5M',1,'37.5395278','126.997796','그랜드하얏트_대표img1.png','그랜드하얏트_대표img2.png','그랜드하얏트_대표img3.png','서울특별시 용산구 소월로 322',1,2,null,null,null,null,1,4,5,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (32,'heyy, seogwipo',2,'당신의 취향과 제주의 감성이 어우러지는 헤이, 서귀포. 
+	서귀포항이 내려다보이는 곳에 위치한 이곳은 서귀포 앞바다가 보이는 
+	오션동과 한라산이 보이는 시티동으로 이뤄져 있어 어느 객실을 선택하더라고 후회가 없죠. 
+	이곳은 특히 반려견 동반 객실이 위치해 있어 우리집 댕댕이와도 행복한 제주힐링을 즐길 수 있는데요. 
+	도보권으로 맛집거리도 위치해 있어 뚜벅이 여행객에도 부담이 적은 곳이랍니다.',4,'33.2462368','126.560369','heyySeogwipo_1.jpg','heyySeogwipo_2.jpg','heyySeogwipo_3.jpg','제주특별자치도 서귀포시 태평로 363',1,3,4,6,null,null,1,2,7,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (33,'MARI',2,'전 직원 마스크 착용, 프론트 손소독제 배치를 통해 청결을 유지하고 있습니다.
+	고객님들의 안전과 편안한 휴식 공간을 제공하기 위해 항상 노력하는 익산 마리가 되겠습니다.',5,'35.9422750','126.940594','MARI_1.jpg','MARI_2.jpg','MARI_3.jpg','전북 익산시 배산로6길 26',3,4,5,null,null,null,3,7,null,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (34,'YAZA',2,'효율적인 공간디자인과 가격 경쟁력으로 2030세대의 선호를 받는 YAJA 포항여객터미널점은 
+	각 객실마다 포인트 컬러로 트렌디하면서 아늑한 객실을 자랑합니다. 
+	원하는 객실을 선택할 수 있는 이곳은 전 객실 OTT서비스를 제공해 지루할 틈 없이 즐겁게 보낼 수 있는데요.
+	도보 2분거리에는 영일대 해수욕장이 위치해 있어 산책코스를 즐기기에도 제격입니다. ',6,'36.0529883','129.375331','YAZA_1.jpg','YAZA_2.jpg','YAZA_3.jpg','경상북도 포항시 북구 삼호로 162',3,4,5,null,null,null,2,5,7,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (35,'호텔 안온',2,'편안하고 평온하게 쉬실 수 있도록 준비했습니다.',7,'36.6084756','127.502473','호텔 안온_1.jpg','호텔 안온_2.jpg','호텔 안온_3.jpg','충청북도 청주시 상당구 월평로184번길 68',3,4,5,null,null,null,3,6,7,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (36,'미아모르',2,'속초의 유명 관광지 속초해수욕장, 중앙시장, 동명항, 대포항 등 인접하고 있는 속초 미아모르 입니다.
+	위치 및 접근성이 좋아 편리하게 이용하며 숙박할 수 있답니다.
+	전 객실 넷플릭스 무료 시청이 가능하며, 영화와 드라마를 보며 쉼을 즐길 수 있습니다.',8,'38.1910824','128.589208','미아모르_1.jpg','미아모르_2.jpg','미아모르_3.jpg','강원도 속초시 엑스포로 19',3,6,null,null,null,null,2,5,null,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (38,'세인트존스호텔',1,'안내
+이용안내
+숙소 추천 사유
+오션뷰 인기 호텔
+반려견 동반 가능 호텔(펫 객실)
+인피니티풀 보유 호텔
+넷플릭스 시청 가능(개인계정)
+입실 이용안내
+체크인 시간 : 16:00 / 체크아웃 시간: 11:00
+최대인원을 초과하여 입실 할 수 없습니다.
+객실별 최대인원 까지 인원추가비용 무료제공
+전객실 금연',8,'37.7912487','128.921073','세인트존스_대표img1.png','세인트존스_대표img2.png','세인트존스_대표img3.png','강원도 강릉시 창해로 307',1,2,3,4,5,null,3,5,null,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (39,'센텀컨벤션호텔',1,'안내
+숙소 소개
+★전 객실 리뉴얼 오픈★
+부산 비즈니스의 중심, 센텀시티에 위치한 센텀 컨벤션 호텔입니다.
+항상 친절한 서비스와 청결한 객실 관리로 고객분들에게 편안한 시간을 제공하겠습니다.
+많은 이용 부탁드립니다 :-)',4,'35.1678248','129.132927','센텀컨벤션호텔_대표1.png','센텀컨벤션호텔_대표2.png','센텀컨벤션호텔_대표3.png','부산광역시 해운대구 센텀3로 20 (벡스코 비지니스호텔)',1,2,3,4,5,null,1,3,4,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (40,'윈스토리 호텔 서귀포',1,'안내
+이용안내
+확인 사항
+체크인 15:00 이후, 체크아웃 11:00 이전 22시 이후 체크인 시 호텔 프론트로 사전 연락 부탁드립니다.
+부모 동반 아동 투숙 가능(5세 이하 무료/ 객실 당 최대 인원수를 초과하여 투숙 불가능)
+인원 추가비: 6세 이상 1박당 15,000원. 5세 이하 무료이나 침구추가 요청 시 침구추가비 별도 발생
+침구 추가비: 이불추가 10,000원 / 온돌침구 15,000원 (1채/1박 당)
+넷플릭스 이용 가능(개인 아이디 사용)
+칫솔,치약 유료
+무료 Wi-Fi
+모든 추가 비용 현장 결제
+주차 정보
+무료 주차 (호텔 주변 무/유료 공영주차장 있음)
+호텔 내 주자 가능 대수가 적어 오후 늦게 체크인 시 호텔 내 주차장 이용이 불가할 수 있습니다.',4,'33.2477419','126.557647','윈스토리호텔서귀포_대표1.png','윈스토리호텔서귀포_대표2.png','윈스토리호텔서귀포_대표3.png','제주특별자치도 서귀포시 중정로 11',1,2,3,4,5,null,6,3,4,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (41,'베스트웨스턴플러스 전주호텔',1,'안내
+이용안내
+확인 사항
+※ 객실 내 일회용품(치약, 칫솔, 면도기, 슬리퍼, 어매니티 등)은 비치되어 있지 않습니다.
+기준인원 외 추가인원 투숙시 인원추가비용 발생(현장결제)
+성인(만13세이상~) 1인당 30,000원
+소인(36개월~만12세) 1인당 15,000원
+36개월 미만 무료
+최대 인원 초과시 입실이 불가 합니다. (방문객 불가)',5,'35.8224356','127.147024','베스트웨스턴플러스전주호텔_대표1.png','베스트웨스턴플러스전주호텔_대표2.png','베스트웨스턴플러스전주호텔_대표3.png','전라북도 전주시 완산구 현무1길 41',1,2,3,4,5,null,3,5,1,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (42,'남양주 숲속나라 펜션',3,'쾌적한 공간입니다.',2,'37.6901121149802','127.235033717796','남양주_펜션121_1.jpg','남양주_펜션121_2.jpg','남양주_펜션121_3.jpg','경기 남양주시 오남읍 팔현로207번길 5-1',1,3,5,0,0,0,1,4,7,0,0,0,0,0,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (20,'로이넷호텔 서울 마포',1,'서울 중심에 자리한 로이넷호텔 서울 마포에 머무실 경우 차로 15분 정도 이동하면 롯데월드 및 동대문역사문화공원에 가실 수 있습니다. 이 호텔에서 명동거리까지는 5.2km 떨어져 있으며, 5.6km 거리에는 경복궁도 있습니다.
+무료 무선 인터넷 및 자판기 등의 편의 시설/서비스를 이용하실 수 있습니다.
+호텔의 레스토랑에서 맛있는 식사를 즐겨보세요. 커피숍/카페에서는 스낵이 제공됩니다. 아침 식사(한식)를 매일 7:00 ~ 10:30에 유료로 이용하실 수 있습니다.
+대표적인 편의 시설과 서비스로는 컴퓨터 스테이션, 드라이클리닝/세탁 서비스, 24시간 운영되는 프런트 데스크 등이 있습니다. 시설 내에서 셀프 주차(요금 별도) 이용이 가능합니다.
+평면 TV 시청이 가능한 341개 객실이 마련되어 있습니다. 케이블 TV를 시청하실 수 있습니다. 욕실에는 욕조 또는 샤워, 헤어드라이어, 슬리퍼 등이 마련되어 있습니다. 편의 시설/서비스로는 전화 외에 금고 및 책상도 있습니다..',1,'37.5418134','126.9482837','roynet_1.png','roynet_2.png','roynet_3.png','대한민국 서울특별시 마포구 마포대로 67',2,3,4,null,null,null,3,7,8,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (21,'롯데시티호텔 명동',1,'롯데시티호텔 명동은 지하철 2호선 및 3호선을 이용할 수 있는 을지로3가역 1번 출구에서 도보로 3분 거리에 있으며, 호텔 내 피트니스 센터와 카페를 운영하고 있습니다. 숙소에서 무료 Wi-Fi 이용이 가능합니다.
+
+객실은 에어컨, 평면 위성 TV, 냉장고 등 다양한 시설을 갖추고 있습니다. 전용 욕실에는 목욕 가운과 슬리퍼가 구비되어 있습니다.
+
+프론트 데스크에서 수하물 무료 보관 서비스, 환전 서비스, 티켓 서비스를 제공합니다. 비즈니스 센터에는 회의실과 무료로 이용 가능한 컴퓨터가 마련되어 있습니다. 편의점과 동전 주입식 세탁 시설도 구비되어 있어 더욱 편리합니다.
+
+27층에 자리해 있어 멋진 도시 전망을 감상하실 수 있는 C Caf?는 하루종일 운영되는 뷔페 레스토랑으로 다양한 음식을 선보입니다. Saffron 레스토랑에는 무슬림 투숙객도 즐기실 수 있는 메뉴가 준비되어 있습니다.
+
+주위를 둘러보고 싶다면 도보로 8분 거리에 있는 눈스퀘어와 인기 있는 롯데면세점을 방문해 보세요. 숙소 주변에 각종 레스토랑과 상점도 즐비합니다. 호텔은 김포국제공항에서 17km 거리에 있습니다.',1,'37.5669364','126.988076','LotteCityMyeongdong_1.jpg','LotteCityMyeongdong_2.jpg','LotteCityMyeongdong_3.jpg','서울특별시 중구 삼일대로 362',2,3,4,6,null,null,3,7,null,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (22,'라마다앙코르김포 한강호텔 ',1,'김포에서 강변에 위치한 라마다 앙코르 바이 윈덤 김포 한강 호텔의 경우 차로 1분 거리에는 현대 프리미엄 아울렛, 6분 거리에는 롯데몰 김포공항점 등이 있습니다. 이 가족 여행에 좋은 호텔에서 고척 스카이돔까지는 15.6km 떨어져 있으며, 20.7km 거리에는 롯데 아울렛 - 서울역점도 있습니다.
+피트니스 센터 같은 레크리에이션 시설을 이용하거나 정원에서 전망을 즐기실 수 있습니다. 이 호텔에는 무료 무선 인터넷, 콘시어지 서비스 및 연회장도 편의 시설/서비스로 마련되어 있습니다.
+라마다 앙코르 바이 윈덤 김포 한강 호텔에 있는 레스토랑에서 만족스러운 식사를 즐겨보세요. 아침 식사(뷔페)를 매일 07:00 ~ 10:00에 유료로 이용하실 수 있습니다.
+대표적인 편의 시설과 서비스로는 무료 유선 인터넷, 24시간 운영 비즈니스 센터, 드라이클리닝/세탁 서비스 등이 있습니다. 김포에서의 행사를 계획하시나요? 이 호텔에는 회의 공간 등을 비롯하여 100 제곱미터 크기의 시설이 마련되어 있습니다. 시설 내에서 무료 셀프 주차 이용이 가능합니다.
+588개 객실에는 냉장고 및 LED TV도 갖추어져 있어 편하게 머무실 수 있습니다. 침대에는 오리/거위털 이불 및 고급 침구 등이 갖추어져 있습니다. 무료 유선 및 무선 인터넷이 지원되며 케이블 프로그램도 시청하실 수 있습니다. 전용 욕실에는 헤어드라이어 및 목욕가운도 갖추어져 있습니다.',2,'37.6013733','126.785883','RamaGimpo_1.png','RamaGimpo_2.png','RamaGimpo_3.png','경기도 김포시 아라육로152번길 169',2,3,4,6,null,null,3,null,null,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (23,'오라카이 송도파크 호텔',1,'인천 중심에 자리한 오라카이 송도파크 호텔에 머무실 경우 15분 정도 걸으면 송도 컨벤시아 컨벤션센터 및 트리보울에 가실 수 있습니다. 이 4성급 호텔에서 송도 센트럴 파크까지는 1.4km 떨어져 있으며, 10.5km 거리에는 소래포구 어시장도 있습니다.
+실내 수영장, 사우나, 피트니스 센터 등의 레크리에이션 시설을 십분 활용하시기 바랍니다. 이 호텔에는 무료 무선 인터넷, 콘시어지 서비스, 웨딩 서비스 등도 마련되어 있습니다.
+호텔에 있는 레스토랑 illy CAFFE에 들러 브런치(주말)를 즐겨보세요. 이용 가능한 또 다른 다이닝 옵션으로는 커피숍/카페 및 룸서비스(이용 시간 제한) 등이 있습니다. 바/라운지에서는 음료를 마시며 하루를 여유롭게 마무리하실 수 있어요. 아침 식사(뷔페)를 매일 07:00 ~ 10:00에 유료로 이용하실 수 있습니다.
+대표적인 편의 시설과 서비스로는 24시간 운영 비즈니스 센터, 드라이클리닝/세탁 서비스, 24시간 운영되는 프런트 데스크 등이 있습니다. 이 호텔에는 행사를 위한 4개의 회의실이 마련되어 있습니다. 시설 내에서 무료 셀프 주차 이용이 가능합니다.
+275개 객실에는 냉장고 및 미니바(일부 품목 무료)도 갖추어져 있어 편하게 머무실 수 있습니다. 32인치 LED TV에서 케이블 프로그램을 시청하실 수 있으며 무료 무선 인터넷도 지원됩니다. 욕실에는 샤워, 무료 세면용품, 헤어드라이어 등이 마련되어 있습니다. 편의 시설/서비스로는 전화 외에 금고 및 책상도 있습니다.',3,'37.3881632','126.6409129','Orakai_1.png','Orakai_2.png','Orakai_3.png','인천광역시 연수구 테크노파크로 151',2,3,4,5,6,null,3,5,6,8,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (24,'서귀포 블라섬펜션',3,'안녕하세요. 서귀포 블라섬펜션입니다.
+아름다운제주 성산일출봉에서 차로 10분거리에 위치한 저희 블라섬이유 펜션은 2023년 신축으로 건축된 복층형 독채펜션으로
+최상의 컨디션과 프라이빗한 공간제공을 목표로 찾아주시는 고객이 그날의 주인공이 되어 힐링할수 있도록 진심을 담았습니다.',4,'33.4725374','126.891383','jejuBle_1.png','jejuBle_2.png','jejuBle_3.png','제주특별자치도 서귀포시 성산읍 시흥상동로53번길 77-3',3,4,6,null,null,null,2,7,null,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (1,'스탠포드 호텔 서울 (Stanford Hotel Seoul)',1,'서울 중심에 자리한 스탠포드 호텔 서울의 경우 차로 4분 거리에는 난지 한강공원, 10분 거리에는 서울특별시청 등이 있습니다.',1,'37.5823579752299','126.886698648133','스탠포드_호텔_서울_1.png','스탠포드_호텔_서울_2.png','스탠포드_호텔_서울_3.png','서울특별시 마포구 월드컵북로58길 15 (03922)',1,3,4,5,null,null,9,10,11,12,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (2,'그라벨호텔제주 (Grabel Hotel Jeju)',2,'제주시 중심에 자리한 그라벨 호텔 제주의 경우 걸어서 5분 이내 거리에 Aljakji Beach 및 제주 민속 오일시장 등이 있습니다.',2,'33.4923861986651','126.428653547426','그라벨호텔제주_1.png','그라벨호텔제주_2.png','그라벨호텔제주_3.png','제주특별자치도 제주시 일주서로 7316 (63069)',4,5,6,null,null,null,1,5,6,8,10,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (3,'센텀 프리미어 호텔',1,'부산(해운대)에 위치한 센텀 프리미어 호텔에 머무실 경우 차로 10분 정도 이동하면 광안리 해수욕장 및 해운대 해수욕장에 가실 수 있습니다.',3,'35.1669244792266','129.13158496276','센텀_프리미어_호텔_1.png','센텀_프리미어_호텔_2.png','센텀_프리미어_호텔_3.png','부산광역시 해운대구 센텀1로 17 1층 (48060)',2,5,7,11,13,15,2,4,5,6,7,8,11,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (4,'오크우드 프리미어 인천',1,'인천(송도)에 위치한 오크우드 프리미어 인천의 경우 걸어서 15분 이내 거리에 송도 컨벤시아 컨벤션센터 및 NC 큐브 커넬워크 등이 있습니다.',4,'37.3891408885668','126.644442676851','오크우드_프리미어_인천_1.png','오크우드_프리미어_인천_2.png','오크우드_프리미어_인천_3.png','인천광역시 연수구 KR, 165 컨벤시아 (21998)',6,7,8,10,12,null,1,3,7,8,9,10,11,12,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (5,'호텔 디에디션',2,'대전(둔산동)에 위치한 호텔디에디션의 경우 차로 5분 이내 거리에 Namseon Park Common Sports Hall 및 Gyeongseong Bowlingjang 등이 있습니다.',5,'36.3497120254725','127.387414871248','호텔_디에디션_1.png','호텔_디에디션_2.png','호텔_디에디션_3.png','대전광역시 서구 대전광역시 서구 둔산남로 91번길 13 (35241)',2,4,6,7,10,11,3,6,7,12,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (6,'아리아나 호텔',1,'대구(수성구)에 위치한 아리아나 호텔에 숙박하실 경우 차로 5분 정도 이동하면 수성못 및 Suseong Aqua Suyeongjang에 가실 수 있습니다.',6,'35.8326903285753','128.622893504056','아리아나호텔_1.png','아리아나호텔_2.png','아리아나호텔_3.png','대구광역시 동대구로 27 (42175)',3,5,6,9,10,11,4,7,8,11,12,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (7,'에이치원 호텔',1,'호텔 에이치원는 내 집과 같은 안락함을 모토로 아늑하고 실용적인 공간과 깔끔하고 편리한 시설, 문화적인 경험을 제공하는 비즈니스 호텔입니다',7,'35.1727438238438','126.88368941921','에이치원호텔_1.png','에이치원호텔_2.png','에이치원호텔_3.png','광주광역시 북구 대자로 106번길 10-6 (운암동) (61262)',4,5,7,10,null,null,2,4,5,7,8,9,11,12,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (8,'스타즈 호텔 울산',1,'스타즈 호텔 울산은 프론트없이 언택트로 운영됩니다.',8,'35.5402290259119','129.347392206607','스타즈_호텔_울산_1.png','스타즈_호텔_울산_2.png','스타즈_호텔_울산_3.png','울산광역시 남구 남중로 65 (44712)',2,3,5,null,null,null,1,4,5,7,8,9,11,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (9,'에덴파라다이스호텔',1,'이천시를 둘러보려면 에덴 파라다이스 호텔이 제격이다.',6,'37.2614421236846','127.394528219354','에덴파라다이스호텔_1.png','에덴파라다이스호텔_2.png','에덴파라다이스호텔_3.png','경기도 이천시 서이천로 449-79 (17384)',1,7,11,12,14,null,5,7,8,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (10,'신라스테이 천안',1,'천안 중심에 자리한 신라스테이 천안에 머무실 경우 차로 5분 정도 이동하면 Hyundai Bowling Center 및 천안백석경기장에 가실 수 있습니다',5,'36.8257794895184','127.143217736831','신라스테이_천안_1.png','신라스테이_천안_2.png','신라스테이_천안_3.png','충청남도 천안시 서북구 동서대로 177 (31110)',5,6,null,null,null,null,2,3,4,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (11,'쏠비치 진도',1,'진도에 위치한 쏠비치 진도에 머무실 경우 차로 15분 정도 이동하면 진도 신비의 바닷길 및 울림산방에 가실 수 있습니다.',5,'34.4007603712975','126.326314042717','쏠비치_진도_1.png','쏠비치_진도_2.png','쏠비치_진도_3.png','전라남도 진도군 송군길 30-40 (58936)',3,5,6,null,null,null,1,4,5,7,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (12,'소노캄 거제',1,'거제(일운면)에 위치한 소노캄 거제(구 대명리조트 거제마리나)에 숙박하실 경우 차로 5분 정도 이동하면 거제도 민속박물관 및 거제문화예술회관에 가실 수 있습니다. ',6,'34.8437912579634','128.702942606704','소노캄_거제_1.png','소노캄_거제_2.png','소노캄_거제_3.png','경상남도 거제시 거제대로 2660 (53326)',4,5,null,null,null,null,3,4,7,8,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (13,'씨 크루즈 호텔',1,'씨크루즈호텔속초에서는 환경보호에 동참하기 위하여 일회용 어메니티는 비치하지 않고, 고퀄리티의 친환경 제품인 샴푸,바디워시 핸드워시를 다회용 용기에 담아 제공하고 있습니다.',1,'38.2012982310424','128.587073536985','씨크루즈호텔_1.png','씨크루즈호텔_2.png','씨크루즈호텔_3.png','강원특별자치도 속초시 청초호반로 273',2,3,4,5,6,null,1,2,7,11,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (14,'강남 글래드 호텔',1,'씨크루즈호텔속초에서는 환경보호에 동참하기 위하여 일회용 어메니티는 비치하지 않고, 고퀄리티의 친환경 제품인 샴푸,바디워시 핸드워시를 다회용 용기에 담아 제공하고 있습니다.',1,'37.5088229113126','127.064541844422','강남_글래드_1.jpg','강남_글래드_2.jpg','강남_글래드_3.jpg','강원특별자치도 속초시 청초호반로 273',2,3,4,5,6,null,1,2,7,11,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (15,'나인브릭 호텔',1,'씨크루즈호텔속초에서는 환경보호에 동참하기 위하여 일회용 어메니티는 비치하지 않고, 고퀄리티의 친환경 제품인 샴푸,바디워시 핸드워시를 다회용 용기에 담아 제공하고 있습니다.',1,'37.5537822641849','126.920571391398','나인브릭_호텔_1.jpg','나인브릭_호텔_2.jpg','나인브릭_호텔_3.jpg','강원특별자치도 속초시 청초호반로 273',2,3,4,5,6,null,1,2,7,11,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (16,'노보텔 앰버서더 호텔',1,'씨크루즈호텔속초에서는 환경보호에 동참하기 위하여 일회용 어메니티는 비치하지 않고, 고퀄리티의 친환경 제품인 샴푸,바디워시 핸드워시를 다회용 용기에 담아 제공하고 있습니다.',1,'37.5052805568865','127.028919391781','강남_노보텔_앰배서더_1.jpg','강남_노보텔_앰배서더_2.jpg','강남_노보텔_앰배서더_3.jpg','서울 강남구 봉은사로 130',2,6,0,0,0,0,3,6,7,8,0,0,0,0,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (17,'로이넷 호텔',1,'씨크루즈호텔속초에서는 환경보호에 동참하기 위하여 일회용 어메니티는 비치하지 않고, 고퀄리티의 친환경 제품인 샴푸,바디워시 핸드워시를 다회용 용기에 담아 제공하고 있습니다.',1,'37.5418494274679','126.948300486676','로이넷호텔_1.jpg','로이넷호텔_2.jpg','로이넷호텔_3.jpg','강원특별자치도 속초시 청초호반로 273',2,3,4,5,6,null,1,2,7,11,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (18,'메이필드 호텔',1,'씨크루즈호텔속초에서는 환경보호에 동참하기 위하여 일회용 어메니티는 비치하지 않고, 고퀄리티의 친환경 제품인 샴푸,바디워시 핸드워시를 다회용 용기에 담아 제공하고 있습니다.',1,'37.5478957237892','126.819507121486','메이필드_1.jpg','메이필드_2.jpg','메이필드_3.jpg','강원특별자치도 속초시 청초호반로 273',2,3,4,5,6,null,1,2,7,11,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (19,'삼성 신라스테이 호텔',1,'쾌적한 공간입니다.',1,'37.5042815416175','127.04154245088','신라스테이_삼성_1.jpg','신라스테이_삼성_2.jpg','신라스테이_삼성_3.jpg','서울 강남구 언주로 517',1,2,5,0,0,0,1,2,3,4,5,6,7,8,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (26,'해운대 하운드 시그니처 호텔',1,'부산(해운대)에 위치한 하운드호텔 시그니처에 숙박하실 경우 차로 15분 정도 이동하면 광안리 해수욕장 및 해운대 해수욕장에 가실 수 있습니다. 이 호텔에서 파라다이스 카지노까지는 1km 떨어져 있으며, 3km 거리에는 신세계 센텀 시티도 있습니다.
+시즌별로 운영되는 야외 수영장 같은 레크리에이션 시설 외에 기타 편의 시설/서비스로 무료 무선 인터넷도 이용하실 수 있습니다.
+대표적인 편의 시설과 서비스로는 24시간 운영되는 프런트 데스크, 짐 보관, 엘리베이터 등이 있습니다. 시설 내에서 무료 주차 대행 이용이 가능합니다.
+에어컨이 설치된 71개의 객실에는 스마트 TV도 갖추어져 있어 편하게 머무실 수 있습니다. 무료 무선 인터넷도 지원되며 케이블 프로그램을 시청하실 수 있습니다. 욕실에는 무료 세면용품 및 헤어드라이어도 마련되어 있습니다. 편의 시설/서비스로는 전기 주전자 및 무료 생수 등이 있으며 객실 정돈 서비스는 매일 제공됩니다.',6,'35.1610493','129.156792','HaeHound_1.png','HaeHound_2.png','HaeHound_3.png','부산광역시 해운대구 구남로12번길 61',2,3,4,5,6,null,2,5,7,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (25,'달빛사랑 한옥펜션',1,'순천에 위치한 달빛사랑 한옥펜션 에 머무실 경우 10분 정도 걸으면 뿌리깊은나무박물관 및 낙안읍성 민속마을에 가실 수 있습니다. 이 게스트하우스에서 순천만국가정원까지는 19.2km 떨어져 있으며, 17km 거리에는 선암사도 있습니다.
+대표적인 편의 시설과 서비스로는 공용 구역의 전자레인지, 정수기 등이 있습니다. 시설 내에서 무료 셀프 주차 이용이 가능합니다.
+에어컨이 설치된 8개의 객실에는 평면 TV도 갖추어져 있어 편하게 머무실 수 있습니다. 무료 무선 인터넷 이용이 가능합니다. 샤워 시설을 갖춘 전용 욕실에는 무료 세면용품 및 헤어드라이어도 마련되어 있습니다.',5,'34.9075649','127.344851','Moonlight_1.png','Moonlight_2.png','Moonlight_3.png','전라남도 순천시 조정래길 786-6',3,4,6,null,null,null,1,6,null,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (27,'청주 무인호텔 더 반트',1,'청주에 위치한 청주 무인호텔 더 반트에 머무실 경우 10분 정도 걸으면 청주고인쇄박물관 및 상당산성에 가실 수 있습니다. 이 모텔에서 직지관까지는 1.6km 떨어져 있으며, 1.8km 거리에는 흥덕사지도 있습니다.
+무료 무선 인터넷 및 공용 거실 등의 편의 시설/서비스를 이용하실 수 있습니다.
+청주 무인호텔 더 반트의 숙박 고객을 위해 서비스를 제공하는 스낵바/델리에서는 간단한 식사가 가능합니다.
+시설 내에서 무료 셀프 주차 이용이 가능합니다.
+에어컨이 설치된 40개의 객실에는 냉장고도 갖추어져 있어 편하게 머무실 수 있습니다. 컴퓨터에서는 무료 무선 인터넷도 지원됩니다. 욕실에는 욕조 또는 샤워 및 헤어드라이어도 마련되어 있습니다. 편의 시설/서비스로는 전화 등이 있으며 객실 정돈 서비스는 매일 제공됩니다.',7,'36.6468893','127.487547','VanttSelf_1.png','VanttSelf_2.png','VanttSelf_3.png','충청북도 청주시 청원구 사북로149번길 38 (우암동)',1,3,6,null,null,null,6,7,null,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (28,'828 스파 펜션',3,'공지사항
+예약되지 않은 인원 방문 및 숙박이 불가하며 예약되지 않은 인원 방문시 해당 객실 환불 없이 퇴실 조치
+※ 고객님들의 안전과 건강을 위해 코로나19 예방차 방역 작업을 매일실시하고 있습니다.
+22시 이후 입실하실 경우 펜션으로 미리 연락 부탁드립니다.
+객실 시설물 오염 및 분실, 훼손시 변상해야함
+객실물품 외부 반출 불가
+모든 건물 내 금연
+한 일행 두 객실 이상 예약시 객실간 이동금지',8,'38.2171480','128.594809','Sokcho828_1.png','Sokcho828_2.png','Sokcho828_3.png','강원도 속초시 영랑해안길 177',3,5,6,null,null,null,2,5,7,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (29,'나이아가라 호텔',1,'아름다운 한강과 북한산 조망이 가능한 객실에서 즐기는 특별한 하루!
+	일몰 시간 브라운톤의 실내 인테리어에 은은한 조명과 석양이 더해지는 로맨틱한 분위기:)
+	9호선 염창역에 위치하여 김포공항, 선유도공원, 여의도에 가까운 위치입니다!',1,'37.5490776','126.878555','나이아가라 호텔_1.jpg','나이아가라 호텔_2.jpg','나이아가라 호텔_3.jpg','서울특별시 강서구 양천로 743',2,3,null,null,null,null,3,7,null,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (30,'호텔 스퀘어 안산',1,'스퀘어 안산은 산업단지공단 내 비즈니스 활성화와 해당 지역을 찾는 바이어의 편의를 제공할 목적으로 개관된 특급호텔로, 
+	지하 1층, 지상 14층 규모에 201개 객실, 다양한 크기의 연회장 및 식음 시설을 갖춘 호텔입니다.
+	안산 시민공원 옆에 위치하여 여유롭고 한적한 휴식을 즐기실 수 있으며, 
+	여행 목적에 따라 자유로운 코스여행도 즐기실 수 있습니다.',2,'37.3144171','126.798945','호텔 스퀘어 안산_1.jpg','호텔 스퀘어 안산_2.jpg','호텔 스퀘어 안산_3.jpg','경기도 안산시 단원구 동산로 81',2,3,4,6,null,null,3,null,null,null,null,null,null,null,null);
+Insert into HR.TMSTSTAY (S_NO,S_NAME,S_TYPE,S_INFO,S_LOCA,S_ADDR_X,S_ADDR_Y,S_IMG1,S_IMG2,S_IMG3,S_ADDR,S_FACILITY1,S_FACILITY2,S_FACILITY3,S_FACILITY4,S_FACILITY5,S_FACILITY6,S_THEME1,S_THEME2,S_THEME3,S_THEME4,S_THEME5,S_THEME6,S_THEME7,S_THEME8,S_RATE) values (31,'블루오션 레지던스 호텔',1,'추천격조 있는 서비스, 고급스러운 분위기
+	인천공항과 서울을 잇는 영종도에 위치한 블루오션호텔은 특급 호텔식 시설이 구비된 원룸형 아파트에 
+	접목시켜 호텔에 비교해도 손색이 없는 구성을 갖추고 있습니다.',3,'37.4873325','126.563498','블루오션 레지던스 호텔_1.jpg','블루오션 레지던스 호텔_2.jpg','블루오션 레지던스 호텔_3.jpg','인천광역시 중구 영종대로 911',1,3,4,null,null,null,2,null,null,null,null,null,null,null,null);
+
+COMMIT;
+
+-----------------------------------------------------------------------------------
+
+
+-- 객실 정보 INSERT
+
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (113,38,'슈페리어 벙커더블 노오션뷰','기본정보
+8.3평, 더블베드 1개 + 이층침대 1개
+3인 기준 / 최대 4인
+에어컨, TV, 냉장고, 커피포트, 전자식 금고
+샤워시설, 비데, 욕실용품, 드라이기, 가운
+개별 테라스
+무료 Wi-Fi
+금연 객실',4,286000,'세인트존스_객실3-1img.png','세인트존스_객실3-2img.png','세인트존스_객실3-3img.png','Y','Y','N',2,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (112,38,'슈페리어 더블 노오션뷰','8.3평, 더블 침대 1개 2인 기준 / 인원 추가 불가 / 최대 2인
+에어컨, TV, 냉장고, 커피포트, 전자식 금고
+샤워시설, 비데, 욕실용품, 드라이기, 가운
+개별 테라스
+무료 Wi-Fi
+금연 객실',3,253000,'세인트존스_객실img1.png','세인트존스_객실img2.png','세인트존스_객실img3.png','Y','Y','N',2,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (114,39,'슈페리어 더블','기본정보
+퀸 침대 1개 2인 기준 / 인원 추가 불가',2,200000,'센텀컨벤션_객실1-1.png','센텀컨벤션_객실1-2.png','센텀컨벤션_객실1-3.png','Y','Y','N',2,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (115,39,'슈페리어 트윈','기본정보
+퀸 침대 1개 2인 기준 / 인원 추가 불가',2,200000,'센텀컨벤션_객실2-1.png','센텀컨벤션_객실2-2.png','센텀컨벤션_객실2-3.png','Y','Y','N',2,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (116,39,'패밀리 트리플','기본정보
+슈퍼싱글 침대 3개
+3인 기준 / 인원 추가 불가',3,200000,'센텀컨벤션_객실3-1.png','센텀컨벤션_객실3-2.png','센텀컨벤션_객실3-3.png','Y','Y','N',2,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (117,40,'온돌3','기본정보 24.7㎡, 온돌 2인 기준 / 최대 4인
+에어컨, TV, 냉장고, 커피포트, 생수
+샤워시설, 욕실용품, 드라이기
+무료 Wi-Fi
+금연객실
+세탁기 사용료 3,000원 발생(세제+건조대 포함)
+3박이상시 세탁기 사용 무료 (세제 별도구매)',4,68000,'윈스토리호텔서귀포_객실1-1.png','윈스토리호텔서귀포_객실1-2.png','윈스토리호텔서귀포_객실1-3.png','Y','Y','N',2,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (118,40,'그랜드 패밀리','기본정보
+40.44㎡, 더블 침대 1개
+기준인원 5인 / 인원 추가시 1인당 15,000원 추가비 발생/ 최대 7인
+에어컨, TV, 냉장고, 커피포트, 생수
+샤워시설, 욕실용품, 드라이기
+무료 Wi-Fi
+금연객실
+세탁기 사용료 3,000원 발생(세제+건조대 포함)
+3박이상시 세탁기 사용 무료 (세제 별도구매)',4,125000,'윈스토리호텔서귀포_객실2-1.png','윈스토리호텔서귀포_객실2-2.png','윈스토리호텔서귀포_객실2-3.png','Y','Y','N',2,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (119,40,'디럭스 트리플','기본정보
+30.64㎡, 더블 침대 1개 + 싱글 침대 2개
+4인 기준 / 인원 추가 불가
+에어컨, TV, 냉장고, 커피포트, 생수
+샤워시설, 욕실용품, 드라이기
+무료 Wi-Fi
+금연객실
+세탁기 사용료 3,000원 발생(세제+건조대 포함)
+3박이상시 세탁기 사용 무료 (세제 별도구매)',4,91000,'윈스토리호텔서귀포_객실3-1.png','윈스토리호텔서귀포_객실3-2.png','윈스토리호텔서귀포_객실3-3.png','Y','Y','N',2,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (120,41,'스탠다드 트윈','기본정보
+기준2인/최대3인
+더블 베드 1개,싱글 베드 1개
+공기청정기(로비), 열화상측정기(로비), 세스코방역(건물전체, 객실), 시몬스침대(객실)
+에어컨,TV,냉장고,생수,커피포트,샤워시설,비데,드라이기,욕실용품,가운',3,121000,'베스트웨스턴플러스전주_객실1-1.png','베스트웨스턴플러스전주_객실1-2.png','베스트웨스턴플러스전주_객실1-3.png','Y','Y','N',2,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (121,41,'프리미어 스위트','기본정보
+기준 2인/최대 2인
+더블 베드 1개
+공기청정기(로비), 열화상측정기(로비), 세스코방역(건물전체, 객실), 시몬스침대(객실)
+에어컨,TV,냉장고,생수,커피포트,샤워시설,비데,드라이기,욕실용품,가운',3,309000,'베스트웨스턴플러스전주_객실2-1.png','베스트웨스턴플러스전주_객실2-2.png','베스트웨스턴플러스전주_객실2-3.png','Y','Y','N',2,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (122,41,'디럭스 프리미어 더블','기본정보
+기준 2인/최대 2인
+더블 베드 1개
+공기청정기(로비), 열화상측정기(로비), 세스코방역(건물전체, 객실), 시몬스침대(객실)
+에어컨,TV,냉장고,생수,커피포트,샤워시설,비데,드라이기,욕실용품,가운',4,360000,'베스트웨스턴플러스전주_객실3-1.png','베스트웨스턴플러스전주_객실3-1.png','베스트웨스턴플러스전주_객실3-1.png','Y','Y','N',2,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (57,20,'스탠다드더블룸','금연 객실',2,172000,'roynet_ROOM_1_1.png','roynet_ROOM_1_2.png','roynet_ROOM_1_3.png','N','N','Y',1,2,3,5,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (58,20,'디럭스 3인룸','금연 객실',3,246000,'roynet_ROOM_2_1.png','roynet_ROOM_2_2.png','roynet_ROOM_2_3.png','Y','Y','N',1,2,3,5,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (59,20,'슈페리어더블룸','금연 객실',2,190000,'roynet_ROOM_3_1.png','roynet_ROOM_3_2.png','roynet_ROOM_3_3.png','N','N','Y',1,2,3,5,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (60,21,'수페리어 더블룸','금연 객실, 25 제곱미터, 평면 TV, 방음 시설, 이 객실은 목재 책상과 평면 위성 TV를 갖추고 있습니다. 객실에서 도시 전망을 감상하실 수 있습니다. 전용 욕실에는 워크인 샤워 시설이 있으며, 욕실용품이 구비되어 있습니다.',2,230000,'LotteCityMyeongdong_ROOM_1_1.jpg','LotteCityMyeongdong_ROOM_1_2.jpg','LotteCityMyeongdong_ROOM_1_3.png','N','Y','N',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (61,21,'수페리어 트윈룸','금연 객실, 25 제곱미터, 평면 TV, 방음 시설',2,250000,'LotteCityMyeongdong_ROOM_2_1.jpg','LotteCityMyeongdong_ROOM_2_2.jpg','LotteCityMyeongdong_ROOM_2_3.jpg','Y','N','N',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (62,21,'슈페리어더블룸','금연 객실, 25 제곱미터, 평면 TV, 방음 시설',3,340000,'LotteCityMyeongdong_ROOM_3_1.jpg','LotteCityMyeongdong_ROOM_3_2.jpg','LotteCityMyeongdong_ROOM_3_3.jpg','Y','Y','N',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (63,22,'수페리어 더블룸','금연 객실',2,118000,'RamaGimpo_ROOM_1_1.png','RamaGimpo_ROOM_1_2.png','RamaGimpo_ROOM_1_3.png','N','Y','N',1,2,3,5,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (64,22,'수페리어 트윈룸','금연 객실',2,137000,'RamaGimpo_ROOM_2_1.png','RamaGimpo_ROOM_2_2.png','RamaGimpo_ROOM_2_3.png','Y','N','N',1,2,3,5,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (65,22,'패밀리 트윈룸','금연 객실',3,140000,'RamaGimpo_ROOM_3_1.png','RamaGimpo_ROOM_3_2.png','RamaGimpo_ROOM_3_3.png','Y','Y','N',1,2,3,5,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (66,23,'디럭스 트윈룸','금연 객실',2,200000,'Orakai_ROOM_1_1.png','Orakai_ROOM_1_2.png','Orakai_ROOM_1_3.png','Y','N','N',1,2,3,5,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (67,23,'디럭스 더블룸','금연 객실',2,210000,'Orakai_ROOM_2_1.png','Orakai_ROOM_2_2.png','Orakai_ROOM_2_3.png','N','N','Y',1,2,3,5,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (68,23,'프리미어 패밀리 트윈룸','금연 객실',3,270000,'Orakai_ROOM_3_1.png','Orakai_ROOM_3_2.png','Orakai_ROOM_3_3.png','Y','N','Y',1,2,3,5,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (69,24,'이유40평','금연 객실',16,350000,'jejuBle_ROOM_1_1.png','jejuBle_ROOM_1_2.png','jejuBle_ROOM_1_3.png','Y','Y','N',1,2,3,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (70,24,'이유25평','금연 객실',7,220000,'jejuBle_ROOM_2_1.png','jejuBle_ROOM_2_2.png','jejuBle_ROOM_2_3.png','N','Y','N',1,2,3,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (71,24,'블라섬25평','금연 객실',3,220000,'jejuBle_ROOM_3_1.png','jejuBle_ROOM_3_2.png','jejuBle_ROOM_3_3.png','N','Y','N',1,2,3,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (72,25,'게스트룸','금연 객실',3,78000,'Moonlight_ROOM_1_1.png','Moonlight_ROOM_1_2.png','Moonlight_ROOM_1_3.png','N','N','Y',1,2,3,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (73,25,'문라이트 러브 룸','금연 객실',3,78000,'Moonlight_ROOM_2_1.png','Moonlight_ROOM_2_2.png','Moonlight_ROOM_2_3.png','N','N','Y',1,2,3,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (74,25,'아가페 룸','금연 객실',7,165000,'Moonlight_ROOM_3_1.png','Moonlight_ROOM_3_2.png','Moonlight_ROOM_3_3.png','N','N','Y',1,2,3,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (75,26,'시그니처 더블룸','금연 객실',2,140000,'HaeHound_ROOM_1_1.png','HaeHound_ROOM_1_2.png','HaeHound_ROOM_1_3.png','N','N','Y',1,2,3,4,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (76,26,'더블룸 (테라스 포함)','금연 객실',2,140000,'HaeHound_ROOM_2_1.png','HaeHound_ROOM_2_2.png','HaeHound_ROOM_2_3.png','N','N','Y',1,2,3,4,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (77,26,'프리미어 트윈룸','금연 객실',3,165000,'HaeHound_ROOM_3_1.png','HaeHound_ROOM_3_2.png','HaeHound_ROOM_3_3.png','Y','Y','N',1,2,3,4,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (78,27,'디럭스룸 (욕조)','금연 객실',2,45000,'VanttSelf_ROOM_1_1.png','VanttSelf_ROOM_1_2.png','VanttSelf_ROOM_1_3.png','N','N','Y',1,2,3,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (79,27,'룸 더블 침대','금연 객실',2,50000,'VanttSelf_ROOM_2_1.png','VanttSelf_ROOM_2_2.png','VanttSelf_ROOM_2_3.png','Y','N','Y',1,2,3,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (80,27,'수페리어룸 (욕조)','금연 객실',2,50000,'VanttSelf_ROOM_3_1.png','VanttSelf_ROOM_3_2.png','VanttSelf_ROOM_3_3.png','N','N','Y',1,2,3,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (81,28,'오션 뷰 룸 501','금연 객실',2,160000,'Sokcho828_ROOM_1_1.png','Sokcho828_ROOM_1_2.png','Sokcho828_ROOM_1_3.png','N','N','Y',1,2,3,4,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (82,28,'오션 뷰 룸 502','금연 객실',2,160000,'Sokcho828_ROOM_2_1.png','Sokcho828_ROOM_2_2.png','Sokcho828_ROOM_2_3.png','N','N','Y',1,2,3,4,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (83,28,'오션 뷰 룸 302','금연 객실',2,160000,'Sokcho828_ROOM_3_1.png','Sokcho828_ROOM_3_2.png','Sokcho828_ROOM_3_3.png','N','N','Y',1,2,3,4,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (84,29,'스탠다드 더블','금연 객실',2,169000,'나이아가라 호텔_스탠다드 더블_1.jpg','나이아가라 호텔_스탠다드 더블_2.jpg','나이아가라 호텔_스탠다드 더블_3.jpg','N','Y','N',2,3,5,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (85,29,'스탠다드 트윈','금연 객실',2,199000,'나이아가라 호텔_스탠다드 트윈_1.jpg','나이아가라 호텔_스탠다드 트윈_2.jpg','나이아가라 호텔_스탠다드 트윈_3.jpg','Y','N','N',2,3,5,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (86,29,'디럭스 트윈','금연 객실',2,189000,'나이아가라 호텔_디럭스 트윈_1.jpg','나이아가라 호텔_디럭스 트윈_2.jpg','나이아가라 호텔_디럭스 트윈_3.jpg','Y','Y','N',2,3,5,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (87,30,'스탠다드 트윈','금연 객실',2,123000,'호텔 스퀘어 안산_스탠다드 트윈_1.jpg','호텔 스퀘어 안산_스탠다드 트윈_2.jpg','호텔 스퀘어 안산_스탠다드 트윈_3.jpg','Y','N','N',3,5,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (88,30,'레지던스 더블','금연 객실',2,159000,'호텔 스퀘어 안산_레지던스 더블_1.jpg','호텔 스퀘어 안산_레지던스 더블_2.jpg','호텔 스퀘어 안산_레지던스 더블_3.jpg','N','Y','N',3,5,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (89,30,'패밀리 스위트','금연 객실',3,217000,'호텔 스퀘어 안산_패밀리 스위트_1.jpg','호텔 스퀘어 안산_패밀리 스위트_2.jpg','호텔 스퀘어 안산_패밀리 스위트_3.jpg','Y','Y','N',1,3,4,5,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (90,31,'디럭스 트윈 싱글','금연 객실',2,127000,'블루오션 레지던스 호텔_디럭스 트윈 싱글_1.jpg','블루오션 레지던스 호텔_디럭스 트윈 싱글_2.jpg','블루오션 레지던스 호텔_디럭스 트윈 싱글_3.jpg','Y','N','N',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (91,31,'디럭스 더블','금연 객실',2,150000,'블루오션 레지던스 호텔_디럭스 더블_1.jpg','블루오션 레지던스 호텔_디럭스 더블_2.jpg','블루오션 레지던스 호텔_디럭스 더블_3.jpg','N','Y','N',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (92,31,'블루오션 스위트','금연 객실',4,299000,'블루오션 레지던스 호텔_블루오션 스위트_1.jpg','블루오션 레지던스 호텔_블루오션 스위트_2.jpg','블루오션 레지던스 호텔_블루오션 스위트_3.jpg','Y','Y','N',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (93,32,'이코노미 더블','금연 객실',2,51000,'heyy,seogwipo_이코노미 더블_1.jpg','heyy,seogwipo_이코노미 더블_2.jpg','heyy,seogwipo_이코노미 더블_3.jpg','N','Y','N',1,3,4,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (94,32,'디럭스 트윈','금연 객실',3,55000,'heyy,seogwipo_디럭스 트윈_1.jpg','heyy,seogwipo_디럭스 트윈_2.jpg','heyy,seogwipo_디럭스 트윈_3.jpg','Y','Y','N',1,3,4,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (95,32,'패밀리 트윈','금연 객실',4,59000,'heyy,seogwipo_패밀리 트윈_1.jpg','heyy,seogwipo_패밀리 트윈_2.jpg','heyy,seogwipo_패밀리 트윈_3.jpg','N','Y','N',1,3,4,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (96,33,'STANDARD','금연 객실',2,65000,'MARI_STANDARD_1.jpg','MARI_STANDARD_2.jpg','MARI_STANDARD_3.jpg','N','Y','N',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (97,33,'PREMIUM','금연 객실',2,80000,'MARI_PREMIUM_1.jpg','MARI_PREMIUM_2.jpg','MARI_PREMIUM_3.jpg','N','Y','N',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (98,33,'SUITE TWIN','금연 객실',4,110000,'MARI_SUITE TWIN_1.jpg','MARI_SUITE TWIN_2.jpg','MARI_SUITE TWIN_3.jpg','N','Y','N',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (99,34,'STANDARD','금연 객실',2,110000,'YAZA_STANDARD_1.jpg','YAZA_STANDARD_2.jpg','YAZA_STANDARD_3.jpg','N','N','Y',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (8,3,'센텀 프리미어 호텔 102호','쾌적한 공간입니다.',5,30000,'센텀_프리미어_호텔_102호_1.png','센텀_프리미어_호텔_102호_2.png','센텀_프리미어_호텔_102호_3.png','Y','Y','N',2,3,4,5,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (9,3,'센텀 프리미어 호텔 103호','쾌적한 공간입니다.',7,45000,'센텀_프리미어_호텔_103호_1.png','센텀_프리미어_호텔_103호_2.png','센텀_프리미어_호텔_103호_3.png','Y','Y','Y',4,5,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (10,4,'오크우드 프리미어 인천 101호','쾌적한 공간입니다.',3,25000,'오크우드_프리미어_인천_101호_1.png','오크우드_프리미어_인천_102호_2.png','오크우드_프리미어_인천_101호_3.png','Y','N','N',1,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (1,1,'스탠포드 호텔 서울 101호','쾌적한 공간입니다.',3,20000,'스탠포드_호텔_서울_101호_1.png','스탠포드_호텔_서울_101호_2.png','스탠포드_호텔_서울_101호_3.png','Y','N','N',1,2,null,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (2,1,'스탠포드 호텔 서울 102호','쾌적한 공간입니다.',5,40000,'스탠포드_호텔_서울_102호_1.png','스탠포드_호텔_서울_102호_2.png','스탠포드_호텔_서울_102호_3.png','N','Y','N',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (3,1,'스탠포드 호텔 서울 103호','쾌적한 공간입니다.',7,50000,'스탠포드_호텔_서울_103호_1.png','스탠포드_호텔_서울_103호_2.png','스탠포드_호텔_서울_103호_3.png','Y','Y','Y',3,5,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (4,2,'그라벨호텔제주 101호','쾌적한 공간입니다.',2,20000,'그라벨호텔제주_101호_1.png','그라벨호텔제주_101호_2.png','그라벨호텔제주_101호_3.png','Y','N','N',1,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (5,2,'그라벨호텔제주 102호','쾌적한 공간입니다.',3,30000,'그라벨호텔제주_102호_1.png','그라벨호텔제주_102호_2.png','그라벨호텔제주_102호_3.png','Y','Y','N',2,5,null,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (6,2,'그라벨호텔제주 103호','쾌적한 공간입니다.',5,50000,'그라벨호텔제주_103호_1.png','그라벨호텔제주_103호_2.png','그라벨호텔제주_103호_3.png','Y','Y','Y',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (7,3,'센텀 프리미어 호텔 101호','쾌적한 공간입니다.',3,25000,'센텀_프리미어_호텔_101호_1.png','센텀_프리미어_호텔_101호_2.png','센텀_프리미어_호텔_101호_1.png','Y','N','N',1,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (11,4,'오크우드 프리미어 인천 102호','쾌적한 공간입니다.',4,35000,'오크우드_프리미어_인천_102호_1.png','오크우드_프리미어_인천_102호_2.png','오크우드_프리미어_인천_102호_3.png','Y','N','N',1,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (12,4,'오크우드 프리미어 인천 103호','쾌적한 공간입니다.',6,50000,'오크우드_프리미어_인천_103호_1.png','오크우드_프리미어_인천_103호_2.png','오크우드_프리미어_인천_103호_3.png','Y','Y','Y',4,5,null,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (13,5,'호텔 디에디션 101호','쾌적한 공간입니다.',2,50000,'호텔_디에디션_101호_1.png','호텔_디에디션_101호_2.png','호텔_디에디션_101호_3.png','Y','N','N',4,5,null,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (14,5,'호텔 디에디션 102호','쾌적한 공간입니다.',4,50000,'호텔_디에디션_102호_1.png','호텔_디에디션_102호_2.png','호텔_디에디션_102호_3.png','Y','Y','N',1,2,3,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (15,5,'호텔 디에디션 103호','쾌적한 공간입니다.',6,50000,'호텔_디에디션_103호_1.png','호텔_디에디션_103호_2.png','호텔_디에디션_103호_3.png','Y','Y','Y',1,4,5,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (16,6,'아리아나 호텔 101호','쾌적한 공간입니다.',2,25000,'아리아나_호텔_101호_1.png','아리아나 호텔_101호_2.png','아리아나_호텔_101호_3.png','Y','N','Y',1,4,5,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (17,6,'아리아나 호텔 102호','쾌적한 공간입니다.',4,35000,'아리아나_호텔_102호_1.png','아리아나 호텔_102호_2.png','아리아나_호텔_102호_3.png','Y','Y','Y',1,2,3,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (18,6,'아리아나 호텔 103호','쾌적한 공간입니다.',6,50000,'아리아나_호텔_103호_1.png','아리아나 호텔_103호_2.png','아리아나_호텔_103호_3.png','Y','Y','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (19,7,'에이치원 호텔 101호','쾌적한 공간입니다.',2,25000,'에이치원_호텔_101호_1.png','에이치원_호텔_101호_2.png','에이치원_호텔_101호_3.png','Y','N','Y',1,4,5,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (20,7,'에이치원 호텔 102호','쾌적한 공간입니다.',4,40000,'에이치원_호텔_102호_1.png','에이치원_호텔_102호_2.png','에이치원_호텔_101호_3.png','Y','Y','N',2,4,5,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (21,7,'에이치원 호텔 103호','쾌적한 공간입니다.',6,56000,'에이치원_호텔_103호_1.png','에이치원_호텔_103호_2.png','에이치원_호텔_103호_3.png','Y','Y','Y',1,4,5,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (22,8,'스타즈 호텔 울산 101호','쾌적한 공간입니다.',2,25000,'스타즈_호텔_울산_101호_1.png','스타즈_호텔_울산_101호_2.png','스타즈_호텔_울산_101호_3.png','Y','N','N',1,2,null,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (23,8,'스타즈 호텔 울산 102호','쾌적한 공간입니다.',4,60000,'스타즈_호텔_울산_102호_1.png','스타즈_호텔_울산_102호_2.png','스타즈_호텔_울산_102호_3.png','Y','Y','N',1,2,3,4,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (24,8,'스타즈 호텔 울산 103호','쾌적한 공간입니다.',6,100000,'스타즈_호텔_울산_103호_1.png','스타즈_호텔_울산_103호_2.png','스타즈_호텔_울산_103호_3.png','Y','Y','Y',1,2,3,4,5,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (25,9,'에덴파라다이스호텔 101호','쾌적한 공간입니다.',3,50000,'에덴파라다이스호텔_101호_1.png','에덴파라다이스호텔_101호_2.png','에덴파라다이스호텔_101호_3.png','Y','N','N',3,5,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (26,9,'에덴파라다이스호텔 102호','쾌적한 공간입니다.',5,70000,'에덴파라다이스호텔_102호_1.png','에덴파라다이스호텔_102호_2.png','에덴파라다이스호텔_102호_3.png','Y','Y','N',3,4,5,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (27,9,'에덴파라다이스호텔 103호','쾌적한 공간입니다.',7,100000,'에덴파라다이스호텔_103호_1.png','에덴파라다이스호텔_103호_2.png','에덴파라다이스호텔_103호_3.png','Y','Y','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (28,13,'씨 크루즈 호텔 101호','쾌적한 공간입니다.',2,30000,'씨_크루즈_호텔_101호_1.png','씨_크루즈_호텔_101호_2.png','씨_크루즈_호텔_101호_3.png','Y','N','N',2,4,5,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (29,13,'씨 크루즈 호텔 102호','쾌적한 공간입니다.',5,50000,'씨_크루즈_호텔_102호_1.png','씨_크루즈_호텔_102호_2.png','씨_크루즈_호텔_102호_3.png','Y','Y','N',1,2,4,5,6,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (30,13,'씨 크루즈 호텔 103호','쾌적한 공간입니다.',8,70000,'씨_크루즈_호텔_103호_1.png','씨_크루즈_호텔_103호_2.png','씨_크루즈_호텔_103호_3.png','Y','Y','Y',3,5,null,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (31,10,'신안스테이 천안 101호','쾌적한 공간입니다.',3,30000,'신안스테이_천안_101호_1.png','신안스테이_천안_101호_2.png','신안스테이_천안_101호_3.png','Y','N','N',2,4,5,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (32,10,'신안스테이 천안 102호','쾌적한 공간입니다.',6,60000,'신안스테이_천안_102호_1.png','신안스테이_천안_102호_2.png','신안스테이_천안_102호_3.png','Y','Y','N',1,2,3,4,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (33,10,'신안스테이 천안 103호','쾌적한 공간입니다.',8,80000,'신안스테이_천안_103호_1.png','신안스테이_천안_103호_2.png','신안스테이_천안_103호_3.png','Y','Y','Y',3,5,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (34,11,'쏠비치 진도 101호','쾌적한 공간입니다.',4,25000,'쏠비치_진도_101호_1.png','쏠비치_진도_101호_2.png','쏠비치_진도_101호_3.png','Y','N','N',1,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (35,11,'쏠비치 진도 102호','쾌적한 공간입니다.',4,50000,'쏠비치_진도_102호_1.png','쏠비치_진도_102호_2.png','쏠비치_진도_102호_3.png','Y','Y','N',2,4,5,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (36,11,'쏠비치 진도 103호','쾌적한 공간입니다.',4,50000,'쏠비치_진도_103호_1.png','쏠비치_진도_103호_2.png','쏠비치_진도_103호_3.png','Y','Y','Y',1,4,5,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (37,12,'소노캄 거제 101호','쾌적한 공간입니다.',4,30000,'소노캄_거제_101호_1.png','소노캄_거제_101호_2.png','소노캄_거제_101호_3.png','Y','N','N',3,5,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (38,12,'소노캄 거제 102호','쾌적한 공간입니다.',4,30000,'소노캄_거제_102호_1.png','소노캄_거제_102호_2.png','소노캄_거제_102호_3.png','Y','Y','N',1,5,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (39,12,'소노캄 거제 103호','쾌적한 공간입니다.',4,30000,'소노캄_거제_103호_1.png','소노캄_거제_103호_2.png','소노캄_거제_103호_3.png','Y','Y','Y',3,4,5,6,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (40,14,'강남 글래드 호텔 101호','쾌적한 공간입니다.',3,100000,'강남_글래드_101_1.jpg','강남_글래드_101_2.jpg','강남_글래드_101_3.jpg','N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (41,14,'강남 글래드 호텔 201호','쾌적한 공간입니다.',3,100000,'강남_글래드_201_1.jpg','강남_글래드_201_2.jpg','강남_글래드_201_3.jpg','N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (42,14,'강남 글래드 호텔 301호','쾌적한 공간입니다.',3,100000,'강남_글래드_301_1.jpg','강남_글래드_301_2.jpg','강남_글래드_301_3.jpg','N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (43,15,'나인브릭 호텔 101호','쾌적한 공간입니다.',3,100000,'나인브릭_호텔_101_1.jpg','나인브릭_호텔_101_2.jpg','나인브릭_호텔_101_3.jpg','N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (44,15,'나인브릭 호텔 201호','쾌적한 공간입니다.',3,100000,'나인브릭_호텔_201_1.jpg','나인브릭_호텔_201_2.jpg','나인브릭_호텔_201_3.jpg','N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (45,15,'나인브릭 호텔 301호','쾌적한 공간입니다.',3,100000,'나인브릭_호텔_301_1.jpg','나인브릭_호텔_301_2.jpg','나인브릭_호텔_301_3.jpg','N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (46,16,'노보텔 앰배서더 호텔 101호','쾌적한 공간입니다.',3,100000,'강남_노보텔_앰배서더_101_1.jpg','강남_노보텔_앰배서더_101_2.jpg',null,'N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (47,16,'노보텔 앰배서더 호텔 201호','쾌적한 공간입니다.',3,100000,'강남_노보텔_앰배서더_201_1.jpg','강남_노보텔_앰배서더_201_2.jpg','강남_노보텔_앰배서더_201_3.jpg','N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (49,17,'로이넷 호텔 201호','쾌적한 공간입니다.',3,100000,'로이넷호텔_201_1.jpg','로이넷호텔_201_2.jpg','로이넷호텔_201_2.jpg','N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (48,17,'로이넷 호텔 101호','쾌적한 공간입니다.',3,100000,'로이넷호텔_101_1.jpg','로이넷호텔_101_2.jpg','로이넷호텔_101_3.jpg','N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (50,17,'로이넷 호텔 301호','쾌적한 공간입니다.',3,100000,'로이넷호텔_301_1.jpg','로이넷호텔_301_2.jpg','로이넷호텔_301_3.jpg','N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (51,18,'메이필드 호텔 101호','쾌적한 공간입니다.',3,100000,'메이필드_101_1.jpg','메이필드_101_2.jpg','메이필드_101_3.jpg','N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (52,18,'메이필드 호텔 201호','쾌적한 공간입니다.',3,100000,'메이필드_201_1.jpg','메이필드_201_2.jpg','메이필드_201_3.jpg','N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (53,18,'메이필드 호텔 301호','쾌적한 공간입니다.',3,100000,'메이필드_301_1.jpg','메이필드_301_2.jpg',null,'N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (54,19,'신라스테이 101호','쾌적한 공간입니다.',3,100000,'신라스테이_삼성_101_1.jpg','신라스테이_삼성_101_2.jpg','신라스테이_삼성_101_3.jpg','N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (55,19,'신라스테이 201호','쾌적한 공간입니다.',3,100000,'신라스테이_삼성_201_1.jpg','신라스테이_삼성_201_2.jpg',null,'N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (56,19,'신라스테이 301호','쾌적한 공간입니다.',3,100000,'신라스테이_삼성_301_1.jpg','신라스테이_삼성_301_2.jpg','신라스테이_삼성_301_3.jpg','N','N','Y',1,2,3,4,5,6);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (100,34,'BUSINESS','금연 객실',2,100000,'YAZA_BUSINESS_1.jpg','YAZA_BUSINESS_2.jpg','YAZA_BUSINESS_3.jpg','Y','N','N',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (101,34,'PREMIUM','금연 객실',2,120000,'YAZA_PREMIUM_1.jpg','YAZA_PREMIUM_2.jpg','YAZA_PREMIUM_3.jpg','N','N','Y',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (109,37,'스탠다드 트윈','기본정보
+[패키지 혜택]
+18시 레이트 체크인
+14시 레이트 체크아웃(객실 현황에 따라 제공 가능) 2인 조식 포함
+9.09평, 더블 침대 1개 2인 기준 / 1인 추가 시, 60,500원 / 최대 3인
+기준 투숙 인원은 2인 기준으로, 인원 추가로 인한 비용은 현장에서 추가 결제가 필요합니다.
+에어컨, TV, 냉장고, 커피포트, 생수
+샤워시설 및 욕조, 욕실용품, 가운
+전객실 금연
+취소 및 환불불가',3,450000,'그랜드하얏트_객실2-1img.png','그랜드하얏트_객실2-2img.png','그랜드하얏트_객실2-3img.png','N','Y','Y',2,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (102,35,'편안한 방','금연 객실',2,70000,'호텔 안온_편안한 방_1.jpg','호텔 안온_편안한 방_2.jpg','호텔 안온_편안한 방_3.jpg','N','N','Y',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (103,35,'내가 찾던 방','금연 객실',2,75000,'호텔 안온_내가 찾던 방_1.jpg','호텔 안온_내가 찾던 방_2.jpg','호텔 안온_내가 찾던 방_3.jpg','N','N','Y',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (104,35,'우리들의 아지트','금연 객실',2,80000,'호텔 안온_우리들의 아지트_1.jpg','호텔 안온_우리들의 아지트_2.jpg','호텔 안온_우리들의 아지트_3.jpg','N','N','Y',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (105,36,'종일방','금연 객실',3,160000,'미아모르_종일방_1.jpg','미아모르_종일방_2.jpg','미아모르_종일방_3.jpg','N','N','Y',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (106,36,'이른 입실방','금연 객실',3,120000,'미아모르_이른 입실방_1.jpg','미아모르_이른 입실방_2.jpg','미아모르_이른 입실방_3.jpg','N','N','Y',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (107,36,'늦은 퇴실방','금연 객실',3,150000,'미아모르_늦은 퇴실방_1.jpg','미아모르_늦은 퇴실방_2.jpg','미아모르_늦은 퇴실방_3.jpg','N','N','Y',3,4,6,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (108,37,'스탠다드 킹','기본정보
+[패키지 혜택]
+18시 레이트 체크인
+14시 레이트 체크아웃(객실 현황에 따라 제공 가능) 2인 조식 포함
+9.09평, 더블 침대 1개 2인 기준 / 1인 추가 시, 60,500원 / 최대 3인
+기준 투숙 인원은 2인 기준으로, 인원 추가로 인한 비용은 현장에서 추가 결제가 필요합니다.
+에어컨, TV, 냉장고, 커피포트, 생수
+샤워시설 및 욕조, 욕실용품, 가운
+전객실 금연
+취소 및 환불불가',4,496000,'그랜드하얏트_객실img1.png','그랜드하얏트_객실img2.png','그랜드하얏트_객실img3.png','N','Y','Y',2,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (110,37,'프리미엄 남산전망 킹','기본정보
+[패키지 혜택]
+18시 레이트 체크인
+14시 레이트 체크아웃(객실 현황에 따라 제공 가능) 2인 조식 포함
+9.09평, 더블 침대 1개 2인 기준 / 1인 추가 시, 60,500원 / 최대 3인
+기준 투숙 인원은 2인 기준으로, 인원 추가로 인한 비용은 현장에서 추가 결제가 필요합니다.
+에어컨, TV, 냉장고, 커피포트, 생수
+샤워시설 및 욕조, 욕실용품, 가운
+전객실 금연
+취소 및 환불불가',3,486000,'그랜드하얏트_객실3-1img.png','그랜드하얏트_객실3-2img.png','그랜드하얏트_객실3-3img.png','N','Y','Y',2,3,4,null,null,null);
+Insert into HR.TMSTROOM (R_NO,S_NO,R_NAME,R_DETAIL,R_PERSON_CNT,R_PRICE,R_IMG1,R_IMG2,R_IMG3,R_SINGLE_BED_FLAG,R_DOUBLE_BED_FLAG,R_QUEEN_BED_FLAG,R_FACILITY1,R_FACILITY2,R_FACILITY3,R_FACILITY4,R_FACILITY5,R_FACILITY6) values (111,38,'슈페리어 패밀리 온돌 빌딩뷰','기본정보
+8.3평, 토퍼(요매트) 더블사이즈 2개 2인 기준 / 최대 4인
+에어컨, TV, 냉장고, 커피포트, 전자식 금고
+샤워시설, 비데, 욕실용품, 드라이기, 가운
+개별 테라스
+무료 Wi-Fi
+금연 객실',4,286000,'세인트존스_객실2-1img.png','세인트존스_객실2-2img.png','세인트존스_객실2-3img.png','Y','Y','N',2,3,4,null,null,null);
+
+COMMIT;
+
+
+
+
+
+
+
